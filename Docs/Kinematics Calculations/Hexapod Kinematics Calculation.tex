@@ -1,0 +1,74 @@
+\documentclass[12pt, letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[section]{placeins}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{gensymb}
+
+\graphicspath{{../media/}}
+
+\title{Kinematics Calculations for Hexapod Robot}
+\author{Nabeel Chowdhury}
+\date{\today}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{../media/}{#1.pdf_tex}
+}
+
+\begin{document}
+	\maketitle
+	\newpage
+	
+	\section{Servo Angles for each Leg}
+		Looking from above, the first angle of each leg that makes contact with the floor at $P(x,y,z)$ is found as $\theta_C = \tan^{-1} \left( \frac{L_y}{L_x} \right) = \tan^{-1} \left( \frac{P_y}{P_x} \right)$.
+		
+		\begin{figure}[ht]
+			\centering
+			\resizebox{0.99\textwidth}{!}{\incfig{Leg Top}}
+			\caption{The top view of the leg. $\theta_C$ is the Coax angle of the servo attached to the body of the Hexapod. $L_x$ is the length of the leg from the body in the x direction and $L_y$ is the length of the leg in the y direction.}
+		\end{figure}
+		
+		\newpage
+		Looking from the side of the leg, we can define several parameters.
+		
+		\begin{figure}[ht]
+			\centering
+			\resizebox{0.88\textwidth}{!}{\incfig{Leg Side}}
+			\caption{The side view of the leg. $\theta_F$ is the Femur angle and $\theta_T$ is the tibia angle. $L_C$ is the offset of the femur servo from the body, or the coax length. $L_F$ is the length of the Femur and $L_T$ is the length of the Tibia. $L_x$ is the x distance of the leg's point of contact with the ground. $H$ is the height of the body off of the ground. The rest of the parameters are needed in interim steps to find $\theta_F$ and $\theta_T$.}
+		\end{figure}
+		
+		First, we need to find the length of $A$.
+		\begin{flalign*}
+			A &= \sqrt{H^2 + \left( L_x - L_C \right)^2} = \sqrt{P^2_z + \left( P_x - L_C \right)^2} &\\
+		\end{flalign*}
+		
+		Using $A$ we can use the law of cosines to find $\theta_F$.
+		\begin{flalign*}
+			\theta_F &= \theta_\beta - \theta_\alpha &\\			
+			\theta_\alpha &= \tan_1 \left( \frac{H}{L_x - L_C} \right) &\\
+			L_T^2 &= L_F^2 + A^2 -2L_FA \cos (\theta_\beta) &\\ 
+			\therefore \theta_F &= \cos^{-1} \left( \frac{L_T^2 - L_F^2 - A^2}{-2L_FA} \right) - \tan_1 \left( \frac{H}{L_x - L_C} \right) &\\
+		\end{flalign*}
+		
+		We can also use the law of cosines to find the tibia angle as well.
+		\begin{flalign*}
+			\theta_T &= 90\degree - \theta_\gamma &\\			
+			A^2 &= L_F^2 + L_T^2 -2L_FL_T \cos (\theta_\gamma) &\\ 
+			\therefore \theta_T &= 90\degree - \cos^{-1} \left( \frac{A^2 - L_F^2 - L_T^2}{-2L_FL_T} \right) &\\
+		\end{flalign*}
+		
+		In summary:
+		\begin{flalign*}
+			& \boxed{\theta_C = \tan^{-1} \left( \frac{P_y}{P_x} \right)} &\\
+			& \boxed{\theta_F = \cos^{-1} \left( \frac{L_T^2 - L_F^2 - P^2_z + \left( P_x - L_C \right)^2}{-2L_F\left( \sqrt{P^2_z + \left( P_x - L_C \right)^2} \right)} \right) - \tan_1 \left( \frac{-P_z}{L_x - L_C} \right)} &\\
+			& \boxed{\theta_T = 90\degree - \cos^{-1} \left( \frac{P^2_z + \left( P_x - L_C \right)^2 - L_F^2 - L_T^2}{-2L_FL_T} \right)} &\\
+		\end{flalign*}
+\end{document}
