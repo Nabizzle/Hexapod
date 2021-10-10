@@ -1,0 +1,73 @@
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Hexapod Turning Zoomed.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{843.12689353bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.35661891)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Hexapod Turning Zoomed.pdf}}%
+    \put(0.51898372,0.05712355){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x1}, B_{y1}, B_{z1}$\end{tabular}}}}%
+    \put(0.04448865,0.06160972){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0,0$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Hexapod Turning Zoomed.pdf}}%
+    \put(0.80269461,0.2324052){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1, z_1$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexapod Turning Zoomed.pdf}}%
+    \put(0.94697459,0.05652743){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\end{tabular}}}}%
+    \put(0.86582809,0.14175231){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$y$\end{tabular}}}}%
+    \put(0.84701016,0.03500974){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$z$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hexapod Turning Zoomed.pdf}}%
+    \put(0.41221513,0.10625068){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\theta_a$\end{tabular}}}}%
+    \put(0.30451656,0.10212064){\color[rgb]{0,1,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Hexapod Turning Zoomed.pdf}}%
+    \put(0.17206087,0.15560902){\color[rgb]{0,1,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x1}', B_{y1}', B_{z1}'$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Hexapod Turning Zoomed.pdf}}%
+    \put(-1.20856393,1.22178811){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.77771718\unitlength}\raggedright \end{minipage}}}%
+  \end{picture}%
+\endgroup%

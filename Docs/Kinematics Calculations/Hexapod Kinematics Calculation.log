@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.8)  10 OCT 2021 13:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.8)  10 OCT 2021 15:54
 entering extended mode
 **"./Hexapod Kinematics Calculation.tex"
 ("Hexapod Kinematics Calculation.tex"
@@ -487,30 +487,181 @@ DF inclusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ../media/../media//Base Hexapod Position.pdf): P
 DF inclusion: multiple pdfs with page group included in a single page
->] [6] ("../media/../media/Hexapod Forward Step.pdf_tex"
-<../media/../media//Hexapod Forward Step.pdf, id=57, page=1, 1089.09105pt x 123
-8.43832pt>
+>] [6] ("../media/../media/Hexapod Turning.pdf_tex"
+<../media/../media//Hexapod Turning.pdf, id=57, page=1, 1392.49348pt x 1087.882
+06pt>
+File: ../media/../media//Hexapod Turning.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning.pdf, page 1>
+Package pdftex.def Info: ../media/../media//Hexapod Turning.pdf , page1 used on
+ input line 56.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Hexapod Turning.pdf, id=58, page=2, 1392.49348pt x 1087.882
+06pt>
+File: ../media/../media//Hexapod Turning.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning.pdf, page 2>
+Package pdftex.def Info: ../media/../media//Hexapod Turning.pdf , page2 used on
+ input line 64.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Hexapod Turning.pdf, id=59, page=3, 1392.49348pt x 1087.882
+06pt>
+File: ../media/../media//Hexapod Turning.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning.pdf, page 3>
+Package pdftex.def Info: ../media/../media//Hexapod Turning.pdf , page3 used on
+ input line 71.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Hexapod Turning.pdf, id=60, page=4, 1392.49348pt x 1087.882
+06pt>
+File: ../media/../media//Hexapod Turning.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning.pdf, page 4>
+Package pdftex.def Info: ../media/../media//Hexapod Turning.pdf , page4 used on
+ input line 75.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Hexapod Turning.pdf, id=61, page=5, 1392.49348pt x 1087.882
+06pt>
+File: ../media/../media//Hexapod Turning.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning.pdf, page 5>
+Package pdftex.def Info: ../media/../media//Hexapod Turning.pdf , page5 used on
+ input line 78.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Hexapod Turning.pdf, id=62, page=6, 1392.49348pt x 1087.882
+06pt>
+File: ../media/../media//Hexapod Turning.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning.pdf, page 6>
+Package pdftex.def Info: ../media/../media//Hexapod Turning.pdf , page6 used on
+ input line 80.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+)
+("../media/../media/Hexapod Turning Zoomed.pdf_tex"
+<../media/../media//Hexapod Turning Zoomed.pdf, id=63, page=1, 846.28862pt x 30
+1.80252pt>
+File: ../media/../media//Hexapod Turning Zoomed.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning Zoomed.pdf, page 1>
+Package pdftex.def Info: ../media/../media//Hexapod Turning Zoomed.pdf , page1 
+used on input line 56.
+(pdftex.def)             Requested size: 390.0pt x 139.07951pt.
+<../media/../media//Hexapod Turning Zoomed.pdf, id=64, page=2, 846.28862pt x 30
+1.80252pt>
+File: ../media/../media//Hexapod Turning Zoomed.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning Zoomed.pdf, page 2>
+Package pdftex.def Info: ../media/../media//Hexapod Turning Zoomed.pdf , page2 
+used on input line 59.
+(pdftex.def)             Requested size: 390.0pt x 139.07951pt.
+<../media/../media//Hexapod Turning Zoomed.pdf, id=65, page=3, 846.28862pt x 30
+1.80252pt>
+File: ../media/../media//Hexapod Turning Zoomed.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning Zoomed.pdf, page 3>
+Package pdftex.def Info: ../media/../media//Hexapod Turning Zoomed.pdf , page3 
+used on input line 61.
+(pdftex.def)             Requested size: 390.0pt x 139.07951pt.
+<../media/../media//Hexapod Turning Zoomed.pdf, id=66, page=4, 846.28862pt x 30
+1.80252pt>
+File: ../media/../media//Hexapod Turning Zoomed.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning Zoomed.pdf, page 4>
+Package pdftex.def Info: ../media/../media//Hexapod Turning Zoomed.pdf , page4 
+used on input line 65.
+(pdftex.def)             Requested size: 390.0pt x 139.07951pt.
+<../media/../media//Hexapod Turning Zoomed.pdf, id=67, page=5, 846.28862pt x 30
+1.80252pt>
+File: ../media/../media//Hexapod Turning Zoomed.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning Zoomed.pdf, page 5>
+Package pdftex.def Info: ../media/../media//Hexapod Turning Zoomed.pdf , page5 
+used on input line 68.
+(pdftex.def)             Requested size: 390.0pt x 139.07951pt.
+<../media/../media//Hexapod Turning Zoomed.pdf, id=68, page=6, 846.28862pt x 30
+1.80252pt>
+File: ../media/../media//Hexapod Turning Zoomed.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Turning Zoomed.pdf, page 6>
+Package pdftex.def Info: ../media/../media//Hexapod Turning Zoomed.pdf , page6 
+used on input line 70.
+(pdftex.def)             Requested size: 390.0pt x 139.07951pt.
+) [7 <../media/../media//Hexapod Turning.pdf> <../media/../media//Hexapod Turni
+ng.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+>] [8 <../media/../media//Hexapod Turning Zoomed.pdf> <../media/../media//Hexap
+od Turning Zoomed.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning Zoomed.pdf): 
+PDF inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning Zoomed.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning Zoomed.pdf): 
+PDF inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning Zoomed.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning Zoomed.pdf): 
+PDF inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning Zoomed.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning Zoomed.pdf): 
+PDF inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Turning Zoomed.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Turning Zoomed.pdf): 
+PDF inclusion: multiple pdfs with page group included in a single page
+>] ("../media/../media/Hexapod Forward Step.pdf_tex"
+<../media/../media//Hexapod Forward Step.pdf, id=80, page=1, 1398.37508pt x 123
+8.44273pt>
 File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
 <use ../media/../media//Hexapod Forward Step.pdf, page 1>
 Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page1 us
 ed on input line 56.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
-<../media/../media//Hexapod Forward Step.pdf, id=58, page=2, 1089.09105pt x 123
-8.43832pt>
+(pdftex.def)             Requested size: 390.0pt x 345.40102pt.
+<../media/../media//Hexapod Forward Step.pdf, id=81, page=2, 1398.37508pt x 123
+8.44273pt>
 File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
 <use ../media/../media//Hexapod Forward Step.pdf, page 2>
 Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page2 us
 ed on input line 59.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
-<../media/../media//Hexapod Forward Step.pdf, id=59, page=3, 1089.09105pt x 123
-8.43832pt>
+(pdftex.def)             Requested size: 390.0pt x 345.40102pt.
+<../media/../media//Hexapod Forward Step.pdf, id=82, page=3, 1398.37508pt x 123
+8.44273pt>
 File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
 <use ../media/../media//Hexapod Forward Step.pdf, page 3>
 Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page3 us
 ed on input line 62.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
-) [7] [8 <../media/../media//Hexapod Forward Step.pdf> <../media/../media//Hexa
-pod Forward Step.pdf
+(pdftex.def)             Requested size: 390.0pt x 345.40102pt.
+<../media/../media//Hexapod Forward Step.pdf, id=83, page=4, 1398.37508pt x 123
+8.44273pt>
+File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Forward Step.pdf, page 4>
+Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page4 us
+ed on input line 70.
+(pdftex.def)             Requested size: 390.0pt x 345.40102pt.
+<../media/../media//Hexapod Forward Step.pdf, id=84, page=5, 1398.37508pt x 123
+8.44273pt>
+File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Forward Step.pdf, page 5>
+Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page5 us
+ed on input line 74.
+(pdftex.def)             Requested size: 390.0pt x 345.40102pt.
+) [9 <../media/../media//Hexapod Forward Step.pdf> <../media/../media//Hexapod 
+Forward Step.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
+F inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Forward Step.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
+F inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Hexapod Forward Step.pdf
 
 pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
 F inclusion: multiple pdfs with page group included in a single page
@@ -520,10 +671,10 @@ pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
 F inclusion: multiple pdfs with page group included in a single page
 >] ("Hexapod Kinematics Calculation.aux") ) 
 Here is how much of TeX's memory you used:
- 4678 strings out of 479618
- 70519 string characters out of 2865027
- 363513 words of memory out of 3000000
- 21754 multiletter control sequences out of 15000+200000
+ 4732 strings out of 479618
+ 73511 string characters out of 2865027
+ 364513 words of memory out of 3000000
+ 21802 multiletter control sequences out of 15000+200000
  412193 words of font info for 61 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,21n,75p,614b,433s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -540,10 +691,10 @@ s/cm/cmr12.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public
 ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nblch/AppData/Local/Programs/M
 iKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/nblch/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on "Hexapod Kinematics Calculation.pdf" (8 pages, 153997 bytes).
+Output written on "Hexapod Kinematics Calculation.pdf" (9 pages, 174226 bytes).
 
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
+ 125 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 116 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

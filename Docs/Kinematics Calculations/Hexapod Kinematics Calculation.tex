@@ -139,8 +139,8 @@
 					\text{ where: } n = 0,1,2,3,4,5
 				\end{equation*}
 				
-				\begin{equation*}
-					\therefore					
+				Therefore, the endpoints of each leg in relation to the body center is:
+				\begin{equation*}				
 					\begin{bmatrix}
 						&x_n \\
     					&y_n \\
@@ -160,7 +160,65 @@
 					\end{bmatrix}
 					\text{ where: } n = 0,1,2,3,4,5
 				\end{equation*}
+		\section{Hexapod Turning}
+			Turning the hexapod is slightly different from the rotation of the body alone as the act of turning the whole hexapod requires rotating the origin point. Here we take leg 1 as an example with a small left turn with an angle of $\alpha$.
 		
+		\begin{figure}[ht]
+			\centering
+			\resizebox{0.85\textwidth}{!}{\incfig{Hexapod Turning}}
+			\caption{The hexapod taking a small left turn.}
+		\end{figure}
+		
+		\begin{figure}[ht]
+			\centering
+			\resizebox{0.85\textwidth}{!}{\incfig{Hexapod Turning Zoomed}}
+			\caption{Zoomed in view of leg 1 during the left turn}
+		\end{figure}
+		
+		The first thing we need to find is the angle the leg end point makes withe the center of the body before the turn. this is found as:
+		\begin{flalign*}
+			\theta_a = \tan^{-1} \left(\frac{y_n}{x_n} \right)
+		\end{flalign*}				
+		
+		Now we can use the previous rotation matrices to find the length of the leg from the body.
+		\begin{flalign*}
+			\theta_a = \tan^{-1} \left(\frac{y_n}{x_n} \right)
+		\end{flalign*}
+		
+		\begin{flalign*}
+			\begin{bmatrix}
+				&P_{xn} \\
+    			&P_{yn} \\
+    			&P_{zn}
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				&x_n \\
+    			&y_n \\
+    			&z_n
+			\end{bmatrix}
+			- (R_zR_yR_x)^{-1}
+			\begin{bmatrix}
+				&B_{xn} \\
+    			&B_{yn} \\
+    			&B_{zn}
+			\end{bmatrix}
+			\text{ where: } n = 0,1,2,3,4,5
+		\end{flalign*}
+		
+		The length of the leg from the body is $L = \sqrt{P_{xn}^2 + P_{yn}^2}$
+		
+		In the rotated coordinate frame, we can use the original body offset distances and the length of the leg to find the new leg end point position in the rotated global coordinate frame.
+		
+		\begin{flalign*}
+			P'_{xn} &= L \cos(\theta_a - \alpha) - B_{xn} &\\
+			P'_{yn} &= L \sin(\theta_a - \alpha) - B_{yn} &\\
+			P'_{zn} &= P_{zn}
+		\end{flalign*}
+		
+		These new leg positions are where they should move to turn the whole body to a new angle and then the legs can left up and move to their default position to keep the robot rotated.
+		
+		\section{Finding How the Hexapod Should Move Forward.}
 		\begin{figure}[ht]
 			\centering
 			\resizebox{0.95\textwidth}{!}{\incfig{Hexapod Forward Step}}

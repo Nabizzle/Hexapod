@@ -1,0 +1,83 @@
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Hexapod Turning.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1387.29114442bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.78124748)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Hexapod Turning.pdf}}%
+    \put(0.60844222,0.56997693){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x0}, B_{y0}, B_{z0}$\end{tabular}}}}%
+    \put(0.70700921,0.36569517){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x1}, B_{y1}, B_{z1}$\end{tabular}}}}%
+    \put(0.60775337,0.19770455){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x2}, B_{y2}, B_{z2}$\end{tabular}}}}%
+    \put(0.19266981,0.20526867){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x3}, B_{y3}, B_{z3}$\end{tabular}}}}%
+    \put(0.10735639,0.36564148){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x4}, B_{y4}, B_{z4}$\end{tabular}}}}%
+    \put(0.12077448,0.68415569){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_5, y_5, z_5$\end{tabular}}}}%
+    \put(0.4186346,0.36842164){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0,0$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Hexapod Turning.pdf}}%
+    \put(0.68933335,0.73035963){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_0, y_0, z_0$\end{tabular}}}}%
+    \put(0.87943465,0.47222268){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1, z_1$\end{tabular}}}}%
+    \put(0.69502518,0.04401348){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2, z_2$\end{tabular}}}}%
+    \put(0.25666082,0.00899704){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_3, y_3, z_3$\end{tabular}}}}%
+    \put(0.19261019,0.57117543){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_x5, B_y5, B_z5$\end{tabular}}}}%
+    \put(-0.01081199,0.38420926){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4, z_4$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexapod Turning.pdf}}%
+    \put(0.95669664,0.101035){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\end{tabular}}}}%
+    \put(0.8449937,0.21835211){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$y$\end{tabular}}}}%
+    \put(0.81908984,0.07141464){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$z$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hexapod Turning.pdf}}%
+    \put(0.64212055,0.39555221){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\theta_a$\end{tabular}}}}%
+    \put(0.57666669,0.39304217){\color[rgb]{0,1,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Hexapod Turning.pdf}}%
+    \put(0.49616667,0.42554976){\color[rgb]{0,1,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x1}', B_{y1}', B_{z1}'$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Hexapod Turning.pdf}}%
+    \put(-1.29603309,1.88590195){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.786424\unitlength}\raggedright \end{minipage}}}%
+  \end{picture}%
+\endgroup%
