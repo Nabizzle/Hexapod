@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.8)  10 OCT 2021 15:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.8)  10 OCT 2021 16:11
 entering extended mode
 **"./Hexapod Kinematics Calculation.tex"
 ("Hexapod Kinematics Calculation.tex"
@@ -673,7 +673,7 @@ F inclusion: multiple pdfs with page group included in a single page
 Here is how much of TeX's memory you used:
  4732 strings out of 479618
  73511 string characters out of 2865027
- 368515 words of memory out of 3000000
+ 369515 words of memory out of 3000000
  21802 multiletter control sequences out of 15000+200000
  412193 words of font info for 61 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -691,7 +691,7 @@ s/cm/cmr12.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public
 ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nblch/AppData/Local/Programs/M
 iKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/nblch/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on "Hexapod Kinematics Calculation.pdf" (10 pages, 175624 bytes)
+Output written on "Hexapod Kinematics Calculation.pdf" (10 pages, 176318 bytes)
 .
 PDF statistics:
  128 PDF objects out of 1000 (max. 8388607)

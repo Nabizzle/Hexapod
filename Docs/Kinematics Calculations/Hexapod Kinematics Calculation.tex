@@ -182,7 +182,29 @@
 					\end{bmatrix}
 					\text{ where: } n = 0,1,2,3,4,5
 				\end{equation*}
-			
+		
+			\subsection{Combined Body Offset Changes}
+				The combined changes to the body offsets is below:		
+				\begin{equation*}
+					\begin{bmatrix}
+						&B_{xn}' \\
+    					&B_{yn}' \\
+    					&B_{zn}'
+					\end{bmatrix}
+					= (R_zR_yR_x)^{-1}
+					\begin{bmatrix}
+						&B_{xn} \\
+    					&B_{yn} \\
+    					&B_{zn}
+					\end{bmatrix}
+					+
+					\begin{bmatrix}
+						&T_{x} \\
+    					&T_{y} \\
+    					&T_{z}
+					\end{bmatrix}
+					\text{ where: } n = 0,1,2,3,4,5
+				\end{equation*}
 		\section{Hexapod Turning}
 			Turning the hexapod is slightly different from the rotation of the body alone as the act of turning the whole hexapod requires rotating the origin point. Here we take leg 1 as an example with a small left turn with an angle of $\alpha$.
 		
@@ -226,7 +248,13 @@
     			&B_{yn} \\
     			&B_{zn}
 			\end{bmatrix}
-			\text{ where: } n = 0,1,2,3,4,5
+			-
+			\begin{bmatrix}
+				&T_{x} \\
+    			&T_{y} \\
+    			&T_{z}
+			\end{bmatrix}
+			\text{ where: } n = 0,...,5
 		\end{flalign*}
 		
 		The length of the leg from the body is $L = \sqrt{P_{xn}^2 + P_{yn}^2}$
