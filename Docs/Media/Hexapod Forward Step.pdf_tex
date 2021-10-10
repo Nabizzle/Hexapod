@@ -54,12 +54,8 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{Hexapod Forward Step.pdf}}%
-    \put(0.5402892,0.46459342){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$60\degree$\end{tabular}}}}%
-    \put(0.5409333,0.41692088){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{Hexapod Forward Step.pdf}}%
-    \put(0.47314286,0.36070278){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\frac{\text{Body Offset}}{2}$\end{tabular}}}}%
     \put(0.41944585,0.53260108){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexapod Forward Step.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Hexapod Forward Step.pdf}}%
     \put(0.69471057,0.72961093){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_0, y_0, z_0$\end{tabular}}}}%
     \put(0.8945427,0.49519795){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1, z_1$\end{tabular}}}}%
     \put(0.69570696,0.0375778){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2, z_2$\end{tabular}}}}%
@@ -67,16 +63,16 @@
     \put(-0.00097786,0.38689202){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4, z_4$\end{tabular}}}}%
     \put(0.19194476,0.84020324){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_5, y_5, z_5$\end{tabular}}}}%
     \put(0.43435736,0.41895676){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0,0$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hexapod Forward Step.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexapod Forward Step.pdf}}%
     \put(0.88942471,0.1100682){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\end{tabular}}}}%
     \put(0.77819157,0.22689183){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$y$\end{tabular}}}}%
     \put(0.75239666,0.08057242){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$z$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{Hexapod Forward Step.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hexapod Forward Step.pdf}}%
     \put(0.61476894,0.62438329){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x0}, B_{y0}, B_{z0}$\end{tabular}}}}%
     \put(0.71292136,0.42096075){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x1}, B_{y1}, B_{z1}$\end{tabular}}}}%
     \put(0.61408298,0.2536767){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x2}, B_{y2}, B_{z2}$\end{tabular}}}}%
     \put(0.19801989,0.261209){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x3}, B_{y3}, B_{z3}$\end{tabular}}}}%
     \put(0.09203608,0.45287172){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x4}, B_{y4}, B_{z4}$\end{tabular}}}}%
-    \put(0.20216636,0.62557675){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_x5, B_y5, B_z5$\end{tabular}}}}%
+    \put(0.20216636,0.62557675){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x5}, B_{y5}, B_{z5}$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

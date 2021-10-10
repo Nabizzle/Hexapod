@@ -63,22 +63,6 @@
     </marker>
     <marker
        style="overflow:visible"
-       id="Arrow1Sstart"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="Arrow1Sstart"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         transform="matrix(0.2,0,0,0.2,1.2,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path865"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       style="overflow:visible"
        id="marker1159"
        refX="0"
        refY="0"
@@ -90,22 +74,6 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
          id="path1157"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Send"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="Arrow1Send"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path868"
          inkscape:connector-curvature="0" />
     </marker>
     <marker
@@ -194,7 +162,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.64"
-     inkscape:cx="912.05678"
+     inkscape:cx="658.15053"
      inkscape:cy="881.02414"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -217,7 +185,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -253,76 +221,6 @@
          cy="151.02512"
          r="0.56696427" />
     </g>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send)"
-       d="m 106.8744,151.0741 101.07017,-0.0668"
-       id="path851"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:8, 1;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 158.74911,167.83708 -1e-5,72.96194"
-       id="path1147"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1159)"
-       d="M 106.8744,151.0741 157.14549,63.35369"
-       id="path1155"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow1Sstart);marker-end:url(#marker1243)"
-       id="path1195"
-       sodipodi:type="arc"
-       sodipodi:cx="106.8744"
-       sodipodi:cy="151.0741"
-       sodipodi:rx="21.849283"
-       sodipodi:ry="21.849283"
-       sodipodi:start="5.3489567"
-       sodipodi:end="6.1680168"
-       sodipodi:arc-type="arc"
-       d="m 119.86246,133.5042 a 21.849283,21.849283 0 0 1 8.71648,15.05911"
-       sodipodi:open="true" />
-    <text
-       xml:space="preserve"
-       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;stroke-width:0.26458299"
-       x="128.18118"
-       y="140.37091"
-       id="text1313"><tspan
-         sodipodi:role="line"
-         id="tspan1311"
-         x="128.18118"
-         y="140.37091"
-         style="stroke-width:0.26458299">$60\degree$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;stroke-width:0.26458299"
-       x="128.49774"
-       y="163.80066"
-       id="text1317"><tspan
-         sodipodi:role="line"
-         id="tspan1315"
-         x="128.49774"
-         y="163.80066"
-         style="stroke-width:0.26458299">Body Offset</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker1397);marker-end:url(#marker1329)"
-       d="m 110.3489,168.00754 46.01265,-0.0668"
-       id="path1325"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0" />
-    <text
-       xml:space="preserve"
-       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;stroke-width:0.26458299"
-       x="95.180595"
-       y="191.43031"
-       id="text1473"><tspan
-         sodipodi:role="line"
-         id="tspan1471"
-         x="95.180595"
-         y="191.43031"
-         style="stroke-width:0.26458299">$\frac{\text{Body Offset}}{2}$</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;stroke-width:0.26458299"
@@ -675,6 +573,6 @@
          y="61.252007"
          x="-37.996941"
          id="tspan994"
-         sodipodi:role="line">$B_x5, B_y5, B_z5$</tspan></text>
+         sodipodi:role="line">$B_{x5}, B_{y5}, B_{z5}$</tspan></text>
   </g>
 </svg>

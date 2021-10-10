@@ -66,7 +66,7 @@
     \put(0.87943465,0.47222268){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1, z_1$\end{tabular}}}}%
     \put(0.69502518,0.04401348){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2, z_2$\end{tabular}}}}%
     \put(0.25666082,0.00899704){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_3, y_3, z_3$\end{tabular}}}}%
-    \put(0.19261019,0.57117543){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_x5, B_y5, B_z5$\end{tabular}}}}%
+    \put(0.19261019,0.57117543){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x5}, B_{y5}, B_{z5}$\end{tabular}}}}%
     \put(-0.01081199,0.38420926){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4, z_4$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexapod Turning.pdf}}%
     \put(0.95669664,0.101035){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\end{tabular}}}}%

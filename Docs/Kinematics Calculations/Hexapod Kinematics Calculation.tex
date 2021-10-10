@@ -270,10 +270,27 @@
 		These new leg positions are where they should move to turn the whole body to a new angle and then the legs can left up and move to their default position to keep the robot rotated.
 		
 		\newpage
-		\section{Finding How the Hexapod Should Move Forward.}
+		\section{Hexapod Translation in the XY Plane}
+		Having the hexapod move in any direction level to the ground is simple. The position of the end points of the legs is the opposite of movement of the center of the body. Therefore, the new position of the legs is found using the following 
+		\begin{figure}[ht]
+			\centering
+			\resizebox{0.95\textwidth}{!}{\incfig{Hexapod Walking}}
+			\caption{The top view body when making a motion in the xy plane.}
+		\end{figure}
+		
+		\begin{flalign*}
+			P'_{xn} &= P_{xn} - W_x &\\
+			P'_{yn} &= P_{yn} - W_y &\\
+			P'_{zn} &= P_{zn}
+		\end{flalign*}
+		
+		\newpage
+		\section{Hexapod Alternative Walk Cycle}
+		When the hexapod makes a motion two alternative sets of legs move. One set stays on the ground to form a tripod and the other moves off the ground and into position. The legs will always for an equilateral triangle. For the legs that move off of the ground, the calculation should be made so that it assumes that the origin moved in the opposite direction of the actual motion. Then the second set of legs comes off the ground and does the same.
 		\begin{figure}[ht]
 			\centering
 			\resizebox{0.95\textwidth}{!}{\incfig{Hexapod Forward Step}}
-			\caption{The top view of the whole body when the legs that make the magenta triangle take a forward step.}
+			\caption{The alternative tripod walk of the hexapod.}
 		\end{figure}
+		
 \end{document}
