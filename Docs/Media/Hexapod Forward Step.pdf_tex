@@ -1,4 +1,4 @@
-%% Creator: Inkscape 1.0.2 (e86c870879, 2021-01-15, custom), www.inkscape.org
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'Hexapod Forward Step.pdf' (pdf, eps, ps)
 %%
@@ -60,13 +60,12 @@
     \put(0.50824403,0.48365419){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\frac{\text{Body Offset}}{2}$\end{tabular}}}}%
     \put(0.40041626,0.68384791){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexapod Forward Step.pdf}}%
-    \put(0.64864955,0.79788282){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_0, y_0$\end{tabular}}}}%
-    \put(0.77886515,0.55198278){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1$\end{tabular}}}}%
-    \put(0.64776879,0.32190163){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2$\end{tabular}}}}%
-    \put(0.2744329,0.33017647){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_3, y_3$\end{tabular}}}}%
-    \put(0.15976661,0.54360545){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4$\end{tabular}}}}%
-    \put(0.27463031,0.79947542){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_5, y_5$\end{tabular}}}}%
-    \put(0.4964562,0.54157414){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hexapod Forward Step.pdf}}%
+    \put(0.64800702,0.79747927){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_0, y_0, z_0$\end{tabular}}}}%
+    \put(0.77822266,0.55157924){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1, z_1$\end{tabular}}}}%
+    \put(0.64712631,0.32149805){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2, z_2$\end{tabular}}}}%
+    \put(0.23231655,0.32977293){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_3, y_3, z_3$\end{tabular}}}}%
+    \put(0.11765028,0.54320191){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4, z_4$\end{tabular}}}}%
+    \put(0.23251398,0.79907187){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_5, y_5, z_5$\end{tabular}}}}%
+    \put(0.4681645,0.5411706){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0,0$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

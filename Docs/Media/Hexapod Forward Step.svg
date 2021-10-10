@@ -12,7 +12,7 @@
    viewBox="0 0 382.77173 435.26129"
    version="1.1"
    id="svg8"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="Hexapod Forward Step.svg">
   <defs
      id="defs2">
@@ -110,9 +110,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.45254834"
-     inkscape:cx="563.40563"
-     inkscape:cy="762.66268"
+     inkscape:zoom="1.28"
+     inkscape:cx="694.30135"
+     inkscape:cy="555.21737"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -121,10 +121,10 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="2100"
-     inkscape:window-height="1234"
-     inkscape:window-x="-9"
-     inkscape:window-y="16"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -134,7 +134,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -327,83 +327,6 @@
        style="fill:none;stroke:#00ffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1"
        d="M -84.333407,177.46562 202.52844,11.845852 202.54547,342.956 -84.333407,177.46562"
        id="path1545" />
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="163.80667"
-       y="63.297665"
-       id="text1641"><tspan
-         sodipodi:role="line"
-         id="tspan1639"
-         x="163.80667"
-         y="63.297665"
-         style="stroke-width:0.264583">$x_0, y_0$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="213.64952"
-       y="157.42125"
-       id="text1645"><tspan
-         sodipodi:role="line"
-         id="tspan1643"
-         x="213.64952"
-         y="157.42125"
-         style="stroke-width:0.264583">$x_1, y_1$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="163.46954"
-       y="245.48981"
-       id="text1649"><tspan
-         sodipodi:role="line"
-         id="tspan1647"
-         x="163.46954"
-         y="245.48981"
-         style="stroke-width:0.264583">$x_2, y_2$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="20.567118"
-       y="242.32243"
-       id="text1653"><tspan
-         sodipodi:role="line"
-         id="tspan1651"
-         x="20.567118"
-         y="242.32243"
-         style="stroke-width:0.264583">$x_3, y_3$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="-23.323895"
-       y="160.62785"
-       id="text1657"><tspan
-         sodipodi:role="line"
-         id="tspan1655"
-         x="-23.323895"
-         y="160.62785"
-         style="stroke-width:0.264583">$x_4, y_4$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="20.642683"
-       y="62.688065"
-       id="text1661"><tspan
-         sodipodi:role="line"
-         id="tspan1659"
-         x="20.642683"
-         y="62.688065"
-         style="stroke-width:0.264583">$x_5, y_5$</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="105.55136"
-       y="161.40538"
-       id="text1671"><tspan
-         sodipodi:role="line"
-         id="tspan1669"
-         x="105.55136"
-         y="161.40538"
-         style="stroke-width:0.264583">$0,0$</tspan></text>
     <circle
        style="fill:none;fill-opacity:1;stroke:#00ffff;stroke-width:0.5;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1"
        id="circle1673"
@@ -411,5 +334,82 @@
        cy="179.50728"
        r="190.92271"
        transform="rotate(-1.0755362)" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="163.56073"
+       y="63.452133"
+       id="text1641-5"><tspan
+         sodipodi:role="line"
+         id="tspan1639-2"
+         x="163.56073"
+         y="63.452133"
+         style="stroke-width:0.26458299">$x_0, y_0, z_0$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="213.40359"
+       y="157.57571"
+       id="text1645-5"><tspan
+         sodipodi:role="line"
+         id="tspan1643-2"
+         x="213.40359"
+         y="157.57571"
+         style="stroke-width:0.26458299">$x_1, y_1, z_1$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="163.22362"
+       y="245.64429"
+       id="text1649-9"><tspan
+         sodipodi:role="line"
+         id="tspan1647-2"
+         x="163.22362"
+         y="245.64429"
+         style="stroke-width:0.26458299">$x_2, y_2, z_2$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="4.4461718"
+       y="242.4769"
+       id="text1653-5"><tspan
+         sodipodi:role="line"
+         id="tspan1651-8"
+         x="4.4461718"
+         y="242.4769"
+         style="stroke-width:0.26458299">$x_3, y_3, z_3$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="-39.444836"
+       y="160.78232"
+       id="text1657-0"><tspan
+         sodipodi:role="line"
+         id="tspan1655-0"
+         x="-39.444836"
+         y="160.78232"
+         style="stroke-width:0.26458299">$x_4, y_4, z_4$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="4.5217409"
+       y="62.842529"
+       id="text1661-8"><tspan
+         sodipodi:role="line"
+         id="tspan1659-4"
+         x="4.5217409"
+         y="62.842529"
+         style="stroke-width:0.26458299">$x_5, y_5, z_5$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.26458299"
+       x="94.722099"
+       y="161.55984"
+       id="text1671-3"><tspan
+         sodipodi:role="line"
+         id="tspan1669-7"
+         x="94.722099"
+         y="161.55984"
+         style="stroke-width:0.26458299">$0,0,0$</tspan></text>
   </g>
 </svg>

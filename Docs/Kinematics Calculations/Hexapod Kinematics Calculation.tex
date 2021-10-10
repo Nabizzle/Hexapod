@@ -74,11 +74,92 @@
 
 	\newpage	
 	\section{Converting Leg Origin to Body Origin}
+		In order to find how all of the legs will move together, the origins of each leg need to be shifted from their body attachment points to the body center. Shown in the image below is a top down view of the hexapod body with the leg attachment points labeled as $x_n, y_n, z_n$ with $n = 0, 1, 2, 3, 4, 5$ to correspond to the leg numbers in the code. in the default position, the offset of the legs from the body are a known number, but each offset will change as the body rotates in place. This will be explored later.
 		\begin{figure}[ht]
 			\centering
 			\resizebox{0.95\textwidth}{!}{\incfig{Base Hexapod Position}}
-			\caption{The top view of the whole body with each leg attachment point labeled with x and y values.}
+			\caption{The top view of the whole body with each leg attachment point labeled with x, y, and x values.}
 		\end{figure}
+		
+		The position of each leg endpoint can be found using the body offset plus the leg's position from the body attachment.
+		\begin{flalign*}
+			x_n &= B_{xn} + P_{xn} \text{ where: } n = 0,1,2,3,4,5&\\
+			y_n &= B_{yn} + P_{yn} \text{ where: } n = 0,1,2,3,4,5&\\
+			z_n &= B_{zn} + P_{zn} \text{ where: } n = 0,1,2,3,4,5&\\
+		\end{flalign*}		
+		
+		\subsection{Body Offset Changes Due to Rotation}
+			Each body offset will change based on the rotation of the body. This could be solved using trigonometry like for the legs, but a simpler, global solution is to use rotation matrices and find where each leg attachment point is moved to in space. A change in pitch is a rotation around the x axis, a change in roll is a rotation around the y axis, and a change in yaw is a rotation around the z axis.
+			\subsubsection{Rotation Matrices}
+				The rotation matrices are below:
+				
+				\textbf{Rotation About the X Axis}
+				\begin{equation*}
+				R_x = 
+					\begin{bmatrix}
+						&1 &0 &0 \\
+    					&0 &\cos(\theta) &\sin(\theta) \\
+    					&0 &-\sin(\theta) &\cos(\theta)
+					\end{bmatrix}
+				\end{equation*}
+				
+				\textbf{Rotation About the Y Axis}
+				\begin{equation*}
+				R_y = 
+					\begin{bmatrix}
+						&\cos(\theta) &0 &\sin(\theta) \\
+    					&0 &1 &0 \\ 
+    					&-\sin(\theta) &0 &\cos(\theta)
+					\end{bmatrix}
+				\end{equation*}
+				
+				\textbf{Rotation About the Z Axis}
+				\begin{equation*}
+				R_z = 
+					\begin{bmatrix}
+						&\cos(\theta) &\sin(\theta)&0 \\
+    					&-\sin(\theta) &\cos(\theta) &0 \\
+    					&0 &0 &1
+					\end{bmatrix}
+				\end{equation*}
+				
+				To find the new endpoints, we do the following calculation:
+				\begin{equation*}
+					\begin{bmatrix}
+						&B_{xn}' \\
+    					&B_{yn}' \\
+    					&B_{zn}'
+					\end{bmatrix}
+					= (R_zR_yR_x)^{-1}
+					\begin{bmatrix}
+						&B_{xn} \\
+    					&B_{yn} \\
+    					&B_{zn}
+					\end{bmatrix}
+					\text{ where: } n = 0,1,2,3,4,5
+				\end{equation*}
+				
+				\begin{equation*}
+					\therefore					
+					\begin{bmatrix}
+						&x_n \\
+    					&y_n \\
+    					&z_n
+					\end{bmatrix}
+					= (R_zR_yR_x)^{-1}
+					\begin{bmatrix}
+						&B_{xn} \\
+    					&B_{yn} \\
+    					&B_{zn}
+					\end{bmatrix}
+					+
+					\begin{bmatrix}
+						&P_{xn} \\
+    					&P_{yn} \\
+    					&P_{zn}
+					\end{bmatrix}
+					\text{ where: } n = 0,1,2,3,4,5
+				\end{equation*}
 		
 		\begin{figure}[ht]
 			\centering

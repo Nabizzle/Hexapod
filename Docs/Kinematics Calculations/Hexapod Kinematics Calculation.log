@@ -1,40 +1,40 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.5)  8 OCT 2021 16:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.8)  10 OCT 2021 13:37
 entering extended mode
 **"./Hexapod Kinematics Calculation.tex"
-(Hexapod Kinematics Calculation.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-07-12>
+("Hexapod Kinematics Calculation.tex"
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-01-09> xparse <2020-03-03>
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
-File: size12.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
-\c@part=\count182
-\c@section=\count183
-\c@subsection=\count184
-\c@subsubsection=\count185
-\c@paragraph=\count186
-\c@subparagraph=\count187
-\c@figure=\count188
-\c@table=\count189
+\c@part=\count177
+\c@section=\count178
+\c@subsection=\count179
+\c@subsubsection=\count180
+\c@paragraph=\count181
+\c@subparagraph=\count182
+\c@figure=\count183
+\c@table=\count184
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
-Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks16
-\inpenc@posthook=\toks17
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks18
+\KV@toks@=\toks17
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -43,7 +43,7 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 107.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
@@ -51,7 +51,7 @@ File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 \Gin@req@height=\dimen139
 \Gin@req@width=\dimen140
 ) (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
-Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+Package: parskip 2020-06-15 v2.0f non-zero parskip adjustments
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
@@ -64,9 +64,9 @@ Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 ))
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count190
+\etb@tempcnta=\count185
 )) (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2021/04/20 v2.17j AMS math features
+Package: amsmath 2020/09/23 v2.17i AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
@@ -75,7 +75,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks19
+\@emptytoks=\toks18
 \ex@=\dimen141
 ))
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
@@ -85,41 +85,41 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count191
+\inf@bad=\count186
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count192
-\leftroot@=\count193
+\uproot@=\count187
+\leftroot@=\count188
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count194
-\DOTSCASE@=\count195
+\classnum@=\count189
+\DOTSCASE@=\count190
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box50
-\strutbox@=\box51
+\Mathstrutbox@=\box47
+\strutbox@=\box48
 \big@size=\dimen143
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count196
-\c@MaxMatrixCols=\count197
+\macc@depth=\count191
+\c@MaxMatrixCols=\count192
 \dotsspace@=\muskip16
-\c@parentequation=\count198
-\dspbrk@lvl=\count199
-\tag@help=\toks20
-\row@=\count266
-\column@=\count267
-\maxfields@=\count268
-\andhelp@=\toks21
+\c@parentequation=\count193
+\dspbrk@lvl=\count194
+\tag@help=\toks19
+\row@=\count195
+\column@=\count196
+\maxfields@=\count197
+\andhelp@=\toks20
 \eqnshift@=\dimen144
 \alignsep@=\dimen145
 \tagshift@=\dimen146
 \tagwidth@=\dimen147
 \totwidth@=\dimen148
 \lineht@=\dimen149
-\@envbody=\toks22
+\@envbody=\toks21
 \multlinegap=\skip50
 \multlinetaggap=\skip51
-\mathdisplay@stack=\toks23
+\mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
 )
@@ -142,27 +142,27 @@ Package: import 2020/04/01  v 6.2
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/xifthen\xifthen.sty
 Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
 
-(C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+(C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/latex-tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count269
-\calc@Bcount=\count270
+\calc@Acount=\count198
+\calc@Bcount=\count199
 \calc@Adimen=\dimen150
 \calc@Bdimen=\dimen151
 \calc@Askip=\skip52
 \calc@Bskip=\skip53
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count271
+\calc@Ccount=\count266
 \calc@Cskip=\skip54
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
-Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/ifmtarg\ifmtarg.sty
 Package: ifmtarg 2018/04/16 v1.2b check for an empty argument
 ))
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
-Package: pdfpages 2021/03/06 v0.5t Insert pages of external PDF documents (AM)
+Package: pdfpages 2021/01/09 v0.5r Insert pages of external PDF documents (AM)
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
 Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
@@ -188,18 +188,17 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 ))
 \AM@pagewidth=\dimen154
 \AM@pageheight=\dimen155
-\AM@fboxrule=\dimen156
 
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pppdftex.def
-File: pppdftex.def 2021/03/06 v0.5t Pdfpages driver for pdfTeX (AM)
+File: pppdftex.def 2021/01/09 v0.5r Pdfpages driver for pdfTeX (AM)
 )
-\pdfpages@includegraphics@status=\count272
-\AM@pagebox=\box52
-\AM@global@opts=\toks24
-\AM@pagecnt=\count273
-\AM@toc@title=\toks25
-\c@AM@survey=\count274
-\AM@templatesizebox=\box53
+\pdfpages@includegraphics@status=\count267
+\AM@pagebox=\box49
+\AM@global@opts=\toks23
+\AM@pagecnt=\count268
+\AM@toc@title=\toks24
+\c@AM@survey=\count269
+\AM@templatesizebox=\box50
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transparent
 .sty
@@ -215,10 +214,10 @@ Package: gensymb 2003/07/02 v1.0 (WaS)
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
-File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count275
-\l__pdf_internal_box=\box54
-) (Hexapod Kinematics Calculation.aux)
+File: l3backend-pdftex.def 2020-01-29 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count270
+\l__pdf_internal_box=\box51
+) ("Hexapod Kinematics Calculation.aux")
 \openout1 = `"Hexapod Kinematics Calculation.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
@@ -239,28 +238,24 @@ LaTeX Font Info:    ... okay on input line 26.
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count276
-\scratchdimen=\dimen157
-\scratchbox=\box55
-\nofMPsegments=\count277
-\nofMParguments=\count278
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count279
-\MPscratchDim=\dimen158
-\MPnumerator=\count280
-\makeMPintoPDFobject=\count281
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count271
+\scratchdimen=\dimen156
+\scratchbox=\box52
+\nofMPsegments=\count272
+\nofMParguments=\count273
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count274
+\MPscratchDim=\dimen157
+\MPnumerator=\count275
+\makeMPintoPDFobject=\count276
+\everyMPtoPDFconversion=\toks26
 )
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-
-(C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
-fg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
-))
+)
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 (C:\Users\nblch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
@@ -294,7 +289,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {C:/Users/nblch/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-(../media/../media/Leg Top.pdf_tex
+("../media/../media/Leg Top.pdf_tex"
 <../media/../media//Leg Top.pdf, id=7, page=1, 459.5265pt x 288.502pt>
 File: ../media/../media//Leg Top.pdf Graphic file (type pdf)
 <use ../media/../media//Leg Top.pdf, page 1>
@@ -341,7 +336,7 @@ multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ../media/../media//Leg Top.pdf): PDF inclusion: 
 multiple pdfs with page group included in a single page
->] (../media/../media/Leg Side.pdf_tex
+>] ("../media/../media/Leg Side.pdf_tex"
 <../media/../media//Leg Side.pdf, id=24, page=1, 491.2454pt x 298.7104pt>
 File: ../media/../media//Leg Side.pdf Graphic file (type pdf)
 <use ../media/../media//Leg Side.pdf, page 1>
@@ -428,65 +423,49 @@ pdfTeX warning: pdflatex (file ../media/../media//Leg Side.pdf): PDF inclusion:
 
 pdfTeX warning: pdflatex (file ../media/../media//Leg Side.pdf): PDF inclusion:
  multiple pdfs with page group included in a single page
->] [4] (../media/../media/Base Hexapod Position.pdf_tex
-<../media/../media//Base Hexapod Position.pdf, id=43, page=1, 1089.29984pt x 10
-89.186pt>
+>] [4] ("../media/../media/Base Hexapod Position.pdf_tex"
+<../media/../media//Base Hexapod Position.pdf, id=43, page=1, 1392.49348pt x 10
+87.88206pt>
 File: ../media/../media//Base Hexapod Position.pdf Graphic file (type pdf)
 <use ../media/../media//Base Hexapod Position.pdf, page 1>
 Package pdftex.def Info: ../media/../media//Base Hexapod Position.pdf , page1 u
 sed on input line 56.
-(pdftex.def)             Requested size: 390.0pt x 389.96274pt.
-<../media/../media//Base Hexapod Position.pdf, id=44, page=2, 1089.29984pt x 10
-89.186pt>
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Base Hexapod Position.pdf, id=44, page=2, 1392.49348pt x 10
+87.88206pt>
 File: ../media/../media//Base Hexapod Position.pdf Graphic file (type pdf)
 <use ../media/../media//Base Hexapod Position.pdf, page 2>
 Package pdftex.def Info: ../media/../media//Base Hexapod Position.pdf , page2 u
 sed on input line 59.
-(pdftex.def)             Requested size: 390.0pt x 389.96274pt.
-<../media/../media//Base Hexapod Position.pdf, id=45, page=3, 1089.29984pt x 10
-89.186pt>
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Base Hexapod Position.pdf, id=45, page=3, 1392.49348pt x 10
+87.88206pt>
 File: ../media/../media//Base Hexapod Position.pdf Graphic file (type pdf)
 <use ../media/../media//Base Hexapod Position.pdf, page 3>
 Package pdftex.def Info: ../media/../media//Base Hexapod Position.pdf , page3 u
 sed on input line 62.
-(pdftex.def)             Requested size: 390.0pt x 389.96274pt.
-<../media/../media//Base Hexapod Position.pdf, id=46, page=4, 1089.29984pt x 10
-89.186pt>
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Base Hexapod Position.pdf, id=46, page=4, 1392.49348pt x 10
+87.88206pt>
 File: ../media/../media//Base Hexapod Position.pdf Graphic file (type pdf)
 <use ../media/../media//Base Hexapod Position.pdf, page 4>
 Package pdftex.def Info: ../media/../media//Base Hexapod Position.pdf , page4 u
 sed on input line 70.
-(pdftex.def)             Requested size: 390.0pt x 389.96274pt.
-)
-(../media/../media/Hexapod Forward Step.pdf_tex
-<../media/../media//Hexapod Forward Step.pdf, id=47, page=1, 1089.09105pt x 123
-8.43832pt>
-File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
-<use ../media/../media//Hexapod Forward Step.pdf, page 1>
-Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page1 us
-ed on input line 56.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
-<../media/../media//Hexapod Forward Step.pdf, id=48, page=2, 1089.09105pt x 123
-8.43832pt>
-File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
-<use ../media/../media//Hexapod Forward Step.pdf, page 2>
-Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page2 us
-ed on input line 59.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
-<../media/../media//Hexapod Forward Step.pdf, id=49, page=3, 1089.09105pt x 123
-8.43832pt>
-File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
-<use ../media/../media//Hexapod Forward Step.pdf, page 3>
-Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page3 us
-ed on input line 62.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
-<../media/../media//Hexapod Forward Step.pdf, id=50, page=4, 1089.09105pt x 123
-8.43832pt>
-File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
-<use ../media/../media//Hexapod Forward Step.pdf, page 4>
-Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page4 us
-ed on input line 70.
-(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Base Hexapod Position.pdf, id=47, page=5, 1392.49348pt x 10
+87.88206pt>
+File: ../media/../media//Base Hexapod Position.pdf Graphic file (type pdf)
+<use ../media/../media//Base Hexapod Position.pdf, page 5>
+Package pdftex.def Info: ../media/../media//Base Hexapod Position.pdf , page5 u
+sed on input line 77.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
+<../media/../media//Base Hexapod Position.pdf, id=48, page=6, 1392.49348pt x 10
+87.88206pt>
+File: ../media/../media//Base Hexapod Position.pdf Graphic file (type pdf)
+<use ../media/../media//Base Hexapod Position.pdf, page 6>
+Package pdftex.def Info: ../media/../media//Base Hexapod Position.pdf , page6 u
+sed on input line 81.
+(pdftex.def)             Requested size: 390.0pt x 304.6879pt.
 ) [5 <../media/../media//Base Hexapod Position.pdf> <../media/../media//Base He
 xapod Position.pdf
 
@@ -500,8 +479,38 @@ DF inclusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ../media/../media//Base Hexapod Position.pdf): P
 DF inclusion: multiple pdfs with page group included in a single page
->] [6 <../media/../media//Hexapod Forward Step.pdf> <../media/../media//Hexapod
- Forward Step.pdf
+> <../media/../media//Base Hexapod Position.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Base Hexapod Position.pdf): P
+DF inclusion: multiple pdfs with page group included in a single page
+> <../media/../media//Base Hexapod Position.pdf
+
+pdfTeX warning: pdflatex (file ../media/../media//Base Hexapod Position.pdf): P
+DF inclusion: multiple pdfs with page group included in a single page
+>] [6] ("../media/../media/Hexapod Forward Step.pdf_tex"
+<../media/../media//Hexapod Forward Step.pdf, id=57, page=1, 1089.09105pt x 123
+8.43832pt>
+File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Forward Step.pdf, page 1>
+Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page1 us
+ed on input line 56.
+(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
+<../media/../media//Hexapod Forward Step.pdf, id=58, page=2, 1089.09105pt x 123
+8.43832pt>
+File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Forward Step.pdf, page 2>
+Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page2 us
+ed on input line 59.
+(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
+<../media/../media//Hexapod Forward Step.pdf, id=59, page=3, 1089.09105pt x 123
+8.43832pt>
+File: ../media/../media//Hexapod Forward Step.pdf Graphic file (type pdf)
+<use ../media/../media//Hexapod Forward Step.pdf, page 3>
+Package pdftex.def Info: ../media/../media//Hexapod Forward Step.pdf , page3 us
+ed on input line 62.
+(pdftex.def)             Requested size: 390.0pt x 443.47533pt.
+) [7] [8 <../media/../media//Hexapod Forward Step.pdf> <../media/../media//Hexa
+pod Forward Step.pdf
 
 pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
 F inclusion: multiple pdfs with page group included in a single page
@@ -509,36 +518,32 @@ F inclusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
 F inclusion: multiple pdfs with page group included in a single page
-> <../media/../media//Hexapod Forward Step.pdf
-
-pdfTeX warning: pdflatex (file ../media/../media//Hexapod Forward Step.pdf): PD
-F inclusion: multiple pdfs with page group included in a single page
->] (Hexapod Kinematics Calculation.aux) ) 
+>] ("Hexapod Kinematics Calculation.aux") ) 
 Here is how much of TeX's memory you used:
- 4753 strings out of 478868
- 72279 string characters out of 2848809
- 385380 words of memory out of 3000000
- 22571 multiletter control sequences out of 15000+600000
- 411579 words of font info for 59 fonts, out of 8000000 for 9000
+ 4678 strings out of 479618
+ 70519 string characters out of 2865027
+ 363513 words of memory out of 3000000
+ 21754 multiletter control sequences out of 15000+200000
+ 412193 words of font info for 61 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,20n,75p,614b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
-<C:/Users/nblch/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/nblch/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/nblch/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/n
-blch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:
-/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8
-.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmr12.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmr17.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmr8.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nblch/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/nblch/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on "Hexapod Kinematics Calculation.pdf" (6 pages, 153074 bytes).
+ 68i,21n,75p,614b,433s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/nblch/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/nblch/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/nblch/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users
+/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
+C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmm
+i8.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr12.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmr17.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmr8.pfb><C:/Users/nblch/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nblch/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/nblch/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on "Hexapod Kinematics Calculation.pdf" (8 pages, 153997 bytes).
 
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 111 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 

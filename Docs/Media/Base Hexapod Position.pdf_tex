@@ -1,4 +1,4 @@
-%% Creator: Inkscape 1.0.2 (e86c870879, 2021-01-15, custom), www.inkscape.org
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'Base Hexapod Position.pdf' (pdf, eps, ps)
 %%
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{1085.23018424bp}%
+    \setlength{\unitlength}{1387.29114442bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,23 +50,34 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.9998955)%
+  \begin{picture}(1,0.78124748)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{Base Hexapod Position.pdf}}%
-    \put(0.55565339,0.52785161){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$60\degree$\end{tabular}}}}%
-    \put(0.5845561,0.47313162){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
+    \put(0.53564882,0.41249351){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$60\degree$\end{tabular}}}}%
+    \put(0.52330735,0.36644426){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{Base Hexapod Position.pdf}}%
-    \put(0.50832935,0.41500025){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\frac{\text{Body Offset}}{2}$\end{tabular}}}}%
-    \put(0.40052224,0.6151556){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
+    \put(0.481329,0.32421377){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\frac{\text{Body Offset}}{2}$\end{tabular}}}}%
+    \put(0.38597414,0.4753273){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Body Offset\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{Base Hexapod Position.pdf}}%
-    \put(0.64870797,0.72916866){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_0, y_0$\end{tabular}}}}%
-    \put(0.77889861,0.48331574){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1$\end{tabular}}}}%
-    \put(0.64782738,0.25327868){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2$\end{tabular}}}}%
-    \put(0.27456303,0.26155193){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_3, y_3$\end{tabular}}}}%
-    \put(0.15991872,0.47494002){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4$\end{tabular}}}}%
-    \put(0.27476041,0.73076095){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_5, y_5$\end{tabular}}}}%
-    \put(0.49654378,0.4729091){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0$\end{tabular}}}}%
+    \put(0.60844222,0.56997693){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x0}, B_{y0}, B_{z0}$\end{tabular}}}}%
+    \put(0.70700921,0.36569517){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x1}, B_{y1}, B_{z1}$\end{tabular}}}}%
+    \put(0.60775337,0.19770455){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x2}, B_{y2}, B_{z2}$\end{tabular}}}}%
+    \put(0.19266981,0.20526867){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x3}, B_{y3}, B_{z3}$\end{tabular}}}}%
+    \put(0.10735639,0.36564148){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_{x4}, B_{y4}, B_{z4}$\end{tabular}}}}%
+    \put(0.18954756,0.72959459){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_5, y_5, z_5$\end{tabular}}}}%
+    \put(0.4186346,0.36842164){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$0,0,0$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{Base Hexapod Position.pdf}}%
+    \put(0.68933335,0.73035963){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_0, y_0, z_0$\end{tabular}}}}%
+    \put(0.89082062,0.38639239){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1, y_1, z_1$\end{tabular}}}}%
+    \put(0.69502518,0.04401348){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2, y_2, z_2$\end{tabular}}}}%
+    \put(0.17952476,0.04638146){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_3, y_3, z_3$\end{tabular}}}}%
+    \put(0.19261019,0.57117543){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_x5, B_y5, B_z5$\end{tabular}}}}%
+    \put(-0.01081199,0.38420926){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_4, y_4, z_4$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Base Hexapod Position.pdf}}%
+    \put(0.95669664,0.101035){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\end{tabular}}}}%
+    \put(0.8449937,0.21835211){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$y$\end{tabular}}}}%
+    \put(0.81908984,0.07141464){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$z$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Base Hexapod Position.pdf}}%
   \end{picture}%
 \endgroup%
