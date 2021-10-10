@@ -379,13 +379,13 @@
     <text
        xml:space="preserve"
        style="font-size:6.3499999px;line-height:1.25;font-family:sans-serif;stroke-width:0.26458299"
-       x="83.208183"
-       y="160.76474"
+       x="81.604568"
+       y="163.97197"
        id="text1671"><tspan
          sodipodi:role="line"
          id="tspan1669"
-         x="83.208183"
-         y="160.76474"
+         x="81.604568"
+         y="163.97197"
          style="stroke-width:0.26458299">$0,0,0$</tspan></text>
     <circle
        style="fill:none;fill-opacity:1;stroke:#00ffff;stroke-width:0.5;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1"
@@ -448,7 +448,7 @@
          y="45.767029"
          x="-14.313203"
          id="tspan994"
-         sodipodi:role="line">$B_x5, B_y5, B_z5$</tspan></text>
+         sodipodi:role="line">$B_{x5}, B_{y5}, B_{z5}$</tspan></text>
     <text
        id="text1000"
        y="154.21338"
