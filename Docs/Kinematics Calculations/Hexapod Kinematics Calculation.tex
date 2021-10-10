@@ -160,6 +160,29 @@
 					\end{bmatrix}
 					\text{ where: } n = 0,1,2,3,4,5
 				\end{equation*}
+			\subsection{Body Offset Changes Due to Body Translation}
+				When the body of the hexapod translates in place, the only change that is needed is to add the translation to each offset. Assuming there is a desired translation of $[T_x, T_y, T_z]$, the body offsets will be:
+				\begin{equation*}
+					\begin{bmatrix}
+						&B_{xn}' \\
+    					&B_{yn}' \\
+    					&B_{zn}'
+					\end{bmatrix}
+					=
+					\begin{bmatrix}
+						&B_{xn} \\
+    					&B_{yn} \\
+    					&B_{zn}
+					\end{bmatrix}
+					+
+					\begin{bmatrix}
+						&T_{x} \\
+    					&T_{y} \\
+    					&T_{z}
+					\end{bmatrix}
+					\text{ where: } n = 0,1,2,3,4,5
+				\end{equation*}
+			
 		\section{Hexapod Turning}
 			Turning the hexapod is slightly different from the rotation of the body alone as the act of turning the whole hexapod requires rotating the origin point. Here we take leg 1 as an example with a small left turn with an angle of $\alpha$.
 		
@@ -218,6 +241,7 @@
 		
 		These new leg positions are where they should move to turn the whole body to a new angle and then the legs can left up and move to their default position to keep the robot rotated.
 		
+		\newpage
 		\section{Finding How the Hexapod Should Move Forward.}
 		\begin{figure}[ht]
 			\centering
