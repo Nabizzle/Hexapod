@@ -1,32 +1,32 @@
 # Table of Contents
 
-* [Hexapod Project Description](#hexapod-description)
+* [Hexapod Project Description](#hexapod-project-description)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
 * [Author](#author)
 * [Acknowledgements](#acknowledgements)
 * [Description of Each Script](#description-of-each-script)
-  * [Rotation Matrices](#rotationmatrices)
+  * [Rotation Matrices](#rotation-matrices)
     * [xRot](#xrot)
     * [yRot](#yrot)
     * [zRot](#zrot)
-  * [Body Functions](#bodyfunctions)
+  * [Body Functions](#body-functions)
     * [bodyPos](#bodypos)
-  * [Leg Functions](#legfunctions)
+  * [Leg Functions](#leg-functions)
     * [legPos](#legpos)
     * [legAngle](#legangle)
     * [startLegPos](#startlegpos)
     * [getFeetPos](#getfeetpos)
     * [recalculateLegAngles](#recalculatelegangles)
     * [legModel](#legmodel)
-  * [Movement Functions](#movementfunctions)
-    * [stepForward](#step_forward)
-    * [stepTurnFoot](#step_turn_foot)
-    * [stepTurn](#step_turn)
-  * [Movement Cycles](#movementcycles)
+  * [Movement Functions](#movement-functions)
+    * [stepForward](#stepforward)
+    * [stepTurnFoot](#stepturnfoot)
+    * [stepTurn](#stepturn)
+  * [Movement Cycles](#movement-cycles)
     * [walk](#walk)
     * [turn](#turn)
-  * [Model Visualization](#modelvisualization)
+  * [Model Visualization](#model-visualization)
     * [showModel](#showmodel)
     * [animate](#animate)
 
@@ -157,7 +157,7 @@ Takes the body and leg models, a figure to plot on, a linear distance to move, a
 
 Takes the body and leg models, a figure to plot on, and an angle to turn to. This function breaks the turn into steps based on the maximum turn angle. The cycle ends with the hexapod moving to the neutral position. This function requires a non-zero angle to turn to (positive angles are left turns) and ends with the creation of a video, saved to the media folder, of the movement. Left and right turns are saved as seperate videos. Below is an example of this turn cycle turning the hexapd right and then left.
 
-<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod_Turn.gif" width="800">
+<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod_Turn.gif" width="500">
 
 ## Model Visualization
 
