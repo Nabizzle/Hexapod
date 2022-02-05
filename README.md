@@ -29,6 +29,7 @@
   * [Model Visualization](#model-visualization)
     * [showModel](#showmodel)
     * [animate](#animate)
+    * [animateBodyTranslate](#animatebodytranslate)
 
 # Hexapod Project Description
 
@@ -170,3 +171,9 @@ Takes the body and leg models, the figure to plot on, the floor height, and an e
 ### animate
 
 This is the function required by the movie writer to create a video. This takes in the same parameters as the showModel function as well as the leg movements to animate the walk and turn cycles.
+
+### animateBodyTranslate
+
+This function takes a specific frame number and figure to iterate through translation and rotations arrays in order to create a video of the body of the hexapod moving in all degrees of freedom independent of leg position.
+
+<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod_Body_Translation.gif" width="500">
