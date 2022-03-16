@@ -2,9 +2,11 @@ from setuptools import find_packages, setup
 setup(
     name='hexapod',
     packages=find_packages(include=['hexapod']),
-    version='0.1.0',
+    version='1.0.0',
     description='Library of Hexapod Functions',
+    long_description='Library of hexapod functions taken from the Walking Model jupyter notebook.',
     author='Nabeel Chowdhury',
+    author_email='nabeel.chowdhury@case.edu',
     license='GPL-2.0',
     install_requires=['numpy==1.22.3'],
     setup_requires=['pytest-runner==6.0.0'],
