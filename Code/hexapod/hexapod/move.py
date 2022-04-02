@@ -5,8 +5,6 @@ from hexapod.leg import getFeetPos
 def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = True):
     # Calculate the x, y, and z position updates to move in a step in a direction
     z_resolution = 1 # the forward distance of each sub step.
-    x_resolution = z_resolution * cos(radians(step_angle))
-    y_resolution = z_resolution * sin(radians(step_angle))
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 for i in np.arange (- step_height, step_height + z_resolution, z_resolution)])
     x = np.linspace(0, distance * cos(radians(step_angle)), z.size)
@@ -59,7 +57,7 @@ def stepTurn(feet_pos, step_angle = 15, step_height = 15, right_foot = True):
 
     return previous_foot
 
-def walk(body_model, leg_model, distance = 30, angle = 90):
+def walk(leg_model, distance = 30, angle = 90):
     # Creates a series of foot positions to use in telling the robot to walk in a directino
     max_step_size = 30 #Maximum step distance
     if distance <= 0: #raise an error if the robot is not commanded to move a positive distance
@@ -120,7 +118,7 @@ def walk(body_model, leg_model, distance = 30, angle = 90):
     walk_positions = np.concatenate((walk_positions, temp_walk_positions), axis = 0)
     return walk_positions
 
-def turn(body_model, leg_model, turn_angle = 60):
+def turn(leg_model, turn_angle = 60):
     # Creates the series of foot positions to turn the hexapod about the z axis.
     max_turn_angle = 15 #sets the maximum angle to turn by.
     if turn_angle == 0: #Raise an error is the robot is not commanded to move a non zero angle
