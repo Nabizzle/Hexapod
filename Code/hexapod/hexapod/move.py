@@ -1,4 +1,4 @@
-from math import degrees, radians, sin, cos, atan2, sqrt, round
+from math import degrees, radians, sin, cos, atan2, sqrt
 import numpy as np
 from hexapod.leg import getFeetPos
 
