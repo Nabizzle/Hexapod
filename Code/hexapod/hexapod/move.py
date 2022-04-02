@@ -180,6 +180,7 @@ def emgToWalk(leg_model, right_foot, max_distance = 30):
     # Walks a dynamic distance based a normalized EMG input.
 
     # Loops forever once started
+    previous_step = 0
     while True:
         #set the emg to values between 0-1
         # TODO: call a function to poll for an emg value from the raspberry pi zero
@@ -199,7 +200,34 @@ def emgToWalk(leg_model, right_foot, max_distance = 30):
         
         previous_step = distance
         right_foot = not right_foot
+        # TODO: Write a function to use the walk positions to make a movement
 
 def pollWalkEMG():
+    # TODO: Get the recorded EMG from the raspberry pi zero and normalize it.
+    return 1
+
+def emgToTurn(leg_model, right_foot, max_turn_angle = 15):
+    # Turns a dynamic angle based on a normalized EMG input
+
+    # Loops forever when started
+    previous_turn_angle = 0
+    while True:
+        # TODO: call a function to poll for an emg value from the raspberry pi zero
+        emg = pollTurnEMG()
+
+        if emg < 0:
+            emg = 0
+
+        if emg > 1:
+            emg = 1
+
+        turn_angle = round(max_turn_angle * emg)
+        feet_positions = getFeetPos(leg_model)
+
+        turn_positions = stepTurn(feet_positions, step_angle = np.sign(turn_angle) * (abs(turn_angle) + previous_turn_angle), right_foot = right_foot)
+        right_foot = not right_foot
+        # TODO: Write a function to use the turn positions to make a movement
+
+def pollTurnEMG():
     # TODO: Get the recorded EMG from the raspberry pi zero and normalize it.
     return 1
