@@ -1,4 +1,4 @@
-from math import degrees, radians, sin, cos, atan2, sqrt
+from math import degrees, radians, sin, cos, atan2, sqrt, round
 import numpy as np
 from hexapod.leg import getFeetPos
 
@@ -174,3 +174,32 @@ def turn(body_model, leg_model, turn_angle = 60):
 
     turn_positions = np.concatenate((turn_positions, temp_turn_positions), axis = 0)
     return turn_positions
+
+
+def emgToWalk(leg_model, right_foot, max_distance = 30):
+    # Walks a dynamic distance based a normalized EMG input.
+
+    # Loops forever once started
+    while True:
+        #set the emg to values between 0-1
+        # TODO: call a function to poll for an emg value from the raspberry pi zero
+        emg = pollWalkEMG()
+
+        if emg < 0:
+            emg = 0
+
+        if emg > 1:
+            emg = 1
+
+        distance = round(max_distance * emg) # find a integer distance to move that is a percentage of the max distance.
+        walk_positions = stepForward(step_angle = 90, distance = distance + previous_step, right_foot = right_foot)
+        feet_positions = getFeetPos(leg_model)
+        for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
+            walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
+        
+        previous_step = distance
+        right_foot = not right_foot
+
+def pollWalkEMG():
+    # TODO: Get the recorded EMG from the raspberry pi zero and normalize it.
+    return 1
