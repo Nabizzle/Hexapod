@@ -1,4 +1,3 @@
-from signal import pause
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos
 from hexapod.move import switchMode, emgToWalk, resetWalkStance, emgToTurn, resetTurnStance
