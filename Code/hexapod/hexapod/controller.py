@@ -3,7 +3,7 @@ from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos
 from hexapod.move import switchMode, emgToWalk, resetWalkStance, emgToTurn, resetTurnStance
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
-import time
+from time import sleep
 
 def controller(mode):
     #controls the hexapod to walk or turn and send the commands
@@ -39,6 +39,6 @@ def sendPositions(port, positions, body_model):
         angles = recalculateLegAngles(position, body_model) #convert the feet positions to angles
         message = anglesToSerial(angles) #get the serial message from the angles
         sendData(port, message) #send the serial message
-        pause(0.05) #wait 50ms
+        sleep(0.05) #wait 50ms
 
     return True
