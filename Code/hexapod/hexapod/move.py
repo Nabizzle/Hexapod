@@ -1,6 +1,6 @@
 from math import degrees, radians, sin, cos, atan2, sqrt
 import numpy as np
-from hexapod.leg import getFeetPos
+from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
 from hexapod.piToPi import pollEMG
 
 def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = True):
@@ -193,14 +193,15 @@ def emgToWalk(leg_model, right_foot, previous_step, max_distance = 30):
     right_foot = not right_foot
     return[leg_model, right_foot, previous_step]
 
-def resetWalkStance(leg_model, right_foot, previous_step):
+def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     walk_positions = stepForward(step_angle = 90, distance = previous_step, right_foot = right_foot)
     feet_positions = getFeetPos(leg_model)
     for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
         walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
 
     # TODO: Write a function to use the walk positions to make a movement
-
+    leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :], body_model), body_model)
+    right_foot = not right_foot
     return[leg_model, right_foot]
 
 def emgToTurn(leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
