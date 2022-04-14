@@ -1,6 +1,7 @@
 from math import degrees, radians, sin, cos, atan2, sqrt
 import numpy as np
 from hexapod.leg import getFeetPos
+from hexapod.piToPi import pollWalkEMG, pollTurnEMG
 
 def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = True):
     # Calculate the x, y, and z position updates to move in a step in a direction
@@ -200,10 +201,6 @@ def emgToWalk(leg_model, right_foot, max_distance = 30):
         right_foot = not right_foot
         # TODO: Write a function to use the walk positions to make a movement
 
-def pollWalkEMG():
-    # TODO: Get the recorded EMG from the raspberry pi zero and normalize it.
-    return 1
-
 def emgToTurn(leg_model, right_foot, max_turn_angle = 15):
     # Turns a dynamic angle based on a normalized EMG input
 
@@ -225,7 +222,3 @@ def emgToTurn(leg_model, right_foot, max_turn_angle = 15):
         turn_positions = stepTurn(feet_positions, step_angle = np.sign(turn_angle) * (abs(turn_angle) + previous_turn_angle), right_foot = right_foot)
         right_foot = not right_foot
         # TODO: Write a function to use the turn positions to make a movement
-
-def pollTurnEMG():
-    # TODO: Get the recorded EMG from the raspberry pi zero and normalize it.
-    return 1
