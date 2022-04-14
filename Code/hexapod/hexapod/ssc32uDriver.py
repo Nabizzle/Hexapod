@@ -1,4 +1,6 @@
+from typing import Type
 import serial
+import numpy as np
 
 def angleToPW(angle):
     #convert the input angle in degrees to the pulse width in us to command that angle
@@ -6,6 +8,10 @@ def angleToPW(angle):
 
 def anglesToSerial(angles, speed, time):
     #converts an array of servo angles to the formatted serial command for the Lynxmotiohn SSC-32U
+    if angles.shape == (6, 3):
+        angles = angles.flatten()
+    else:
+        raise Exception('Input angles were the wrong format. Should be a 6x3 numpy array')
     #speed is in microseconds/second and time is in milliseconds. A speed of 1000us takes 1 second to go 90 degrees
     serial_string = ''
     for i, angle in enumerate(angles):
