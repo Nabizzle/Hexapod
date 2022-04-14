@@ -174,7 +174,6 @@ def turn(leg_model, turn_angle = 60):
     turn_positions = np.concatenate((turn_positions, temp_turn_positions), axis = 0)
     return turn_positions
 
-
 def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30):
     # Walks a dynamic distance based a normalized EMG input.
     #call a function to poll for forearm emg values from the raspberry pi zero
