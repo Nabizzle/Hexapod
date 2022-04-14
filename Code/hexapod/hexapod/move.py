@@ -228,11 +228,11 @@ def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
 
     return[leg_model, right_foot, turn_positions]
 
-def switchMode(fcr_emg, edc_emg, threshold):
+def switchMode(threshold):
     #if the user is cocontracting, tell the hexapod to switch walking modes.
+    [fcr_emg, edc_emg] = pollEMG()
+
     if fcr_emg > threshold and edc_emg > threshold:
         return True
     else:
         return False
-
-# TODO: Write a function to use the walk or turn positions to make a movement
