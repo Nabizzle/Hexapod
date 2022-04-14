@@ -175,46 +175,45 @@ def turn(leg_model, turn_angle = 60):
     return turn_positions
 
 
-def emgToWalk(leg_model, right_foot, max_distance = 30):
+def emgToWalk(leg_model, right_foot, previous_step, max_distance = 30):
     # Walks a dynamic distance based a normalized EMG input.
+    #call a function to poll for forearm emg values from the raspberry pi zero
+    [fcr_emg, edc_emg] = pollEMG()
+    emg = fcr_emg - edc_emg #finds the difference between EMG signals to move forward or backwards
 
-    # Loops forever once started
-    previous_step = 0
-    while True:
-        #call a function to poll for forearm emg values from the raspberry pi zero
-        [fcr_emg, edc_emg] = pollEMG()
-        emg = fcr_emg - edc_emg #finds the difference between EMG signals to move forward or backwards
+    distance = round(max_distance * abs(emg)) # find a integer distance to move that is a percentage of the max distance.
+    walk_positions = stepForward(step_angle = np.sign(emg) * 90, distance = distance + previous_step, right_foot = right_foot)
+    feet_positions = getFeetPos(leg_model)
+    for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
+        walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
 
-        distance = round(max_distance * abs(emg)) # find a integer distance to move that is a percentage of the max distance.
-        walk_positions = stepForward(step_angle = np.sign(emg) * 90, distance = distance + previous_step, right_foot = right_foot)
-        feet_positions = getFeetPos(leg_model)
-        for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
-            walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
-        
-        previous_step = distance
-        right_foot = not right_foot
-        # TODO: Write a function to use the walk positions to make a movement
+    # TODO: Write a function to use the walk positions to make a movement
 
-def emgToTurn(leg_model, right_foot, max_turn_angle = 15):
+    previous_step = distance
+    right_foot = not right_foot
+    return[leg_model, right_foot, previous_step]
+
+def emgToTurn(leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
     # Turns a dynamic angle based on a normalized EMG input
+    #call a function to poll for forearm emg values from the raspberry pi zero
+    [fcr_emg, edc_emg] = pollEMG()
+    emg = fcr_emg - edc_emg #finds the difference between EMG signals to move right or left
 
-    # Loops forever when started
-    previous_turn_angle = 0
-    while True:
-        #call a function to poll for forearm emg values from the raspberry pi zero
-        [fcr_emg, edc_emg] = pollEMG()
-        emg = fcr_emg - edc_emg #finds the difference between EMG signals to move right or left
+    turn_angle = round(max_turn_angle * emg)
+    feet_positions = getFeetPos(leg_model)
 
-        turn_angle = round(max_turn_angle * emg)
-        feet_positions = getFeetPos(leg_model)
+    turn_positions = stepTurn(feet_positions, step_angle = np.sign(turn_angle) * (abs(turn_angle) + previous_turn_angle), right_foot = right_foot)
 
-        turn_positions = stepTurn(feet_positions, step_angle = np.sign(turn_angle) * (abs(turn_angle) + previous_turn_angle), right_foot = right_foot)
-        right_foot = not right_foot
-        # TODO: Write a function to use the turn positions to make a movement
+    # TODO: Write a function to use the turn positions to make a movement
+
+    previous_turn_angle = turn_angle
+    right_foot = not right_foot
+
+    return[leg_model, right_foot, previous_turn_angle]
     
 def switchMode(fcr_emg, edc_emg, threshold):
     #if the user is cocontracting, tell the hexapod to switch walking modes.
-    if fcr_emg > threshold & edc_emg > threshold:
+    if fcr_emg > threshold and edc_emg > threshold:
         return True
     else:
         return False
