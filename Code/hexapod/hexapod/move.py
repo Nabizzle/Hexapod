@@ -187,12 +187,10 @@ def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 3
     for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
         walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
 
-    # TODO: Write a function to use the walk positions to make a movement
-
     previous_step = distance
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :], body_model), body_model)
-    return[leg_model, right_foot, previous_step]
+    return[leg_model, right_foot, previous_step, walk_positions]
 
 def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     walk_positions = stepForward(step_angle = 90, distance = previous_step, right_foot = right_foot)
@@ -200,10 +198,9 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
         walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
 
-    # TODO: Write a function to use the walk positions to make a movement
     leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :], body_model), body_model)
     right_foot = not right_foot
-    return[leg_model, right_foot]
+    return[leg_model, right_foot, walk_positions]
 
 def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
     # Turns a dynamic angle based on a normalized EMG input
@@ -216,29 +213,27 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_a
 
     turn_positions = stepTurn(feet_positions, step_angle = np.sign(turn_angle) * (abs(turn_angle) + previous_turn_angle), right_foot = right_foot)
 
-    # TODO: Write a function to use the turn positions to make a movement
-
     previous_turn_angle = turn_angle
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :], body_model), body_model)
 
-    return[leg_model, right_foot, previous_turn_angle]
+    return[leg_model, right_foot, previous_turn_angle, turn_positions]
 
 def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     feet_positions = getFeetPos(leg_model)
 
     turn_positions = stepTurn(feet_positions, step_angle = previous_turn_angle, right_foot = right_foot)
 
-    # TODO: Write a function to use the turn positions to make a movement
-
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :], body_model), body_model)
 
-    return[leg_model, right_foot]
-    
+    return[leg_model, right_foot, turn_positions]
+
 def switchMode(fcr_emg, edc_emg, threshold):
     #if the user is cocontracting, tell the hexapod to switch walking modes.
     if fcr_emg > threshold and edc_emg > threshold:
         return True
     else:
         return False
+
+# TODO: Write a function to use the walk or turn positions to make a movement
