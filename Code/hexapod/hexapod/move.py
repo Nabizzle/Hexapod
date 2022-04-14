@@ -181,8 +181,8 @@ def emgToWalk(leg_model, right_foot, previous_step, max_distance = 30):
     [fcr_emg, edc_emg] = pollEMG()
     emg = fcr_emg - edc_emg #finds the difference between EMG signals to move forward or backwards
 
-    distance = round(max_distance * abs(emg)) # find a integer distance to move that is a percentage of the max distance.
-    walk_positions = stepForward(step_angle = np.sign(emg) * 90, distance = distance + previous_step, right_foot = right_foot)
+    distance = round(max_distance * emg) # find a integer distance to move that is a percentage of the max distance.
+    walk_positions = stepForward(step_angle = 90, distance = distance + previous_step, right_foot = right_foot)
     feet_positions = getFeetPos(leg_model)
     for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
         walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
@@ -192,6 +192,16 @@ def emgToWalk(leg_model, right_foot, previous_step, max_distance = 30):
     previous_step = distance
     right_foot = not right_foot
     return[leg_model, right_foot, previous_step]
+
+def resetWalkStance(leg_model, right_foot, previous_step):
+    walk_positions = stepForward(step_angle = 90, distance = previous_step, right_foot = right_foot)
+    feet_positions = getFeetPos(leg_model)
+    for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
+        walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
+
+    # TODO: Write a function to use the walk positions to make a movement
+
+    return[leg_model, right_foot]
 
 def emgToTurn(leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
     # Turns a dynamic angle based on a normalized EMG input
