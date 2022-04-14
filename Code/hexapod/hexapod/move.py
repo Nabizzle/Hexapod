@@ -175,7 +175,7 @@ def turn(leg_model, turn_angle = 60):
     return turn_positions
 
 
-def emgToWalk(leg_model, right_foot, previous_step, max_distance = 30):
+def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30):
     # Walks a dynamic distance based a normalized EMG input.
     #call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -191,6 +191,7 @@ def emgToWalk(leg_model, right_foot, previous_step, max_distance = 30):
 
     previous_step = distance
     right_foot = not right_foot
+    leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :], body_model), body_model)
     return[leg_model, right_foot, previous_step]
 
 def resetWalkStance(body_model, leg_model, right_foot, previous_step):
@@ -204,7 +205,7 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     right_foot = not right_foot
     return[leg_model, right_foot]
 
-def emgToTurn(leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
+def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
     # Turns a dynamic angle based on a normalized EMG input
     #call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -219,6 +220,7 @@ def emgToTurn(leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
 
     previous_turn_angle = turn_angle
     right_foot = not right_foot
+    leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :], body_model), body_model)
 
     return[leg_model, right_foot, previous_turn_angle]
     
