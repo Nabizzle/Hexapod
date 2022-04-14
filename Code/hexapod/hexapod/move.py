@@ -216,7 +216,7 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_a
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :], body_model), body_model)
 
-    return[leg_model, right_foot, previous_turn_angle, turn_positions]
+    return [leg_model, right_foot, previous_turn_angle, turn_positions]
 
 def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     feet_positions = getFeetPos(leg_model)
@@ -226,7 +226,7 @@ def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :], body_model), body_model)
 
-    return[leg_model, right_foot, turn_positions]
+    return [leg_model, right_foot, turn_positions]
 
 def switchMode(threshold):
     #if the user is cocontracting, tell the hexapod to switch walking modes.
