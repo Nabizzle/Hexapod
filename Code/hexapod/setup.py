@@ -8,7 +8,7 @@ setup(
     author='Nabeel Chowdhury',
     author_email='nabeel.chowdhury@case.edu',
     license='GPL-2.0',
-    install_requires=['numpy==1.22.3'],
+    install_requires=['numpy==1.22.3', 'pyserial==3.5'],
     setup_requires=['pytest-runner==6.0.0'],
     tests_require=['pytest==7.1.0', 'numpy==1.22.3'],
     test_suite='tests',
