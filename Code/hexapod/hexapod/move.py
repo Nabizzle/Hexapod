@@ -90,7 +90,7 @@ def walk(leg_model, distance = 30, angle = 90):
             right_foot = not right_foot #switch which foot steps forward
             break
 
-        elif i == 0: #if this is the first of more than one step, move forward the max distance
+        if i == 0: #if this is the first of more than one step, move forward the max distance
             walk_positions = stepForward(step_angle = angle, distance = max_step_size, right_foot = right_foot)
             feet_positions = getFeetPos(leg_model)
             for j in range(walk_positions.shape[0]):
@@ -150,7 +150,7 @@ def turn(leg_model, turn_angle = 60):
             right_foot = not right_foot #switch which foot steps forward
             break
 
-        elif i == 0: #if this is the first of more than one step, turn the max angle
+        if i == 0: #if this is the first of more than one step, turn the max angle
             feet_positions = getFeetPos(leg_model)
             turn_positions = stepTurn(feet_positions, step_angle = np.sign(remaining_turn_distance) * max_turn_angle, right_foot = right_foot)
             remaining_turn_distance -= np.sign(remaining_turn_distance) * max_turn_angle #reduce the remaining distance by the max step size
