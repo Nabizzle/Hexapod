@@ -40,7 +40,7 @@ This project is made in two parts. The first is a computational model where the 
 
 ## Getting Started
 
-The current sete of code is only the computational model for testing the control of the robot. This is run through the Jupyter Notebook [Walking Model.](https://github.com/Nabizzle/Hexapod/blob/main/Code/Walking%20Model.ipynb) Refer to the notebook to see the outputs of creating the neutral position of an example walk and turn cycle. The bottom setion of the notebook allow you to change the body rotaion and translation before the hexapod walks and turns and the last two cells allow you to change the walking distance and angle as well as the turning angle.
+The current sete of code is only the computational model for testing the control of the robot. This is run through the Jupyter Notebook [Walking Model.](https://github.com/Nabizzle/Hexapod/blob/main/Code/Walking%20Model.ipynb) Refer to the notebook to see the outputs of creating the neutral position of an example walk and turn cycle. The bottom setion of the notebook allow you to change the body rotaion and translation before the hexapod walks and turns and the last two cells allow you to change the walking distance and angle as well as the turning angle. This ReadMe corresponds to the Jupyter Notebook. For the library of python functions to run the physical robot, refer to the [library's ReadMe](https://github.com/Nabizzle/Hexapod/tree/main/Code/hexapod)
 
 ### Prerequisites
 
