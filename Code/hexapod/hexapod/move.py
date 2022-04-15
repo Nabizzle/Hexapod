@@ -1,4 +1,4 @@
-from math import degrees, radians, sin, cos, atan2, sqrt, hypot
+from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np
 from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
 from hexapod.piToPi import pollEMG
