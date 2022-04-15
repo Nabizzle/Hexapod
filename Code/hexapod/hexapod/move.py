@@ -1,4 +1,4 @@
-from math import degrees, radians, sin, cos, atan2, sqrt
+from math import degrees, radians, sin, cos, atan2, sqrt, hypot
 import numpy as np
 from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
 from hexapod.piToPi import pollEMG
@@ -23,7 +23,7 @@ def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = T
 
 def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, right_foot = True):
     z_resolution = 1 # the forward distance of each sub step.
-    radius = sqrt(foot_x ** 2 + foot_y ** 2)
+    radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 + foot_z for i in np.arange (- step_height, step_height + z_resolution, z_resolution)])
