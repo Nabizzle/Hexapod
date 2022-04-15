@@ -515,14 +515,6 @@ def test_stepTurn():
         [-3.88228568e+01,  1.44888874e+02, -2.00000000e+01]]]))
 
 def test_walk():
-    body_model = np.array([[42.5, 73.61215932, 0],
-                            [85, 0, 0],
-                            [42.5, -73.61215932, 0],
-                            [-42.5, -73.61215932, 0],
-                            [-85, 0, 0],
-                            [-42.5, 73.61215932, 0],
-                            [42.5, 73.61215932, 0]])
-
     leg_model = np.array([[[42.5, 85, 42.5, -42.5, -85, -42.5],
                 [73.6121593, 0, -73.6121593, -73.6121593, 0, 73.6121593],
                 [0, 0, 0, 0, 0, 0]],
@@ -1018,19 +1010,11 @@ def test_resetWalkStance():
     right_foot = False
     previous_step = 15
 
-    [leg_model, right_foot, walk_positions] = move.resetWalkStance(body_model, input_leg_model, right_foot, previous_step)
+    [leg_model, right_foot, _] = move.resetWalkStance(body_model, input_leg_model, right_foot, previous_step)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
 
 def test_turn():
-    body_model = np.array([[42.5, 73.61215932, 0],
-                            [85, 0, 0],
-                            [42.5, -73.61215932, 0],
-                            [-42.5, -73.61215932, 0],
-                            [-85, 0, 0],
-                            [-42.5, 73.61215932, 0],
-                            [42.5, 73.61215932, 0]])
-
     leg_model = np.array([[[42.5, 85, 42.5, -42.5, -85, -42.5],
                 [73.6121593, 0, -73.6121593, -73.6121593, 0, 73.6121593],
                 [0, 0, 0, 0, 0, 0]],
@@ -2176,7 +2160,7 @@ def test_resetTurnStance():
     right_foot = False
     previous_turn_angle = 15
 
-    [leg_model, right_foot, turn_positions] = move.resetTurnStance(body_model, input_leg_model, right_foot, previous_turn_angle)
+    [leg_model, right_foot, _] = move.resetTurnStance(body_model, input_leg_model, right_foot, previous_turn_angle)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
 
