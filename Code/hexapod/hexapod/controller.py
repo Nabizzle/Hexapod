@@ -36,7 +36,7 @@ def controller(mode):
 def sendPositions(port, positions, body_model):
     for position in positions:
         angles = recalculateLegAngles(position, body_model) #convert the feet positions to angles
-        message = anglesToSerial(angles) #get the serial message from the angles
+        message = anglesToSerial(angles, 500, 2000) #get the serial message from the angles
         sendData(port, message) #send the serial message
         sleep(0.05) #wait 50ms
 
