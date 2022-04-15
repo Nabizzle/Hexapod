@@ -63,10 +63,9 @@ def walk(leg_model, distance = 30, angle = 90):
     max_step_size = 30 #Maximum step distance
     if distance <= 0: #raise an error if the robot is not commanded to move a positive distance
         raise ValueError("distance must be a positive distance")
-    else: #find the number of steps to take
-        steps = int(distance / max_step_size)
-        if distance % max_step_size > 0:
-            steps += 1
+    steps = int(distance / max_step_size)
+    if distance % max_step_size > 0:
+        steps += 1
 
     right_foot = True; #If the right foot is moving forward
     remaining_distance = distance #Sets the remaining distance to move forward as the full distane to move
@@ -124,10 +123,9 @@ def turn(leg_model, turn_angle = 60):
     max_turn_angle = 15 #sets the maximum angle to turn by.
     if turn_angle == 0: #Raise an error is the robot is not commanded to move a non zero angle
         raise ValueError("turn angle must be a number larger than 0.")
-    else: #find the number of steps to take
-        steps = int(abs(turn_angle / max_turn_angle))
-        if abs(turn_angle % max_turn_angle) > 0:
-            steps += 1
+    steps = int(abs(turn_angle / max_turn_angle))
+    if abs(turn_angle % max_turn_angle) > 0:
+        steps += 1
 
     right_foot = True; #If the right foot is moving forward
     remaining_turn_distance = turn_angle #Sets the remaining turn distance to the full turn
