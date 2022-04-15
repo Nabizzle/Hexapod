@@ -1,4 +1,4 @@
-from hexapod import body, leg
+from hexapod import leg
 import numpy as np
 
 def test_legPos():

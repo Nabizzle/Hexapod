@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.linalg import inv
 from math import degrees, sin, cos, acos, atan2, sqrt, pi
-from hexapod.rotation import xRot, yRot, zRot
+from hexapod.rotation import yRot, zRot
 
 def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.34, femur = 76.2, tibia = 88.32):
     # finds the positions for the coax, femur, and tibia leg segments and adds them to the body model
