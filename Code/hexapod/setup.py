@@ -4,7 +4,7 @@ setup(
     packages=find_packages(include=['hexapod']),
     version='1.0.0',
     description='Library of Hexapod Functions',
-    long_description='Library of hexapod functions taken from the Walking Model jupyter notebook.',
+    long_description='Library of hexapod functions.',
     author='Nabeel Chowdhury',
     author_email='nabeel.chowdhury@case.edu',
     license='GPL-2.0',
