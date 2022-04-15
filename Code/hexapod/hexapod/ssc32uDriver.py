@@ -14,7 +14,7 @@ def anglesToSerial(angles, speed, time):
     serial_string = ''
     for i, angle in enumerate(angles):
         serial_string += '#' + str(i) + 'P' +  str(angleToPW(angle)) + 'S' + str(speed)
-    
+
     serial_string += 'T' + str(time) + '\r'
     return serial_string
 
