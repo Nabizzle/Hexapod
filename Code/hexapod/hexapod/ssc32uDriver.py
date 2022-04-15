@@ -24,7 +24,7 @@ def connect(com):
     ser.baudrate = 9600
     ser.port = com
     ser.open()
-    if ser.is_open():
+    if ser.is_open:
         print(ser)
     else:
         print('Serial port did not open')
@@ -33,7 +33,7 @@ def connect(com):
 def disconnect(ser):
     #disconnects for the serial port
     ser.close()
-    if ser.is_open():
+    if ser.is_open:
         print('Serial port is still open')
         return False
 
