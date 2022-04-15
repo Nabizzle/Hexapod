@@ -67,7 +67,7 @@ def walk(leg_model, distance = 30, angle = 90):
     if distance % max_step_size > 0:
         steps += 1
 
-    right_foot = True; #If the right foot is moving forward
+    right_foot = True #If the right foot is moving forward
     remaining_distance = distance #Sets the remaining distance to move forward as the full distane to move
     for i in range(steps): #iterate over the number of steps to take
         if remaining_distance <= max_step_size: #if the remaining distance to move is less than the max step size, then move the robot remaining distance
@@ -127,7 +127,7 @@ def turn(leg_model, turn_angle = 60):
     if abs(turn_angle % max_turn_angle) > 0:
         steps += 1
 
-    right_foot = True; #If the right foot is moving forward
+    right_foot = True #If the right foot is moving forward
     remaining_turn_distance = turn_angle #Sets the remaining turn distance to the full turn
     for i in range(steps): #iterate over the number of steps to take
         if abs(remaining_turn_distance) <= max_turn_angle: #if the remaining turn distance to move is less than the max turn angle, then turn the robot the remaining angle

@@ -18,20 +18,20 @@ def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.
 
 def legAngle(x, y, z, coax = 26.34, femur = 76.2, tibia = 88.32):
     # finds the angles for the coax, femur, and tibia leg segments
-    coax_angle = degrees(atan2(y, x));
+    coax_angle = degrees(atan2(y, x))
     coax_rot = zRot(-coax_angle)
     leg_rotated = np.matmul(inv(coax_rot), np.array([[x, y, z]]).T)
-    femur_angle = degrees(acos((tibia ** 2 - femur ** 2 - leg_rotated[2] ** 2 - (leg_rotated[0] - coax) ** 2) / (-2 * femur * (sqrt(leg_rotated[2] ** 2 + (leg_rotated[0] - coax) ** 2))))) - degrees(atan2(-leg_rotated[2], (leg_rotated[0] - coax)));
-    tibia_angle = degrees(acos((leg_rotated[2] ** 2 + (leg_rotated[0] - coax) ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur * tibia))) - 90;
+    femur_angle = degrees(acos((tibia ** 2 - femur ** 2 - leg_rotated[2] ** 2 - (leg_rotated[0] - coax) ** 2) / (-2 * femur * (sqrt(leg_rotated[2] ** 2 + (leg_rotated[0] - coax) ** 2))))) - degrees(atan2(-leg_rotated[2], (leg_rotated[0] - coax)))
+    tibia_angle = degrees(acos((leg_rotated[2] ** 2 + (leg_rotated[0] - coax) ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur * tibia))) - 90
 
     if abs(coax_angle) <= 1e-10:
-        coax_angle = 0;
+        coax_angle = 0
 
     if abs(femur_angle) <= 1e-10:
-        femur_angle = 0;
+        femur_angle = 0
 
     if abs(tibia_angle) <= 1e-10:
-        tibia_angle = 0;
+        tibia_angle = 0
 
     return [coax_angle, femur_angle, tibia_angle]
 
