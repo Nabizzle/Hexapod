@@ -16,7 +16,7 @@ def anglesToSerial(angles, speed, time):
         serial_string += '#' + str(i) + 'P' + str(angleToPW(angle)) + 'S' + str(speed)
 
     serial_string += 'T' + str(time) + '\r'
-    return serial_string
+    return bytes(serial_string, 'ascii')
 
 def connect(com):
     #tries to open a serial port with the Lynxmotiohn SSC-32U on the desired COM port
