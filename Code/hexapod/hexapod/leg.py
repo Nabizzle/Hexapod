@@ -49,7 +49,7 @@ def startLegPos(body_model, start_radius = 150, start_height = 20):
     [start_radius * cos(- 2 * pi / 3) , start_radius * sin(- 2 * pi / 3), - start_height],
     [- start_radius, 0, - start_height],
     [start_radius * cos(2 * pi / 3), start_radius * sin(2 * pi / 3), - start_height]])
-    start_leg =  recalculateLegAngles(start_leg_pos, body_model)
+    start_leg = recalculateLegAngles(start_leg_pos, body_model)
     return start_leg
 
 def legModel(leg_angles, body_model):

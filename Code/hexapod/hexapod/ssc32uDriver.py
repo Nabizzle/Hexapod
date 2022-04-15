@@ -13,7 +13,7 @@ def anglesToSerial(angles, speed, time):
     #speed is in microseconds/second and time is in milliseconds. A speed of 1000us takes 1 second to go 90 degrees
     serial_string = ''
     for i, angle in enumerate(angles):
-        serial_string += '#' + str(i) + 'P' +  str(angleToPW(angle)) + 'S' + str(speed)
+        serial_string += '#' + str(i) + 'P' + str(angleToPW(angle)) + 'S' + str(speed)
 
     serial_string += 'T' + str(time) + '\r'
     return serial_string
