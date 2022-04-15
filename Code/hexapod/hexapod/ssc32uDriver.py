@@ -1,5 +1,4 @@
 import serial
-import numpy as np
 
 def angleToPW(angle):
     #convert the input angle in degrees to the pulse width in us to command that angle
@@ -15,7 +14,7 @@ def anglesToSerial(angles, speed, time):
     serial_string = ''
     for i, angle in enumerate(angles):
         serial_string += '#' + str(i) + 'P' +  str(angleToPW(angle)) + 'S' + str(speed)
-    
+
     serial_string += 'T' + str(time) + '\r'
     return serial_string
 
