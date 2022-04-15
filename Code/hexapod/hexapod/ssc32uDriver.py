@@ -24,7 +24,7 @@ def connect(com):
     ser = serial.Serial()
     ser.baudrate = 9600
     ser.port = com
-    ser.open
+    ser.open()
     if ser.is_open():
         print(ser)
     else:
@@ -37,9 +37,9 @@ def disconnect(ser):
     if ser.is_open():
         print('Serial port is still open')
         return False
-    else:
-        print('Serial port is closed.')
-        return True
+
+    print('Serial port is closed.')
+    return True
 
 def sendData(ser, serial_string):
     #sends the commands for the servos to the Lynxmotiohn SSC-32U
