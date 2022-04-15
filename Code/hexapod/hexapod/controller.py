@@ -10,6 +10,8 @@ def controller(mode):
     #setup the starting robot positions
     body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
     start_leg = startLegPos(body_model, start_radius = 150, start_height = 20)
+    message = anglesToSerial(start_leg, 500, 2000) #get the serial message from the angles
+    sendData(port, message) #send the serial message
     leg_model = legModel(start_leg, body_model)
 
     #iterate forever
