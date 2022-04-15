@@ -1020,7 +1020,7 @@ def test_resetWalkStance():
 
     [leg_model, right_foot, walk_positions] = move.resetWalkStance(body_model, input_leg_model, right_foot, previous_step)
 
-    assert np.allclose(leg_model, output_leg_model) and right_foot == True
+    assert np.allclose(leg_model, output_leg_model) and right_foot is True
 
 def test_turn():
     body_model = np.array([[42.5, 73.61215932, 0],
@@ -2178,7 +2178,7 @@ def test_resetTurnStance():
 
     [leg_model, right_foot, turn_positions] = move.resetTurnStance(body_model, input_leg_model, right_foot, previous_turn_angle)
 
-    assert np.allclose(leg_model, output_leg_model) and right_foot == True
+    assert np.allclose(leg_model, output_leg_model) and right_foot is True
 
 def test_switchMode():
-    assert move.switchMode(0.75) == True
+    assert move.switchMode(0.75) is True
