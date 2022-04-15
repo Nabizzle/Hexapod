@@ -1,6 +1,5 @@
 from typing import Type
 import serial
-import numpy as np
 
 def angleToPW(angle):
     #convert the input angle in degrees to the pulse width in us to command that angle
