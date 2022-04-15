@@ -232,7 +232,4 @@ def switchMode(threshold):
     #if the user is cocontracting, tell the hexapod to switch walking modes.
     [fcr_emg, edc_emg] = pollEMG()
 
-    if fcr_emg > threshold and edc_emg > threshold:
-        return True
-    else:
-        return False
+    return bool(fcr_emg > threshold and edc_emg > threshold)
