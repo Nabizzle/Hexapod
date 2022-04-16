@@ -8,20 +8,22 @@ def angleToPW(angle):
 def anglesToSerial(angles, speed, time):
     #converts an array of servo angles to the formatted serial command for the Lynxmotiohn SSC-32U
     if angles.shape == (6, 3):
-        angles[3:6, 1:3] = - angles[3:6, 1:3]
+        temp_angles = angles
+        temp_angles[0:3, 2] = - temp_angles[0:3, 2]
+        temp_angles[3:6, 1] = - temp_angles[3:6, 1]
         adjustment = np.array([[90, 90, 90],
                                [90, 90, 90],
                                [90, 90, 90],
-                               [270, 90, 90],
                                [-90, 90, 90],
-                               [-90, 90, 90]])
-        angles = angles + adjustment
-        angles = angles.flatten()
+                               [270, 90, 90],
+                               [270, 90, 90]])
+        temp_angles = adjustment - temp_angles
+        angles_processed = temp_angles.flatten()
     else:
         raise Exception('Input angles were the wrong format. Should be a 6x3 numpy array')
     #speed is in microseconds/second and time is in milliseconds. A speed of 1000us takes 1 second to go 90 degrees
     serial_string = ''
-    for i, angle in enumerate(angles):
+    for i, angle in enumerate(angles_processed):
         serial_string += '#' + str(i) + 'P' + str(angleToPW(angle)) + 'S' + str(speed)
 
     serial_string += 'T' + str(time) + '\r'
