@@ -2907,6 +2907,3 @@ def test_resetTurnStance():
     [leg_model, right_foot, _] = move.resetTurnStance(body_model, input_leg_model, right_foot, previous_turn_angle)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
-
-def test_switchMode():
-    assert move.switchMode(0.75) is True
