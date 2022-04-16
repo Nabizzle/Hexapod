@@ -1,4 +1,5 @@
 import serial
+import numpy as np
 
 def angleToPW(angle):
     #convert the input angle in degrees to the pulse width in us to command that angle
@@ -7,6 +8,14 @@ def angleToPW(angle):
 def anglesToSerial(angles, speed, time):
     #converts an array of servo angles to the formatted serial command for the Lynxmotiohn SSC-32U
     if angles.shape == (6, 3):
+        angles[3:6, 1:3] = - angles[3:6, 1:3]
+        adjustment = np.array([[90, 90, 90],
+                               [90, 90, 90],
+                               [90, 90, 90],
+                               [270, 90, 90],
+                               [-90, 90, 90],
+                               [-90, 90, 90]])
+        angles = angles + adjustment
         angles = angles.flatten()
     else:
         raise Exception('Input angles were the wrong format. Should be a 6x3 numpy array')
