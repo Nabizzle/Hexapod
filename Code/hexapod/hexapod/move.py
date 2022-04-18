@@ -13,7 +13,7 @@ def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = T
     lead_foot = np.dstack((x, y, z)).reshape(z.size, 1, 3)
     dragging_foot = np.dstack((- x, - y, np.zeros(z.size))).reshape(z.size, 1, 3)
 
-    #define legs 0, 2, and 4 as the right legs and legs 1, 3, 5 as the left legs
+    # define legs 0, 2, and 4 as the right legs and legs 1, 3, 5 as the left legs
     if right_foot: #right foot
         feet = np.concatenate((lead_foot, dragging_foot, lead_foot, dragging_foot, lead_foot, dragging_foot), axis = 1)
     else:
@@ -35,7 +35,7 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, righ
         x[i] = radius * cos(radians(angle))
         y[i] = radius * sin(radians(angle))
 
-    #define legs 0, 2, and 4 as the right legs and legs 1, 3, 5 as the left legs
+    # define legs 0, 2, and 4 as the right legs and legs 1, 3, 5 as the left legs
     if right_foot: #right foot
         angles = np.linspace(foot_angle, foot_angle + step_angle, z.size)
     else:
@@ -176,7 +176,7 @@ def turn(leg_model, turn_angle = 60):
 
 def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30):
     """Walks a dynamic distance based a normalized EMG input."""
-    #call a function to poll for forearm emg values from the raspberry pi zero
+    # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
     emg = fcr_emg - edc_emg #finds the difference between EMG signals to move forward or backwards
 
@@ -204,7 +204,7 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
 
 def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
     """Turns a dynamic angle based on a normalized EMG input"""
-    #call a function to poll for forearm emg values from the raspberry pi zero
+    # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
     emg = fcr_emg - edc_emg #finds the difference between EMG signals to move right or left
 

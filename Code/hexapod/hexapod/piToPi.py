@@ -10,10 +10,10 @@ def pollEMG():
     cs = digitalio.DigitalInOut(board.D5)
     mcp = MCP.MCP3008(spi, cs)
 
-    #setup the EMG channels to record from
+    # setup the EMG channels to record from
     fcr_channel = AnalogIn(mcp, MCP.P0)
     edc_channel = AnalogIn(mcp, MCP.P1)
-    #get the 16 value on each EMG channel and normalize it
+    # get the 16 value on each EMG channel and normalize it
     fcr_emg = fcr_channel.value / 65536.0
     edc_emg = edc_channel.value / 65536.0
 

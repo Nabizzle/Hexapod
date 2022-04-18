@@ -21,7 +21,7 @@ def anglesToSerial(angles, speed, time):
         angles_processed = temp_angles.flatten()
     else:
         raise Exception('Input angles were the wrong format. Should be a 6x3 numpy array')
-    #speed is in microseconds/second and time is in milliseconds. A speed of 1000us takes 1 second to go 90 degrees
+    # speed is in microseconds/second and time is in milliseconds. A speed of 1000us takes 1 second to go 90 degrees
     serial_string = ''
     for i, angle in enumerate(angles_processed):
         serial_string += '#' + str(i) + 'P' + str(angleToPW(angle)) + 'S' + str(speed)
