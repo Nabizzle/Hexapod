@@ -7,7 +7,7 @@ def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = T
     """Calculate the x, y, and z position updates to move in a step in a direction"""
     z_resolution = 1 # the forward distance of each sub step.
 
-    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 for i in np.arange (- step_height, step_height + z_resolution, z_resolution)])
+    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 for i in np.arange(-step_height, step_height + z_resolution, z_resolution)])
     x = np.linspace(0, distance * cos(radians(step_angle)), z.size)
     y = np.linspace(0, distance * sin(radians(step_angle)), z.size)
     lead_foot = np.dstack((x, y, z)).reshape(z.size, 1, 3)
@@ -27,7 +27,7 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, righ
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
 
-    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 + foot_z for i in np.arange (- step_height, step_height + z_resolution, z_resolution)])
+    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 + foot_z for i in np.arange(-step_height, step_height + z_resolution, z_resolution)])
     x = np.empty(z.size)
     y = np.empty(z.size)
     angles = np.linspace(foot_angle, foot_angle + step_angle, z.size)
