@@ -36,6 +36,7 @@ def legAngle(x, y, z, coax = 26.34, femur = 76.2, tibia = 88.32):
     return [coax_angle, femur_angle, tibia_angle]
 
 def recalculateLegAngles(feet_positions, body_model):
+    """Finds the coax, femur, and tibia angles of each leg based on the body model and feet positions of the hexapod"""
     leg_angles = np.empty([6, 3])
     for i in range(6):
         leg_angles[i, :] = legAngle(feet_positions[i, 0] - body_model[i, 0], feet_positions[i, 1] - body_model[i, 1], feet_positions[i, 2] - body_model[i, 2])

@@ -22,6 +22,7 @@ def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = T
     return feet
 
 def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, right_foot = True):
+    """Calculate the offset of a foor when turning the hexapod about an angle"""
     z_resolution = 1 # the forward distance of each sub step.
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
@@ -48,6 +49,7 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, righ
     return np.dstack((x, y, z)).reshape(z.size, 1, 3)
 
 def stepTurn(feet_pos, step_angle = 15, step_height = 15, right_foot = True):
+    """Calcluate the absolute positions of each foot of the hexapod when turning about an angle"""
     for i in range(6):
         footstep = stepTurnFoot(foot_x = feet_pos[i, 0], foot_y = feet_pos[i, 1], foot_z = feet_pos[i, 2], step_angle = step_angle, step_height = step_height, right_foot = right_foot)
         right_foot = not right_foot
@@ -190,6 +192,7 @@ def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 3
     return[leg_model, right_foot, previous_step, walk_positions]
 
 def resetWalkStance(body_model, leg_model, right_foot, previous_step):
+    """Takes the final step of the walk cycle by repeating the previous step with the opposite legs as the last step."""
     walk_positions = stepForward(step_angle = 90, distance = previous_step, right_foot = right_foot)
     feet_positions = getFeetPos(leg_model)
     for i in range(walk_positions.shape[0]): #add all of the feet positions to the walk
@@ -217,6 +220,7 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_a
     return [leg_model, right_foot, previous_turn_angle, turn_positions]
 
 def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
+    """Takes the final step of the turn cycle by repeating the previous step with the opposite legs as the last step."""
     feet_positions = getFeetPos(leg_model)
 
     turn_positions = stepTurn(feet_positions, step_angle = previous_turn_angle, right_foot = right_foot)
