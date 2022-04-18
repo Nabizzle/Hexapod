@@ -4,7 +4,8 @@ from math import degrees, sin, cos, acos, atan2, sqrt, pi
 from hexapod.rotation import yRot, zRot
 
 def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.34, femur = 76.2, tibia = 88.32):
-    """finds the positions for the coax, femur, and tibia leg segments and adds them to the body model"""
+    """finds the positions for the coax, femur, and tibia leg segments and
+    adds them to the body model"""
     coax_rot = zRot(coax_angle)
     femur_rot = np.matmul(yRot(femur_angle), coax_rot)
     tibia_rot = np.matmul(yRot(tibia_angle), femur_rot)
@@ -36,7 +37,8 @@ def legAngle(x, y, z, coax = 26.34, femur = 76.2, tibia = 88.32):
     return [coax_angle, femur_angle, tibia_angle]
 
 def recalculateLegAngles(feet_positions, body_model):
-    """Finds the coax, femur, and tibia angles of each leg based on the body model and feet positions of the hexapod"""
+    """Finds the coax, femur, and tibia angles of each leg based on the body
+    model and feet positions of the hexapod"""
     leg_angles = np.empty([6, 3])
     for i in range(6):
         leg_angles[i, :] = legAngle(feet_positions[i, 0] - body_model[i, 0], feet_positions[i, 1] - body_model[i, 1], feet_positions[i, 2] - body_model[i, 2])
@@ -61,7 +63,8 @@ def legModel(leg_angles, body_model):
     return leg_model
 
 def getFeetPos(leg_model):
-    """return the current positions of the ends of the legs or where the feet of the hexapod currently are."""
+    """return the current positions of the ends of the legs or where the feet
+    of the hexapod currently are."""
     feet_positions = np.empty([6, 3])
     for i in range(6):
         feet_positions[i, :] = leg_model[3, :, i]

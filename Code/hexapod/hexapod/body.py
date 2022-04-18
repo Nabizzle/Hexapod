@@ -4,7 +4,8 @@ from hexapod.rotation import xRot, yRot, zRot
 from math import sin, pi
 
 def bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85):
-    """Applies rotations in pitch, roll, and yaw and translations in x, y, and z tot he body."""
+    """Applies rotations in pitch, roll, and yaw and translations in x, y, and
+    z tot he body."""
     body_rot = np.matmul(zRot(yaw), yRot(roll))
     body_rot = np.matmul(body_rot, xRot(pitch))
 
