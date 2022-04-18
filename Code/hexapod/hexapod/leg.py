@@ -68,7 +68,7 @@ def legModel(leg_angles, body_model):
     """Generates the model of the legs based on the servo angles of the legs."""
     leg_model = np.empty([4, 3, 6])
     for i in range(6):
-        leg_model[:, :, i] = legPos(leg_angles[i][0], leg_angles[i][1], leg_angles[i][2], body_model, i) #coax angle, femur angle, tibia angle, model of the hexapod body, leg number
+        leg_model[:, :, i] = legPos(leg_angles[i][0], leg_angles[i][1], leg_angles[i][2], body_model, i)  # coax angle, femur angle, tibia angle, model of the hexapod body, leg number
     return leg_model
 
 

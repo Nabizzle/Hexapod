@@ -7,12 +7,12 @@ from time import sleep
 
 def controller(mode):
     """controls the hexapod to walk or turn and send the commands"""
-    port = connect('COM1') #connect to the servo controller
+    port = connect('COM1')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
     start_leg = startLegPos(body_model, start_radius = 150, start_height = 20)
-    message = anglesToSerial(start_leg, 500, 2000) #get the serial message from the angles
-    sendData(port, message) #send the serial message
+    message = anglesToSerial(start_leg, 500, 2000)  # get the serial message from the angles
+    sendData(port, message)  # send the serial message
     leg_model = legModel(start_leg, body_model)
 
     # iterate forever
@@ -20,7 +20,7 @@ def controller(mode):
     previous_turn_angle = 0
     right_foot = True
     while True:
-        if mode: #True = walk, False = turn
+        if mode:  # True = walk, False = turn
             [leg_model, right_foot, previous_step, positions] = emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30)
         else:
             [leg_model, right_foot, previous_turn_angle, positions] = emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15)
@@ -41,19 +41,19 @@ def sit(port):
     """tells the Hexapod to sit with its body on the ground"""
     body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
     sit_leg = startLegPos(body_model, start_radius = 90, start_height = 10)
-    message = anglesToSerial(sit_leg, 500, 2000) #get the serial message from the angles
-    sendData(port, message) #send the serial message
+    message = anglesToSerial(sit_leg, 500, 2000)  # get the serial message from the angles
+    sendData(port, message)  # send the serial message
 
 
 def stand():
     """tells the hexapod to stand for the first time"""
     # controls the hexapod to walk or turn and send the commands
-    port = connect('COM4') #connect to the servo controller
+    port = connect('COM4')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
     start_leg = startLegPos(body_model, start_radius = 180, start_height = 60)
-    message = anglesToSerial(start_leg, 500, 2000) #get the serial message from the angles
-    sendData(port, message) #send the serial message
+    message = anglesToSerial(start_leg, 500, 2000)  # get the serial message from the angles
+    sendData(port, message)  # send the serial message
 
 
 def walkCycle(port, body_model, leg_model, distance, angle):
@@ -68,8 +68,8 @@ def sendPositions(port, positions, body_model):
     controller
     """
     for position in positions:
-        angles = recalculateLegAngles(position, body_model) #convert the feet positions to angles
-        message = anglesToSerial(angles, 1000, 2000) #get the serial message from the angles
-        sendData(port, message) #send the serial message
+        angles = recalculateLegAngles(position, body_model)  # convert the feet positions to angles
+        message = anglesToSerial(angles, 1000, 2000)  # get the serial message from the angles
+        sendData(port, message)  # send the serial message
         sleep(0.005)
     return True
