@@ -3,6 +3,7 @@ import numpy as np
 from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
 from hexapod.piToPi import pollEMG
 
+
 def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = True):
     """Calculate the x, y, and z position updates to move in a step in a direction"""
     z_resolution = 1 # the forward distance of each sub step.
@@ -20,6 +21,7 @@ def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = T
         feet = np.concatenate((dragging_foot, lead_foot, dragging_foot, lead_foot, dragging_foot, lead_foot), axis = 1)
 
     return feet
+
 
 def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, right_foot = True):
     """Calculate the offset of a foor when turning the hexapod about an angle"""
@@ -48,6 +50,7 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle = 15, step_height = 15, righ
 
     return np.dstack((x, y, z)).reshape(z.size, 1, 3)
 
+
 def stepTurn(feet_pos, step_angle = 15, step_height = 15, right_foot = True):
     """
     Calcluate the absolute positions of each foot of the hexapod when
@@ -62,6 +65,7 @@ def stepTurn(feet_pos, step_angle = 15, step_height = 15, right_foot = True):
             previous_foot = np.concatenate((previous_foot, footstep), axis = 1)
 
     return previous_foot
+
 
 def walk(leg_model, distance = 30, angle = 90):
     """
@@ -126,6 +130,7 @@ def walk(leg_model, distance = 30, angle = 90):
     walk_positions = np.concatenate((walk_positions, temp_walk_positions), axis = 0)
     return walk_positions
 
+
 def turn(leg_model, turn_angle = 60):
     """Creates the series of foot positions to turn the hexapod about the z axis."""
     max_turn_angle = 15 #sets the maximum angle to turn by.
@@ -180,6 +185,7 @@ def turn(leg_model, turn_angle = 60):
     turn_positions = np.concatenate((turn_positions, temp_turn_positions), axis = 0)
     return turn_positions
 
+
 def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30):
     """Walks a dynamic distance based a normalized EMG input."""
     # call a function to poll for forearm emg values from the raspberry pi zero
@@ -197,6 +203,7 @@ def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 3
     leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :], body_model), body_model)
     return[leg_model, right_foot, previous_step, walk_positions]
 
+
 def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     """
     Takes the final step of the walk cycle by repeating the previous step
@@ -210,6 +217,7 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :], body_model), body_model)
     right_foot = not right_foot
     return[leg_model, right_foot, walk_positions]
+
 
 def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
     """Turns a dynamic angle based on a normalized EMG input"""
@@ -228,6 +236,7 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_a
 
     return [leg_model, right_foot, previous_turn_angle, turn_positions]
 
+
 def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     """
     Takes the final step of the turn cycle by repeating the previous step
@@ -241,6 +250,7 @@ def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :], body_model), body_model)
 
     return [leg_model, right_foot, turn_positions]
+
 
 def switchMode(threshold):
     """if the user is cocontracting, tell the hexapod to switch walking modes."""

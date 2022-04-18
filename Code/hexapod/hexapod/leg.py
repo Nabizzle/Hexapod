@@ -3,6 +3,7 @@ from numpy.linalg import inv
 from math import degrees, sin, cos, acos, atan2, sqrt, pi
 from hexapod.rotation import yRot, zRot
 
+
 def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.34, femur = 76.2, tibia = 88.32):
     """
     finds the positions for the coax, femur, and tibia leg segments and
@@ -18,6 +19,7 @@ def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.
 
     leg_positions = np.concatenate((np.array([body_model[leg_num, :]]), leg_coax.T, leg_femur.T, leg_tibia.T), axis = 0)
     return leg_positions
+
 
 def legAngle(x, y, z, coax = 26.34, femur = 76.2, tibia = 88.32):
     """finds the angles for the coax, femur, and tibia leg segments"""
@@ -38,6 +40,7 @@ def legAngle(x, y, z, coax = 26.34, femur = 76.2, tibia = 88.32):
 
     return [coax_angle, femur_angle, tibia_angle]
 
+
 def recalculateLegAngles(feet_positions, body_model):
     """
     Finds the coax, femur, and tibia angles of each leg based on the body
@@ -47,6 +50,7 @@ def recalculateLegAngles(feet_positions, body_model):
     for i in range(6):
         leg_angles[i, :] = legAngle(feet_positions[i, 0] - body_model[i, 0], feet_positions[i, 1] - body_model[i, 1], feet_positions[i, 2] - body_model[i, 2])
     return leg_angles
+
 
 def startLegPos(body_model, start_radius = 150, start_height = 20):
     """Create the starting angles of the legs on the hexapod based"""
@@ -59,12 +63,14 @@ def startLegPos(body_model, start_radius = 150, start_height = 20):
     start_leg = recalculateLegAngles(start_leg_pos, body_model)
     return start_leg
 
+
 def legModel(leg_angles, body_model):
     """Generates the model of the legs based on the servo angles of the legs."""
     leg_model = np.empty([4, 3, 6])
     for i in range(6):
         leg_model[:, :, i] = legPos(leg_angles[i][0], leg_angles[i][1], leg_angles[i][2], body_model, i) #coax angle, femur angle, tibia angle, model of the hexapod body, leg number
     return leg_model
+
 
 def getFeetPos(leg_model):
     """

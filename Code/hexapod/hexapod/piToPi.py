@@ -4,6 +4,7 @@ import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 
+
 def pollEMG():
     """
     Read in EMG values on the first two ADC channels of the Raspberry Pi

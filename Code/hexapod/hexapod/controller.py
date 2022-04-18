@@ -4,6 +4,7 @@ from hexapod.move import switchMode, emgToWalk, resetWalkStance, emgToTurn, rese
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
 from time import sleep
 
+
 def controller(mode):
     """controls the hexapod to walk or turn and send the commands"""
     port = connect('COM1') #connect to the servo controller
@@ -35,12 +36,14 @@ def controller(mode):
             mode = not mode
             sendPositions(port, positions, body_model)
 
+
 def sit(port):
     """tells the Hexapod to sit with its body on the ground"""
     body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
     sit_leg = startLegPos(body_model, start_radius = 90, start_height = 10)
     message = anglesToSerial(sit_leg, 500, 2000) #get the serial message from the angles
     sendData(port, message) #send the serial message
+
 
 def stand():
     """tells the hexapod to stand for the first time"""
@@ -52,10 +55,12 @@ def stand():
     message = anglesToSerial(start_leg, 500, 2000) #get the serial message from the angles
     sendData(port, message) #send the serial message
 
+
 def walkCycle(port, body_model, leg_model, distance, angle):
     """Tells the hexapod to walk a specified distance without the need for EMG"""
     positions = walk(leg_model, distance, angle)
     sendPositions(port, positions, body_model)
+
 
 def sendPositions(port, positions, body_model):
     """
