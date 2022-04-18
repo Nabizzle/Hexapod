@@ -78,15 +78,15 @@ def walk(leg_model, distance = 30, angle = 90):
             else: #if this is not the first step the robot needs to move forward the max step size first to bring the robot to a neutral position before moving the rest of the distance.
                 temp_walk_positions = stepForward(step_angle = angle, distance = remaining_distance + max_step_size, right_foot = right_foot)
 
-            try: #try to get the current feet positions from the last stepped position
+            if 'walk_positions' in locals(): #try to get the current feet positions from the last stepped position
                 feet_positions = walk_positions[-1, :, :]
-            except: #if there was not a step yet get the feet positions from the leg model
+            else: #if there was not a step yet get the feet positions from the leg model
                 feet_positions = getFeetPos(leg_model)
             for j in range(temp_walk_positions.shape[0]): #add all of the feet positions to the walk
                 temp_walk_positions[j, :, :] = temp_walk_positions[j, :, :] + feet_positions
-            try: # try to add the next step to the walk
+            if 'walk_positions' in locals(): # try to add the next step to the walk
                 walk_positions = np.concatenate((walk_positions, temp_walk_positions), axis = 0)
-            except: #if this is the first step, create the walk array with the first step
+            else: #if this is the first step, create the walk array with the first step
                 walk_positions = temp_walk_positions
             right_foot = not right_foot #switch which foot steps forward
             break
@@ -102,9 +102,9 @@ def walk(leg_model, distance = 30, angle = 90):
         else: #if this is not the first step and the next step is more than the max distance, move the legs forward by twice the max distance to reset and then move forward the max distance
             temp_walk_positions = stepForward(step_angle = angle, distance = max_step_size * 2, right_foot = right_foot)
 
-            try:
+            if 'walk_positions' in locals():
                 feet_positions = walk_positions[-1, :, :]
-            except:
+            else:
                 feet_positions = getFeetPos(leg_model)
             for j in range(temp_walk_positions.shape[0]):
                 temp_walk_positions[j, :, :] = temp_walk_positions[j, :, :] + feet_positions
@@ -133,9 +133,9 @@ def turn(leg_model, turn_angle = 60):
     remaining_turn_distance = turn_angle #Sets the remaining turn distance to the full turn
     for i in range(steps): #iterate over the number of steps to take
         if abs(remaining_turn_distance) <= max_turn_angle: #if the remaining turn distance to move is less than the max turn angle, then turn the robot the remaining angle
-            try: #try to get the current feet positions from the last stepped position
+            if 'turn_positions' in locals(): #try to get the current feet positions from the last stepped position
                 feet_positions = turn_positions[-1, :, :]
-            except: #if there was not a step yet get the feet positions from the leg model
+            else: #if there was not a step yet get the feet positions from the leg model
                 feet_positions = getFeetPos(leg_model)
 
             if steps == 1: #if this is the only step then the feet only need to turn the robot the remaining turn distance
@@ -143,9 +143,9 @@ def turn(leg_model, turn_angle = 60):
             else: #if this is not the first step the robot needs to move forward the max turn size first to bring the robot to a neutral position before moving the rest of the distance.
                 temp_turn_positions = stepTurn(feet_positions, step_angle = np.sign(remaining_turn_distance) * (abs(remaining_turn_distance) + max_turn_angle), right_foot = right_foot)
 
-            try: # try to add the next step to the walk
+            if 'turn_positions' in locals(): # try to add the next step to the walk
                 turn_positions = np.concatenate((turn_positions, temp_turn_positions), axis = 0)
-            except: #if this is the first step, create the walk array with the first step
+            else: #if this is the first step, create the walk array with the first step
                 turn_positions = temp_turn_positions
             right_foot = not right_foot #switch which foot steps forward
             break
@@ -157,9 +157,9 @@ def turn(leg_model, turn_angle = 60):
             right_foot = not right_foot
 
         else: #if this is not the first step and the next step is more than the max angle, move the legs forward by twice the max angle to reset and then turn the max distance
-            try:
+            if 'turn_positions' in locals():
                 feet_positions = turn_positions[-1, :, :]
-            except:
+            else:
                 feet_positions = getFeetPos(leg_model)
 
             temp_turn_positions = stepTurn(feet_positions, step_angle = np.sign(remaining_turn_distance) * max_turn_angle * 2, right_foot = right_foot)
