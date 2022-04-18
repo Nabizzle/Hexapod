@@ -45,11 +45,11 @@ def recalculateLegAngles(feet_positions, body_model):
 def startLegPos(body_model, start_radius = 150, start_height = 20):
     """Create the starting angles of the legs on the hexapod based"""
     start_leg_pos = np.array([[start_radius * cos(pi / 3), start_radius * sin(pi / 3), - start_height],
-                            [start_radius, 0, - start_height],
-                            [start_radius * cos(- pi / 3), start_radius * sin(- pi / 3), - start_height],
-                            [start_radius * cos(- 2 * pi / 3) , start_radius * sin(- 2 * pi / 3), - start_height],
-                            [- start_radius, 0, - start_height],
-                            [start_radius * cos(2 * pi / 3), start_radius * sin(2 * pi / 3), - start_height]])
+                              [start_radius, 0, - start_height],
+                              [start_radius * cos(- pi / 3), start_radius * sin(- pi / 3), - start_height],
+                              [start_radius * cos(- 2 * pi / 3) , start_radius * sin(- 2 * pi / 3), - start_height],
+                              [- start_radius, 0, - start_height],
+                              [start_radius * cos(2 * pi / 3), start_radius * sin(2 * pi / 3), - start_height]])
     start_leg = recalculateLegAngles(start_leg_pos, body_model)
     return start_leg
 
