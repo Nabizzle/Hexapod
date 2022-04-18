@@ -4,7 +4,7 @@ from math import degrees, sin, cos, acos, atan2, sqrt, pi
 from hexapod.rotation import yRot, zRot
 
 def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.34, femur = 76.2, tibia = 88.32):
-    # finds the positions for the coax, femur, and tibia leg segments and adds them to the body model
+    """finds the positions for the coax, femur, and tibia leg segments and adds them to the body model"""
     coax_rot = zRot(coax_angle)
     femur_rot = np.matmul(yRot(femur_angle), coax_rot)
     tibia_rot = np.matmul(yRot(tibia_angle), femur_rot)
@@ -17,7 +17,7 @@ def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num, coax = 26.
     return leg_positions
 
 def legAngle(x, y, z, coax = 26.34, femur = 76.2, tibia = 88.32):
-    # finds the angles for the coax, femur, and tibia leg segments
+    """finds the angles for the coax, femur, and tibia leg segments"""
     coax_angle = degrees(atan2(y, x))
     coax_rot = zRot(-coax_angle)
     leg_rotated = np.matmul(inv(coax_rot), np.array([[x, y, z]]).T)
@@ -42,7 +42,7 @@ def recalculateLegAngles(feet_positions, body_model):
     return leg_angles
 
 def startLegPos(body_model, start_radius = 150, start_height = 20):
-    # Create the starting angles of the legs on the hexapod based
+    """Create the starting angles of the legs on the hexapod based"""
     start_leg_pos = np.array([[start_radius * cos(pi / 3), start_radius * sin(pi / 3), - start_height],
                             [start_radius, 0, - start_height],
                             [start_radius * cos(- pi / 3), start_radius * sin(- pi / 3), - start_height],
@@ -53,14 +53,14 @@ def startLegPos(body_model, start_radius = 150, start_height = 20):
     return start_leg
 
 def legModel(leg_angles, body_model):
-    # Generates the model of the legs based on the servo angles of the legs.
+    """Generates the model of the legs based on the servo angles of the legs."""
     leg_model = np.empty([4, 3, 6])
     for i in range(6):
         leg_model[:, :, i] = legPos(leg_angles[i][0], leg_angles[i][1], leg_angles[i][2], body_model, i) #coax angle, femur angle, tibia angle, model of the hexapod body, leg number
     return leg_model
 
 def getFeetPos(leg_model):
-    # return the current positions of the ends of the legs or where the feet of the hexapod currently are.
+    """return the current positions of the ends of the legs or where the feet of the hexapod currently are."""
     feet_positions = np.empty([6, 3])
     for i in range(6):
         feet_positions[i, :] = leg_model[3, :, i]

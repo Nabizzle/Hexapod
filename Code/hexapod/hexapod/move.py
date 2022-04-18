@@ -4,7 +4,7 @@ from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
 from hexapod.piToPi import pollEMG
 
 def stepForward(step_angle = 90, distance = 30, step_height = 15, right_foot = True):
-    # Calculate the x, y, and z position updates to move in a step in a direction
+    """Calculate the x, y, and z position updates to move in a step in a direction"""
     z_resolution = 1 # the forward distance of each sub step.
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 for i in np.arange (- step_height, step_height + z_resolution, z_resolution)])
@@ -59,7 +59,7 @@ def stepTurn(feet_pos, step_angle = 15, step_height = 15, right_foot = True):
     return previous_foot
 
 def walk(leg_model, distance = 30, angle = 90):
-    # Creates a series of foot positions to use in telling the robot to walk in a directino
+    """Creates a series of foot positions to use in telling the robot to walk in a direction"""
     max_step_size = 30 #Maximum step distance
     if distance <= 0: #raise an error if the robot is not commanded to move a positive distance
         raise ValueError("distance must be a positive distance")
@@ -119,7 +119,7 @@ def walk(leg_model, distance = 30, angle = 90):
     return walk_positions
 
 def turn(leg_model, turn_angle = 60):
-    # Creates the series of foot positions to turn the hexapod about the z axis.
+    """Creates the series of foot positions to turn the hexapod about the z axis."""
     max_turn_angle = 15 #sets the maximum angle to turn by.
     if turn_angle == 0: #Raise an error is the robot is not commanded to move a non zero angle
         raise ValueError("turn angle must be a number larger than 0.")
@@ -173,7 +173,7 @@ def turn(leg_model, turn_angle = 60):
     return turn_positions
 
 def emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30):
-    # Walks a dynamic distance based a normalized EMG input.
+    """Walks a dynamic distance based a normalized EMG input."""
     #call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
     emg = fcr_emg - edc_emg #finds the difference between EMG signals to move forward or backwards
@@ -200,7 +200,7 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     return[leg_model, right_foot, walk_positions]
 
 def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15):
-    # Turns a dynamic angle based on a normalized EMG input
+    """Turns a dynamic angle based on a normalized EMG input"""
     #call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
     emg = fcr_emg - edc_emg #finds the difference between EMG signals to move right or left
@@ -227,7 +227,7 @@ def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     return [leg_model, right_foot, turn_positions]
 
 def switchMode(threshold):
-    #if the user is cocontracting, tell the hexapod to switch walking modes.
+    """if the user is cocontracting, tell the hexapod to switch walking modes."""
     [fcr_emg, edc_emg] = pollEMG()
 
     return bool(fcr_emg > threshold and edc_emg > threshold)
