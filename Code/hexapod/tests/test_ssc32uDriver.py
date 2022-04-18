@@ -2,9 +2,11 @@ from hexapod import ssc32uDriver
 import numpy as np
 
 def test_angleToPW():
+    """Tests that the found pulse width for a 90 degree servo positions is 1500us"""
     assert ssc32uDriver.angleToPW(90) == 1500
 
 def test_anglesToSerial():
+    """Tests that the message to the servo controller is made and formatted correctly and as a btye string"""
     angles = np.array([[60, 60, 60],
                         [0, 60, 60],
                         [-60, 60, 60],
