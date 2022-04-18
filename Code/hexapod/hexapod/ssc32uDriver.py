@@ -3,14 +3,18 @@ import numpy as np
 
 
 def angleToPW(angle):
-    """convert the input angle in degrees to the pulse width in us to command
-    that angle"""
+    """
+    convert the input angle in degrees to the pulse width in us to command
+    that angle
+    """
     return round(2000 * angle / 180 + 500)  # returns the pulse width as the equivalent whole number between 500us (0 degrees) and 2500us (180 degrees)
 
 
 def anglesToSerial(angles, speed, time):
-    """converts an array of servo angles to the formatted serial command for
-    the Lynxmotiohn SSC-32U"""
+    """
+    converts an array of servo angles to the formatted serial command for
+    the Lynxmotiohn SSC-32U
+    """
     if angles.shape == (6, 3):
         temp_angles = angles
         temp_angles[0:3, 2] = - temp_angles[0:3, 2]
@@ -38,8 +42,10 @@ def anglesToSerial(angles, speed, time):
 
 
 def connect(com):
-    """tries to open a serial port with the Lynxmotiohn SSC-32U on the desired
-    COM port"""
+    """
+    tries to open a serial port with the Lynxmotiohn SSC-32U on the desired
+    COM port
+    """
     ser = serial.Serial()
     ser.baudrate = 9600
     ser.port = com

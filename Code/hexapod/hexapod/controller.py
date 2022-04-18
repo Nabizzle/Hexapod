@@ -58,8 +58,10 @@ def walkCycle(port, body_model, leg_model, distance, angle):
     sendPositions(port, positions, body_model)
 
 def sendPositions(port, positions, body_model):
-    """Send each position in a set of hexapod command positions to the servo
-    controller"""
+    """
+    Send each position in a set of hexapod command positions to the servo
+    controller
+    """
     for position in positions:
         angles = recalculateLegAngles(position, body_model) #convert the feet positions to angles
         message = anglesToSerial(angles, 1000, 2000) #get the serial message from the angles
