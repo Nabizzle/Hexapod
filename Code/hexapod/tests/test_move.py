@@ -2894,6 +2894,28 @@ def test_turn():
                                                                        [-7.50000000e+01,  1.29903811e+02, -2.00000000e+01]]]))
 
 
+def test_turnZero():
+    """Tests that a turn angle of 0 raises an exception"""
+    leg_model = np.array([[[42.5, 85, 42.5, -42.5, -85, -42.5],
+                           [73.6121593, 0, -73.6121593, -73.6121593, 0, 73.6121593],
+                           [0, 0, 0, 0, 0, 0]],
+
+                          [[55.67, 111.34,  55.67, -55.67, -111.34, -55.67],
+                           [96.4232685, 0, -96.4232685, -96.4232685, 0, 96.4232685],
+                           [0, 0, 0, 0, 0, 0]],
+
+                          [[72.6674223, 145.334845, 72.6674223, -72.6674223, -145.334845, -72.6674223],
+                           [125.863668, 0, -125.863668, -125.863668, 0, 125.863668],
+                           [68.1967047, 68.1967047, 68.1967047, 68.1967047, 68.1967047, 68.1967047]],
+
+                          [[75, 150, 75, -75, -150, -75],
+                           [129.903811, 0, -129.903811, -129.903811, 0, 129.903811],
+                           [-20, -20, -20, -20, -20, -20]]])
+
+    with pytest.raises(ValueError):
+        move.turn(leg_model, turn_angle=0)
+
+
 def test_resetTurnStance():
     """Given the body and leg models right after taking a 15 degree turn, this function tests that the hexapod ends in the default resting stance after the resetTurnStance test is run. This is the same condition as when the hexapod is just turned on."""
     body_model = np.array([[42.5, 73.61215932, 0],
