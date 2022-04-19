@@ -9,6 +9,7 @@ test_patterns = [
 name = "test-coverage"
 enabled = true
 
+[[analyzers]]
 name = "python"
 enabled = true
 
