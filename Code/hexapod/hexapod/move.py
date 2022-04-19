@@ -296,7 +296,8 @@ def turn(leg_model: NDArray, turn_angle: float = 60) -> NDArray:
 
 def emgToWalk(body_model: NDArray, leg_model: NDArray, right_foot: bool,
               previous_step: float,
-              max_distance: float = 30) -> Tuple[NDArray,bool, float, NDArray]:
+              max_distance: float = 30) -> Tuple[NDArray, bool, float,
+                                                 NDArray]:
     """Walks a dynamic distance based a normalized EMG input."""
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -341,8 +342,8 @@ def resetWalkStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
 
 def emgToTurn(body_model: NDArray, leg_model: NDArray, right_foot: bool,
               previous_turn_angle: float,
-              max_turn_angle:float = 15) -> Tuple[NDArray, bool, float,
-                                                  NDArray]:
+              max_turn_angle: float = 15) -> Tuple[NDArray, bool, float,
+                                                   NDArray]:
     """Turns a dynamic angle based on a normalized EMG input"""
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()

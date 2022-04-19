@@ -7,8 +7,8 @@ from typing import List
 
 
 def legPos(coax_angle: float, femur_angle: float, tibia_angle: float,
-body_model: NDArray, leg_num: int, coax: float = 26.34, femur: float = 76.2,
-tibia: float = 88.32) -> NDArray:
+           body_model: NDArray, leg_num: int, coax: float = 26.34,
+           femur: float = 76.2, tibia: float = 88.32) -> NDArray:
     """
     finds the positions for the coax, femur, and tibia leg segments and
     adds them to the body model
@@ -60,7 +60,7 @@ def legAngle(x: float, y: float, z: float, coax: float = 26.34,
 
 
 def recalculateLegAngles(feet_positions: NDArray,
-                         body_model: NDArray)-> NDArray:
+                         body_model: NDArray) -> NDArray:
     """
     Finds the coax, femur, and tibia angles of each leg based on the body
     model and feet positions of the hexapod
