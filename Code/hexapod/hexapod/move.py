@@ -1,7 +1,6 @@
 from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np
 from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
-from hexapod.piToPi import pollEMG
 
 
 def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
@@ -380,3 +379,17 @@ def switchMode(threshold):
     [fcr_emg, edc_emg] = pollEMG()
 
     return bool(fcr_emg > threshold and edc_emg > threshold)
+
+
+def pollEMG():
+    """Get EMG and normalize it"""
+    fcr_emg = 1
+    edc_emg = 1
+
+    fcr_emg = min(fcr_emg, 1.0)
+    fcr_emg = max(fcr_emg, 0.0)
+
+    edc_emg = min(edc_emg, 1.0)
+    edc_emg = max(edc_emg, 0.0)
+
+    return [fcr_emg, edc_emg]
