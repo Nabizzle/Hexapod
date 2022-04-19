@@ -226,8 +226,8 @@ def turn(leg_model, turn_angle = 60):
                 temp_turn_positions =\
                     stepTurn(feet_positions,
                              step_angle=np.sign(remaining_turn_distance)
-                             * (abs(remaining_turn_distance)
-                             + max_turn_angle),
+                                        * (abs(remaining_turn_distance)
+                                           + max_turn_angle),
                              right_foot=right_foot)
 
             # try to add the next step to the walk
@@ -346,7 +346,7 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle,
     turn_positions =\
         stepTurn(feet_positions,
                  step_angle=np.sign(turn_angle) * (abs(turn_angle)
-                 + previous_turn_angle),
+                                                   + previous_turn_angle),
                  right_foot = right_foot)
 
     previous_turn_angle = turn_angle
