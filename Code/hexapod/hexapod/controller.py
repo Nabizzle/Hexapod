@@ -89,7 +89,7 @@ def sendPositions(port: Any, positions: NDArray, body_model: NDArray) -> bool:
         # convert the feet positions to angles
         angles = recalculateLegAngles(position, body_model)
         # get the serial message from the angles
-        message = anglesToSerial(angles, 1000, 2000)
+        message = anglesToSerial(angles)
         sendData(port, message)  # send the serial message
         sleep(0.005)
     return True
