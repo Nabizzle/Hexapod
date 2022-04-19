@@ -33,13 +33,14 @@ def legAngle(x, y, z, coax=26.34, femur=76.2, tibia=88.32):
     coax_rot = zRot(-coax_angle)
     leg_rotated = np.matmul(inv(coax_rot), np.array([[x, y, z]]).T)
     femur_angle = degrees(acos((tibia ** 2 - femur ** 2 - leg_rotated[2] ** 2\
-        - (leg_rotated[0] - coax) ** 2) / (-2 * femur * (sqrt(leg_rotated[2]\
-            ** 2\
-                + (leg_rotated[0] - coax) ** 2)))))\
-                    - degrees(atan2(-leg_rotated[2],
-    (leg_rotated[0] - coax)))
+                                -(leg_rotated[0] - coax) ** 2) / (-2 * femur\
+                                * (sqrt(leg_rotated[2] ** 2 + (leg_rotated[0]\
+                                - coax) ** 2))))) -\
+                                degrees(atan2(-leg_rotated[2],
+                                (leg_rotated[0] - coax)))
     tibia_angle = degrees(acos((leg_rotated[2] ** 2 + (leg_rotated[0] - coax)\
-        ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur * tibia))) - 90
+                                ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur\
+                                * tibia))) - 90
 
     if abs(coax_angle) <= 1e-10:
         coax_angle = 0
@@ -89,7 +90,7 @@ def legModel(leg_angles, body_model):
         # leg model takes the coax angle, femur angle, tibia angle, model of
         # the hexapod body, leg number
         leg_model[:, :, i] = legPos(leg_angles[i][0], leg_angles[i][1],
-        leg_angles[i][2], body_model, i)
+                                    leg_angles[i][2], body_model, i)
     return leg_model
 
 

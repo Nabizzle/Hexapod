@@ -9,8 +9,8 @@ def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
     z_resolution = 1  # the forward distance of each sub step.
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4\
-        for i in np.arange(-step_height, step_height + z_resolution,
-                           z_resolution)])
+                  for i in np.arange(-step_height, step_height + z_resolution,
+                  z_resolution)])
     x = np.linspace(0, distance * cos(radians(step_angle)), z.size)
     y = np.linspace(0, distance * sin(radians(step_angle)), z.size)
     lead_foot = np.dstack((x, y, z)).reshape(z.size, 1, 3)
@@ -37,8 +37,8 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle=15, step_height=15,
     foot_angle = degrees(atan2(foot_y, foot_x))
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 + foot_z\
-        for i in np.arange(-step_height, step_height + z_resolution,
-        z_resolution)])
+                  for i in np.arange(-step_height, step_height + z_resolution,
+                  z_resolution)])
     x = np.empty(z.size)
     y = np.empty(z.size)
     angles = np.linspace(foot_angle, foot_angle + step_angle, z.size)
@@ -88,7 +88,7 @@ def walk(leg_model, distance=30, angle=90):
     """
     max_step_size = 30  # Maximum step distance
     # raise an error if the robot is not commanded to move a positive distance
-    if distance <= 0: 
+    if distance <= 0:
         raise ValueError("distance must be a positive distance")
     steps = int(distance / max_step_size)
     if distance % max_step_size > 0:
@@ -130,8 +130,9 @@ def walk(leg_model, distance=30, angle=90):
             # try to add the next step to the walk
             if 'walk_positions' in locals():
                 walk_positions = np.concatenate((walk_positions,
-                temp_walk_positions), axis = 0)\
-            # if this is the first step, create walk array with the first step
+                                                 temp_walk_positions),
+                                                 axis = 0)
+            # create walk array with the first step
             else:
                 walk_positions = temp_walk_positions
             right_foot = not right_foot  # switch which foot steps forward
@@ -231,8 +232,10 @@ def turn(leg_model, turn_angle = 60):
 
             # try to add the next step to the walk
             if 'turn_positions' in locals():
-                turn_positions = np.concatenate((turn_positions,
-                temp_turn_positions), axis = 0)
+                turn_positions =\
+                    np.concatenate((turn_positions,
+                                    temp_turn_positions),
+                                    axis = 0)
             # if this is the first step, create walk array with the first step
             else:
                 turn_positions = temp_turn_positions
@@ -262,9 +265,9 @@ def turn(leg_model, turn_angle = 60):
 
             temp_turn_positions =\
                 stepTurn(feet_positions,
-                step_angle = np.sign(remaining_turn_distance)\
-                    * max_turn_angle * 2,
-                             right_foot=right_foot)
+                         step_angle=np.sign(remaining_turn_distance)\
+                             * max_turn_angle * 2,
+                         right_foot=right_foot)
 
             turn_positions = np.concatenate((turn_positions,
                                              temp_turn_positions),
@@ -277,8 +280,8 @@ def turn(leg_model, turn_angle = 60):
     # reset the position of the robot by moving the last step distance
     temp_turn_positions =\
         stepTurn(feet_positions,
-        step_angle=remaining_turn_distance,
-        right_foot=right_foot) 
+                 step_angle=remaining_turn_distance,
+                 right_foot=right_foot)
 
     turn_positions = np.concatenate((turn_positions,
                                      temp_turn_positions),
@@ -340,9 +343,11 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle,
     turn_angle = round(max_turn_angle * emg)
     feet_positions = getFeetPos(leg_model)
 
-    turn_positions = stepTurn(feet_positions, step_angle =\
-        np.sign(turn_angle) * (abs(turn_angle) + previous_turn_angle),
-        right_foot = right_foot)
+    turn_positions =\
+        stepTurn(feet_positions,
+                 step_angle=np.sign(turn_angle) * (abs(turn_angle)\
+                     + previous_turn_angle),
+                 right_foot = right_foot)
 
     previous_turn_angle = turn_angle
     right_foot = not right_foot
@@ -359,8 +364,9 @@ def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     """
     feet_positions = getFeetPos(leg_model)
 
-    turn_positions = stepTurn(feet_positions, step_angle =\
-        previous_turn_angle, right_foot = right_foot)
+    turn_positions = stepTurn(feet_positions,
+                              step_angle=previous_turn_angle,
+                              right_foot=right_foot)
 
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :],
