@@ -1,7 +1,7 @@
 import serial
 import numpy as np
 from numpy.typing import NDArray
-from typing import Any
+from typing import Any, Optional
 
 
 def angleToPW(angle: float) -> float:
@@ -14,7 +14,8 @@ def angleToPW(angle: float) -> float:
     return round(2000 * angle / 180 + 500)
 
 
-def anglesToSerial(angles: NDArray, speed: int, time: int) -> bytes:
+def anglesToSerial(angles: NDArray, speed: Optional[int] = None,
+                   time: Optional[int] = None) -> bytes:
     """
     converts an array of servo angles to the formatted serial command for
     the Lynxmotiohn SSC-32U
@@ -39,9 +40,13 @@ def anglesToSerial(angles: NDArray, speed: int, time: int) -> bytes:
     serial_string = ''
     for i, angle in enumerate(angles_processed):
         serial_string += '#' + str(i) + 'P' + \
-            str(angleToPW(angle)) + 'S' + str(speed)
+            str(angleToPW(angle))
+        if speed is not None:
+            serial_string += 'S' + str(speed)
 
-    serial_string += 'T' + str(time) + '\r'
+    if time is not None:
+        serial_string += 'T' + str(time)
+    serial_string += '\r'
     return bytes(serial_string, 'ascii')
 
 
