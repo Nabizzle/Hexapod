@@ -32,14 +32,14 @@ def legAngle(x, y, z, coax=26.34, femur=76.2, tibia=88.32):
     coax_angle = degrees(atan2(y, x))
     coax_rot = zRot(-coax_angle)
     leg_rotated = np.matmul(inv(coax_rot), np.array([[x, y, z]]).T)
-    femur_angle = degrees(acos((tibia ** 2 - femur ** 2 - leg_rotated[2] ** 2\
-                                -(leg_rotated[0] - coax) ** 2) / (-2 * femur\
-                                * (sqrt(leg_rotated[2] ** 2 + (leg_rotated[0]\
-                                - coax) ** 2))))) -\
-                                degrees(atan2(-leg_rotated[2],
+    femur_angle = degrees(acos((tibia ** 2 - femur ** 2 - leg_rotated[2] ** 2
+                                -(leg_rotated[0] - coax) ** 2) / (-2 * femur
+                                * (sqrt(leg_rotated[2] ** 2 + (leg_rotated[0]
+                                - coax) ** 2)))))\
+                                - degrees(atan2(-leg_rotated[2],
                                 (leg_rotated[0] - coax)))
-    tibia_angle = degrees(acos((leg_rotated[2] ** 2 + (leg_rotated[0] - coax)\
-                                ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur\
+    tibia_angle = degrees(acos((leg_rotated[2] ** 2 + (leg_rotated[0] - coax)
+                                ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur
                                 * tibia))) - 90
 
     if abs(coax_angle) <= 1e-10:
@@ -69,16 +69,16 @@ def recalculateLegAngles(feet_positions, body_model):
 
 def startLegPos(body_model, start_radius=150, start_height=20):
     """Create the starting angles of the legs on the hexapod based"""
-    start_leg_pos = np.array([[start_radius * cos(pi / 3), start_radius\
-                                  * sin(pi / 3), - start_height],
+    start_leg_pos = np.array([[start_radius * cos(pi / 3), start_radius
+                               * sin(pi / 3), - start_height],
                               [start_radius, 0, - start_height],
-                              [start_radius * cos(- pi / 3), start_radius\
-                                  * sin(- pi / 3), - start_height],
-                              [start_radius * cos(- 2 * pi / 3) , start_radius\
-                                  * sin(- 2 * pi / 3), - start_height],
+                              [start_radius * cos(- pi / 3), start_radius
+                               * sin(- pi / 3), - start_height],
+                              [start_radius * cos(- 2 * pi / 3) , start_radius
+                               * sin(- 2 * pi / 3), - start_height],
                               [- start_radius, 0, - start_height],
-                              [start_radius * cos(2 * pi / 3), start_radius\
-                                  * sin(2 * pi / 3), - start_height]])
+                              [start_radius * cos(2 * pi / 3), start_radius
+                               * sin(2 * pi / 3), - start_height]])
     start_leg = recalculateLegAngles(start_leg_pos, body_model)
     return start_leg
 

@@ -8,7 +8,7 @@ def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
     """Calculate the x, y, and z position updates to move in a step in a direction"""
     z_resolution = 1  # the forward distance of each sub step.
 
-    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4\
+    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4
                   for i in np.arange(-step_height, step_height + z_resolution,
                   z_resolution)])
     x = np.linspace(0, distance * cos(radians(step_angle)), z.size)
@@ -36,7 +36,7 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle=15, step_height=15,
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
 
-    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 + foot_z\
+    z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4 + foot_z
                   for i in np.arange(-step_height, step_height + z_resolution,
                   z_resolution)])
     x = np.empty(z.size)
@@ -225,9 +225,9 @@ def turn(leg_model, turn_angle = 60):
             else:
                 temp_turn_positions =\
                     stepTurn(feet_positions,
-                             step_angle=np.sign(remaining_turn_distance)\
-                                 * (abs(remaining_turn_distance)\
-                                     + max_turn_angle),
+                             step_angle=np.sign(remaining_turn_distance)
+                             * (abs(remaining_turn_distance)
+                             + max_turn_angle),
                              right_foot=right_foot)
 
             # try to add the next step to the walk
@@ -247,8 +247,8 @@ def turn(leg_model, turn_angle = 60):
             feet_positions = getFeetPos(leg_model)
             turn_positions =\
                 stepTurn(feet_positions,
-                         step_angle=np.sign(remaining_turn_distance)\
-                             * max_turn_angle,
+                         step_angle=np.sign(remaining_turn_distance)
+                         * max_turn_angle,
                          right_foot=right_foot)
             # reduce the remaining distance by the max step size
             remaining_turn_distance -=\
@@ -265,8 +265,8 @@ def turn(leg_model, turn_angle = 60):
 
             temp_turn_positions =\
                 stepTurn(feet_positions,
-                         step_angle=np.sign(remaining_turn_distance)\
-                             * max_turn_angle * 2,
+                         step_angle=np.sign(remaining_turn_distance)
+                         * max_turn_angle * 2,
                          right_foot=right_foot)
 
             turn_positions = np.concatenate((turn_positions,
@@ -345,8 +345,8 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle,
 
     turn_positions =\
         stepTurn(feet_positions,
-                 step_angle=np.sign(turn_angle) * (abs(turn_angle)\
-                     + previous_turn_angle),
+                 step_angle=np.sign(turn_angle) * (abs(turn_angle)
+                 + previous_turn_angle),
                  right_foot = right_foot)
 
     previous_turn_angle = turn_angle
