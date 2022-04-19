@@ -1,5 +1,7 @@
 from hexapod import move
 import numpy as np
+import pytest
+
 
 def test_stepForward():
     """Tests that the ouput feet offsets from making one step forward are correct"""
@@ -220,6 +222,7 @@ def test_stepForward():
                                                                                                                  [1.83697020e-15,  3.00000000e+01,  0.00000000e+00],
                                                                                                                  [-1.83697020e-15, -3.00000000e+01,  0.00000000e+00]]]))
 
+
 def test_stepTurnFoot():
     """Tests that the offset of the second foot when turning one step is correct"""
     feet_positions = np.array([[75, 129.903811, -20],
@@ -290,6 +293,7 @@ def test_stepTurnFoot():
                                                                                                                                                                       [[145.22214606, 37.55700061, -12.75]],
 
                                                                                                                                                                       [[144.88887394, 38.82285677, -20]]]))
+
 
 def test_stepTurn():
     """Tests that the output feet positions of all six legs are correct when turning the hexapod one step"""
@@ -516,6 +520,7 @@ def test_stepTurn():
                                                                                                                  [-1.06066017e+02, -1.06066017e+02, -2.00000000e+01],
                                                                                                                  [-1.44888874e+02, -3.88228568e+01, -2.00000000e+01],
                                                                                                                  [-3.88228568e+01,  1.44888874e+02, -2.00000000e+01]]]))
+
 
 def test_walk():
     """Tests that the output feet positions of all six legs are accurate when the hexapod moves a distance of 30."""
@@ -1093,6 +1098,28 @@ def test_walk():
                                                                                 7.10542736e-15, -2.00000000e+01],
                                                                                [-7.50000000e+01,  1.29903811e+02, -2.00000000e+01]]]))
 
+
+def test_walkNegative():
+    """Tests that the output feet positions of all six legs are accurate when the hexapod moves a distance of 30."""
+    leg_model = np.array([[[42.5, 85, 42.5, -42.5, -85, -42.5],
+                           [73.6121593, 0, -73.6121593, -73.6121593, 0, 73.6121593],
+                           [0, 0, 0, 0, 0, 0]],
+
+                          [[55.67, 111.34,  55.67, -55.67, -111.34, -55.67],
+                           [96.4232685, 0, -96.4232685, -96.4232685, 0, 96.4232685],
+                           [0, 0, 0, 0, 0, 0]],
+
+                          [[72.6674223, 145.334845, 72.6674223, -72.6674223, -145.334845, -72.6674223],
+                           [125.863668, 0, -125.863668, -125.863668, 0, 125.863668],
+                           [68.1967047, 68.1967047, 68.1967047, 68.1967047, 68.1967047, 68.1967047]],
+
+                          [[75, 150, 75, -75, -150, -75],
+                           [129.903811, 0, -129.903811, -129.903811, 0, 129.903811],
+                           [-20, -20, -20, -20, -20, -20]]])
+    with pytest.raises(ValueError):
+        move.walk(leg_model, distance=-30, angle=90)
+
+
 def test_resetWalkStance():
     """Takes the model of the body and legs right after taking a step with a distance of 15 and tests that the resetWalkStance ends with the models back at the default resting position. This position is the same as when the hexapod was turned on"""
     body_model = np.array([[42.5, 73.61215932, 0],
@@ -1141,6 +1168,7 @@ def test_resetWalkStance():
     [leg_model, right_foot, _] = move.resetWalkStance(body_model, input_leg_model, right_foot, previous_step)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
+
 
 def test_turn():
     """Tests that the hexapod takes two turning steps correctly by checking every foot position during the turn."""
@@ -2865,6 +2893,7 @@ def test_turn():
                                                                         1.83697020e-14, -2.00000000e+01],
                                                                        [-7.50000000e+01,  1.29903811e+02, -2.00000000e+01]]]))
 
+
 def test_resetTurnStance():
     """Given the body and leg models right after taking a 15 degree turn, this function tests that the hexapod ends in the default resting stance after the resetTurnStance test is run. This is the same condition as when the hexapod is just turned on."""
     body_model = np.array([[42.5, 73.61215932, 0],
@@ -2913,3 +2942,8 @@ def test_resetTurnStance():
     [leg_model, right_foot, _] = move.resetTurnStance(body_model, input_leg_model, right_foot, previous_turn_angle)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
+
+
+def test_pollEMG():
+    [fcr_emg, edc_emg] = move.pollEMG()
+    assert fcr_emg <= 1 and fcr_emg >= 0 and edc_emg <=1 and edc_emg >=0
