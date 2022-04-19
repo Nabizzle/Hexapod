@@ -5,7 +5,7 @@ import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 
 
-def pollEMG():
+def recieveEMG():
     """
     Read in EMG values on the first two ADC channels of the Raspberry Pi
     zero through the MCP3008
@@ -20,6 +20,14 @@ def pollEMG():
     # get the 16 value on each EMG channel and normalize it
     fcr_emg = fcr_channel.value / 65536.0
     edc_emg = edc_channel.value / 65536.0
+
+    return [fcr_emg, edc_emg]
+
+
+def pollEMG():
+    """Get EMG and normalize it"""
+    fcr_emg = 1
+    edc_emg = 1
 
     fcr_emg = min(fcr_emg, 1.0)
     fcr_emg = max(fcr_emg, 0.0)
