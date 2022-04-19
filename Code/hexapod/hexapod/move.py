@@ -21,16 +21,16 @@ def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
     if right_foot:  # right foot
         feet = np.concatenate((lead_foot, dragging_foot, lead_foot,
                                dragging_foot, lead_foot, dragging_foot),
-                              axis = 1)
+                              axis=1)
     else:
         feet = np.concatenate((dragging_foot, lead_foot, dragging_foot,
-                               lead_foot, dragging_foot, lead_foot), axis = 1)
+                               lead_foot, dragging_foot, lead_foot), axis=1)
 
     return feet
 
 
 def stepTurnFoot(foot_x, foot_y, foot_z, step_angle=15, step_height=15,
-                 right_foot = True):
+                 right_foot=True):
     """Calculate the offset of a foor when turning the hexapod about an angle"""
     z_resolution = 1  # the forward distance of each sub step.
     radius = hypot(foot_x, foot_y)
@@ -76,7 +76,7 @@ def stepTurn(feet_pos, step_angle=15, step_height=15, right_foot=True):
         if i == 0:
             previous_foot = footstep
         else:
-            previous_foot = np.concatenate((previous_foot, footstep), axis = 1)
+            previous_foot = np.concatenate((previous_foot, footstep), axis=1)
 
     return previous_foot
 
@@ -131,7 +131,7 @@ def walk(leg_model, distance=30, angle=90):
             if 'walk_positions' in locals():
                 walk_positions = np.concatenate((walk_positions,
                                                  temp_walk_positions),
-                                                axis = 0)
+                                                axis=0)
             # create walk array with the first step
             else:
                 walk_positions = temp_walk_positions
@@ -169,7 +169,7 @@ def walk(leg_model, distance=30, angle=90):
                     + feet_positions
             walk_positions = np.concatenate((walk_positions,
                                              temp_walk_positions),
-                                            axis = 0)
+                                            axis=0)
             remaining_distance -= max_step_size
             right_foot = not right_foot
 
@@ -184,11 +184,11 @@ def walk(leg_model, distance=30, angle=90):
             + feet_positions
     walk_positions = np.concatenate((walk_positions,
                                      temp_walk_positions),
-                                    axis = 0)
+                                    axis=0)
     return walk_positions
 
 
-def turn(leg_model, turn_angle = 60):
+def turn(leg_model, turn_angle=60):
     """Creates the series of foot positions to turn the hexapod about the z axis."""
     max_turn_angle = 15  # sets the maximum angle to turn by.
     # Raise an error is the robot is not commanded to move a non zero angle
@@ -235,7 +235,7 @@ def turn(leg_model, turn_angle = 60):
                 turn_positions =\
                     np.concatenate((turn_positions,
                                     temp_turn_positions),
-                                   axis = 0)
+                                   axis=0)
             # if this is the first step, create walk array with the first step
             else:
                 turn_positions = temp_turn_positions
@@ -271,7 +271,7 @@ def turn(leg_model, turn_angle = 60):
 
             turn_positions = np.concatenate((turn_positions,
                                              temp_turn_positions),
-                                            axis = 0)
+                                            axis=0)
             remaining_turn_distance -=\
                 np.sign(remaining_turn_distance) * max_turn_angle
             right_foot = not right_foot
@@ -285,7 +285,7 @@ def turn(leg_model, turn_angle = 60):
 
     turn_positions = np.concatenate((turn_positions,
                                      temp_turn_positions),
-                                    axis = 0)
+                                    axis=0)
     return turn_positions
 
 
@@ -319,8 +319,8 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     Takes the final step of the walk cycle by repeating the previous step
     with the opposite legs as the last step.
     """
-    walk_positions = stepForward(step_angle = 90, distance = previous_step,
-                                 right_foot = right_foot)
+    walk_positions = stepForward(step_angle=90, distance=previous_step,
+                                 right_foot=right_foot)
     feet_positions = getFeetPos(leg_model)
     # add all of the feet positions to the walk
     for i in range(walk_positions.shape[0]):
@@ -347,7 +347,7 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle,
         stepTurn(feet_positions,
                  step_angle=np.sign(turn_angle) * (abs(turn_angle)
                                                    + previous_turn_angle),
-                 right_foot = right_foot)
+                 right_foot=right_foot)
 
     previous_turn_angle = turn_angle
     right_foot = not right_foot

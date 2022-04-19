@@ -11,7 +11,7 @@ def controller(mode):
     port = connect('COM1')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
-                         body_offset = 85)
+                         body_offset=85)
     start_leg = startLegPos(body_model, start_radius=150, start_height=20)
     # get the serial message from the angles
     message = anglesToSerial(start_leg, 500, 2000)
@@ -26,11 +26,11 @@ def controller(mode):
         if mode:  # True = walk, False = turn
             [leg_model, right_foot, previous_step, positions] =\
                 emgToWalk(body_model, leg_model, right_foot, previous_step,
-                          max_distance = 30)
+                          max_distance=30)
         else:
             [leg_model, right_foot, previous_turn_angle, positions] =\
                 emgToTurn(body_model, leg_model, right_foot,
-                          previous_turn_angle, max_turn_angle = 15)
+                          previous_turn_angle, max_turn_angle=15)
 
         sendPositions(port, positions, body_model)
 
@@ -64,7 +64,7 @@ def stand():
     port = connect('COM4')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
-                         body_offset = 85)
+                         body_offset=85)
     start_leg = startLegPos(body_model, start_radius=180, start_height=60)
     # get the serial message from the angles
     message = anglesToSerial(start_leg, 500, 2000)

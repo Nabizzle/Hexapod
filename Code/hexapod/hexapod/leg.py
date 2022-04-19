@@ -5,7 +5,7 @@ from hexapod.rotation import yRot, zRot
 
 
 def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num,
-           coax=26.34, femur = 76.2, tibia = 88.32):
+           coax=26.34, femur=76.2, tibia=88.32):
     """
     finds the positions for the coax, femur, and tibia leg segments and
     adds them to the body model
@@ -23,7 +23,7 @@ def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num,
 
     leg_positions = np.concatenate((np.array([body_model[leg_num, :]]),
                                     leg_coax.T, leg_femur.T, leg_tibia.T),
-                                   axis = 0)
+                                   axis=0)
     return leg_positions
 
 

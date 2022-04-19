@@ -28,7 +28,7 @@ def bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0, body_offset=85):
                                                  0]]).T)
 
     body_model = np.concatenate((body_0.T, body_1.T, body_2.T, body_3.T,
-                                 body_4.T, body_5.T, body_0.T), axis = 0)
+                                 body_4.T, body_5.T, body_0.T), axis=0)
     translation = [[Tx, Ty, Tz],
                    [Tx, Ty, Tz],
                    [Tx, Ty, Tz],
