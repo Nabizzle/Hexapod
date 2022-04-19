@@ -41,6 +41,8 @@ jobs:
           coverage xml
           # From the root directory, run the report coverage command
           ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml
+          
+          curl -Os https://uploader.codecov.io/latest/linux/codecov chmod +x codecov ./codecov
 
         env:
           DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
