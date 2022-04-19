@@ -3,9 +3,10 @@ import digitalio
 import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
+from typing import Tuple
 
 
-def recieveEMG():
+def recieveEMG() -> Tuple[float, float]:
     """
     Read in EMG values on the first two ADC channels of the Raspberry Pi
     zero through the MCP3008

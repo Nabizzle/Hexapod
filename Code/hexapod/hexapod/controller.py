@@ -3,10 +3,12 @@ from hexapod.body import bodyPos
 from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
                           resetTurnStance, walk)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
+from numpy.typing import NDArray
+from typing import Any
 from time import sleep
 
 
-def controller(mode):
+def controller(mode: bool) -> None:
     """controls the hexapod to walk or turn and send the commands"""
     port = connect('COM1')  # connect to the servo controller
     # setup the starting robot positions
@@ -48,7 +50,7 @@ def controller(mode):
             sendPositions(port, positions, body_model)
 
 
-def sit(port):
+def sit(port: Any) -> None:
     """tells the Hexapod to sit with its body on the ground"""
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
@@ -58,7 +60,7 @@ def sit(port):
     sendData(port, message)  # send the serial message
 
 
-def stand():
+def stand() -> None:
     """tells the hexapod to stand for the first time"""
     # controls the hexapod to walk or turn and send the commands
     port = connect('COM4')  # connect to the servo controller
@@ -71,13 +73,14 @@ def stand():
     sendData(port, message)  # send the serial message
 
 
-def walkCycle(port, body_model, leg_model, distance, angle):
+def walkCycle(port: Any, body_model: NDArray, leg_model: NDArray,
+              distance: float, angle: float) -> None:
     """Tells the hexapod to walk a specified distance without the need for EMG"""
     positions = walk(leg_model, distance, angle)
     sendPositions(port, positions, body_model)
 
 
-def sendPositions(port, positions, body_model):
+def sendPositions(port: Any, positions: NDArray, body_model: NDArray) -> bool:
     """
     Send each position in a set of hexapod command positions to the servo
     controller

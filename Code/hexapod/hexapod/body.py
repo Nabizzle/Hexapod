@@ -1,10 +1,12 @@
 import numpy as np
 from numpy.linalg import inv
+from numpy.typing import NDArray
 from hexapod.rotation import xRot, yRot, zRot
 from math import sin, pi
 
 
-def bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0, body_offset=85):
+def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
+            Ty: float = 0, Tz: float = 0, body_offset: float = 85) -> NDArray:
     """
     Applies rotations in pitch, roll, and yaw and translations in x, y, and
     z to the body.

@@ -1,8 +1,9 @@
 from math import radians, cos, sin
 import numpy as np
+from numpy.typing import NDArray
 
 
-def xRot(theta):
+def xRot(theta: float) -> NDArray:
     """Return the rotation matrix for a rotation about the x axis"""
     angle = radians(theta)
     mat = np.array([[1, 0, 0],
@@ -11,7 +12,7 @@ def xRot(theta):
     return mat
 
 
-def yRot(theta):
+def yRot(theta: float) -> NDArray:
     """Return the rotation matrix for a rotation about the y axis"""
     angle = radians(theta)
     mat = np.array([[cos(angle), 0, sin(angle)],
@@ -20,7 +21,7 @@ def yRot(theta):
     return mat
 
 
-def zRot(theta):
+def zRot(theta: float) -> NDArray:
     """Return the rotation matrix for a rotation about the z axis"""
     angle = radians(theta)
     mat = np.array([[cos(angle), sin(angle), 0],

@@ -1,9 +1,12 @@
 from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np
+from numpy.typing import NDArray
 from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
+from typing import Tuple
 
 
-def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
+def stepForward(step_angle: float = 90, distance: float = 30,
+                step_height: float = 15, right_foot: bool = True) -> NDArray:
     """Calculate the x, y, and z position updates to move in a step in a direction"""
     z_resolution = 1  # the forward distance of each sub step.
 
@@ -28,8 +31,9 @@ def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
     return feet
 
 
-def stepTurnFoot(foot_x, foot_y, foot_z, step_angle=15, step_height=15,
-                 right_foot=True):
+def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
+                 step_angle: float = 15, step_height: float = 15,
+                 right_foot: bool = True) -> NDArray:
     """Calculate the offset of a foor when turning the hexapod about an angle"""
     z_resolution = 1  # the forward distance of each sub step.
     radius = hypot(foot_x, foot_y)
@@ -59,7 +63,8 @@ def stepTurnFoot(foot_x, foot_y, foot_z, step_angle=15, step_height=15,
     return np.dstack((x, y, z)).reshape(z.size, 1, 3)
 
 
-def stepTurn(feet_pos, step_angle=15, step_height=15, right_foot=True):
+def stepTurn(feet_pos: NDArray, step_angle: float = 15,
+             step_height: float = 15, right_foot: bool = True) -> NDArray:
     """
     Calcluate the absolute positions of each foot of the hexapod when
     turning about an angle
@@ -80,7 +85,8 @@ def stepTurn(feet_pos, step_angle=15, step_height=15, right_foot=True):
     return previous_foot
 
 
-def walk(leg_model, distance=30, angle=90):
+def walk(leg_model: NDArray, distance: float = 30,
+         angle: float = 90) -> NDArray:
     """
     Creates a series of foot positions to use in telling the robot to walk
     in a direction
@@ -187,7 +193,7 @@ def walk(leg_model, distance=30, angle=90):
     return walk_positions
 
 
-def turn(leg_model, turn_angle=60):
+def turn(leg_model: NDArray, turn_angle: float = 60) -> NDArray:
     """Creates the series of foot positions to turn the hexapod about the z axis."""
     max_turn_angle = 15  # sets the maximum angle to turn by.
     # Raise an error is the robot is not commanded to move a non zero angle
@@ -288,8 +294,9 @@ def turn(leg_model, turn_angle=60):
     return turn_positions
 
 
-def emgToWalk(body_model, leg_model, right_foot, previous_step,
-              max_distance=30):
+def emgToWalk(body_model: NDArray, leg_model: NDArray, right_foot: bool,
+              previous_step: float,
+              max_distance: float = 30) -> Tuple[NDArray,bool, float, NDArray]:
     """Walks a dynamic distance based a normalized EMG input."""
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -313,7 +320,8 @@ def emgToWalk(body_model, leg_model, right_foot, previous_step,
     return[leg_model, right_foot, previous_step, walk_positions]
 
 
-def resetWalkStance(body_model, leg_model, right_foot, previous_step):
+def resetWalkStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
+                    previous_step: float) -> Tuple[NDArray, bool, NDArray]:
     """
     Takes the final step of the walk cycle by repeating the previous step
     with the opposite legs as the last step.
@@ -331,8 +339,10 @@ def resetWalkStance(body_model, leg_model, right_foot, previous_step):
     return[leg_model, right_foot, walk_positions]
 
 
-def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle,
-              max_turn_angle=15):
+def emgToTurn(body_model: NDArray, leg_model: NDArray, right_foot: bool,
+              previous_turn_angle: float,
+              max_turn_angle:float = 15) -> Tuple[NDArray, bool, float,
+                                                  NDArray]:
     """Turns a dynamic angle based on a normalized EMG input"""
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -356,7 +366,9 @@ def emgToTurn(body_model, leg_model, right_foot, previous_turn_angle,
     return [leg_model, right_foot, previous_turn_angle, turn_positions]
 
 
-def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
+def resetTurnStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
+                    previous_turn_angle: float) -> Tuple[NDArray, bool,
+                                                         NDArray]:
     """
     Takes the final step of the turn cycle by repeating the previous step
     with the opposite legs as the last step.
@@ -374,14 +386,14 @@ def resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle):
     return [leg_model, right_foot, turn_positions]
 
 
-def switchMode(threshold):
+def switchMode(threshold: float) -> bool:
     """if the user is cocontracting, tell the hexapod to switch walking modes."""
     [fcr_emg, edc_emg] = pollEMG()
 
     return bool(fcr_emg > threshold and edc_emg > threshold)
 
 
-def pollEMG():
+def pollEMG() -> Tuple[float, float]:
     """Get EMG and normalize it"""
     fcr_emg = 1
     edc_emg = 1
