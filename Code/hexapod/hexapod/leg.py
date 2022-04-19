@@ -22,8 +22,8 @@ def legPos(coax_angle, femur_angle, tibia_angle, body_model, leg_num,
         + leg_femur
 
     leg_positions = np.concatenate((np.array([body_model[leg_num, :]]),
-                                              leg_coax.T, leg_femur.T,
-                                              leg_tibia.T), axis = 0)
+                                    leg_coax.T, leg_femur.T, leg_tibia.T),
+                                   axis = 0)
     return leg_positions
 
 
@@ -33,15 +33,15 @@ def legAngle(x, y, z, coax=26.34, femur=76.2, tibia=88.32):
     coax_rot = zRot(-coax_angle)
     leg_rotated = np.matmul(inv(coax_rot), np.array([[x, y, z]]).T)
     femur_angle = degrees(acos((tibia ** 2 - femur ** 2 - leg_rotated[2] ** 2
-                                -(leg_rotated[0] - coax) ** 2) /
-                                (-2 * femur * (sqrt(leg_rotated[2] ** 2 +
-                                               (leg_rotated[0] - coax)**2)))))\
-                                - degrees(atan2(-leg_rotated[2],
-                                                (leg_rotated[0] - coax)))
+                                - (leg_rotated[0] - coax) ** 2) /
+                               (-2 * femur * (sqrt(leg_rotated[2] ** 2 +
+                                                   (leg_rotated[0] - coax)**2))
+                                )))\
+        - degrees(atan2(-leg_rotated[2],
+                        (leg_rotated[0] - coax)))
     tibia_angle = degrees(acos((leg_rotated[2] ** 2 + (leg_rotated[0] - coax)
-                                ** 2 - femur ** 2 - tibia ** 2) / (-2 * femur
-                                                                   * tibia)))\
-                  - 90
+                                ** 2 - femur ** 2 - tibia ** 2) /
+                               (-2 * femur * tibia))) - 90
 
     if abs(coax_angle) <= 1e-10:
         coax_angle = 0

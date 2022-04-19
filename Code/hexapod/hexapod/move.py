@@ -21,7 +21,7 @@ def stepForward(step_angle=90, distance=30, step_height=15, right_foot=True):
     if right_foot:  # right foot
         feet = np.concatenate((lead_foot, dragging_foot, lead_foot,
                                dragging_foot, lead_foot, dragging_foot),
-                               axis = 1)
+                              axis = 1)
     else:
         feet = np.concatenate((dragging_foot, lead_foot, dragging_foot,
                                lead_foot, dragging_foot, lead_foot), axis = 1)
@@ -131,7 +131,7 @@ def walk(leg_model, distance=30, angle=90):
             if 'walk_positions' in locals():
                 walk_positions = np.concatenate((walk_positions,
                                                  temp_walk_positions),
-                                                 axis = 0)
+                                                axis = 0)
             # create walk array with the first step
             else:
                 walk_positions = temp_walk_positions
@@ -169,7 +169,7 @@ def walk(leg_model, distance=30, angle=90):
                     + feet_positions
             walk_positions = np.concatenate((walk_positions,
                                              temp_walk_positions),
-                                             axis = 0)
+                                            axis = 0)
             remaining_distance -= max_step_size
             right_foot = not right_foot
 
@@ -184,7 +184,7 @@ def walk(leg_model, distance=30, angle=90):
             + feet_positions
     walk_positions = np.concatenate((walk_positions,
                                      temp_walk_positions),
-                                     axis = 0)
+                                    axis = 0)
     return walk_positions
 
 
@@ -226,8 +226,8 @@ def turn(leg_model, turn_angle = 60):
                 temp_turn_positions =\
                     stepTurn(feet_positions,
                              step_angle=np.sign(remaining_turn_distance)
-                                        * (abs(remaining_turn_distance)
-                                           + max_turn_angle),
+                             * (abs(remaining_turn_distance)
+                                + max_turn_angle),
                              right_foot=right_foot)
 
             # try to add the next step to the walk
@@ -235,7 +235,7 @@ def turn(leg_model, turn_angle = 60):
                 turn_positions =\
                     np.concatenate((turn_positions,
                                     temp_turn_positions),
-                                    axis = 0)
+                                   axis = 0)
             # if this is the first step, create walk array with the first step
             else:
                 turn_positions = temp_turn_positions
@@ -271,7 +271,7 @@ def turn(leg_model, turn_angle = 60):
 
             turn_positions = np.concatenate((turn_positions,
                                              temp_turn_positions),
-                                             axis = 0)
+                                            axis = 0)
             remaining_turn_distance -=\
                 np.sign(remaining_turn_distance) * max_turn_angle
             right_foot = not right_foot
@@ -285,7 +285,7 @@ def turn(leg_model, turn_angle = 60):
 
     turn_positions = np.concatenate((turn_positions,
                                      temp_turn_positions),
-                                     axis = 0)
+                                    axis = 0)
     return turn_positions
 
 
