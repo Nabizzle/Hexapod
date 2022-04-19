@@ -1,6 +1,7 @@
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos
-from hexapod.move import switchMode, emgToWalk, resetWalkStance, emgToTurn, resetTurnStance, walk
+from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
+                          resetTurnStance, walk)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
 from time import sleep
 
@@ -9,9 +10,11 @@ def controller(mode):
     """controls the hexapod to walk or turn and send the commands"""
     port = connect('COM1')  # connect to the servo controller
     # setup the starting robot positions
-    body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
-    start_leg = startLegPos(body_model, start_radius = 150, start_height = 20)
-    message = anglesToSerial(start_leg, 500, 2000)  # get the serial message from the angles
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset = 85)
+    start_leg = startLegPos(body_model, start_radius=150, start_height=20)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
     sendData(port, message)  # send the serial message
     leg_model = legModel(start_leg, body_model)
 
@@ -21,27 +24,37 @@ def controller(mode):
     right_foot = True
     while True:
         if mode:  # True = walk, False = turn
-            [leg_model, right_foot, previous_step, positions] = emgToWalk(body_model, leg_model, right_foot, previous_step, max_distance = 30)
+            [leg_model, right_foot, previous_step, positions] =\
+                emgToWalk(body_model, leg_model, right_foot, previous_step,
+                          max_distance = 30)
         else:
-            [leg_model, right_foot, previous_turn_angle, positions] = emgToTurn(body_model, leg_model, right_foot, previous_turn_angle, max_turn_angle = 15)
+            [leg_model, right_foot, previous_turn_angle, positions] =\
+                emgToTurn(body_model, leg_model, right_foot,
+                          previous_turn_angle, max_turn_angle = 15)
 
         sendPositions(port, positions, body_model)
 
         if switchMode(0.75):
             if mode:
-                [leg_model, right_foot, positions] = resetWalkStance(body_model, leg_model, right_foot, previous_step)
+                [leg_model, right_foot, positions] =\
+                    resetWalkStance(body_model, leg_model, right_foot,
+                                    previous_step)
                 previous_step = 0
             else:
-                [leg_model, right_foot, positions] = resetTurnStance(body_model, leg_model, right_foot, previous_turn_angle)
+                [leg_model, right_foot, positions] =\
+                    resetTurnStance(body_model, leg_model, right_foot,
+                                    previous_turn_angle)
             mode = not mode
             sendPositions(port, positions, body_model)
 
 
 def sit(port):
     """tells the Hexapod to sit with its body on the ground"""
-    body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
-    sit_leg = startLegPos(body_model, start_radius = 90, start_height = 10)
-    message = anglesToSerial(sit_leg, 500, 2000)  # get the serial message from the angles
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset=85)
+    sit_leg = startLegPos(body_model, start_radius=90, start_height=10)
+    # get the serial message from the angles
+    message = anglesToSerial(sit_leg, 500, 2000)
     sendData(port, message)  # send the serial message
 
 
@@ -50,9 +63,11 @@ def stand():
     # controls the hexapod to walk or turn and send the commands
     port = connect('COM4')  # connect to the servo controller
     # setup the starting robot positions
-    body_model = bodyPos(pitch = 0, roll = 0, yaw = 0, Tx = 0, Ty = 0, Tz = 0, body_offset = 85)
-    start_leg = startLegPos(body_model, start_radius = 180, start_height = 60)
-    message = anglesToSerial(start_leg, 500, 2000)  # get the serial message from the angles
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset = 85)
+    start_leg = startLegPos(body_model, start_radius=180, start_height=60)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
     sendData(port, message)  # send the serial message
 
 
@@ -68,8 +83,10 @@ def sendPositions(port, positions, body_model):
     controller
     """
     for position in positions:
-        angles = recalculateLegAngles(position, body_model)  # convert the feet positions to angles
-        message = anglesToSerial(angles, 1000, 2000)  # get the serial message from the angles
+        # convert the feet positions to angles
+        angles = recalculateLegAngles(position, body_model)
+        # get the serial message from the angles
+        message = anglesToSerial(angles, 1000, 2000)
         sendData(port, message)  # send the serial message
         sleep(0.005)
     return True

@@ -7,7 +7,9 @@ def angleToPW(angle):
     convert the input angle in degrees to the pulse width in us to command
     that angle
     """
-    return round(2000 * angle / 180 + 500)  # returns the pulse width as the equivalent whole number between 500us (0 degrees) and 2500us (180 degrees)
+    # returns the pulse width as the equivalent whole number between 500us
+    # (0 degrees) and 2500us (180 degrees)
+    return round(2000 * angle / 180 + 500)
 
 
 def anglesToSerial(angles, speed, time):
