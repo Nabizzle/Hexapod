@@ -6,6 +6,9 @@ test_patterns = [
 ]
 
 [[analyzers]]
+name = "test-coverage"
+enabled = true
+
 name = "python"
 enabled = true
 
