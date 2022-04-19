@@ -2945,5 +2945,6 @@ def test_resetTurnStance():
 
 
 def test_pollEMG():
+    """Tests that the returned EMG values are between 0 and 1"""
     [fcr_emg, edc_emg] = move.pollEMG()
-    assert fcr_emg <= 1 and fcr_emg >= 0 and edc_emg <=1 and edc_emg >=0
+    assert 0 <= fcr_emg <= 1 and 0 <= edc_emg <=1
