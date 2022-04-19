@@ -28,11 +28,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Report results to DeepSource
-      # Generate coverage report in xml format
         run: |
-          coverage xml
           # Install deepsource CLI
           curl https://deepsource.io/cli | sh
+          # Generate coverage report in xml format
+          coverage xml
           # From the root directory, run the report coverage command
           ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml
 
