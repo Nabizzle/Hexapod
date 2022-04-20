@@ -75,7 +75,10 @@ def recalculateLegAngles(feet_positions: NDArray,
 
 def startLegPos(body_model: NDArray, start_radius: float = 150,
                 start_height: float = 20) -> NDArray:
-    """Create the starting angles of the legs on the hexapod based"""
+    """
+    Create the starting angles of the legs on the hexapod based on the
+    standing radius on the ground and height off the ground.
+    """
     start_leg_pos = np.array([[start_radius * cos(pi / 3), start_radius
                                * sin(pi / 3), - start_height],
                               [start_radius, 0, - start_height],

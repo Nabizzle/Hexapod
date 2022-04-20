@@ -67,7 +67,7 @@ def connect(com: str) -> Any:
 
 
 def disconnect(ser: Any) -> bool:
-    """disconnects for the serial port"""
+    """disconnects from the serial port"""
     ser.close()
     if ser.is_open:
         print('Serial port is still open')
