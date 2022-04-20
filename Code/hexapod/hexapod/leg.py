@@ -2,7 +2,8 @@
 Functions to generate, change, and use the model of the hexapod's legs
 
 These functions take the leg dimensions and servo angles to find their position
-or can do the opposite and find the angles from the dimensions. Together, these functions define the leg model and allow the user to update and pull
+or can do the opposite and find the angles from the dimensions. Together,
+these functions define the leg model and allow the user to update and pull
 relevant information about the legs.
 
 Functions
@@ -118,7 +119,7 @@ def legAngle(x: float, y: float, z: float, coax: float = 26.34,
     -------
     [coax_angle, femur_angle, tibia_angle]: List[float]
         A list of the three servo angles for the leg segments.
-    
+
     Notes:
         Refer to the Kinematics Calculations document in the Docs folder for
         how the equations in this function were found.
@@ -191,7 +192,7 @@ def startLegPos(body_model: NDArray, start_radius: float = 180,
                 start_height: float = 60) -> NDArray:
     """
     Find the neutral position of the hexapod.
-    
+
     Create the starting angles of the legs on the hexapod based on the
     standing radius on the ground and height off the ground.
 
@@ -234,7 +235,7 @@ def startLegPos(body_model: NDArray, start_radius: float = 180,
 def legModel(leg_angles: NDArray, body_model: NDArray) -> NDArray:
     """
     Generates the model of the legs based on the servo angles of the legs.
-    
+
     Recreates the leg model from all of the servo angles of the legs. This
     method is used when walking and turning to update the model of the robot
     for the next step.
@@ -268,7 +269,7 @@ def legModel(leg_angles: NDArray, body_model: NDArray) -> NDArray:
 def getFeetPos(leg_model: NDArray) -> NDArray:
     """
     Ouput the x, y, z position of the feet of the hexapod.
-    
+
     Return the current positions of the ends of the legs or where the feet
     of the hexapod currently are.
 
