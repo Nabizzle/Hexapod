@@ -94,7 +94,7 @@ def controller(mode: bool) -> None:
 def sit(port: Any) -> None:
     """
     Tells the Hexapod to sit with its body on the ground.
-    
+
     Recreates the neutral hexapod positions, but with a lowered height so that
     the body of the hexapod touches the ground. This is the position that the
     hexapod should be turned off in.
@@ -115,7 +115,7 @@ def sit(port: Any) -> None:
 def stand() -> None:
     """
     Tells the hexapod to stand in the neutral position.
-    
+
     Recreates the neutral hexapod positions that occur at the beginning
     of the controller function.
 
@@ -144,7 +144,7 @@ def walkCycle(port: Any, body_model: NDArray, leg_model: NDArray,
               distance: float, angle: float) -> None:
     """
     Tells the hexapod to walk a specified distance without the need for EMG.
-    
+
     This function just uses the move.walk function and sends its positions to
     the Lynxmotion SSC32U.
 
