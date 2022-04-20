@@ -107,7 +107,7 @@ Scripts used in the communications with and between Raspberry Pis.
 Querrys the Raspberry Pi Zero W for the wrist flexor and wrist extensor EMG values. The EMG values are constrained between 0 and 1 and the EMG values are output as a two value list with the flexor and extensor values respectivly.
 
 ## Lynxmotiohn SSC-32U Driver
-Functions to communicate with the Lynxmotiohn SSC-32U to drive the 18 servos of the hexapod
+Functions to communicate with the Lynxmotion SSC-32U to drive the 18 servos of the hexapod
 
 ### angleToPW
 Takes in an angle in degrees and finds the pulse width of the pulse pulse width modulation signal

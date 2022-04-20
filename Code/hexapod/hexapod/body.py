@@ -6,10 +6,10 @@ Functions in this model are used to take in desired angles and translations to
 orient the body in whatever way the user desires independent of the legs and
 their movement.
 
-Functions:
+Functions
+---------
 bodyPos: Creates a model of the body with input rotations and translations.
 """
-
 import numpy as np
 from numpy.linalg import inv
 from numpy.typing import NDArray

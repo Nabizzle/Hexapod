@@ -26,7 +26,7 @@ rotation:
     These are the functions to find the rotation of any point around an axis
     by an angle in degrees.
 ssc32uDriver:
-    Functions to communicate with the Lynxmotiohn SSC-32U to drive the 18
+    Functions to communicate with the Lynxmotion SSC-32U to drive the 18
     servos of the hexapod.
 
 Functions
@@ -35,8 +35,8 @@ body.bodyPos:
     Applies rotations in pitch, roll, and yaw and translations in x, y, and
     z to the body.
 controller.controller: Controls the hexapod to walk or turn based on EMG.
-controller.sit: Tells the Hexapod to sit with its body on the ground
-controller.stand: Tells the hexapod to stand in the neutral position
+controller.sit: Tells the Hexapod to sit with its body on the ground.
+controller.stand: Tells the hexapod to stand in the neutral position.
 controller.walkCycle:
     Tells the hexapod to walk a specified distance without the need for EMG
 controller.sendPositions:
