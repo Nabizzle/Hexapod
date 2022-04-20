@@ -55,7 +55,7 @@ def test_startLegPos():
                             [-42.5, 73.61215932, 0],
                             [42.5, 73.61215932, 0]])
 
-    assert np.allclose(leg.startLegPos(body_model), np.array([[60, 63.50456104, -60.47672858],
+    assert np.allclose(leg.startLegPos(body_model, 150, 20), np.array([[60, 63.50456104, -60.47672858],
                                                             [0, 63.50456104, -60.47672858],
                                                             [-60, 63.50456104, -60.47672858],
                                                             [-120, 63.50456104, -60.47672858],
