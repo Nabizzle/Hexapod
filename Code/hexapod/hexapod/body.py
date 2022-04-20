@@ -22,7 +22,7 @@ def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
     """
     Creates a model of the body with input rotations and translations.
 
-    Applies rotations in `pitch`, `roll`, and `yaw` and translations in x, y, 
+    Applies rotations in `pitch`, `roll`, and `yaw` and translations in x, y,
     and z to the body. After this, it creates a model of the hexapod's body
     that represents the locations of the coax servo output shafts.
 
@@ -53,9 +53,9 @@ def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
 
     Notes
     -----
-    The seventh point in the model is the same as the first and was used when plotting the model, but is not needed in controlling the hexapod.
+    The seventh point in the model is the same as the first and was used when
+    plotting the model, but is not needed in controlling the hexapod.
     """
-
     body_rot = np.matmul(zRot(yaw), yRot(roll))
     body_rot = np.matmul(body_rot, xRot(pitch))
 

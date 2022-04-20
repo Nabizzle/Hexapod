@@ -4,7 +4,8 @@ A library of funtions to control an 18 DoF hexapod
 This library contains code to create a computational model of the body and
 legs of the hexapod so that those models can control a real hexapod's 18
 servos. The library also has a driver to convert the model angles to 18 servo
-commands. The hexapod can run automatically walking and turning based on code or can take in two EMG streams to direct the amount to walk and turn.
+commands. The hexapod can run automatically walking and turning based on code
+or can take in two EMG streams to direct the amount to walk and turn.
 
 Modules
 -------
