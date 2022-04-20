@@ -42,21 +42,13 @@ controller.walkCycle:
 controller.sendPositions:
     Send each position in a set of hexapod command positions to the servo
     controller
-leg.legPos:
-    Finds the positions for the coax, femur, and tibia leg segments and
-    adds them to the body model
+leg.legPos: Finds the positions for the leg segments.
 leg.legAngle: Finds the angles for the coax, femur, and tibia leg segments.
-leg.recalculateLegAngles:
-    Finds the coax, femur, and tibia angles of each leg based on the body
-    model and feet positions of the hexapod
-leg.startLegPos:
-    Create the starting angles of the legs on the hexapod based on the
-    standing radius on the ground and height off the ground.
+leg.recalculateLegAngles: Finds the coax, femur, and tibia angles of each leg.
+leg.startLegPos: Find the neutral position of the hexapod.
 leg.legModel:
     Generates the model of the legs based on the servo angles of the legs.
-leg.getFeetPos:
-    Return the current positions of the ends of the legs or where the feet
-    of the hexapod currently are.
+leg.getFeetPos: Ouput the x, y, z position of the feet of the hexapod.
 move.stepForward:
     Calculate the x, y, and z positions to move in a step in a direction.
 move.stepTurnFoot:
