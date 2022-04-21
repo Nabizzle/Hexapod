@@ -1,3 +1,27 @@
+"""
+Functions to calculate linear and angular movement for the hexapod.
+
+These are a collection of functions to find how the hexapod will take steps to
+move linearlly in any direction aor to turn itself in the x-y plane about the
+z axis.
+
+Functions:
+stepForward:
+    Calculate the x, y, z position updates to move in a step in a direction.
+stepTurnFoot:
+    Calculate the offset of a foot when turning the hexapod about an angle.
+stepTurn: Calcluate the positions of each foot when turning about an angle.
+walk: Creates a series of foot positions to use when walking in a direction.
+turn:
+    Creates the series of foot positions to turn the hexapod about the z axis.
+emgToWalk: Walks a dynamic distance based a normalized EMG input.
+resetWalkStance: Completes the final step in walking to a neutral stance.
+emgToTurn: Turns a dynamic angle based on a normalized EMG input.
+resetTurnStance: Completes the final step in turning to a neutral stance.
+switchMode:
+    Switches walking modes if the user is cocontracting their muscles.
+pollEMG: Get EMG signals and normalize them.
+"""
 from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np
 from numpy.typing import NDArray
@@ -7,7 +31,9 @@ from typing import Tuple
 
 def stepForward(step_angle: float = 90, distance: float = 30,
                 step_height: float = 15, right_foot: bool = True) -> NDArray:
-    """Calculate the x, y, and z position updates to move in a step in a direction"""
+    """
+    Calculate the x, y, z position updates to move in a step in a direction.
+    """
     z_resolution = 1  # the forward distance of each sub step.
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4
@@ -34,7 +60,9 @@ def stepForward(step_angle: float = 90, distance: float = 30,
 def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
                  step_angle: float = 15, step_height: float = 15,
                  right_foot: bool = True) -> NDArray:
-    """Calculate the offset of a foor when turning the hexapod about an angle"""
+    """
+    Calculate the offset of a foot when turning the hexapod about an angle.
+    """
     z_resolution = 1  # the forward distance of each sub step.
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
@@ -66,8 +94,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
 def stepTurn(feet_pos: NDArray, step_angle: float = 15,
              step_height: float = 15, right_foot: bool = True) -> NDArray:
     """
-    Calcluate the absolute positions of each foot of the hexapod when
-    turning about an angle
+    Calcluate the positions of each foot when turning about an angle.
     """
     for i in range(6):
         footstep = stepTurnFoot(foot_x=feet_pos[i, 0],
@@ -88,8 +115,7 @@ def stepTurn(feet_pos: NDArray, step_angle: float = 15,
 def walk(leg_model: NDArray, distance: float = 30,
          angle: float = 90) -> NDArray:
     """
-    Creates a series of foot positions to use in telling the robot to walk
-    in a direction
+    Creates a series of foot positions to use when walking in a direction.
     """
     max_step_size = 30  # Maximum step distance
     # raise an error if the robot is not commanded to move a positive distance
@@ -194,7 +220,9 @@ def walk(leg_model: NDArray, distance: float = 30,
 
 
 def turn(leg_model: NDArray, turn_angle: float = 60) -> NDArray:
-    """Creates the series of foot positions to turn the hexapod about the z axis."""
+    """
+    Creates the series of foot positions to turn the hexapod about the z axis.
+    """
     max_turn_angle = 15  # sets the maximum angle to turn by.
     # Raise an error is the robot is not commanded to move a non zero angle
     if turn_angle == 0:
@@ -298,7 +326,9 @@ def emgToWalk(body_model: NDArray, leg_model: NDArray, right_foot: bool,
               previous_step: float,
               max_distance: float = 30) -> Tuple[NDArray, bool, float,
                                                  NDArray]:
-    """Walks a dynamic distance based a normalized EMG input."""
+    """
+    Walks a dynamic distance based a normalized EMG input.
+    """
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
     # finds the difference between EMG signals to move forward or backwards
@@ -324,6 +354,8 @@ def emgToWalk(body_model: NDArray, leg_model: NDArray, right_foot: bool,
 def resetWalkStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
                     previous_step: float) -> Tuple[NDArray, bool, NDArray]:
     """
+    Completes the final step in walking to a neutral stance.
+
     Takes the final step of the walk cycle by repeating the previous step
     with the opposite legs as the last step.
     """
@@ -344,7 +376,9 @@ def emgToTurn(body_model: NDArray, leg_model: NDArray, right_foot: bool,
               previous_turn_angle: float,
               max_turn_angle: float = 15) -> Tuple[NDArray, bool, float,
                                                    NDArray]:
-    """Turns a dynamic angle based on a normalized EMG input"""
+    """
+    Turns a dynamic angle based on a normalized EMG input.
+    """
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
     # finds the difference between EMG signals to move right or left
@@ -371,6 +405,8 @@ def resetTurnStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
                     previous_turn_angle: float) -> Tuple[NDArray, bool,
                                                          NDArray]:
     """
+    Completes the final step in turning to a neutral stance.
+
     Takes the final step of the turn cycle by repeating the previous step
     with the opposite legs as the last step.
     """
@@ -388,14 +424,16 @@ def resetTurnStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
 
 
 def switchMode(threshold: float) -> bool:
-    """if the user is cocontracting, tell the hexapod to switch walking modes."""
+    """
+    Switches walking modes if the user is cocontracting their muscles.
+    """
     [fcr_emg, edc_emg] = pollEMG()
 
     return bool(fcr_emg > threshold and edc_emg > threshold)
 
 
 def pollEMG() -> Tuple[float, float]:
-    """Get EMG and normalize it"""
+    """Get EMG signals and normalize them"""
     fcr_emg = 1
     edc_emg = 1
 
