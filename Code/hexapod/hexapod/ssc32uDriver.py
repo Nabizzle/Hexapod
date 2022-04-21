@@ -55,7 +55,7 @@ def anglesToSerial(angles: NDArray, speed: Optional[int] = None,
                    time: Optional[int] = None) -> bytes:
     """
     Takes the hexapods servo angles and converts them to a serial command.
-    
+
     Converts an array of 18 servo angles to the formatted serial command for
     the Lynxmotiohn SSC-32U. The servo angles need to be in the format made in
     the leg module.
@@ -122,7 +122,7 @@ def anglesToSerial(angles: NDArray, speed: Optional[int] = None,
 def connect(com: str) -> Any:
     """
     Connect to the input COM port.
-    
+
     Open a serial port with the Lynxmotiohn SSC-32U on the desired COM port.
 
     Parameters
@@ -194,6 +194,12 @@ def sendData(ser: Any, serial_string: bytes) -> bool:
     -------
     bool
         Always returns true at the end of the function.
+
+    See Also
+    --------
+    connect
+    anglesToSerial:
+        Takes the hexapods servo angles and converts them to a serial command.
     """
     ser.write(serial_string)
     return True
