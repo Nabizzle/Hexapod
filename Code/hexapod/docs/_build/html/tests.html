@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>tests package &#8212; Hexapod v1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="setup module" href="setup.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tests-package">
+<h1>tests package<a class="headerlink" href="#tests-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-tests.test_body">
+<span id="tests-test-body-module"></span><h2>tests.test_body module<a class="headerlink" href="#module-tests.test_body" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_body.test_bodyPos">
+<span class="sig-prename descclassname"><span class="pre">tests.test_body.</span></span><span class="sig-name descname"><span class="pre">test_bodyPos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_body.test_bodyPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests the default body positions is correct</p>
+</dd></dl>
+
+</section>
+<section id="module-tests.test_leg">
+<span id="tests-test-leg-module"></span><h2>tests.test_leg module<a class="headerlink" href="#module-tests.test_leg" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_leg.test_getFeetPos">
+<span class="sig-prename descclassname"><span class="pre">tests.test_leg.</span></span><span class="sig-name descname"><span class="pre">test_getFeetPos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_leg.test_getFeetPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the found feet positions as x, y, z points are correct given the model of the legs</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_leg.test_legAngle">
+<span class="sig-prename descclassname"><span class="pre">tests.test_leg.</span></span><span class="sig-name descname"><span class="pre">test_legAngle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_leg.test_legAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the defult leg dimensions declared by the function definition</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_leg.test_legModel">
+<span class="sig-prename descclassname"><span class="pre">tests.test_leg.</span></span><span class="sig-name descname"><span class="pre">test_legModel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_leg.test_legModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the found model of the legs is correct given the leg angles and body model of the starting condition of the hexapod</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_leg.test_legPos">
+<span class="sig-prename descclassname"><span class="pre">tests.test_leg.</span></span><span class="sig-name descname"><span class="pre">test_legPos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_leg.test_legPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the output positions of the leg segments is correct given the coax, femur, and tibia angles with the body model.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_leg.test_recalculateLegAngles">
+<span class="sig-prename descclassname"><span class="pre">tests.test_leg.</span></span><span class="sig-name descname"><span class="pre">test_recalculateLegAngles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_leg.test_recalculateLegAngles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that all of the output leg servo angles are correct given the default body model and feet positions when the hexapod is just turned on</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_leg.test_startLegPos">
+<span class="sig-prename descclassname"><span class="pre">tests.test_leg.</span></span><span class="sig-name descname"><span class="pre">test_startLegPos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_leg.test_startLegPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the starting leg angles are correct when given the body model of the starting condition of the robot</p>
+</dd></dl>
+
+</section>
+<section id="module-tests.test_move">
+<span id="tests-test-move-module"></span><h2>tests.test_move module<a class="headerlink" href="#module-tests.test_move" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_pollEMG">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_pollEMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_pollEMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the returned EMG values are between 0 and 1</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_resetTurnStance">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_resetTurnStance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_resetTurnStance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given the body and leg models right after taking a 15 degree turn, this function tests that the hexapod ends in the default resting stance after the resetTurnStance test is run. This is the same condition as when the hexapod is just turned on.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_resetWalkStance">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_resetWalkStance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_resetWalkStance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the model of the body and legs right after taking a step with a distance of 15 and tests that the resetWalkStance ends with the models back at the default resting position. This position is the same as when the hexapod was turned on</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_stepForward">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_stepForward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_stepForward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the ouput feet offsets from making one step forward are correct</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_stepTurn">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_stepTurn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_stepTurn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the output feet positions of all six legs are correct when turning the hexapod one step</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_stepTurnFoot">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_stepTurnFoot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_stepTurnFoot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the offset of the second foot when turning one step is correct</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_turn">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the hexapod takes two turning steps correctly by checking every foot position during the turn.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_turnZero">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_turnZero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_turnZero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that a turn angle of 0 raises an exception</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_walk">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_walk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the output feet positions of all six legs are accurate when the hexapod moves a distance of 30.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_move.test_walkNegative">
+<span class="sig-prename descclassname"><span class="pre">tests.test_move.</span></span><span class="sig-name descname"><span class="pre">test_walkNegative</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_move.test_walkNegative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the output feet positions of all six legs are accurate when the hexapod moves a distance of 30.</p>
+</dd></dl>
+
+</section>
+<section id="module-tests.test_rotation">
+<span id="tests-test-rotation-module"></span><h2>tests.test_rotation module<a class="headerlink" href="#module-tests.test_rotation" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_rotation.test_xrot">
+<span class="sig-prename descclassname"><span class="pre">tests.test_rotation.</span></span><span class="sig-name descname"><span class="pre">test_xrot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_rotation.test_xrot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the x rotation matrix with a 90 degree rotation is correct</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_rotation.test_yRot">
+<span class="sig-prename descclassname"><span class="pre">tests.test_rotation.</span></span><span class="sig-name descname"><span class="pre">test_yRot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_rotation.test_yRot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the y rotation matrix with a 90 degree rotation is correct</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_rotation.test_zRot">
+<span class="sig-prename descclassname"><span class="pre">tests.test_rotation.</span></span><span class="sig-name descname"><span class="pre">test_zRot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_rotation.test_zRot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the z rotation matrix with a 90 degree rotation is correct</p>
+</dd></dl>
+
+</section>
+<section id="module-tests.test_ssc32uDriver">
+<span id="tests-test-ssc32udriver-module"></span><h2>tests.test_ssc32uDriver module<a class="headerlink" href="#module-tests.test_ssc32uDriver" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_ssc32uDriver.test_angleToPW">
+<span class="sig-prename descclassname"><span class="pre">tests.test_ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">test_angleToPW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_ssc32uDriver.test_angleToPW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the found pulse width for a 90 degree servo positions is 1500us</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_ssc32uDriver.test_anglesToSerial">
+<span class="sig-prename descclassname"><span class="pre">tests.test_ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">test_anglesToSerial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_ssc32uDriver.test_anglesToSerial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that the message to the servo controller is made and formatted correctly and as a btye string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.test_ssc32uDriver.test_anglesToSerialWrongFormat">
+<span class="sig-prename descclassname"><span class="pre">tests.test_ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">test_anglesToSerialWrongFormat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.test_ssc32uDriver.test_anglesToSerialWrongFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests that an incorrectly formatted message raises an exception</p>
+</dd></dl>
+
+</section>
+<section id="module-tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tests" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hexapod</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">hexapod</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hexapod.html">hexapod package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">hexapod</a><ul>
+      <li>Previous: <a href="setup.html" title="previous chapter">setup module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Nabeel Chowdhury.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

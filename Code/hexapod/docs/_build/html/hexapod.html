@@ -1,0 +1,1445 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>hexapod package &#8212; Hexapod v1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="setup module" href="setup.html" />
+    <link rel="prev" title="hexapod" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="hexapod-package">
+<h1>hexapod package<a class="headerlink" href="#hexapod-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-hexapod.body">
+<span id="hexapod-body-module"></span><h2>hexapod.body module<a class="headerlink" href="#module-hexapod.body" title="Permalink to this headline">¶</a></h2>
+<p>Functions related to calculating the points in x, y, z space that make up the
+body model.</p>
+<p>Functions in this model are used to take in desired angles and translations to
+orient the body in whatever way the user desires independent of the legs and
+their movement.</p>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.body.bodyPos">
+<span class="sig-prename descclassname"><span class="pre">hexapod.body.</span></span><span class="sig-name descname"><span class="pre">bodyPos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tz</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">85</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.body.bodyPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a model of the body with input rotations and translations.</p>
+<p>Applies rotations in <cite>pitch</cite>, <cite>roll</cite>, and <cite>yaw</cite> and translations in x, y,
+and z to the body. After this, it creates a model of the hexapod’s body
+that represents the locations of the coax servo output shafts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pitch: float, default=0</strong></dt><dd><p>The rotation of the body about the x axis.roll</p>
+</dd>
+<dt><strong>roll: float, default=0</strong></dt><dd><p>The rotation of the body about the y axis.</p>
+</dd>
+<dt><strong>yaw: float, default=0</strong></dt><dd><p>The rotation of the body about the z axis.</p>
+</dd>
+<dt><strong>Tx: float, default=0</strong></dt><dd><p>Translation of the body along the x axis.</p>
+</dd>
+<dt><strong>Ty: float, default=0</strong></dt><dd><p>Translation of the body along the y axis.</p>
+</dd>
+<dt><strong>Tz: float, default=0</strong></dt><dd><p>Translation of the body along the z axis.</p>
+</dd>
+<dt><strong>body_offset: float, default=85</strong></dt><dd><p>The distance in millimeters along the x axis of the second coax angle
+servo from the center of the hexapod when the body has no translations
+or rotations.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>body_model: NDArray</dt><dd><p>A 7x3 numpy array that represents the locations of the coax servos as
+x, y, and z points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The seventh point in the model is the same as the first and was used when
+plotting the model, but is not needed in controlling the hexapod.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod.controller">
+<span id="hexapod-controller-module"></span><h2>hexapod.controller module<a class="headerlink" href="#module-hexapod.controller" title="Permalink to this headline">¶</a></h2>
+<p>Scripts for controlling the hexapod.</p>
+<p>These are scripts that control how the hexapod walks and turns. This module
+combines the work of the rest of the library and as a result, imports most of
+it to utilize most of the functions.</p>
+<section id="id1">
+<h3>Functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>controller:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+</dd>
+<dt>sit:</dt><dd><p>Tells the Hexapod to sit with its body on the ground.</p>
+</dd>
+<dt>stand:</dt><dd><p>Tells the hexapod to stand in the neutral position.</p>
+</dd>
+<dt>walkCycle:</dt><dd><p>Tells the hexapod to walk a specified distance without the need for EMG</p>
+</dd>
+<dt>sendPositions:</dt><dd><p>Send each position in a set to the servo controller.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.controller.controller">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.controller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+<p>Takes in EMG signals and tells the hexapod how to walk or turn based on
+those EMG signals. The signals are sent over a COM port to the Lynxmotion
+SSC32U servo controller. This controller combines the work of the rest of
+the library to get the hexapod to move. This is the main function to run
+when using the hexapod for its intended purpose.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mode: bool</strong></dt><dd><p>This parameter determines if the hexapod is walking or turning. <cite>mode</cite>
+equalling 1 is walking and 0 is turning.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">move.switchMode</span></code></dt><dd><p>Sends a boolean based on EMG to indicate when to change movement modes.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function has the serial port to communicate to and the threshold
+of cocontraction to switch modes hardcoded.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.controller.sendPositions">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">sendPositions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#hexapod.controller.sendPositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send each position in a set to the servo controller.</p>
+<p>Takes a list of command positions and iterates through them to send each
+position as a servo command to the Lynxmotion SSC32U.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>port: Serial Port</strong></dt><dd><p>The COM port that the servo signals are sent over</p>
+</dd>
+<dt><strong>positions: NDArray</strong></dt><dd><p>A numpy array of a set of foot positions to command the hexapod to.
+These foot positions are a 6x3 numpy array of x, y, z positions for
+the six legs and the number of 6x3 arrays in the positions matrix is
+determined by how far the hexapod walked or turned.</p>
+</dd>
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool:</dt><dd><p>The function returns true when finished.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>In this function, the ssc32uDriver.anglesToSerial function does not have
+its speed or time inputs used as each change in position is so small, that
+using these parameters is unneeded. Also note that there is a 5ms delay
+between commands.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.controller.sit">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">sit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.sit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells the Hexapod to sit with its body on the ground.</p>
+<p>Recreates the neutral hexapod positions, but with a lowered height so that
+the body of the hexapod touches the ground. This is the position that the
+hexapod should be turned off in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>port: Serial Port</strong></dt><dd><p>The COM port that the servo signals are sent over.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.controller.stand">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">stand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.stand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells the hexapod to stand in the neutral position.</p>
+<p>Recreates the neutral hexapod positions that occur at the beginning
+of the controller function.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.controller.controller" title="hexapod.controller.controller"><code class="xref py py-obj docutils literal notranslate"><span class="pre">controller</span></code></a></dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function assumes that there is already a connection to the serial
+port for the Lynxmotion SSC32U.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.controller.walkCycle">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">walkCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.walkCycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
+<p>This function just uses the move.walk function and sends its positions to
+the Lynxmotion SSC32U.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>port: Serial Port</strong></dt><dd><p>The COM port that the servo signals are sent over.</p>
+</dd>
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>distance: float</strong></dt><dd><p>The length in millimeters that the hexapod will walk. This distance is
+broken up into steps based on the max step size in move.walk</p>
+</dd>
+<dt><strong>angle: float</strong></dt><dd><p>The direction the hexapod will walk in. 90 degrees is forward.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">move.walk</span></code></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod.leg">
+<span id="hexapod-leg-module"></span><h2>hexapod.leg module<a class="headerlink" href="#module-hexapod.leg" title="Permalink to this headline">¶</a></h2>
+<p>Functions to generate, change, and use the model of the hexapod’s legs.</p>
+<p>These functions take the leg dimensions and servo angles to find their position
+or can do the opposite and find the angles from the dimensions. Together,
+these functions define the leg model and allow the user to update and pull
+relevant information about the legs.</p>
+<section id="id2">
+<h3>Functions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>legPos:</dt><dd><p>Finds the positions for the leg segments.</p>
+</dd>
+<dt>legAngle:</dt><dd><p>Finds the angles for the coax, femur, and tibia leg segments.</p>
+</dd>
+<dt>recalculateLegAngles:</dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+<dt>startLegPos:</dt><dd><p>Find the neutral position of the hexapod.</p>
+</dd>
+<dt>legModel:</dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
+</dd>
+<dt>getFeetPos:</dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.leg.getFeetPos">
+<span class="sig-prename descclassname"><span class="pre">hexapod.leg.</span></span><span class="sig-name descname"><span class="pre">getFeetPos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.leg.getFeetPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
+<p>Return the current positions of the ends of the legs or where the feet
+of the hexapod currently are.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>feet_positions: NDArray</dt><dd><p>The 6x3 numpy array of where each leg of the hexapod ends as an
+x, y, z point.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.leg.legAngle">
+<span class="sig-prename descclassname"><span class="pre">hexapod.leg.</span></span><span class="sig-name descname"><span class="pre">legAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">26.34</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">femur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">76.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tibia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">88.32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.leg.legAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the angles for the coax, femur, and tibia leg segments.</p>
+<p>Takes the foot position, or end point of the leg, and calculates what angle
+each segment of the legs should have to achieve that end position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x: float</strong></dt><dd><p>The x location of the foot.</p>
+</dd>
+<dt><strong>y: float</strong></dt><dd><p>The y location of the foot.</p>
+</dd>
+<dt><strong>z: float</strong></dt><dd><p>The z location of the foot.</p>
+</dd>
+<dt><strong>coax: float, defualt=26.34</strong></dt><dd><p>The length of the coax segment in millimeters or the segment from the
+body attachment point to the begining of the femur.</p>
+</dd>
+<dt><strong>femur: float, default=76.2</strong></dt><dd><p>The length of the femur segment in millimeters or the segment from the
+begnining of the femur to the start of the tibia.</p>
+</dd>
+<dt><strong>tibia: float, default=88.32</strong></dt><dd><p>The length of the tibia segment in millimeters or the semgne from the
+start of the tibia to the foot of the leg.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>[coax_angle, femur_angle, tibia_angle]: List[float]</dt><dd><p>A list of the three servo angles for the leg segments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.leg.recalculateLegAngles" title="hexapod.leg.recalculateLegAngles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recalculateLegAngles</span></code></a></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notes</span></code></dt><dd><p>Refer to the Kinematics Calculations document in the Docs folder for how the equations in this function were found.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.leg.legModel">
+<span class="sig-prename descclassname"><span class="pre">hexapod.leg.</span></span><span class="sig-name descname"><span class="pre">legModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leg_angles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.leg.legModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
+<p>Recreates the leg model from all of the servo angles of the legs. This
+method is used when walking and turning to update the model of the robot
+for the next step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>leg_angles: NDArray</strong></dt><dd><p>A 6x3 numpy array of each leg’s coax, femur, and tibia servo angles.</p>
+</dd>
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>leg_model: NDArray</dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.leg.legPos" title="hexapod.leg.legPos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">legPos</span></code></a></dt><dd><p>Finds the positions for the leg segments.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.leg.legPos">
+<span class="sig-prename descclassname"><span class="pre">hexapod.leg.</span></span><span class="sig-name descname"><span class="pre">legPos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coax_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">femur_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tibia_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">26.34</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">femur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">76.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tibia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">88.32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.leg.legPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the positions for the leg segments.</p>
+<p>Takes the angles of all of the leg servos, the leg dimensions, and the
+model of the body to find the locations of each segment of a leg.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>coax_angle: float</strong></dt><dd><p>The angle of the coax servo or the servo directly attached to the body.</p>
+</dd>
+<dt><strong>femur_angle: float</strong></dt><dd><p>The angle of the femur servo or the servo that moves the knee.</p>
+</dd>
+<dt><strong>tibia_angle: float</strong></dt><dd><p>The angle of the tibia servo or the servo that moves the foot.</p>
+</dd>
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_num: int</strong></dt><dd><p>The number of the leg. leg 0 is the front right leg and each
+successive leg is clockwise looking down at the hexapod.</p>
+</dd>
+<dt><strong>coax: float, defualt=26.34</strong></dt><dd><p>The length of the coax segment in millimeters or the segment from the
+body attachment point to the begining of the femur.</p>
+</dd>
+<dt><strong>femur: float, default=76.2</strong></dt><dd><p>The length of the femur segment in millimeters or the segment from the
+begnining of the femur to the start of the tibia.</p>
+</dd>
+<dt><strong>tibia: float, default=88.32</strong></dt><dd><p>The length of the tibia segment in millimeters or the semgne from the
+start of the tibia to the foot of the leg.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>leg_positions: NDArray</dt><dd><p>The global positions of the body attachment point, the coax end point,
+the femur end point, and the tibia end point or foot of the leg. This
+is a 1x4 numpy array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.leg.legModel" title="hexapod.leg.legModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">legModel</span></code></a></dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The default leg segment lengths are from the CAD model I initially made.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.leg.recalculateLegAngles">
+<span class="sig-prename descclassname"><span class="pre">hexapod.leg.</span></span><span class="sig-name descname"><span class="pre">recalculateLegAngles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feet_positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.leg.recalculateLegAngles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+<p>Finds the coax, femur, and tibia servo angles of each leg based on the
+location of each leg’s foot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feet_positions: NDArray</strong></dt><dd><p>A 6x3 numpy array of each leg’s end position in x, y, z.</p>
+</dd>
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>leg_angles: NDArray</dt><dd><p>A 6x3 numpy array of each leg’s coax, femur, and tibia servo angles.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.leg.legAngle" title="hexapod.leg.legAngle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">legAngle</span></code></a></dt><dd><p>Finds the angles for the coax, femur, and tibia leg segments.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.leg.startLegPos">
+<span class="sig-prename descclassname"><span class="pre">hexapod.leg.</span></span><span class="sig-name descname"><span class="pre">startLegPos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">180</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.leg.startLegPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the neutral position of the hexapod.</p>
+<p>Create the starting angles of the legs on the hexapod based on the
+standing radius on the ground and height off the ground.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>start_radius: float, default=180</strong></dt><dd><p>The radius in millimeters that the feet make with the ground when
+equally spaced around the hexapod</p>
+</dd>
+<dt><strong>start_height: float, default=60</strong></dt><dd><p>The distance off the ground from the top of the legs to the bottom
+in millimeters.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>start_leg: NDArray</dt><dd><p>The 6x3 numpy array of servo angles for the neutral position of the
+hexapod</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">recalculateAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod.move">
+<span id="hexapod-move-module"></span><h2>hexapod.move module<a class="headerlink" href="#module-hexapod.move" title="Permalink to this headline">¶</a></h2>
+<p>Functions to calculate linear and angular movement for the hexapod.</p>
+<p>These are a collection of functions to find how the hexapod will take steps to
+move linearlly in any direction aor to turn itself in the x-y plane about the
+z axis.</p>
+<section id="id3">
+<h3>Functions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>stepForward:</dt><dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
+</dd>
+<dt>stepTurnFoot:</dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
+</dd>
+<dt>stepTurn:</dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
+</dd>
+<dt>walk:</dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
+</dd>
+<dt>turn:</dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+</dd>
+<dt>emgToWalk:</dt><dd><p>Walks a dynamic distance based a normalized EMG input.</p>
+</dd>
+<dt>resetWalkStance:</dt><dd><p>Completes the final step in walking to a neutral stance.</p>
+</dd>
+<dt>emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
+</dd>
+<dt>resetTurnStance:</dt><dd><p>Completes the final step in turning to a neutral stance.</p>
+</dd>
+<dt>switchMode:</dt><dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
+</dd>
+<dt>pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.emgToTurn">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">emgToTurn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.emgToTurn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
+<p>Takes two forearm EMG signals and turns an angle determined by how large
+the difference between the two EMG signals are. The angle to turn is
+determined by a percentage of the <cite>max_turn_angle</cite> scaled by the difference
+in EMG signals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>right_foot: bool</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+<dt><strong>previous_turn_angle: float</strong></dt><dd><p>The angle the hexapod turned the last time this function was called.</p>
+</dd>
+<dt><strong>max_turn_angle: float, default=15</strong></dt><dd><p>The angle that the EMG difference scales to. The higher the
+difference, the closer to the <cite>max_turn_angle</cite> the hexapod will turn.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>[leg_model, right_foot, previous_turn_angle, turn_positions]:</dt><dd><p>Tuple[NDArray, bool, float, NDArray]
+The updated input parameters for the next time the function is run.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.turn" title="hexapod.move.turn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">turn</span></code></a></dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+</dd>
+<dt><a class="reference internal" href="#hexapod.move.resetTurnStance" title="hexapod.move.resetTurnStance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resetTurnStance</span></code></a></dt><dd><p>Completes the final step in turning to a neutral stance.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.recalculateLegAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>When the difference in EMG is positive, the hexapod turns left. When it is
+negative, it turns right. The higher the <cite>max_turn_angle</cite> parameter is,
+the farther a change in EMG will turn the hexapod.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.emgToWalk">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">emgToWalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.emgToWalk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walks a dynamic distance based a normalized EMG input.</p>
+<p>Takes two forearm EMG signals and walks forward a distance determined
+by how large the difference between the two EMG signals are. The distance
+to move is determined by a percentage of the <cite>max_step_size</cite> scaled by the
+difference in EMG signals.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>right_foot: bool</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+<dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked the last time this function was called.</p>
+</dd>
+<dt><strong>max_distance: float, default=30</strong></dt><dd><p>The distance that the EMG difference scales to. The higher the
+difference, the closer to the <cite>max_distance</cite> the hexapod will walk.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt>[leg_model, right_foot, previous_step, walk_positions]: Tuple[NDArray,</dt><dd><blockquote>
+<div><p>bool, float,
+NDArray]</p>
+</div></blockquote>
+<p>The updated input parameters for the next time the function is run.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.walk" title="hexapod.move.walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walk</span></code></a></dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
+</dd>
+<dt><a class="reference internal" href="#hexapod.move.resetWalkStance" title="hexapod.move.resetWalkStance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resetWalkStance</span></code></a></dt><dd><p>Completes the final step in walking to a neutral stance.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.recalculateLegAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>When the difference in EMG is positive, the hexapod walks forwards. When it
+is negative, it walks backwards. The higher the <cite>max_distance</cite> parameter
+is, the farther a change in EMG will move the hexapod.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.resetTurnStance">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">resetTurnStance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.resetTurnStance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Completes the final step in turning to a neutral stance.</p>
+<p>Takes the final step of the turn cycle by repeating the previous step
+with the opposite legs as the last step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>right_foot: bool</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+<dt><strong>previous_turn_angle: float</strong></dt><dd><p>The angle the hexapod turned the last time this function was called.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>[leg_model, right_foot, turn_positions]: Tuple[NDArray, bool, NDArray]</dt><dd><p>The updated <cite>leg_model</cite>, <cite>right_foot</cite>, and <cite>turn_positions</cite> parameters.
+The first two allow the hexapod to switch to the walking phase with an
+updated model and smoothly move the correct set of legs on the next
+step, while the <cite>turn_positions</cite> numpy array is used to take the final
+step when the positions are converted to servo angles.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.turn" title="hexapod.move.turn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">turn</span></code></a></dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.recalculateLegAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function is only run when switching to the walking phase of movement
+The hexapod will also reset its stance during the turn if the user does not
+contract at all.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.resetWalkStance">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">resetWalkStance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.resetWalkStance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Completes the final step in walking to a neutral stance.</p>
+<p>Takes the final step of the walk cycle by repeating the previous step
+with the opposite legs as the last step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>body_model: NDArray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>right_foot: bool</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+<dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked the last time this function was called.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>[leg_model, right_foot, walk_positions]: Tuple[NDArray, bool, NDArray]</dt><dd><p>The updated <cite>leg_model</cite>, <cite>right_foot</cite>, and <cite>walk_positions</cite> parameters.
+The first two allow the hexapod to switch to the turning phase with an
+updated model and smoothly move the correct set of legs on the next
+step, while the <cite>walk_positions</cite> numpy array is used to take the final
+step when the positions are converted to servo angles.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.walk" title="hexapod.move.walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walk</span></code></a></dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.recalculateLegAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function is only run when switching to the turning phase of movement.
+The hexapod will also reset its stance during the walk if the user does not
+contract at all.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.stepForward">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">stepForward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">90</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.stepForward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
+<p>Finds the relative positions to move the hexapod’s six legs to when taking
+a step. The resolution of each submovement is determined by the
+resolution of the upwards submovements and the steps taken are parabolic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>step_angle: float, default=90</strong></dt><dd><p>The direction the step is taken in in degrees. 90 degrees is forward.</p>
+</dd>
+<dt><strong>distance: float, default=30</strong></dt><dd><p>How far forward the step will be in millimeters.</p>
+</dd>
+<dt><strong>step_height: float, default=15</strong></dt><dd><p>How high the step will be in millimeters.</p>
+</dd>
+<dt><strong>right_foot: bool, default=True</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>feet: NDArray</dt><dd><p>The 6x3 numpy array that holds the set of relative positions changes
+to take from where the feet were when taking each part of the step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The number of submovements is determined by the resolution in the z
+direction. If you want fewer submovements, raise the <cite>z_resolution</cite>
+number that is hardcoded in the function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.stepTurn">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">stepTurn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feet_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.stepTurn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcluate the positions of each foot when turning about an angle.</p>
+<p>Finds the absolute positions of each leg of the hexapod using the
+stepTurnFoot function to find the relative additions to the curent
+feet positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feet_pos: NDArray</strong></dt><dd><p>The 6x3 numpy array of the x, y, z, positions of each foot of the
+hexapod. This array can be found the leg.getFeetPos funciton.</p>
+</dd>
+<dt><strong>step_angle: float, default=15</strong></dt><dd><p>The angle to move make the step to. A positive angle is a left step.</p>
+</dd>
+<dt><strong>step_height: float, default=15</strong></dt><dd><p>How high the step will be in millimeters.</p>
+</dd>
+<dt><strong>right_foot: bool, default=True</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>previous_foot: NDArray</dt><dd><p>The 6x3 numpy array that holds the set of positions to take during the
+turning step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.stepTurnFoot" title="hexapod.move.stepTurnFoot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stepTurnFoot</span></code></a></dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.getFeetPos</span></code></dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function outputs the absolute positions of the feet instead of the
+relative positions to add to the feet’s current positions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.stepTurnFoot">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">stepTurnFoot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foot_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">foot_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">foot_z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.stepTurnFoot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
+<p>Finds the relative position changes as submovements for one foot in turning
+the hexapod. This function is used in conjunction with the stepTurn
+function to turn the hexapod.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>foot_x: float</strong></dt><dd><p>The x value of the leg’s end position.</p>
+</dd>
+<dt><strong>foot_y: float</strong></dt><dd><p>The y value of the leg’s end position.</p>
+</dd>
+<dt><strong>foot_z: float</strong></dt><dd><p>The z value of the leg’s end position.</p>
+</dd>
+<dt><strong>step_angle: float, default=15</strong></dt><dd><p>The angle to move make the step to. A positive angle is a left step.</p>
+</dd>
+<dt><strong>step_height: float, default=15</strong></dt><dd><p>How high the step will be in millimeters.</p>
+</dd>
+<dt><strong>right_foot: bool, default=True</strong></dt><dd><p>An indicator if the foot is a part of the right or left set of legs
+taking the step. The “right” set are legs 0, 2, and 4 and the “left”
+are 1, 3, and 5.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>NDArray</dt><dd><p>The 1x3 numpy array that holds the absolute position of the given foot
+when taking the turning step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.stepTurn" title="hexapod.move.stepTurn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stepTurn</span></code></a></dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function finds the absolute position changes for one foot instead
+of all of them like in the stepForward function. It is also an absolute
+position and not a relative position change.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.switchMode">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">switchMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#hexapod.move.switchMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
+<p>Checks if both EMG signals are above a threshold value to indicate if the
+hexapod should switch movement modes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>threshold: float</strong></dt><dd><p>The value above which both EMG signals need to be to cause a mode
+switch. This value should be between 0 and 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if both EMG signals are above the threshold input.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pollEMG</span></code></dt><dd><p>Get EMG signals and normalize them</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function is called after every EMG based step to see if the person is
+cocontracting hard enough to switch modes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.turn">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">turn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+<p>Takes a set angle to turn and breaks that movement up into steps based
+on a max turn angle inside the function. Each step is then input into the
+stepTurn function with the set of legs that takes the step alternating.
+The final step puts the hexapod back in its neutral position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>turn_angle: float, default=60</strong></dt><dd><p>The angle to turn to. A positive angle if a left turn.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>turn_positions: NDArray</dt><dd><p>An nx6x3 array of the absolute foot positions to take during all of the
+submovements during the turn. These positions are used to calculate
+the servo angles to take in the turn.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If <cite>turn_angle</cite> is zero.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.recalculateLegAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.walk">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a series of feet positions to use when walking in a direction.</p>
+<p>Takes a set distance to move and breaks that movement up into steps based
+on a max step size inside the function. Each step is then input into the
+stepForward function with the set of legs that takes the step alternating.
+The final step puts the hexapod back in its neutral position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>leg_model: NDArray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>distance: float, default=30</strong></dt><dd><p>The linear distance to move in millimeters.</p>
+</dd>
+<dt><strong>angle: float, default=90</strong></dt><dd><p>The direction the step is taken in in degrees. 90 degrees is forward.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>walk_positions: NDArray</dt><dd><p>An nx6x3 array of the absolute foot positions to take during all of the
+submovements during the walk. These positions are used to calculate
+the servo angles to take in the walk.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If <cite>distance</cite> is zero or negative.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">leg.recalculateLegAngles</span></code></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function does not allow for a negative distance to walk. If the user
+wants the hexapod to walk backwards, the angle should be set to -90
+degrees.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod.piToPi">
+<span id="hexapod-pitopi-module"></span><h2>hexapod.piToPi module<a class="headerlink" href="#module-hexapod.piToPi" title="Permalink to this headline">¶</a></h2>
+<p>Scripts used in the communications with and between Raspberry Pis.</p>
+<section id="id4">
+<h3>Functions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>recieveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>This module will not function unless it is used on a Raspberry Pi or other
+board that can use the board library from Adafruit.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.piToPi.recieveEMG">
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">recieveEMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.recieveEMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+<p>Read in EMG values on the first two ADC channels of the Raspberry Pi
+zero through the MCP3008. This is done through a TCP IP socket.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>[fcr_emg, edc_emg]: Tuple[float, float]</dt><dd><p>The normalized forearm EMG values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod.rotation">
+<span id="hexapod-rotation-module"></span><h2>hexapod.rotation module<a class="headerlink" href="#module-hexapod.rotation" title="Permalink to this headline">¶</a></h2>
+<p>Functions to return rotation matricies.</p>
+<p>These are the functions to find the rotation of any point around an axis by an
+angle in degrees.</p>
+<section id="id5">
+<h3>Functions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>xRot:</dt><dd><p>Return the rotation matrix for a rotation about the x axis.</p>
+</dd>
+<dt>yRot:</dt><dd><p>Return the rotation matrix for a rotation about the y axis.</p>
+</dd>
+<dt>zRot:</dt><dd><p>Return the rotation matrix for a rotation about the z axis.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.rotation.xRot">
+<span class="sig-prename descclassname"><span class="pre">hexapod.rotation.</span></span><span class="sig-name descname"><span class="pre">xRot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.rotation.xRot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the rotation matrix for a rotation about the x axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>theta: float</strong></dt><dd><p>An angle in degrees to rotate about the x axis.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>mat: NDArray</dt><dd><p>3x3 rotation matrix array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The input angle is converted to radians before being used.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.rotation.yRot">
+<span class="sig-prename descclassname"><span class="pre">hexapod.rotation.</span></span><span class="sig-name descname"><span class="pre">yRot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.rotation.yRot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the rotation matrix for a rotation about the y axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>theta: float</strong></dt><dd><p>An angle in degrees to rotate about the y axis.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>mat: NDArray</dt><dd><p>3x3 rotation matrix array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The input angle is converted to radians before being used.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.rotation.zRot">
+<span class="sig-prename descclassname"><span class="pre">hexapod.rotation.</span></span><span class="sig-name descname"><span class="pre">zRot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.rotation.zRot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the rotation matrix for a rotation about the z axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>theta: float</strong></dt><dd><p>An angle in degrees to rotate about the z axis.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>mat: NDArray</dt><dd><p>3x3 rotation matrix array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The input angle is converted to radians before being used.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod.ssc32uDriver">
+<span id="hexapod-ssc32udriver-module"></span><h2>hexapod.ssc32uDriver module<a class="headerlink" href="#module-hexapod.ssc32uDriver" title="Permalink to this headline">¶</a></h2>
+<p>Driver functions to communicate with the Lynxmotion SSC-32U.</p>
+<p>Functions to communicate with the Lynxmotion SSC-32U to drive the 18 servos of
+the hexapod. These functions format commands based on the user manual for the
+controller board.</p>
+<section id="id6">
+<h3>Functions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>angleToPW:</dt><dd><p>Convert an angle to the pulse width to command that angle.</p>
+</dd>
+<dt>anglesToSerial:</dt><dd><p>Takes the hexapods servo angles and converts them to a serial command.</p>
+</dd>
+<dt>connect:</dt><dd><p>Connect to the input COM port.</p>
+</dd>
+<dt>disconnect:</dt><dd><p>Disconnects from the serial port.</p>
+</dd>
+<dt>sendData:</dt><dd><p>Sends the commands for the servos to the Lynxmotiohn SSC-32U.</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h3>Notes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>As of right now, this product may have been discontinued.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.ssc32uDriver.angleToPW">
+<span class="sig-prename descclassname"><span class="pre">hexapod.ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">angleToPW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#hexapod.ssc32uDriver.angleToPW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an angle to the pulse width to command that angle.</p>
+<p>Takes an input <cite>angle</cite> in degrees and converts it to the pulse width to
+command that angle in microsecods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>angle: float</strong></dt><dd><p>An angle in degrees for the servo to move to.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>The pulse width in microseconds that represents the angle.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The pulse width is between 500 microseconds and 2500 microseconds for an
+angle between 0 and 180 degrees.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.ssc32uDriver.anglesToSerial">
+<span class="sig-prename descclassname"><span class="pre">hexapod.ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">anglesToSerial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#hexapod.ssc32uDriver.anglesToSerial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the hexapods servo angles and converts them to a serial command.</p>
+<p>Converts an array of 18 servo angles to the formatted serial command for
+the Lynxmotiohn SSC-32U. The servo angles need to be in the format made in
+the leg module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>angles: NDArray</strong></dt><dd><p>6x3 numpy array of the 18 servo angles of the hexapod’s legs.</p>
+</dd>
+<dt><strong>speed: int, optional</strong></dt><dd><p>How fast the servos move in microseconds/second (the default is None).
+A speed of 1000 takes 1 second to go 90 degrees.</p>
+</dd>
+<dt><strong>time: int, optional</strong></dt><dd><p>The maximum amount of time in milliseconds to move (the default is
+None).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>serial_string: bytes</dt><dd><p>The formatted message for all 18 servos together.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Exception</dt><dd><p>If the input numpy array is not a 6x3 array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.ssc32uDriver.angleToPW" title="hexapod.ssc32uDriver.angleToPW"><code class="xref py py-obj docutils literal notranslate"><span class="pre">angleToPW</span></code></a></dt><dd><p>Convert an angle to the pulse width to command that angle.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The message is converted to bytes in the return statement.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.ssc32uDriver.connect">
+<span class="sig-prename descclassname"><span class="pre">hexapod.ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">com</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#hexapod.ssc32uDriver.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect to the input COM port.</p>
+<p>Open a serial port with the Lynxmotiohn SSC-32U on the desired COM port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>com: str</strong></dt><dd><p>COM port to connect to as a string.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ser: Serial Port</dt><dd><p>The formatted serial port from pyserial.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.ssc32uDriver.disconnect" title="hexapod.ssc32uDriver.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.ssc32uDriver.disconnect">
+<span class="sig-prename descclassname"><span class="pre">hexapod.ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#hexapod.ssc32uDriver.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnects from the serial port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ser: Serial Port</strong></dt><dd><p>The pyserial Serial Port connected to by connect.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Returns True if the serial port closed and False if not.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.ssc32uDriver.connect" title="hexapod.ssc32uDriver.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.ssc32uDriver.sendData">
+<span class="sig-prename descclassname"><span class="pre">hexapod.ssc32uDriver.</span></span><span class="sig-name descname"><span class="pre">sendData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serial_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#hexapod.ssc32uDriver.sendData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the commands for the servos to the Lynxmotiohn SSC-32U.</p>
+<p>Takes the input byte string and writes it accross the input serial port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ser: Serial Port</strong></dt><dd><p>The pyserial serial port made in the connect function</p>
+</dd>
+<dt><strong>serial_string: bytes</strong></dt><dd><p>The message to move the servos with the Lynxmotiohn SSC-32U.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Always returns true at the end of the function.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.ssc32uDriver.connect" title="hexapod.ssc32uDriver.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="#hexapod.ssc32uDriver.anglesToSerial" title="hexapod.ssc32uDriver.anglesToSerial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anglesToSerial</span></code></a></dt><dd><p>Takes the hexapods servo angles and converts them to a serial command.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="module-hexapod">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hexapod" title="Permalink to this headline">¶</a></h2>
+<p>A library of funtions to control an 18 DoF hexapod</p>
+<p>This library contains code to create a computational model of the body and
+legs of the hexapod so that those models can control a real hexapod’s 18
+servos. The library also has a driver to convert the model angles to 18 servo
+commands. The hexapod can run automatically walking and turning based on code
+or can take in two EMG streams to direct the amount to walk and turn.</p>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>body:</dt><dd><p>Functions that relate to creating the model of the hexapod body.</p>
+</dd>
+<dt>controller:</dt><dd><p>Scripts for controlling the hexapod.</p>
+</dd>
+<dt>leg:</dt><dd><p>Functions to generate, change, and use the model of the hexapod’s legs.</p>
+</dd>
+<dt>move:</dt><dd><p>Functions to calculate linear and angular movement for the hexapod.</p>
+</dd>
+<dt>piTopi:</dt><dd><p>Scripts used in the communications with and between Raspberry Pis.</p>
+</dd>
+<dt>rotation:</dt><dd><p>Functions to return rotation matricies.</p>
+</dd>
+<dt>ssc32uDriver:</dt><dd><p>Driver functions to communicate with the Lynxmotion SSC-32U.</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Functions<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>body.bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
+</dd>
+<dt>controller.controller:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+</dd>
+<dt>controller.sit:</dt><dd><p>Tells the Hexapod to sit with its body on the ground.</p>
+</dd>
+<dt>controller.stand:</dt><dd><p>Tells the hexapod to stand in the neutral position.</p>
+</dd>
+<dt>controller.walkCycle:</dt><dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
+</dd>
+<dt>controller.sendPositions:</dt><dd><p>Send each position in a set to the servo controller.</p>
+</dd>
+<dt>leg.legPos:</dt><dd><p>Finds the positions for the leg segments.</p>
+</dd>
+<dt>leg.legAngle:</dt><dd><p>Finds the angles for the coax, femur, and tibia leg segments.</p>
+</dd>
+<dt>leg.recalculateLegAngles:</dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+<dt>leg.startLegPos:</dt><dd><p>Find the neutral position of the hexapod.</p>
+</dd>
+<dt>leg.legModel:</dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
+</dd>
+<dt>leg.getFeetPos:</dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
+</dd>
+<dt>move.stepForward:</dt><dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
+</dd>
+<dt>move.stepTurnFoot:</dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
+</dd>
+<dt>move.stepTurn:</dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
+</dd>
+<dt>move.walk</dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
+</dd>
+<dt>move.turn</dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+</dd>
+<dt>move.emgToWalk:</dt><dd><p>Walks a dynamic distance based a normalized EMG input.</p>
+</dd>
+<dt>move.resetWalkStance:</dt><dd><p>Completes the final step in walking to a neutral stance.</p>
+</dd>
+<dt>move.emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
+</dd>
+<dt>move.resetTurnStance:</dt><dd><p>Completes the final step in turning to a neutral stance.</p>
+</dd>
+<dt>move.switchMode:</dt><dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
+</dd>
+<dt>move.pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
+</dd>
+<dt>piTopi.recieveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+</dd>
+<dt>rotation.xRot:</dt><dd><p>Return the rotation matrix for a rotation about the x axis.</p>
+</dd>
+<dt>rotation.yRot:</dt><dd><p>Return the rotation matrix for a rotation about the y axis.</p>
+</dd>
+<dt>rotation.zRot:</dt><dd><p>Return the rotation matrix for a rotation about the z axis.</p>
+</dd>
+<dt>ssc32uDriver.angleToPW:</dt><dd><p>Convert an angle to the pulse width to command that angle.</p>
+</dd>
+<dt>ssc32uDriver.anglesToSerial:</dt><dd><p>Takes the hexapods servo angles and converts them to a serial command.</p>
+</dd>
+<dt>ssc32uDriver.connect:</dt><dd><p>Connect to the input COM port.</p>
+</dd>
+<dt>ssc32uDriver.disconnect:</dt><dd><p>Disconnects from the serial port.</p>
+</dd>
+<dt>ssc32uDriver.sendData:</dt><dd><p>Sends the byte string command for the servos to the Lynxmotiohn SSC-32U.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hexapod</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">hexapod</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">hexapod package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">hexapod</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">hexapod</a></li>
+      <li>Next: <a href="setup.html" title="next chapter">setup module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Nabeel Chowdhury.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/hexapod.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
