@@ -72,9 +72,7 @@ move.resetTurnStance:
 move.switchMode:
     Switches walking modesIf the user is cocontracting their muscles.
 move.pollEMG: Get EMG signals and normalize them.
-piTopi.recieveEMG:
-    Read in EMG values on the first two ADC channels of the Raspberry Pi
-    Zero W through the MCP300.
+piTopi.recieveEMG: Pull EMG from the Raspberry Pi Zero W
 rotation.xRot: Return the rotation matrix for a rotation about the x axis.
 rotation.yRot: Return the rotation matrix for a rotation about the y axis.
 rotation.zRot: Return the rotation matrix for a rotation about the z axis.
