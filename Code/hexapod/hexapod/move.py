@@ -5,22 +5,30 @@ These are a collection of functions to find how the hexapod will take steps to
 move linearlly in any direction aor to turn itself in the x-y plane about the
 z axis.
 
-Functions:
+Functions
+---------
 stepForward:
     Calculate the x, y, z position updates to move in a step in a direction.
 stepTurnFoot:
-    Calculate the offset of a foot when turning the hexapod about an angle.
-stepTurn: Calcluate the positions of each foot when turning about an angle.
-walk: Creates a series of foot positions to use when walking in a direction.
+    Calculate the position of a foot when turning the hexapod about an angle.
+stepTurn:
+    Calcluate the positions of each foot when turning about an angle.
+walk:
+    Creates a series of feet positions to use when walking in a direction.
 turn:
-    Creates the series of foot positions to turn the hexapod about the z axis.
-emgToWalk: Walks a dynamic distance based a normalized EMG input.
-resetWalkStance: Completes the final step in walking to a neutral stance.
-emgToTurn: Turns a dynamic angle based on a normalized EMG input.
-resetTurnStance: Completes the final step in turning to a neutral stance.
+    Creates the series of feet positions to turn the hexapod about the z axis.
+emgToWalk:
+    Walks a dynamic distance based a normalized EMG input.
+resetWalkStance:
+    Completes the final step in walking to a neutral stance.
+emgToTurn:
+    Turns a dynamic angle based on a normalized EMG input.
+resetTurnStance:
+    Completes the final step in turning to a neutral stance.
 switchMode:
     Switches walking modes if the user is cocontracting their muscles.
-pollEMG: Get EMG signals and normalize them.
+pollEMG:
+    Get EMG signals and normalize them.
 """
 from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np
@@ -33,8 +41,36 @@ def stepForward(step_angle: float = 90, distance: float = 30,
                 step_height: float = 15, right_foot: bool = True) -> NDArray:
     """
     Calculate the x, y, z position updates to move in a step in a direction.
+
+    Finds the relative positions to move the hexapod's six legs to when taking
+    a step. The resolution of each submovement is determined by the
+    resolution of the upwards submovements and the steps taken are parabolic.
+
+    Parameters
+    ----------
+    step_angle: float, default=90
+        The direction the step is taken in in degrees. 90 degrees is forward.
+    distance: float, default=30
+        How far forward the step will be in millimeters.
+    step_height: float, default=15
+        How high the step will be in millimeters.
+    right_foot: bool, default=True
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+
+    Returns
+    -------
+    feet: NDArray
+        The 6x3 numpy array that holds the set of relative positions changes
+        to take from where the feet were when taking each part of the step.
+
+    Notes
+    -----
+    The number of submovements is determined by the resolution in the z
+    direction. If you want fewer submovements, raise the `z_resolution`
+    number that is hardcoded in the function.
     """
-    z_resolution = 1  # the forward distance of each sub step.
+    z_resolution = 1  # the size in mm of the upwards submovements.
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4
                   for i in np.arange(-step_height, step_height + z_resolution,
@@ -61,9 +97,47 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
                  step_angle: float = 15, step_height: float = 15,
                  right_foot: bool = True) -> NDArray:
     """
-    Calculate the offset of a foot when turning the hexapod about an angle.
+    Calculate the position of a foot when turning the hexapod about an angle.
+
+    Finds the relative position changes as submovements for one foot in turning
+    the hexapod. This function is used in conjunction with the stepTurn
+    function to turn the hexapod.
+
+    Parameters
+    ----------
+    foot_x: float
+        The x value of the leg's end position.
+    foot_y: float
+        The y value of the leg's end position.
+    foot_z: float
+        The z value of the leg's end position.
+    step_angle: float, default=15
+        The angle to move make the step to. A positive angle is a left step.
+    step_height: float, default=15
+        How high the step will be in millimeters.
+    right_foot: bool, default=True
+        An indicator if the foot is a part of the right or left set of legs
+        taking the step. The "right" set are legs 0, 2, and 4 and the "left"
+        are 1, 3, and 5.
+
+    Returns
+    -------
+    NDArray
+        The 1x3 numpy array that holds the absolute position of the given foot
+        when taking the turning step.
+
+    See Also
+    --------
+    stepTurn:
+        Calcluate the positions of each foot when turning about an angle.
+
+    Notes
+    -----
+    This function finds the absolute position changes for one foot instead
+    of all of them like in the stepForward function. It is also an absolute
+    position and not a relative position change.
     """
-    z_resolution = 1  # the forward distance of each sub step.
+    z_resolution = 1  # the size in mm of the upwards submovements.
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
 
@@ -95,6 +169,42 @@ def stepTurn(feet_pos: NDArray, step_angle: float = 15,
              step_height: float = 15, right_foot: bool = True) -> NDArray:
     """
     Calcluate the positions of each foot when turning about an angle.
+
+    Finds the absolute positions of each leg of the hexapod using the
+    stepTurnFoot function to find the relative additions to the curent
+    feet positions.
+
+    Parameters
+    ----------
+    feet_pos: NDArray
+        The 6x3 numpy array of the x, y, z, positions of each foot of the
+        hexapod. This array can be found the leg.getFeetPos funciton.
+    step_angle: float, default=15
+        The angle to move make the step to. A positive angle is a left step.
+    step_height: float, default=15
+        How high the step will be in millimeters.
+    right_foot: bool, default=True
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+
+    Returns
+    -------
+    previous_foot: NDArray
+        The 6x3 numpy array that holds the set of positions to take during the
+        turning step.
+
+    See Also
+    --------
+    stepTurnFoot:
+        Calculate the position of a foot when turning the hexapod about an
+        angle.
+    leg.getFeetPos:
+        Ouput the x, y, z position of the feet of the hexapod.
+
+    Notes
+    -----
+    This function outputs the absolute positions of the feet instead of the
+    relative positions to add to the feet's current positions.
     """
     for i in range(6):
         footstep = stepTurnFoot(foot_x=feet_pos[i, 0],
@@ -115,7 +225,45 @@ def stepTurn(feet_pos: NDArray, step_angle: float = 15,
 def walk(leg_model: NDArray, distance: float = 30,
          angle: float = 90) -> NDArray:
     """
-    Creates a series of foot positions to use when walking in a direction.
+    Creates a series of feet positions to use when walking in a direction.
+
+    Takes a set distance to move and breaks that movement up into steps based
+    on a max step size inside the function. Each step is then input into the
+    stepForward function with the set of legs that takes the step alternating.
+    The final step puts the hexapod back in its neutral position.
+
+    Parameters
+    ----------
+    leg_model: NDArray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    distance: float, default=30
+        The linear distance to move in millimeters.
+    angle: float, default=90
+        The direction the step is taken in in degrees. 90 degrees is forward.
+
+    Returns
+    -------
+    walk_positions: NDArray
+        An nx6x3 array of the absolute foot positions to take during all of the
+        submovements during the walk. These positions are used to calculate
+        the servo angles to take in the walk.
+
+    Raises
+    ------
+    ValueError
+        If `distance` is zero or negative.
+
+    See Also
+    --------
+    leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    This function does not allow for a negative distance to walk. If the user
+    wants the hexapod to walk backwards, the angle should be set to -90
+    degrees.
     """
     max_step_size = 30  # Maximum step distance
     # raise an error if the robot is not commanded to move a positive distance
@@ -221,7 +369,37 @@ def walk(leg_model: NDArray, distance: float = 30,
 
 def turn(leg_model: NDArray, turn_angle: float = 60) -> NDArray:
     """
-    Creates the series of foot positions to turn the hexapod about the z axis.
+    Creates the series of feet positions to turn the hexapod about the z axis.
+
+    Takes a set angle to turn and breaks that movement up into steps based
+    on a max turn angle inside the function. Each step is then input into the
+    stepTurn function with the set of legs that takes the step alternating.
+    The final step puts the hexapod back in its neutral position.
+
+    Parameters
+    ----------
+    leg_model: NDArray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    turn_angle: float, default=60
+        The angle to turn to. A positive angle if a left turn.
+
+    Returns
+    -------
+    turn_positions: NDArray
+        An nx6x3 array of the absolute foot positions to take during all of the
+        submovements during the turn. These positions are used to calculate
+        the servo angles to take in the turn.
+
+    Raises
+    ------
+    ValueError
+        If `turn_angle` is zero.
+
+    See Also
+    --------
+    leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
     """
     max_turn_angle = 15  # sets the maximum angle to turn by.
     # Raise an error is the robot is not commanded to move a non zero angle
@@ -328,6 +506,49 @@ def emgToWalk(body_model: NDArray, leg_model: NDArray, right_foot: bool,
                                                  NDArray]:
     """
     Walks a dynamic distance based a normalized EMG input.
+
+    Takes two forearm EMG signals and walks forward a distance determined
+    by how large the difference between the two EMG signals are. The distance
+    to move is determined by a percentage of the `max_step_size` scaled by the
+    difference in EMG signals.
+
+    Parameters
+    ----------
+    body_model: NDArray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: NDArray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_step: float
+        The distance the hexapod walked the last time this function was called.
+    max_distance: float, default=30
+        The distance that the EMG difference scales to. The higher the
+        difference, the closer to the `max_distance` the hexapod will walk.
+
+    Returns
+    -------
+    [leg_model, right_foot, previous_step, walk_positions]: Tuple[NDArray,
+                                                                  bool, float,
+                                                                  NDArray]
+        The updated input parameters for the next time the function is run.
+
+    See Also
+    --------
+    walk:
+        Creates a series of feet positions to use when walking in a direction.
+    resetWalkStance:
+        Completes the final step in walking to a neutral stance.
+    leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    When the difference in EMG is positive, the hexapod walks forwards. When it
+    is negative, it walks backwards. The higher the `max_distance` parameter
+    is, the farther a change in EMG will move the hexapod.
     """
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -348,7 +569,7 @@ def emgToWalk(body_model: NDArray, leg_model: NDArray, right_foot: bool,
     right_foot = not right_foot
     leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :],
                                               body_model), body_model)
-    return[leg_model, right_foot, previous_step, walk_positions]
+    return (leg_model, right_foot, previous_step, walk_positions)
 
 
 def resetWalkStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
@@ -358,6 +579,41 @@ def resetWalkStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
 
     Takes the final step of the walk cycle by repeating the previous step
     with the opposite legs as the last step.
+
+    Parameters
+    ----------
+    body_model: NDArray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: NDArray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_step: float
+        The distance the hexapod walked the last time this function was called.
+
+    Returns
+    -------
+    [leg_model, right_foot, walk_positions]: Tuple[NDArray, bool, NDArray]
+        The updated `leg_model`, `right_foot`, and `walk_positions` parameters.
+        The first two allow the hexapod to switch to the turning phase with an
+        updated model and smoothly move the correct set of legs on the next
+        step, while the `walk_positions` numpy array is used to take the final
+        step when the positions are converted to servo angles.
+
+    See Also
+    --------
+    walk:
+        Creates a series of feet positions to use when walking in a direction.
+    leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    This function is only run when switching to the turning phase of movement.
+    The hexapod will also reset its stance during the walk if the user does not
+    contract at all.
     """
     walk_positions = stepForward(step_angle=90, distance=previous_step,
                                  right_foot=right_foot)
@@ -369,7 +625,7 @@ def resetWalkStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
     leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :],
                                               body_model), body_model)
     right_foot = not right_foot
-    return[leg_model, right_foot, walk_positions]
+    return (leg_model, right_foot, walk_positions)
 
 
 def emgToTurn(body_model: NDArray, leg_model: NDArray, right_foot: bool,
@@ -378,6 +634,49 @@ def emgToTurn(body_model: NDArray, leg_model: NDArray, right_foot: bool,
                                                    NDArray]:
     """
     Turns a dynamic angle based on a normalized EMG input.
+
+    Takes two forearm EMG signals and turns an angle determined by how large
+    the difference between the two EMG signals are. The angle to turn is
+    determined by a percentage of the `max_turn_angle` scaled by the difference
+    in EMG signals.
+
+    Parameters
+    ----------
+    body_model: NDArray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: NDArray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_turn_angle: float
+        The angle the hexapod turned the last time this function was called.
+    max_turn_angle: float, default=15
+        The angle that the EMG difference scales to. The higher the
+        difference, the closer to the `max_turn_angle` the hexapod will turn.
+
+     Returns
+    -------
+    [leg_model, right_foot, previous_turn_angle, turn_positions]:
+        Tuple[NDArray, bool, float, NDArray]
+        The updated input parameters for the next time the function is run.
+
+    See Also
+    --------
+    turn:
+        Creates the series of feet positions to turn the hexapod about the z
+        axis.
+    resetTurnStance:
+        Completes the final step in turning to a neutral stance.
+    leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    When the difference in EMG is positive, the hexapod turns left. When it is
+    negative, it turns right. The higher the `max_turn_angle` parameter is,
+    the farther a change in EMG will turn the hexapod.
     """
     # call a function to poll for forearm emg values from the raspberry pi zero
     [fcr_emg, edc_emg] = pollEMG()
@@ -398,7 +697,7 @@ def emgToTurn(body_model: NDArray, leg_model: NDArray, right_foot: bool,
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :],
                                               body_model), body_model)
 
-    return [leg_model, right_foot, previous_turn_angle, turn_positions]
+    return (leg_model, right_foot, previous_turn_angle, turn_positions)
 
 
 def resetTurnStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
@@ -409,6 +708,42 @@ def resetTurnStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
 
     Takes the final step of the turn cycle by repeating the previous step
     with the opposite legs as the last step.
+
+    Parameters
+    ----------
+    body_model: NDArray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: NDArray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_turn_angle: float
+        The angle the hexapod turned the last time this function was called.
+
+    Returns
+    -------
+    [leg_model, right_foot, turn_positions]: Tuple[NDArray, bool, NDArray]
+        The updated `leg_model`, `right_foot`, and `turn_positions` parameters.
+        The first two allow the hexapod to switch to the walking phase with an
+        updated model and smoothly move the correct set of legs on the next
+        step, while the `turn_positions` numpy array is used to take the final
+        step when the positions are converted to servo angles.
+
+    See Also
+    --------
+    turn:
+        Creates the series of feet positions to turn the hexapod about the z
+        axis.
+    leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    This function is only run when switching to the walking phase of movement
+    The hexapod will also reset its stance during the turn if the user does not
+    contract at all.
     """
     feet_positions = getFeetPos(leg_model)
 
@@ -420,12 +755,36 @@ def resetTurnStance(body_model: NDArray, leg_model: NDArray, right_foot: bool,
     leg_model = legModel(recalculateLegAngles(turn_positions[-1, :, :],
                                               body_model), body_model)
 
-    return [leg_model, right_foot, turn_positions]
+    return (leg_model, right_foot, turn_positions)
 
 
 def switchMode(threshold: float) -> bool:
     """
     Switches walking modes if the user is cocontracting their muscles.
+
+    Checks if both EMG signals are above a threshold value to indicate if the
+    hexapod should switch movement modes.
+
+    Parameters
+    ----------
+    threshold: float
+        The value above which both EMG signals need to be to cause a mode
+        switch. This value should be between 0 and 1.
+
+    Returns
+    -------
+    bool
+        True if both EMG signals are above the threshold input.
+
+    See Also
+    --------
+    pollEMG:
+        Get EMG signals and normalize them
+    
+    Notes
+    -----
+    This function is called after every EMG based step to see if the person is
+    cocontracting hard enough to switch modes.
     """
     [fcr_emg, edc_emg] = pollEMG()
 
@@ -433,7 +792,27 @@ def switchMode(threshold: float) -> bool:
 
 
 def pollEMG() -> Tuple[float, float]:
-    """Get EMG signals and normalize them"""
+    """
+    Get EMG signals and normalize them
+
+    Queries the Raspberry pi Zero W for recorded forearm EMG values and then
+    scales them from 0 to 1.
+
+    Returns
+    -------
+    [fcr_emg, edc_emg]: Tuple[float, float]
+        The two forearm EMG signals
+
+    See Also
+    --------
+    piToPi.recieveEMG():
+        Pull EMG from the Raspberry Pi Zero W
+
+    Notes
+    -----
+    This code just scales the EMG values to set it apart from the code on the
+    Raspberry Pi Zero W that records the EMG.
+    """
     fcr_emg = 1
     edc_emg = 1
 
@@ -443,4 +822,4 @@ def pollEMG() -> Tuple[float, float]:
     edc_emg = min(edc_emg, 1.0)
     edc_emg = max(edc_emg, 0.0)
 
-    return [fcr_emg, edc_emg]
+    return (fcr_emg, edc_emg)
