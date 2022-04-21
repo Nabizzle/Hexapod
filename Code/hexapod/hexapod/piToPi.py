@@ -21,7 +21,7 @@ from typing import Tuple
 def recieveEMG() -> Tuple[float, float]:
     """
     Pull EMG from the Raspberry Pi Zero W
-    
+
     Read in EMG values on the first two ADC channels of the Raspberry Pi
     zero through the MCP3008. This is done through a TCP IP socket.
 

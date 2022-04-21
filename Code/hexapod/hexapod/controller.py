@@ -40,16 +40,16 @@ def controller(mode: bool) -> None:
         This parameter determines if the hexapod is walking or turning. `mode`
         equalling 1 is walking and 0 is turning.
 
-    Notes
-    -----
-    This function has the serial port to communicate to and the threshold
-    of cocontraction to switch modes hardcoded.
-
     See Also
     --------
     move.switchMode:
         Sends a boolean based on EMG to indicate when to change movement
         modes.
+
+    Notes
+    -----
+    This function has the serial port to communicate to and the threshold
+    of cocontraction to switch modes hardcoded.
     """
     port = connect('COM1')  # connect to the servo controller
     # setup the starting robot positions
@@ -119,15 +119,15 @@ def stand() -> None:
     Recreates the neutral hexapod positions that occur at the beginning
     of the controller function.
 
-    Notes
-    -----
-    This function assumes that there is already a connection to the serial
-    port for the Lynxmotion SSC32U.
-
     See Also
     --------
     controller:
         Controls the hexapod to walk or turn based on EMG.
+
+    Notes
+    -----
+    This function assumes that there is already a connection to the serial
+    port for the Lynxmotion SSC32U.
     """
     # controls the hexapod to walk or turn and send the commands
     port = connect('COM4')  # connect to the servo controller

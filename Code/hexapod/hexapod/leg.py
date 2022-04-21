@@ -1,5 +1,5 @@
 """
-Functions to generate, change, and use the model of the hexapod's legs
+Functions to generate, change, and use the model of the hexapod's legs.
 
 These functions take the leg dimensions and servo angles to find their position
 or can do the opposite and find the angles from the dimensions. Together,
@@ -63,14 +63,14 @@ def legPos(coax_angle: float, femur_angle: float, tibia_angle: float,
         the femur end point, and the tibia end point or foot of the leg. This
         is a 1x4 numpy array.
 
-    Notes
-    -----
-    The default leg segment lengths are from the CAD model I initially made.
-
     See Also
     --------
     legModel:
         Generates the model of the legs based on the servo angles of the legs.
+
+    Notes
+    -----
+    The default leg segment lengths are from the CAD model I initially made.
     """
     coax_rot = zRot(coax_angle)
     femur_rot = np.matmul(yRot(femur_angle), coax_rot)
@@ -120,14 +120,14 @@ def legAngle(x: float, y: float, z: float, coax: float = 26.34,
     [coax_angle, femur_angle, tibia_angle]: List[float]
         A list of the three servo angles for the leg segments.
 
-    Notes:
-        Refer to the Kinematics Calculations document in the Docs folder for
-        how the equations in this function were found.
-
     See Also
     --------
     recalculateLegAngles:
         Finds the coax, femur, and tibia angles of each leg.
+
+    Notes:
+        Refer to the Kinematics Calculations document in the Docs folder for
+        how the equations in this function were found.
     """
     coax_angle = degrees(atan2(y, x))
     coax_rot = zRot(-coax_angle)
