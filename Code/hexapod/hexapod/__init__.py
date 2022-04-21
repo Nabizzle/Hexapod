@@ -22,9 +22,7 @@ move:
     steps to move linearlly in any direction and to turn itself in the x-y
     plane.
 piTopi: Scripts used in the communications with and between Raspberry Pis.
-rotation:
-    These are the functions to find the rotation of any point around an axis
-    by an angle in degrees.
+rotation: Functions to return rotation matricies.
 ssc32uDriver:
     Functions to communicate with the Lynxmotion SSC-32U to drive the 18
     servos of the hexapod.
