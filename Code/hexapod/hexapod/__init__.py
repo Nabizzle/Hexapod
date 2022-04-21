@@ -10,36 +10,26 @@ or can take in two EMG streams to direct the amount to walk and turn.
 Modules
 -------
 body: Functions that relate to creating the model of the hexapod body.
-controller:
-    Scripts for directly controlling the hexapod aggregating the total work of
-    the full library.
-leg:
-    These are functions for finding and refinding the positions of the legs
-    from their servo angles or to do the reverse in finding the servo angles
-    from the end positions of the hexapod feet.
+controller: Scripts for controlling the hexapod.
+leg: Functions to generate, change, and use the model of the hexapod's legs.
 move:
     These are a collection of functions to find how the hexapod will take
     steps to move linearlly in any direction and to turn itself in the x-y
     plane.
 piTopi: Scripts used in the communications with and between Raspberry Pis.
 rotation: Functions to return rotation matricies.
-ssc32uDriver:
-    Functions to communicate with the Lynxmotion SSC-32U to drive the 18
-    servos of the hexapod.
+ssc32uDriver: Driver functions to communicate with the Lynxmotion SSC-32U.
 
 Functions
 ---------
-body.bodyPos:
-    Applies rotations in pitch, roll, and yaw and translations in x, y, and
-    z to the body.
+body.bodyPos: Creates a model of the body with input rotations and
+translations.
 controller.controller: Controls the hexapod to walk or turn based on EMG.
 controller.sit: Tells the Hexapod to sit with its body on the ground.
 controller.stand: Tells the hexapod to stand in the neutral position.
 controller.walkCycle:
     Tells the hexapod to walk a specified distance without the need for EMG
-controller.sendPositions:
-    Send each position in a set of hexapod command positions to the servo
-    controller
+controller.sendPositions: Send each position in a set to the servo controller.
 leg.legPos: Finds the positions for the leg segments.
 leg.legAngle: Finds the angles for the coax, femur, and tibia leg segments.
 leg.recalculateLegAngles: Finds the coax, femur, and tibia angles of each leg.
@@ -75,14 +65,10 @@ rotation.xRot: Return the rotation matrix for a rotation about the x axis.
 rotation.yRot: Return the rotation matrix for a rotation about the y axis.
 rotation.zRot: Return the rotation matrix for a rotation about the z axis.
 ssc32uDriver.angleToPW:
-    Convert the input angle in degrees to the pulse width in microseconds to
-    command that angle.
+    Convert an angle to the pulse width to command that angle.
 ssc32uDriver.anglesToSerial:
-    Converts an array of servo angles to the formatted serial command for
-    the Lynxmotiohn SSC-32U.
-ssc32uDriver.connect:
-    Tries to open a serial port with the Lynxmotiohn SSC-32U on the desired
-    COM port.
+    Takes the hexapods servo angles and converts them to a serial command.
+ssc32uDriver.connect: Connect to the input COM port.
 ssc32uDriver.disconnect: Disconnects from the serial port.
 ssc32uDriver.sendData:
     Sends the byte string command for the servos to the Lynxmotiohn SSC-32U.
