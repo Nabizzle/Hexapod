@@ -7,12 +7,16 @@ controller board.
 
 Functions
 ---------
-angleToPW: Convert an angle to the pulse width to command that angle.
+angleToPW:
+    Convert an angle to the pulse width to command that angle.
 anglesToSerial:
     Takes the hexapods servo angles and converts them to a serial command.
-connect: Connect to the input COM port.
-disconnect: Disconnects from the serial port.
-sendData: Sends the commands for the servos to the Lynxmotiohn SSC-32U.
+connect:
+    Connect to the input COM port.
+disconnect:
+    Disconnects from the serial port.
+sendData:
+    Sends the commands for the servos to the Lynxmotiohn SSC-32U.
 
 Notes
 -----
@@ -83,7 +87,8 @@ def anglesToSerial(angles: NDArray, speed: Optional[int] = None,
 
     See Also
     --------
-    angleToPW: Convert an angle to the pulse width to command that angle.
+    angleToPW:
+        Convert an angle to the pulse width to command that angle.
 
     Notes
     -----

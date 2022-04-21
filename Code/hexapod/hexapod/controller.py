@@ -7,12 +7,16 @@ it to utilize most of the functions.
 
 Functions
 ---------
-controller: Controls the hexapod to walk or turn based on EMG.
-sit: Tells the Hexapod to sit with its body on the ground.
-stand: Tells the hexapod to stand in the neutral position.
+controller:
+    Controls the hexapod to walk or turn based on EMG.
+sit:
+    Tells the Hexapod to sit with its body on the ground.
+stand:
+    Tells the hexapod to stand in the neutral position.
 walkCycle:
     Tells the hexapod to walk a specified distance without the need for EMG
-sendPositions: Send each position in a set to the servo controller.
+sendPositions:
+    Send each position in a set to the servo controller.
 """
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos

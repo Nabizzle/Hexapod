@@ -8,13 +8,18 @@ relevant information about the legs.
 
 Functions
 ---------
-legPos: Finds the positions for the leg segments.
-legAngle: Finds the angles for the coax, femur, and tibia leg segments.
-recalculateLegAngles: Finds the coax, femur, and tibia angles of each leg.
-startLegPos: Find the neutral position of the hexapod.
+legPos:
+    Finds the positions for the leg segments.
+legAngle:
+    Finds the angles for the coax, femur, and tibia leg segments.
+recalculateLegAngles:
+    Finds the coax, femur, and tibia angles of each leg.
+startLegPos:
+    Find the neutral position of the hexapod.
 legModel:
     Generates the model of the legs based on the servo angles of the legs.
-getFeetPos: Ouput the x, y, z position of the feet of the hexapod.
+getFeetPos:
+    Ouput the x, y, z position of the feet of the hexapod.
 """
 import numpy as np
 from numpy.linalg import inv
@@ -255,7 +260,8 @@ def legModel(leg_angles: NDArray, body_model: NDArray) -> NDArray:
 
     See Also
     --------
-    legPos: Finds the positions for the leg segments.
+    legPos:
+        Finds the positions for the leg segments.
     """
     leg_model = np.empty([4, 3, 6])
     for i in range(6):

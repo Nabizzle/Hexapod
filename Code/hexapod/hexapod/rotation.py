@@ -6,9 +6,12 @@ angle in degrees.
 
 Functions
 ---------
-xRot: Return the rotation matrix for a rotation about the x axis.
-yRot: Return the rotation matrix for a rotation about the y axis.
-zRot: Return the rotation matrix for a rotation about the z axis.
+xRot:
+    Return the rotation matrix for a rotation about the x axis.
+yRot:
+    Return the rotation matrix for a rotation about the y axis.
+zRot:
+    Return the rotation matrix for a rotation about the z axis.
 """
 from math import radians, cos, sin
 import numpy as np

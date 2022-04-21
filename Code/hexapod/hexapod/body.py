@@ -8,7 +8,8 @@ their movement.
 
 Functions
 ---------
-bodyPos: Creates a model of the body with input rotations and translations.
+bodyPos:
+    Creates a model of the body with input rotations and translations.
 """
 import numpy as np
 from numpy.linalg import inv

@@ -3,7 +3,8 @@ Scripts used in the communications with and between Raspberry Pis.
 
 Functions
 ---------
-recieveEMG: Pull EMG from the Raspberry Pi Zero W
+recieveEMG:
+    Pull EMG from the Raspberry Pi Zero W
 
 Notes
 -----
