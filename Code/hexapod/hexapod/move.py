@@ -780,7 +780,7 @@ def switchMode(threshold: float) -> bool:
     --------
     pollEMG:
         Get EMG signals and normalize them
-    
+
     Notes
     -----
     This function is called after every EMG based step to see if the person is
