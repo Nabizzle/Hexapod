@@ -13,13 +13,13 @@ bodyPos:
 """
 import numpy as np
 from numpy.linalg import inv
-from numpy.typing import NDArray
 from hexapod.rotation import xRot, yRot, zRot
 from math import sin, pi
 
 
 def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
-            Ty: float = 0, Tz: float = 0, body_offset: float = 85) -> NDArray:
+            Ty: float = 0, Tz: float = 0,
+            body_offset: float = 85) -> np.ndarray:
     """
     Creates a model of the body with input rotations and translations.
 
@@ -48,7 +48,7 @@ def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
 
     Returns
     -------
-    body_model: NDArray
+    body_model: np.ndarray
         A 7x3 numpy array that represents the locations of the coax servos as
         x, y, and z points.
 

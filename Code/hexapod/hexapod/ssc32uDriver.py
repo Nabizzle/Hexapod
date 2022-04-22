@@ -24,7 +24,6 @@ As of right now, this product may have been discontinued.
 """
 import serial
 import numpy as np
-from numpy.typing import NDArray
 from typing import Any, Optional
 
 
@@ -55,7 +54,7 @@ def angleToPW(angle: float) -> float:
     return round(2000 * angle / 180 + 500)
 
 
-def anglesToSerial(angles: NDArray, speed: Optional[int] = None,
+def anglesToSerial(angles: np.ndarray, speed: Optional[int] = None,
                    time: Optional[int] = None) -> bytes:
     """
     Takes the hexapods servo angles and converts them to a serial command.
@@ -66,7 +65,7 @@ def anglesToSerial(angles: NDArray, speed: Optional[int] = None,
 
     Parameters
     ----------
-    angles: NDArray
+    angles: np.ndarray
         6x3 numpy array of the 18 servo angles of the hexapod's legs.
     speed: int, optional
         How fast the servos move in microseconds/second (the default is None).

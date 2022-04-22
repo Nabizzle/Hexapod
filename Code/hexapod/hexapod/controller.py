@@ -23,7 +23,7 @@ from hexapod.body import bodyPos
 from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
                           resetTurnStance, walk)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
-from numpy.typing import NDArray
+import numpy as np
 from typing import Any
 from time import sleep
 
@@ -46,7 +46,7 @@ def controller(mode: bool) -> None:
 
     See Also
     --------
-    move.switchMode:
+    hexapod.move.switchMode:
         Sends a boolean based on EMG to indicate when to change movement
         modes.
 
@@ -144,7 +144,7 @@ def stand() -> None:
     sendData(port, message)  # send the serial message
 
 
-def walkCycle(port: Any, body_model: NDArray, leg_model: NDArray,
+def walkCycle(port: Any, body_model: np.ndarray, leg_model: np.ndarray,
               distance: float, angle: float) -> None:
     """
     Tells the hexapod to walk a specified distance without the need for EMG.
@@ -156,9 +156,9 @@ def walkCycle(port: Any, body_model: NDArray, leg_model: NDArray,
     ----------
     port: Serial Port
         The COM port that the servo signals are sent over.
-    body_model: NDArray
+    body_model: np.ndarray
         The 7x3 numpy array containing the locations of the coax servos.
-    leg_model: NDArray
+    leg_model: np.ndarray
         the 4x3x6 numpy array that holds the locations of the coax, femur,
         and tibia servos as well as the feet end positions.
     distance: float
@@ -169,13 +169,14 @@ def walkCycle(port: Any, body_model: NDArray, leg_model: NDArray,
 
     See Also
     --------
-    move.walk
+    hexapod.move.walk
     """
     positions = walk(leg_model, distance, angle)
     sendPositions(port, positions, body_model)
 
 
-def sendPositions(port: Any, positions: NDArray, body_model: NDArray) -> bool:
+def sendPositions(port: Any, positions: np.ndarray,
+                  body_model: np.ndarray) -> bool:
     """
     Send each position in a set to the servo controller.
 
@@ -186,12 +187,12 @@ def sendPositions(port: Any, positions: NDArray, body_model: NDArray) -> bool:
     ----------
     port: Serial Port
         The COM port that the servo signals are sent over
-    positions: NDArray
+    positions: np.ndarray
         A numpy array of a set of foot positions to command the hexapod to.
         These foot positions are a 6x3 numpy array of x, y, z positions for
         the six legs and the number of 6x3 arrays in the positions matrix is
         determined by how far the hexapod walked or turned.
-    body_model: NDArray
+    body_model: np.ndarray
         The 7x3 numpy array containing the locations of the coax servos.
 
     Returns

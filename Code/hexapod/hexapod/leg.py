@@ -23,15 +23,14 @@ getFeetPos:
 """
 import numpy as np
 from numpy.linalg import inv
-from numpy.typing import NDArray
 from math import degrees, sin, cos, acos, atan2, sqrt, pi
 from hexapod.rotation import yRot, zRot
 from typing import List
 
 
 def legPos(coax_angle: float, femur_angle: float, tibia_angle: float,
-           body_model: NDArray, leg_num: int, coax: float = 26.34,
-           femur: float = 76.2, tibia: float = 88.32) -> NDArray:
+           body_model: np.ndarray, leg_num: int, coax: float = 26.34,
+           femur: float = 76.2, tibia: float = 88.32) -> np.ndarray:
     """
     Finds the positions for the leg segments.
 
@@ -46,7 +45,7 @@ def legPos(coax_angle: float, femur_angle: float, tibia_angle: float,
         The angle of the femur servo or the servo that moves the knee.
     tibia_angle: float
         The angle of the tibia servo or the servo that moves the foot.
-    body_model: NDArray
+    body_model: np.ndarray
         The 7x3 numpy array containing the locations of the coax servos.
     leg_num: int
         The number of the leg. leg 0 is the front right leg and each
@@ -63,7 +62,7 @@ def legPos(coax_angle: float, femur_angle: float, tibia_angle: float,
 
     Returns
     -------
-    leg_positions: NDArray
+    leg_positions: np.ndarray
         The global positions of the body attachment point, the coax end point,
         the femur end point, and the tibia end point or foot of the leg. This
         is a 1x4 numpy array.
@@ -160,8 +159,8 @@ def legAngle(x: float, y: float, z: float, coax: float = 26.34,
     return [coax_angle, femur_angle, tibia_angle]
 
 
-def recalculateLegAngles(feet_positions: NDArray,
-                         body_model: NDArray) -> NDArray:
+def recalculateLegAngles(feet_positions: np.ndarray,
+                         body_model: np.ndarray) -> np.ndarray:
     """
     Finds the coax, femur, and tibia angles of each leg.
 
@@ -170,14 +169,14 @@ def recalculateLegAngles(feet_positions: NDArray,
 
     Parameters
     ----------
-    feet_positions: NDArray
+    feet_positions: np.ndarray
         A 6x3 numpy array of each leg's end position in x, y, z.
-    body_model: NDArray
+    body_model: np.ndarray
         The 7x3 numpy array containing the locations of the coax servos.
 
     Returns
     -------
-    leg_angles: NDArray
+    leg_angles: np.ndarray
         A 6x3 numpy array of each leg's coax, femur, and tibia servo angles.
 
     See Also
@@ -193,8 +192,8 @@ def recalculateLegAngles(feet_positions: NDArray,
     return leg_angles
 
 
-def startLegPos(body_model: NDArray, start_radius: float = 180,
-                start_height: float = 60) -> NDArray:
+def startLegPos(body_model: np.ndarray, start_radius: float = 180,
+                start_height: float = 60) -> np.ndarray:
     """
     Find the neutral position of the hexapod.
 
@@ -203,7 +202,7 @@ def startLegPos(body_model: NDArray, start_radius: float = 180,
 
     Parameters
     ----------
-    body_model: NDArray
+    body_model: np.ndarray
         The 7x3 numpy array containing the locations of the coax servos.
     start_radius: float, default=180
         The radius in millimeters that the feet make with the ground when
@@ -214,7 +213,7 @@ def startLegPos(body_model: NDArray, start_radius: float = 180,
 
     Returns
     -------
-    start_leg: NDArray
+    start_leg: np.ndarray
         The 6x3 numpy array of servo angles for the neutral position of the
         hexapod
 
@@ -237,7 +236,7 @@ def startLegPos(body_model: NDArray, start_radius: float = 180,
     return start_leg
 
 
-def legModel(leg_angles: NDArray, body_model: NDArray) -> NDArray:
+def legModel(leg_angles: np.ndarray, body_model: np.ndarray) -> np.ndarray:
     """
     Generates the model of the legs based on the servo angles of the legs.
 
@@ -247,14 +246,14 @@ def legModel(leg_angles: NDArray, body_model: NDArray) -> NDArray:
 
     Parameters
     ----------
-    leg_angles: NDArray
+    leg_angles: np.ndarray
         A 6x3 numpy array of each leg's coax, femur, and tibia servo angles.
-    body_model: NDArray
+    body_model: np.ndarray
         The 7x3 numpy array containing the locations of the coax servos.
 
     Returns
     -------
-    leg_model: NDArray
+    leg_model: np.ndarray
         the 4x3x6 numpy array that holds the locations of the coax, femur,
         and tibia servos as well as the feet end positions.
 
@@ -272,7 +271,7 @@ def legModel(leg_angles: NDArray, body_model: NDArray) -> NDArray:
     return leg_model
 
 
-def getFeetPos(leg_model: NDArray) -> NDArray:
+def getFeetPos(leg_model: np.ndarray) -> np.ndarray:
     """
     Ouput the x, y, z position of the feet of the hexapod.
 
@@ -281,13 +280,13 @@ def getFeetPos(leg_model: NDArray) -> NDArray:
 
     Parameters
     ----------
-    leg_model: NDArray
+    leg_model: np.ndarray
         the 4x3x6 numpy array that holds the locations of the coax, femur,
         and tibia servos as well as the feet end positions.
 
     Returns
     -------
-    feet_positions: NDArray
+    feet_positions: np.ndarray
         The 6x3 numpy array of where each leg of the hexapod ends as an
         x, y, z point.
     """

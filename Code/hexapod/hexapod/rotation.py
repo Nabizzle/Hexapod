@@ -15,10 +15,9 @@ zRot:
 """
 from math import radians, cos, sin
 import numpy as np
-from numpy.typing import NDArray
 
 
-def xRot(theta: float) -> NDArray:
+def xRot(theta: float) -> np.ndarray:
     """
     Return the rotation matrix for a rotation about the x axis.
 
@@ -29,7 +28,7 @@ def xRot(theta: float) -> NDArray:
 
     Returns
     -------
-    mat: NDArray
+    mat: np.ndarray
         3x3 rotation matrix array.
 
     Notes
@@ -43,7 +42,7 @@ def xRot(theta: float) -> NDArray:
     return mat
 
 
-def yRot(theta: float) -> NDArray:
+def yRot(theta: float) -> np.ndarray:
     """
     Return the rotation matrix for a rotation about the y axis.
 
@@ -54,7 +53,7 @@ def yRot(theta: float) -> NDArray:
 
     Returns
     -------
-    mat: NDArray
+    mat: np.ndarray
         3x3 rotation matrix array.
 
     Notes
@@ -68,7 +67,7 @@ def yRot(theta: float) -> NDArray:
     return mat
 
 
-def zRot(theta: float) -> NDArray:
+def zRot(theta: float) -> np.ndarray:
     """
     Return the rotation matrix for a rotation about the z axis.
 
@@ -79,7 +78,7 @@ def zRot(theta: float) -> NDArray:
 
     Returns
     -------
-    mat: NDArray
+    mat: np.ndarray
         3x3 rotation matrix array.
 
     Notes
