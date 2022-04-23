@@ -54,7 +54,7 @@ def controller(mode: bool) -> None:
     This function has the serial port to communicate to and the threshold
     of cocontraction to switch modes hardcoded.
     """
-    port = connect('COM1')  # connect to the servo controller
+    port = connect('COM4')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
@@ -136,7 +136,7 @@ def stand() -> None:
     port = connect('COM4')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
-                            body_offset=85)
+                         body_offset=85)
     start_leg = startLegPos(body_model, start_radius=180, start_height=60)
     # get the serial message from the angles
     message = anglesToSerial(start_leg, 500, 2000)
