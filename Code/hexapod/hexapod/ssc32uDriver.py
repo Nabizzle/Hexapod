@@ -96,11 +96,12 @@ def anglesToSerial(angles: np.ndarray, speed: Optional[int] = None,
     if angles.shape == (6, 3):
         temp_angles = np.copy(angles)
         temp_angles[0:3, 2] = - temp_angles[0:3, 2]
+        temp_angles[3:6, 0] = (temp_angles[3:6, 0] + 360) % 360.0
         temp_angles[3:6, 1] = - temp_angles[3:6, 1]
         adjustment = np.array([[90, 90, 90],
                                [90, 90, 90],
                                [90, 90, 90],
-                               [-90, 90, 90],
+                               [270, 90, 90],
                                [270, 90, 90],
                                [270, 90, 90]])
         temp_angles = adjustment - temp_angles
