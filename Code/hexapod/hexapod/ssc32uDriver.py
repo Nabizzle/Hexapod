@@ -94,7 +94,7 @@ def anglesToSerial(angles: np.ndarray, speed: Optional[int] = None,
     The message is converted to bytes in the return statement.
     """
     if angles.shape == (6, 3):
-        temp_angles = angles
+        temp_angles = np.copy(angles)
         temp_angles[0:3, 2] = - temp_angles[0:3, 2]
         temp_angles[3:6, 1] = - temp_angles[3:6, 1]
         adjustment = np.array([[90, 90, 90],
