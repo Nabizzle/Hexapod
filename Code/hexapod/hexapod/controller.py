@@ -109,7 +109,7 @@ def sit(port: Any) -> None:
         The COM port that the servo signals are sent over.
     """
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
-                            body_offset=85)
+                         body_offset=85)
     sit_leg = startLegPos(body_model, start_radius=120, start_height=10)
     # get the serial message from the angles
     message = anglesToSerial(sit_leg, 500, 2000)
@@ -137,7 +137,7 @@ def stand() -> None:
     port = connect('COM4')  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
-                            body_offset=85)
+                         body_offset=85)
     start_leg = startLegPos(body_model, start_radius=180, start_height=60)
     # get the serial message from the angles
     message = anglesToSerial(start_leg, 500, 2000)
