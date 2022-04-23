@@ -21,7 +21,7 @@ sendPositions:
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos
 from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
-                          resetTurnStance, walk)
+                          resetTurnStance, walk, turn)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
 import numpy as np
 from typing import Any
@@ -94,7 +94,7 @@ def controller(mode: bool) -> None:
             sendPositions(port, positions, body_model)
 
 
-def sit(port: Any) -> None:
+def sit() -> None:
     """
     Tells the Hexapod to sit with its body on the ground.
 
@@ -107,6 +107,7 @@ def sit(port: Any) -> None:
     port: Serial Port
         The COM port that the servo signals are sent over.
     """
+    port = connect('COM4')  # connect to the servo controller
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
     sit_leg = startLegPos(body_model, start_radius=120, start_height=10)
@@ -143,8 +144,7 @@ def stand() -> None:
     sendData(port, message)  # send the serial message
 
 
-def walkCycle(port: Any, body_model: np.ndarray, leg_model: np.ndarray,
-              distance: float, angle: float) -> None:
+def walkCycle(distance: float, angle: float) -> None:
     """
     Tells the hexapod to walk a specified distance without the need for EMG.
 
@@ -153,13 +153,6 @@ def walkCycle(port: Any, body_model: np.ndarray, leg_model: np.ndarray,
 
     Parameters
     ----------
-    port: Serial Port
-        The COM port that the servo signals are sent over.
-    body_model: np.ndarray
-        The 7x3 numpy array containing the locations of the coax servos.
-    leg_model: np.ndarray
-        the 4x3x6 numpy array that holds the locations of the coax, femur,
-        and tibia servos as well as the feet end positions.
     distance: float
         The length in millimeters that the hexapod will walk. This distance is
         broken up into steps based on the max step size in move.walk
@@ -170,7 +163,46 @@ def walkCycle(port: Any, body_model: np.ndarray, leg_model: np.ndarray,
     --------
     hexapod.move.walk
     """
+    # controls the hexapod to walk or turn and send the commands
+    port = connect('COM4')  # connect to the servo controller
+    # setup the starting robot positions
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset=85)
+    start_leg = startLegPos(body_model, start_radius=180, start_height=60)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
+    sendData(port, message)  # send the serial message
+    leg_model = legModel(start_leg, body_model)
     positions = walk(leg_model, distance, angle)
+    sendPositions(port, positions, body_model)
+
+
+def turnCycle(turn_angle: float) -> None:
+    """
+    Tells the hexapod to turn to an angle without EMG
+
+    This function just uses the move.turn function and sends its positions to
+    the Lynxmotion SSC32U.
+
+    Parameters
+    ----------
+    turn_angle: float, default=60
+        The angle to turn to. A positive angle if a left turn.
+
+    See Also
+    --------
+    hexapod.move.turn
+    """
+    port = connect('COM4')  # connect to the servo controller
+    # setup the starting robot positions
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset=85)
+    start_leg = startLegPos(body_model, start_radius=180, start_height=60)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
+    sendData(port, message)  # send the serial message
+    leg_model = legModel(start_leg, body_model)
+    positions = turn(leg_model, turn_angle)
     sendPositions(port, positions, body_model)
 
 
