@@ -25,6 +25,7 @@ from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
 import numpy as np
 from typing import Any
+from time import sleep
 
 
 def controller(mode: bool) -> None:
@@ -138,6 +139,11 @@ def stand() -> None:
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
+    start_leg = startLegPos(body_model, start_radius=180, start_height=10)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
+    sendData(port, message)  # send the serial message
+    sleep(2)
     start_leg = startLegPos(body_model, start_radius=180, start_height=60)
     # get the serial message from the angles
     message = anglesToSerial(start_leg, 500, 2000)
