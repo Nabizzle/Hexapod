@@ -5,7 +5,7 @@ import pytest
 
 def test_stepForward():
     """Tests that the ouput feet offsets from making one step forward are correct"""
-    assert np.allclose(move.stepForward(step_angle=90, distance=30, step_height=15, right_foot=True), np.array([[[0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+    assert np.allclose(move.stepForward(step_angle=90, distance=30, step_height=15, right_foot=True, z_resolution=1), np.array([[[0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
                                                                                                                  [-0.00000000e+00, -0.00000000e+00,  0.00000000e+00],
                                                                                                                  [0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
                                                                                                                  [-0.00000000e+00, -0.00000000e+00,  0.00000000e+00],
@@ -232,7 +232,7 @@ def test_stepTurnFoot():
                                [-150, 0, -20],
                                [-75, 129.903811, -20]])
 
-    assert np.allclose(move.stepTurnFoot(feet_positions[1, 0], feet_positions[1, 1], feet_positions[1, 2], step_angle=15, step_height=15, right_foot=True), np.array([[[150, 0, -20]],
+    assert np.allclose(move.stepTurnFoot(feet_positions[1, 0], feet_positions[1, 1], feet_positions[1, 2], step_angle=15, step_height=15, right_foot=True, z_resolution=1), np.array([[[150, 0, -20]],
 
                                                                                                                                                                       [[149.99428846, 1.30898032, -12.75]],
 
@@ -304,7 +304,7 @@ def test_stepTurn():
                                [-150, 0, -20],
                                [-75, 129.903811, -20]])
 
-    assert np.allclose(move.stepTurn(feet_positions, step_angle=15, step_height=15, right_foot=True), np.array([[[7.50000000e+01,  1.29903811e+02, -2.00000000e+01],
+    assert np.allclose(move.stepTurn(feet_positions, step_angle=15, step_height=15, right_foot=True, z_resolution=1), np.array([[[7.50000000e+01,  1.29903811e+02, -2.00000000e+01],
                                                                                                                  [1.50000000e+02,  0.00000000e+00, -2.00000000e+01],
                                                                                                                  [7.50000000e+01, -1.29903811e+02, -2.00000000e+01],
                                                                                                                  [-7.50000000e+01, -1.29903811e+02, -2.00000000e+01],
@@ -540,7 +540,7 @@ def test_walk():
                            [129.903811, 0, -129.903811, -129.903811, 0, 129.903811],
                            [-20, -20, -20, -20, -20, -20]]])
 
-    assert np.allclose(move.walk(leg_model, distance=30, angle=90), np.array([[[7.50000000e+01,  1.29903811e+02, -2.00000000e+01],
+    assert np.allclose(move.walk(leg_model, distance=30, angle=90, z_resolution=1), np.array([[[7.50000000e+01,  1.29903811e+02, -2.00000000e+01],
                                                                                [1.50000000e+02,  0.00000000e+00, -2.00000000e+01],
                                                                                [7.50000000e+01, -1.29903811e+02, -2.00000000e+01],
                                                                                [-7.50000000e+01, -
@@ -1188,7 +1188,7 @@ def test_turn():
                            [129.903811, 0, -129.903811, -129.903811, 0, 129.903811],
                            [-20, -20, -20, -20, -20, -20]]])
 
-    assert np.allclose(move.turn(leg_model, turn_angle=60), np.array([[[7.50000000e+01,  1.29903811e+02, -2.00000000e+01],
+    assert np.allclose(move.turn(leg_model, turn_angle=60, z_resolution=1), np.array([[[7.50000000e+01,  1.29903811e+02, -2.00000000e+01],
                                                                        [1.50000000e+02,
                                                                            0.00000000e+00, -2.00000000e+01],
                                                                        [7.50000000e+01, -
