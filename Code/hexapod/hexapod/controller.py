@@ -15,6 +15,8 @@ stand:
     Tells the hexapod to stand in the neutral position.
 walkCycle:
     Tells the hexapod to walk a specified distance without the need for EMG
+turnCycle:
+    Tells the hexapod to turn to an angle without EMG
 sendPositions:
     Send each position in a set to the servo controller.
 """

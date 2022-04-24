@@ -110,6 +110,8 @@ it to utilize most of the functions.</p>
 </dd>
 <dt>walkCycle:</dt><dd><p>Tells the hexapod to walk a specified distance without the need for EMG</p>
 </dd>
+<dt>turnCycle:</dt><dd><p>Tells the hexapod to turn to an angle without EMG</p>
+</dd>
 <dt>sendPositions:</dt><dd><p>Send each position in a set to the servo controller.</p>
 </dd>
 </dl>
@@ -179,7 +181,7 @@ between commands.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.sit">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">sit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.sit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">sit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.sit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tells the Hexapod to sit with its body on the ground.</p>
 <p>Recreates the neutral hexapod positions, but with a lowered height so that
 the body of the hexapod touches the ground. This is the position that the
@@ -213,21 +215,36 @@ port for the Lynxmotion SSC32U.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="hexapod.controller.turnCycle">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">turnCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.turnCycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells the hexapod to turn to an angle without EMG</p>
+<p>This function just uses the move.turn function and sends its positions to
+the Lynxmotion SSC32U.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>turn_angle: float, default=60</strong></dt><dd><p>The angle to turn to. A positive angle if a left turn.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.turn" title="hexapod.move.turn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.move.turn</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.walkCycle">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">walkCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.walkCycle" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">walkCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.walkCycle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
 <p>This function just uses the move.walk function and sends its positions to
 the Lynxmotion SSC32U.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>port: Serial Port</strong></dt><dd><p>The COM port that the servo signals are sent over.</p>
-</dd>
-<dt><strong>body_model: np.ndarray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
-</dd>
-<dt><strong>leg_model: np.ndarray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
-and tibia servos as well as the feet end positions.</p>
-</dd>
 <dt><strong>distance: float</strong></dt><dd><p>The length in millimeters that the hexapod will walk. This distance is
 broken up into steps based on the max step size in move.walk</p>
 </dd>
@@ -1323,6 +1340,8 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 <dt>controller.stand:</dt><dd><p>Tells the hexapod to stand in the neutral position.</p>
 </dd>
 <dt>controller.walkCycle:</dt><dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
+</dd>
+<dt>controller.turnCycle:</dt><dd><p>Tells the hexapod to turn to an angle without EMG</p>
 </dd>
 <dt>controller.sendPositions:</dt><dd><p>Send each position in a set to the servo controller.</p>
 </dd>
