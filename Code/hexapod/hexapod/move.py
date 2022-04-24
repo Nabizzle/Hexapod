@@ -70,7 +70,7 @@ def stepForward(step_angle: float = 90, distance: float = 30,
     direction. If you want fewer submovements, raise the `z_resolution`
     number that is hardcoded in the function.
     """
-    z_resolution = 2  # the size in mm of the upwards submovements.
+    z_resolution = 5  # the size in mm of the upwards submovements.
 
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4
                   for i in np.arange(-step_height, step_height + z_resolution,
@@ -137,7 +137,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
     of all of them like in the stepForward function. It is also an absolute
     position and not a relative position change.
     """
-    z_resolution = 2  # the size in mm of the upwards submovements.
+    z_resolution = 5  # the size in mm of the upwards submovements.
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
 
