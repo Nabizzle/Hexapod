@@ -37,8 +37,8 @@ from typing import Tuple
 
 
 def stepForward(step_angle: float = 90, distance: float = 30,
-                step_height: float = 15,
-                right_foot: bool = True) -> np.ndarray:
+                step_height: float = 15, right_foot: bool = True,
+                z_resolution: float = 5) -> np.ndarray:
     """
     Calculate the x, y, z position updates to move in a step in a direction.
 
@@ -57,6 +57,8 @@ def stepForward(step_angle: float = 90, distance: float = 30,
     right_foot: bool, default=True
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    z_resolution: float, default=5
+        the size in mm of the upwards submovements.
 
     Returns
     -------
@@ -70,8 +72,6 @@ def stepForward(step_angle: float = 90, distance: float = 30,
     direction. If you want fewer submovements, raise the `z_resolution`
     number that is hardcoded in the function.
     """
-    z_resolution = 5  # the size in mm of the upwards submovements.
-
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4
                   for i in np.arange(-step_height, step_height + z_resolution,
                   z_resolution)])
@@ -95,7 +95,8 @@ def stepForward(step_angle: float = 90, distance: float = 30,
 
 def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
                  step_angle: float = 15, step_height: float = 15,
-                 right_foot: bool = True) -> np.ndarray:
+                 right_foot: bool = True,
+                 z_resolution: float = 5) -> np.ndarray:
     """
     Calculate the position of a foot when turning the hexapod about an angle.
 
@@ -119,6 +120,8 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
         An indicator if the foot is a part of the right or left set of legs
         taking the step. The "right" set are legs 0, 2, and 4 and the "left"
         are 1, 3, and 5.
+    z_resolution: float, default=5
+        the size in mm of the upwards submovements.
 
     Returns
     -------
@@ -137,7 +140,6 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
     of all of them like in the stepForward function. It is also an absolute
     position and not a relative position change.
     """
-    z_resolution = 5  # the size in mm of the upwards submovements.
     radius = hypot(foot_x, foot_y)
     foot_angle = degrees(atan2(foot_y, foot_x))
 
@@ -166,7 +168,8 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
 
 
 def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
-             step_height: float = 15, right_foot: bool = True) -> np.ndarray:
+             step_height: float = 15, right_foot: bool = True,
+             z_resolution: float = 5) -> np.ndarray:
     """
     Calcluate the positions of each foot when turning about an angle.
 
@@ -212,7 +215,8 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
                                 foot_z=feet_pos[i, 2],
                                 step_angle=step_angle,
                                 step_height=step_height,
-                                right_foot=right_foot)
+                                right_foot=right_foot,
+                                z_resolution=z_resolution)
         right_foot = not right_foot
         if i == 0:
             previous_foot = footstep
@@ -223,7 +227,7 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
 
 
 def walk(leg_model: np.ndarray, distance: float = 30,
-         angle: float = 90) -> np.ndarray:
+         angle: float = 90, z_resolution: float = 5) -> np.ndarray:
     """
     Creates a series of feet positions to use when walking in a direction.
 
@@ -285,7 +289,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
             if steps == 1:
                 temp_walk_positions = stepForward(step_angle=angle,
                                                   distance=remaining_distance,
-                                                  right_foot=right_foot)
+                                                  right_foot=right_foot,
+                                                  z_resolution=z_resolution)
             # if this is not the first step the robot needs to move forward
             # the max step size first to bring the robot to a neutral position
             # before moving the rest of the distance.
@@ -293,7 +298,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
                 temp_walk_positions = stepForward(step_angle=angle,
                                                   distance=remaining_distance
                                                   + max_step_size,
-                                                  right_foot=right_foot)
+                                                  right_foot=right_foot,
+                                                  z_resolution=z_resolution)
 
             # Get the current feet positions from the last stepped position
             if 'walk_positions' in locals():
@@ -322,7 +328,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
         if i == 0:
             walk_positions = stepForward(step_angle=angle,
                                          distance=max_step_size,
-                                         right_foot=right_foot)
+                                         right_foot=right_foot,
+                                         z_resolution=z_resolution)
             feet_positions = getFeetPos(leg_model)
             for j in range(walk_positions.shape[0]):
                 walk_positions[j, :, :] = walk_positions[j, :, :]\
@@ -337,7 +344,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
         else:
             temp_walk_positions = stepForward(step_angle=angle,
                                               distance=max_step_size * 2,
-                                              right_foot=right_foot)
+                                              right_foot=right_foot,
+                                              z_resolution=z_resolution)
 
             if 'walk_positions' in locals():
                 feet_positions = walk_positions[-1, :, :]
@@ -355,7 +363,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
     # reset the position of the robot by moving the last step distance
     temp_walk_positions = stepForward(step_angle=angle,
                                       distance=remaining_distance,
-                                      right_foot=right_foot)
+                                      right_foot=right_foot,
+                                      z_resolution=z_resolution)
 
     feet_positions = walk_positions[-1, :, :]
     for j in range(temp_walk_positions.shape[0]):
@@ -367,7 +376,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
     return walk_positions
 
 
-def turn(leg_model: np.ndarray, turn_angle: float = 60) -> np.ndarray:
+def turn(leg_model: np.ndarray, turn_angle: float = 60,
+         z_resolution: float = 5) -> np.ndarray:
     """
     Creates the series of feet positions to turn the hexapod about the z axis.
 
@@ -429,7 +439,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60) -> np.ndarray:
                 temp_turn_positions =\
                     stepTurn(feet_positions,
                              step_angle=remaining_turn_distance,
-                             right_foot=right_foot)
+                             right_foot=right_foot,
+                             z_resolution=z_resolution)
             # if this is not the first step the robot needs to move forward
             # the max turn size first to bring the robot to a neutral position
             # before moving the rest of the distance.
@@ -439,7 +450,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60) -> np.ndarray:
                              step_angle=np.sign(remaining_turn_distance)
                              * (abs(remaining_turn_distance)
                                 + max_turn_angle),
-                             right_foot=right_foot)
+                             right_foot=right_foot,
+                             z_resolution=z_resolution)
 
             # try to add the next step to the walk
             if 'turn_positions' in locals():
@@ -460,7 +472,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60) -> np.ndarray:
                 stepTurn(feet_positions,
                          step_angle=np.sign(remaining_turn_distance)
                          * max_turn_angle,
-                         right_foot=right_foot)
+                         right_foot=right_foot,
+                         z_resolution=z_resolution)
             # reduce the remaining distance by the max step size
             remaining_turn_distance -=\
                 np.sign(remaining_turn_distance) * max_turn_angle
@@ -478,7 +491,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60) -> np.ndarray:
                 stepTurn(feet_positions,
                          step_angle=np.sign(remaining_turn_distance)
                          * max_turn_angle * 2,
-                         right_foot=right_foot)
+                         right_foot=right_foot,
+                         z_resolution=z_resolution)
 
             turn_positions = np.concatenate((turn_positions,
                                              temp_turn_positions),
@@ -492,7 +506,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60) -> np.ndarray:
     temp_turn_positions =\
         stepTurn(feet_positions,
                  step_angle=remaining_turn_distance,
-                 right_foot=right_foot)
+                 right_foot=right_foot,
+                 z_resolution=z_resolution)
 
     turn_positions = np.concatenate((turn_positions,
                                      temp_turn_positions),
