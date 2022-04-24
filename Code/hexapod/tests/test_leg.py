@@ -16,9 +16,15 @@ def test_legPos():
                         [131.16556788, 79.96110914, 38.1],
                         [92.92188605, 13.72110914, -6.06]]))
 
+
 def test_legAngle():
     """Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the defult leg dimensions declared by the function definition"""
     assert np.allclose(leg.legAngle(40, 10, -20), np.array([14.036243467926479, 57.837989407032495, -74.73564115953161]))
+
+def test_legAngleZeros():
+    """Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the defult leg dimensions declared by the function definition"""
+    assert np.allclose(leg.legAngle(26.34 + 76.2, 0, -88.32),
+                       np.array([0, 0, 0]))
 
 def test_recalculateLegAngles():
     """Tests that all of the output leg servo angles are correct given the default body model and feet positions when the hexapod is just turned on"""
