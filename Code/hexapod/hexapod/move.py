@@ -189,6 +189,8 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
     right_foot: bool, default=True
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    z_resolution: float, default=5
+        the size in mm of the upwards submovements.
 
     Returns
     -------
@@ -245,6 +247,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
         The linear distance to move in millimeters.
     angle: float, default=90
         The direction the step is taken in in degrees. 90 degrees is forward.
+    z_resolution: float, default=5
+        the size in mm of the upwards submovements.
 
     Returns
     -------
@@ -393,6 +397,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
         and tibia servos as well as the feet end positions.
     turn_angle: float, default=60
         The angle to turn to. A positive angle if a left turn.
+    z_resolution: float, default=5
+        the size in mm of the upwards submovements.
 
     Returns
     -------
