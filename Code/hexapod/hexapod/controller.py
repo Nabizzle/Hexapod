@@ -246,10 +246,14 @@ def sendPositions(port: Any, positions: np.ndarray,
     using these parameters is unneeded. Also note that there is a 5ms delay
     between commands.
     """
+    prev_angles = np.zeros((6,3))
     for position in positions:
         # convert the feet positions to angles
-        angles = recalculateLegAngles(position, body_model)
+        next_angles = recalculateLegAngles(position, body_model)
+        # Smoothes the servo angle change
+        angles = next_angles * 0.05 + prev_angles * 0.95
         # get the serial message from the angles
         message = anglesToSerial(angles, 2000)
         sendData(port, message)  # send the serial message
+        prev_angles = next_angles
     return True
