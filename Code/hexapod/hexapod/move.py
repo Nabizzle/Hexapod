@@ -351,10 +351,8 @@ def walk(leg_model: np.ndarray, distance: float = 30,
                                               right_foot=right_foot,
                                               z_resolution=z_resolution)
 
-            if 'walk_positions' in locals():
-                feet_positions = walk_positions[-1, :, :]
-            else:
-                feet_positions = getFeetPos(leg_model)
+            feet_positions = walk_positions[-1, :, :]
+
             for j in range(temp_walk_positions.shape[0]):
                 temp_walk_positions[j, :, :] = temp_walk_positions[j, :, :]\
                     + feet_positions
@@ -488,10 +486,7 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
         # angle, move the legs forward by twice the max angle to reset and
         # then turn the max distance
         else:
-            if 'turn_positions' in locals():
-                feet_positions = turn_positions[-1, :, :]
-            else:
-                feet_positions = getFeetPos(leg_model)
+            feet_positions = turn_positions[-1, :, :]
 
             temp_turn_positions =\
                 stepTurn(feet_positions,
