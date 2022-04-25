@@ -246,7 +246,7 @@ def sendPositions(port: Any, positions: np.ndarray,
     using these parameters is unneeded. Also note that there is a 5ms delay
     between commands.
     """
-    prev_angles = np.zeros((6,3))
+    prev_angles = np.zeros((6, 3))
     for position in positions:
         # convert the feet positions to angles
         next_angles = recalculateLegAngles(position, body_model)
