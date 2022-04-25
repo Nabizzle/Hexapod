@@ -302,9 +302,7 @@ def test_stepTurnFoot():
 
 
 def test_stepTurn():
-    """
-    Tests that the output feet positions of all six legs are correct when turning the hexapod one step
-    """
+    """Tests that the output feet positions of all six legs are correct when turning the hexapod one step"""
     feet_positions = np.array([[75, 129.903811, -20],
                                [150, 0, -20],
                                [75, -129.903811, -20],
