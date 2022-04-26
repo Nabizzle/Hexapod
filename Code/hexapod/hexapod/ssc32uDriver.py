@@ -152,7 +152,7 @@ def connect(com: str) -> Any:
         print(ser)
         return ser
     except:
-        raise Exception('Serial port did not open')
+        raise NotImplementedError('Serial port did not open')
 
 
 def disconnect(ser: Any) -> bool:
@@ -210,4 +210,4 @@ def sendData(ser: Any, serial_string: bytes) -> bool:
         ser.write(serial_string)
         return True
     except:
-        raise Exception('Data did not Write!')
+        raise NotImplementedError('Data did not Write!')
