@@ -44,3 +44,10 @@ jobs:
 
         env:
           DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+          
+      - name: Send Results to CodeCov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+
+          chmod +x codecov
+          ./codecov
