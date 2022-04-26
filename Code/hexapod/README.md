@@ -131,5 +131,18 @@ Scripts for directly controlling the hexapod aggregating the total work of the f
 ### controller
 Connects to the serial port of the Lynxmotiohn SSC-32U, and sets up the starting position of the hexapod. Then the function starts in the walking mode and starts moving based on the EMG signals. After each step, the function checks if the user is cocontracting to switch modes. If they are, the hexapod finishes the step to reset the stance and switches modes.
 
+### sit
+Tells the hexapod to sit with its body on the ground.
+
+### stand
+Tells the hexapod to move its legs out about the ground and then stand up
+
+### walkCycle
+The hexapod walks the input distance in the input angle direction without the need for EMG.
+
+### turnCycle
+The hexapod turns the input angle without the need for EMG.
+
 ### sendPostions
 Takes in the serial port, the positions to move, and the body model. The function iterates through the array of positions to move and sequentially sends them to the Lynxmotiohn SSC-32U. After each message is sent, there is a pause.
+

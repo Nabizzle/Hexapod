@@ -1,58 +1,31 @@
-# Table of Contents
-
-* [Hexapod Project Description](#hexapod-project-description)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-* [Author](#author)
-* [Acknowledgements](#acknowledgements)
-* [Description of Each Script](#description-of-each-script)
-  * [Rotation Matrices](#rotation-matrices)
-    * [xRot](#xrot)
-    * [yRot](#yrot)
-    * [zRot](#zrot)
-  * [Body Functions](#body-functions)
-    * [bodyPos](#bodypos)
-  * [Leg Functions](#leg-functions)
-    * [legPos](#legpos)
-    * [legAngle](#legangle)
-    * [startLegPos](#startlegpos)
-    * [getFeetPos](#getfeetpos)
-    * [recalculateLegAngles](#recalculatelegangles)
-    * [legModel](#legmodel)
-  * [Movement Functions](#movement-functions)
-    * [stepForward](#stepforward)
-    * [stepTurnFoot](#stepturnfoot)
-    * [stepTurn](#stepturn)
-  * [Movement Cycles](#movement-cycles)
-    * [walk](#walk)
-    * [turn](#turn)
-  * [Model Visualization](#model-visualization)
-    * [showModel](#showmodel)
-    * [animate](#animate)
-    * [animateBodyTranslate](#animatebodytranslate)
-
 # Hexapod Project Description
+
+![Rendered Hexapod from Fusion360](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod.PNG)
+
+[![DeepSource](https://deepsource.io/gh/Nabizzle/Hexapod.svg/?label=active+issues&show_trend=true&token=VB3rbYYMZzJr8nYxjxjMuPUo)](https://deepsource.io/gh/Nabizzle/Hexapod/?ref=repository-badge)
+[![DeepSource](https://deepsource.io/gh/Nabizzle/Hexapod.svg/?label=resolved+issues&show_trend=true&token=VB3rbYYMZzJr8nYxjxjMuPUo)](https://deepsource.io/gh/Nabizzle/Hexapod/?ref=repository-badge)
+[![codecov](https://codecov.io/gh/Nabizzle/Hexapod/branch/main/graph/badge.svg?token=Y0SA932W1L)](https://codecov.io/gh/Nabizzle/Hexapod)
 
 The ultimate goal of this project is to create a Hexapod, or six legged robot, that can move and turn in any direction in the x-y plane and rotate and translate the body of the robot along each axis independent of the legs of the robot. The control of the robot will be from control using two EMG sensors that have their data transmitted to the hexapod or from a phone app. The initial design was adapted from the design of [Capers II](https://www.instructables.com/Capers-II-a-Hexapod-Robot/) recreated in Fusion360 and made to be radially symetrical.
 
-This project is made in two parts. The first is a computational model where the [kinematics calculations](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Kinematics%20Calculations/Hexapod%20Kinematics%20Calculation.pdf)
-![Rendered Hexapod from Fusion360](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod.PNG) were tested in getting the body to rotate and translate along the x, y, and z axes independent of the leg positions as well as getting the hexapod to walk and turn variable distances. The second part, which is yet to be made, is the onboard code on the raspberry pis that control the physical robot and transmit EMG to the hexapod.
+This project is made in two parts. The first is a computational model where the [kinematics calculations](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Kinematics%20Calculations/Hexapod%20Kinematics%20Calculation.pdf) were tested in getting the body to rotate and translate along the x, y, and z axes independent of the leg positions as well as getting the hexapod to walk and turn variable distances. The second part is the onboard code on the raspberry pis that control the physical robot and transmit EMG to the hexapod.
 
 ## Getting Started
 
-The current sete of code is only the computational model for testing the control of the robot. This is run through the Jupyter Notebook [Walking Model.](https://github.com/Nabizzle/Hexapod/blob/main/Code/Walking%20Model.ipynb) Refer to the notebook to see the outputs of creating the neutral position of an example walk and turn cycle. The bottom setion of the notebook allow you to change the body rotaion and translation before the hexapod walks and turns and the last two cells allow you to change the walking distance and angle as well as the turning angle. This ReadMe corresponds to the Jupyter Notebook. For the library of python functions to run the physical robot, refer to the [library's ReadMe](https://github.com/Nabizzle/Hexapod/tree/main/Code/hexapod)
+This code is only the computational model for testing the control of the robot. This is run through the Jupyter Notebook [Walking Model.](https://github.com/Nabizzle/Hexapod/blob/main/Code/Walking%20Model.ipynb) Refer to the notebook to see the outputs of creating the neutral position of an example walk and turn cycle. The bottom setion of the notebook allow you to change the body rotaion and translation before the hexapod walks and turns and the last two cells allow you to change the walking distance and angle as well as the turning angle. This ReadMe corresponds to the Jupyter Notebook. For the library of python functions to run the physical robot, refer to the [library's ReadMe](https://github.com/Nabizzle/Hexapod/tree/main/Code/hexapod)
 
 ### Prerequisites
 
-[Python 3.8.12 or later](https://www.python.org/)
+[Python 3.10 or later](https://www.python.org/)
 * Required libraries
-  * Numpy
-  * Matplotlib
-  * Seaborn
+  * Numpy v1.22.3
+  * PySerial v3.5
+  * Adafruit Circuit Python MCP3xxx v1.4.7
   * Math
   * Time
+  * Typing
 
-Hexapod Robot
+### Hexapod Robot
 * [Raspberry pi zero WH](https://www.adafruit.com/product/3708) (Original validation testing hardware, but appeared too slow)
 * [Raspberry pi 4 Model B (2GB of RAM)](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
 * 18 MG996R Servos
@@ -94,11 +67,11 @@ Rotation about the z axis by an angle in degrees.
 
 ## Body Functions
 
-These are functions that relate to moving and creating the model of the hexapod body
+These are functions that relate to creating the model of the hexapod body
 
 ### bodyPos
 
-Creates a hexagon model of the body with the given pitch, roll, and yaw angles and the given x, y, and z translations from the center point of the coordinate axes.
+Creates a hexagon model of the body with the given pitch, roll, and yaw angles, the given x, y, and z translations from the center point of the coordinate axes, and the coax servo distance from the center of the coordinate axis.
 
 ## Leg Functions
 
@@ -106,27 +79,27 @@ These are functions for finding and refinding the positions of the legs from the
 
 ### legPos
 
-This function finds the positions of each segment of the leg from its servo angles and leg number and then outputs those locations to be added to the larger model of the legs.
+This function finds the positions of each segment of the leg from its servo angles, the leg number, and the leg dimensions and then outputs those locations to be added to the larger model of the legs.
 
 ### legAngle
 
-Finds the servo angles of the leg based on the x, y, and z positions of the end contact point of the leg. This function then returns the servo angles as an output.
-
-### startLegPos
-
-Takes the body model and the starting outer radius the legs make on the robot as wel as the starting height of the robot off of the ground to find the starting servo angles of all of the legs. This function then outputs those angles as an array.
-
-### getFeetPos
-
-This function outputs the contact points of each leg with the ground as x, y, and z coordinates in an array.
+Finds the servo angles of the leg based on the x, y, and z positions of the end contact point of the leg and the dimensions of the leg. This function then returns the servo angles as an output.
 
 ### recalculateLegAngles
 
 Takes an input of the current body model and current contact points of the legs to calculate the servo angles of all of the legs. This function outputs the servo angles of all of the legs.
 
+### startLegPos
+
+Takes the body model and the starting outer radius the legs make on the robot as wel as the starting height of the robot off of the ground to find the starting servo angles of all of the legs. This function then outputs those angles as an array.
+
 ### legModel
 
 Takes in the servo angles of all of the legs as an array and calculates the positions of each leg segement to combine into a model of the legs.
+
+### getFeetPos
+
+This function outputs the contact points of each leg with the ground as x, y, and z coordinates in an array.
 
 ## Movement Functions
 
@@ -144,36 +117,74 @@ This function takes the x, y, and z position of a contact point of a leg along w
 
 This funciton takes in the contact positions of all of the legs, the angle to step to, the vertical height of the step, and a boolean to determine if the "right" legs are moving or the other legs are moving. The "right" legs are legs 0, 2, and 4 or every other leg starting from the front right leg of the robot and moving clockwise around the robot looking from above. This function then feeds each foot position into the previous funciton to find the absolute position of each foot.
 
-## Movement Cycles
-
-These are functions to create a walk and turn cycle.
-
 ### walk
 
-Takes the body and leg models, a figure to plot on, a linear distance to move, and an angle to move in in the x-y frome. This function takes the distance to move and breaks it into steps to move based on a maximum step size. The cycle ends with the hexapod moving to the neutral position. This function requires a positive distance to move and ends with the creation of a video, saved to the media folder, of the movement. Below is an example of this walk cycle.
+Takes the leg model, a linear distance to move, and an angle to move in the x-y plane. This function takes the distance to move and breaks it into steps to move based on a maximum step size. The cycle ends with the hexapod moving to the neutral position. This function requires a positive distance to move. This function is used more as a test of the walking function of the robot. Below is an example of this walk cycle.
 
 <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod_Walk.gif" width="500">
 
 ### turn
 
-Takes the body and leg models, a figure to plot on, and an angle to turn to. This function breaks the turn into steps based on the maximum turn angle. The cycle ends with the hexapod moving to the neutral position. This function requires a non-zero angle to turn to (positive angles are left turns) and ends with the creation of a video, saved to the media folder, of the movement. Left and right turns are saved as seperate videos. Below is an example of this turn cycle turning the hexapd right and then left.
+Takes the leg model and an angle to turn to. This function breaks the turn into steps based on the maximum turn angle. The cycle ends with the hexapod moving to the neutral position. This function requires a non-zero angle to turn to (positive angles are left turns). This function is used as a test of the turning function. Below is an example of this turn cycle turning the hexapd right and then left.
 
 <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod_Turn.gif" width="500">
 
-## Model Visualization
+### emgToWalk
+Takes the body and leg models, a boolean for which set of feet should move (same as in the previous step functions), the previous step distance, and the maximum distance for a step in the x-y plane. This function polls for two EMG signals to determine the distance to move and scales the maximum step size to the difference between the EMG signals. If the wrist flexor signal and stronger than the wrist extensor signal, the distance to move is positive. If the opposite is true, the distance is negative. The step size is the previous step distance taken plus the new distance. The output of the function is the leg model, the updated foot set boolean after the step, the step size taken during the function to be used in the next run, and the array of leg positions to take a step.
 
-Functions to plot the full body and leg model and take in an array of leg movements to animate the walk and turn cycles
+### resetWalkStance
+Takes the body and leg models, a boolean for which set of feet should move (same as in the previous step functions), and the previous step distance. This function is meant to reset the stance of the robot when ending the walking cycle before switching to turning. It does this by completing the end of the previous step. The output of the function is the leg model, the updated foot set boolean after the step, and the array of leg positions to take the resetting step.
 
-### showModel
+### emgToTurn
+Takes the body and leg models, a boolean for which set of feet should move (same as in the previous step functions), the previous turning angle, and the maximum angle for a turn in the x-y plane. This function polls for two EMG signals to determine the angle to turn and scales the maximum turn angle to the difference between the EMG signals. If the wrist flexor signal and stronger than the wrist extensor signal, the angle to turn is positive (left turn). If the opposite is true, the angle is negative (right turn). The turning step angle is the previous step angle taken plus the new angle. The output of the function is the leg model, the updated foot set boolean after the step, the step angle taken during the function to be used in the next run, and the array of leg positions to take a step.
 
-Takes the body and leg models, the figure to plot on, the floor height, and an elevation and azmuth angle to plot a 3D figure at. This funciton draws the body as green, the "right" legs as blue, and the "left" legs as red.
+### resetTurnStance
+Takes the body and leg models, a boolean for which set of feet should move (same as in the previous step functions), and the previous turn angle. This function is meant to reset the stance of the robot when ending the turn cycle before switching to walking. It does this by completing the end of the previous turning step. The output of the function is the leg model, the updated foot set boolean after the step, and the array of leg positions to take the resetting step.
 
-### animate
+### switchMode
+Takes in a threshold of EMG to switch the mode. If the user cocontracts above the given threshold, the function returns true to indicate the mode should switch. If the cocontraction is not above threshold, the function returns false.
 
-This is the function required by the movie writer to create a video. This takes in the same parameters as the showModel function as well as the leg movements to animate the walk and turn cycles.
+## Rapsberry Pi to Raspberry Pi Communication
+Scripts used in the communications with and between Raspberry Pis.
 
-### animateBodyTranslate
+### pollEMG
+Querrys the Raspberry Pi Zero W for the wrist flexor and wrist extensor EMG values. The EMG values are constrained between 0 and 1 and the EMG values are output as a two value list with the flexor and extensor values respectivly.
 
-This function takes a specific frame number and figure to iterate through translation and rotations arrays in order to create a video of the body of the hexapod moving in all degrees of freedom independent of leg position.
+## Lynxmotiohn SSC-32U Driver
+Functions to communicate with the Lynxmotion SSC-32U to drive the 18 servos of the hexapod
 
-<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod_Body_Translation.gif" width="500">
+### angleToPW
+Takes in an angle in degrees and finds the pulse width of the pulse pulse width modulation signal
+
+### anglesToSerial
+Takes in a 6x3 numpy array for the 18 servos in the hexapod, the speed the servos should move, and the total time the movement should happen in. The function fomats the angles as a group command and outputs the command as a string.
+
+### connect
+Takes in the COM port to connect to and opens the serial port on that COM port.
+
+### disconnect
+Disconnects from a the inputted serial port.
+
+### sendData
+Takes in a serial port for control and a message to send. Sends the command over the serial port.
+
+## Controller Scripts
+Scripts for directly controlling the hexapod aggregating the total work of the full library.
+
+### controller
+Connects to the serial port of the Lynxmotiohn SSC-32U, and sets up the starting position of the hexapod. Then the function starts in the walking mode and starts moving based on the EMG signals. After each step, the function checks if the user is cocontracting to switch modes. If they are, the hexapod finishes the step to reset the stance and switches modes.
+
+### sit
+Tells the hexapod to sit with its body on the ground.
+
+### stand
+Tells the hexapod to move its legs out about the ground and then stand up
+
+### walkCycle
+The hexapod walks the input distance in the input angle direction without the need for EMG.
+
+### turnCycle
+The hexapod turns the input angle without the need for EMG.
+
+### sendPostions
+Takes in the serial port, the positions to move, and the body model. The function iterates through the array of positions to move and sequentially sends them to the Lynxmotiohn SSC-32U. After each message is sent, there is a pause.
