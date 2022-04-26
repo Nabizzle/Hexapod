@@ -1,6 +1,7 @@
 from hexapod import ssc32uDriver
 import numpy as np
 import serial
+from serial import SerialException
 import pytest
 
 
@@ -36,7 +37,7 @@ def test_anglesToSerialWrongFormat():
 
 def test_connectError():
     """Tests that error is raised when trying to connect without a servo driver"""
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(SerialException):
         ssc32uDriver.connect('COM4')
 
 def test_disconnect():
@@ -47,5 +48,5 @@ def test_disconnect():
 def test_sendDataError():
     """Tests that sending data on a port that isn't connect causes an error"""
     ser = serial.Serial()
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(SerialException):
         ssc32uDriver.sendData(ser, b'data')

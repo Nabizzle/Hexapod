@@ -23,6 +23,7 @@ Notes
 As of right now, this product may have been discontinued.
 """
 import serial
+from serial import SerialException
 import numpy as np
 from typing import Any, Optional
 
@@ -151,8 +152,8 @@ def connect(com: str) -> Any:
         ser.open()
         print(ser)
         return ser
-    except:
-        raise NotImplementedError('Serial port did not open')
+    except SerialException:
+        raise SerialException('Serial port did not open')
 
 
 def disconnect(ser: Any) -> bool:
@@ -209,5 +210,5 @@ def sendData(ser: Any, serial_string: bytes) -> bool:
     try:
         ser.write(serial_string)
         return True
-    except:
-        raise NotImplementedError('Data did not Write!')
+    except SerialException:
+        raise SerialException('Data did not Write!')
