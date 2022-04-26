@@ -150,7 +150,6 @@ def connect(com: str) -> Any:
     ser.port = com
     try:
         ser.open()
-        print(ser)
         return ser
     except SerialException:
         raise SerialException('Serial port did not open')
@@ -176,7 +175,6 @@ def disconnect(ser: Any) -> bool:
     """
     ser.close()
     if ser.is_open:
-        print('Somehow, the serial port is still open')
         return False
 
     print('Serial port is closed.')
