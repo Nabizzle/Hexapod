@@ -147,12 +147,12 @@ def connect(com: str) -> Any:
     ser = serial.Serial()
     ser.baudrate = 9600
     ser.port = com
-    ser.open()
-    if ser.is_open:
+    try:
+        ser.open()
         print(ser)
-    else:
-        print('Serial port did not open')
-    return ser
+        return ser
+    except:
+        raise Exception('Serial port did not open')
 
 
 def disconnect(ser: Any) -> bool:
@@ -175,7 +175,7 @@ def disconnect(ser: Any) -> bool:
     """
     ser.close()
     if ser.is_open:
-        print('Serial port is still open')
+        print('Somehow, the serial port is still open')
         return False
 
     print('Serial port is closed.')
@@ -206,5 +206,8 @@ def sendData(ser: Any, serial_string: bytes) -> bool:
     anglesToSerial:
         Takes the hexapods servo angles and converts them to a serial command.
     """
-    ser.write(serial_string)
-    return True
+    try:
+        ser.write(serial_string)
+        return True
+    except:
+        raise Exception('Data did not Write!')
