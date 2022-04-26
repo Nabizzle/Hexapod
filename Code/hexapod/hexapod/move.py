@@ -38,7 +38,7 @@ from typing import Tuple
 
 def stepForward(step_angle: float = 90, distance: float = 30,
                 step_height: float = 15, right_foot: bool = True,
-                z_resolution: float = 5) -> np.ndarray:
+                z_resolution: float = 10) -> np.ndarray:
     """
     Calculate the x, y, z position updates to move in a step in a direction.
 
@@ -57,7 +57,7 @@ def stepForward(step_angle: float = 90, distance: float = 30,
     right_foot: bool, default=True
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
-    z_resolution: float, default=5
+    z_resolution: float, default=10
         the size in mm of the upwards submovements.
 
     Returns
@@ -96,7 +96,7 @@ def stepForward(step_angle: float = 90, distance: float = 30,
 def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
                  step_angle: float = 15, step_height: float = 15,
                  right_foot: bool = True,
-                 z_resolution: float = 5) -> np.ndarray:
+                 z_resolution: float = 10) -> np.ndarray:
     """
     Calculate the position of a foot when turning the hexapod about an angle.
 
@@ -120,7 +120,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
         An indicator if the foot is a part of the right or left set of legs
         taking the step. The "right" set are legs 0, 2, and 4 and the "left"
         are 1, 3, and 5.
-    z_resolution: float, default=5
+    z_resolution: float, default=10
         the size in mm of the upwards submovements.
 
     Returns
@@ -169,7 +169,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
 
 def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
              step_height: float = 15, right_foot: bool = True,
-             z_resolution: float = 5) -> np.ndarray:
+             z_resolution: float = 10) -> np.ndarray:
     """
     Calcluate the positions of each foot when turning about an angle.
 
@@ -189,7 +189,7 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
     right_foot: bool, default=True
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
-    z_resolution: float, default=5
+    z_resolution: float, default=10
         the size in mm of the upwards submovements.
 
     Returns
@@ -229,7 +229,7 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
 
 
 def walk(leg_model: np.ndarray, distance: float = 30,
-         angle: float = 90, z_resolution: float = 5) -> np.ndarray:
+         angle: float = 90, z_resolution: float = 10) -> np.ndarray:
     """
     Creates a series of feet positions to use when walking in a direction.
 
@@ -247,7 +247,7 @@ def walk(leg_model: np.ndarray, distance: float = 30,
         The linear distance to move in millimeters.
     angle: float, default=90
         The direction the step is taken in in degrees. 90 degrees is forward.
-    z_resolution: float, default=5
+    z_resolution: float, default=10
         the size in mm of the upwards submovements.
 
     Returns
@@ -379,7 +379,7 @@ def walk(leg_model: np.ndarray, distance: float = 30,
 
 
 def turn(leg_model: np.ndarray, turn_angle: float = 60,
-         z_resolution: float = 5) -> np.ndarray:
+         z_resolution: float = 10) -> np.ndarray:
     """
     Creates the series of feet positions to turn the hexapod about the z axis.
 
@@ -395,7 +395,7 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
         and tibia servos as well as the feet end positions.
     turn_angle: float, default=60
         The angle to turn to. A positive angle if a left turn.
-    z_resolution: float, default=5
+    z_resolution: float, default=10
         the size in mm of the upwards submovements.
 
     Returns

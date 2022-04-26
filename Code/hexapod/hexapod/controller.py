@@ -181,7 +181,7 @@ def walkCycle(distance: float, angle: float) -> None:
     message = anglesToSerial(start_leg, 500, 2000)
     sendData(port, message)  # send the serial message
     leg_model = legModel(start_leg, body_model)
-    positions = walk(leg_model, distance, angle)
+    positions = walk(leg_model, distance, angle, 10)
     sendPositions(port, positions, body_model)
 
 
@@ -210,7 +210,7 @@ def turnCycle(turn_angle: float) -> None:
     message = anglesToSerial(start_leg, 500, 2000)
     sendData(port, message)  # send the serial message
     leg_model = legModel(start_leg, body_model)
-    positions = turn(leg_model, turn_angle)
+    positions = turn(leg_model, turn_angle, 10)
     sendPositions(port, positions, body_model)
 
 
@@ -246,14 +246,10 @@ def sendPositions(port: Any, positions: np.ndarray,
     using these parameters is unneeded. Also note that there is a 5ms delay
     between commands.
     """
-    prev_angles = np.zeros((6, 3))
     for position in positions:
         # convert the feet positions to angles
-        next_angles = recalculateLegAngles(position, body_model)
-        # Smoothes the servo angle change
-        angles = next_angles * 0.05 + prev_angles * 0.95
+        angles = recalculateLegAngles(position, body_model)
         # get the serial message from the angles
         message = anglesToSerial(angles, 2000)
         sendData(port, message)  # send the serial message
-        prev_angles = next_angles
     return True
