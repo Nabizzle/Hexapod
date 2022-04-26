@@ -830,7 +830,7 @@ def pollEMG() -> Tuple[float, float]:
     Raspberry Pi Zero W that records the EMG.
     """
     fcr_emg = 1
-    edc_emg = 1
+    edc_emg = 0
 
     fcr_emg = min(fcr_emg, 1.0)
     fcr_emg = max(fcr_emg, 0.0)
