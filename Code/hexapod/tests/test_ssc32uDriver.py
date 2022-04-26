@@ -42,7 +42,7 @@ def test_connectError():
 def test_disconnect():
     """Tests that closing port is successful"""
     ser = serial.Serial()
-    assert ssc32uDriver.disconnect(ser) == True
+    assert ssc32uDriver.disconnect(ser) is True
 
 def test_sendDataError():
     """Tests that sending data on a port that isn't connect causes an error"""
