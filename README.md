@@ -1,10 +1,22 @@
-# Hexapod Project Description
+# EMG Controlled 18 DoF Hexapod
 
 ![Rendered Hexapod from Fusion360](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod.PNG)
 
 [![DeepSource](https://deepsource.io/gh/Nabizzle/Hexapod.svg/?label=active+issues&show_trend=true&token=VB3rbYYMZzJr8nYxjxjMuPUo)](https://deepsource.io/gh/Nabizzle/Hexapod/?ref=repository-badge)
 [![DeepSource](https://deepsource.io/gh/Nabizzle/Hexapod.svg/?label=resolved+issues&show_trend=true&token=VB3rbYYMZzJr8nYxjxjMuPUo)](https://deepsource.io/gh/Nabizzle/Hexapod/?ref=repository-badge)
 [![codecov](https://codecov.io/gh/Nabizzle/Hexapod/branch/main/graph/badge.svg?token=Y0SA932W1L)](https://codecov.io/gh/Nabizzle/Hexapod)
+
+# Code Coverage Graph
+
+<p align="center">
+  <img 
+    width="400"
+    height="400"
+    src="https://codecov.io/gh/Nabizzle/Hexapod/branch/main/graphs/sunburst.svg?token=Y0SA932W1L"
+  >
+</p>
+
+# Hexapod Project Description
 
 The ultimate goal of this project is to create a Hexapod, or six legged robot, that can move and turn in any direction in the x-y plane and rotate and translate the body of the robot along each axis independent of the legs of the robot. The control of the robot will be from control using two EMG sensors that have their data transmitted to the hexapod or from a phone app. The initial design was adapted from the design of [Capers II](https://www.instructables.com/Capers-II-a-Hexapod-Robot/) recreated in Fusion360 and made to be radially symetrical.
 
