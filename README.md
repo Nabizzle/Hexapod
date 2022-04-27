@@ -2,16 +2,26 @@
 
 ![Rendered Hexapod from Fusion360](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod.PNG)
 
+<p align="center">
+  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/walk.gif" width="500" />
+  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/turn.gif" width="500" /> 
+  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/sit%20and%20stand.gif" width="500" />
+</p>
+
+<div align='center'>
+  
 [![DeepSource](https://deepsource.io/gh/Nabizzle/Hexapod.svg/?label=active+issues&show_trend=true&token=VB3rbYYMZzJr8nYxjxjMuPUo)](https://deepsource.io/gh/Nabizzle/Hexapod/?ref=repository-badge)
 [![DeepSource](https://deepsource.io/gh/Nabizzle/Hexapod.svg/?label=resolved+issues&show_trend=true&token=VB3rbYYMZzJr8nYxjxjMuPUo)](https://deepsource.io/gh/Nabizzle/Hexapod/?ref=repository-badge)
 [![codecov](https://codecov.io/gh/Nabizzle/Hexapod/branch/main/graph/badge.svg?token=Y0SA932W1L)](https://codecov.io/gh/Nabizzle/Hexapod)
+  
+</div>
 
 # Code Coverage Graph
 
 <p align="center">
   <img 
-    width="400"
-    height="400"
+    width="300"
+    height="300"
     src="https://codecov.io/gh/Nabizzle/Hexapod/branch/main/graphs/sunburst.svg?token=Y0SA932W1L"
   >
 </p>
@@ -192,11 +202,17 @@ Tells the hexapod to sit with its body on the ground.
 ### stand
 Tells the hexapod to move its legs out about the ground and then stand up
 
+<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/sit%20and%20stand.gif" width="700">
+
 ### walkCycle
 The hexapod walks the input distance in the input angle direction without the need for EMG.
 
+<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/walk.gif" width="700">
+
 ### turnCycle
 The hexapod turns the input angle without the need for EMG.
+
+<img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/turn.gif" width="700">
 
 ### sendPostions
 Takes in the serial port, the positions to move, and the body model. The function iterates through the array of positions to move and sequentially sends them to the Lynxmotiohn SSC-32U. After each message is sent, there is a pause.
