@@ -56,6 +56,7 @@ def test_disconnect():
 
 
 def test_sendData():
+    """Tests sending data over a debug port"""
     ser = serial.serial_for_url('loop://?logging=debug')
     assert ssc32uDriver.sendData(ser, b'data')
 
