@@ -3,9 +3,9 @@
 ![Rendered Hexapod from Fusion360](https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/Hexapod.PNG)
 
 <p align="center">
-  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/walk.gif" width="500" />
-  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/turn.gif" width="500" /> 
-  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/sit%20and%20stand.gif" width="500" />
+  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/walk.gif" width="400" />
+  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/turn.gif" width="400" /> 
+  <img src="https://github.com/Nabizzle/Hexapod/blob/main/Docs/Media/sit%20and%20stand.gif" width="400" />
 </p>
 
 <div align='center'>
