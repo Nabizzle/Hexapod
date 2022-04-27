@@ -145,11 +145,9 @@ def connect(com: str) -> Any:
     --------
     disconnect
     """
-    ser = serial.Serial()
-    ser.baudrate = 9600
-    ser.port = com
     try:
-        ser.open()
+        ser = serial.serial_for_url(com)
+        ser.baudrate = 9600
         return ser
     except SerialException:
         raise SerialException('Serial port did not open')

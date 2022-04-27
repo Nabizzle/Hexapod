@@ -35,15 +35,30 @@ def test_anglesToSerialWrongFormat():
     with pytest.raises(Exception):
         ssc32uDriver.anglesToSerial(angles, speed, time)
 
+
+def test_connect():
+    """Tests that the connection to a serial port works"""
+    test_ser = serial.serial_for_url('loop://?logging=debug')
+    ser = ssc32uDriver.connect('loop://?logging=debug')
+    assert ser.port == test_ser.port and ser.baudrate == 9600
+
+
 def test_connectError():
     """Tests that error is raised when trying to connect without a servo driver"""
     with pytest.raises(SerialException):
-        ssc32uDriver.connect('COM4')
+        ssc32uDriver.connect('COM-1')
+
 
 def test_disconnect():
     """Tests that closing port is successful"""
-    ser = serial.Serial()
+    ser = serial.serial_for_url('loop://?logging=debug')
     assert ssc32uDriver.disconnect(ser) is True
+
+
+def test_sendData():
+    ser = serial.serial_for_url('loop://?logging=debug')
+    assert ssc32uDriver.sendData(ser, b'data')
+
 
 def test_sendDataError():
     """Tests that sending data on a port that isn't connect causes an error"""
