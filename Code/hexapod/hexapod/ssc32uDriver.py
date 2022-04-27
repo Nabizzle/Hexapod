@@ -172,9 +172,6 @@ def disconnect(ser: Any) -> bool:
     connect
     """
     ser.close()
-    if ser.is_open:
-        return False
-
     print('Serial port is closed.')
     return True
 
