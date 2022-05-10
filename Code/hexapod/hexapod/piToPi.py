@@ -19,12 +19,17 @@ from adafruit_mcp3xxx.analog_in import AnalogIn
 from typing import Tuple
 
 
-def recieveEMG() -> Tuple[float, float]:
+def recieveEMG(gain: int) -> Tuple[float, float]:
     """
     Pull EMG from the Raspberry Pi Zero W
 
     Read in EMG values on the first two ADC channels of the Raspberry Pi
     zero through the MCP3008. This is done through a TCP IP socket.
+
+    Parameters
+    ----------
+    gain: int
+        A multiplier of the EMG input to amplify the signal.
 
     Returns
     -------
@@ -39,7 +44,7 @@ def recieveEMG() -> Tuple[float, float]:
     fcr_channel = AnalogIn(mcp, MCP.P0)
     edc_channel = AnalogIn(mcp, MCP.P1)
     # get the 16 value on each EMG channel and normalize it
-    fcr_emg = fcr_channel.value / 65536.0
-    edc_emg = edc_channel.value / 65536.0
+    fcr_emg = fcr_channel.value / 65536.0 * gain
+    edc_emg = edc_channel.value / 65536.0 * gain
 
     return (fcr_emg, edc_emg)
