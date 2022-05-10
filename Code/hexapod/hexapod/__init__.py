@@ -74,7 +74,7 @@ move.switchMode:
     Switches walking modes if the user is cocontracting their muscles.
 move.pollEMG:
     Get EMG signals and normalize them.
-piTopi.recieveEMG:
+piTopi.receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
 rotation.xRot:
     Return the rotation matrix for a rotation about the x axis.

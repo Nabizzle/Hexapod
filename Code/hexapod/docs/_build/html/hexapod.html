@@ -1023,7 +1023,7 @@ degrees.</p>
 <section id="id4">
 <h3>Functions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt>recieveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+<dt>receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 </dd>
 </dl>
 </section>
@@ -1032,8 +1032,8 @@ degrees.</p>
 <p>This module will not function unless it is used on a Raspberry Pi or other
 board that can use the board library from Adafruit.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="hexapod.piToPi.recieveEMG">
-<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">recieveEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.recieveEMG" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="hexapod.piToPi.receiveEMG">
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">receiveEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.receiveEMG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 <p>Read in EMG values on the first two ADC channels of the Raspberry Pi
 zero through the MCP3008. This is done through a TCP IP socket.</p>
@@ -1395,7 +1395,7 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 </dd>
 <dt>move.pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
 </dd>
-<dt>piTopi.recieveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+<dt>piTopi.receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 </dd>
 <dt>rotation.xRot:</dt><dd><p>Return the rotation matrix for a rotation about the x axis.</p>
 </dd>

@@ -3,7 +3,7 @@ Scripts used in the communications with and between Raspberry Pis.
 
 Functions
 ---------
-recieveEMG:
+receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
 
 Notes
@@ -19,7 +19,7 @@ from adafruit_mcp3xxx.analog_in import AnalogIn
 from typing import Tuple
 
 
-def recieveEMG(gain: int) -> Tuple[float, float]:
+def receiveEMG(gain: int) -> Tuple[float, float]:
     """
     Pull EMG from the Raspberry Pi Zero W
 
