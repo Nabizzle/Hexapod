@@ -20,17 +20,19 @@ turnCycle:
 sendPositions:
     Send each position in a set to the servo controller.
 """
+import string
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos
 from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
                           resetTurnStance, walk, turn)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
+from hexapod.piToPi import emgEstablishServer
 import numpy as np
 from typing import Any
 from time import sleep
 
 
-def controller(mode: bool) -> None:
+def controller(usb_port: string, mode: bool) -> None:
     """
     Controls the hexapod to walk or turn based on EMG.
 
@@ -57,7 +59,8 @@ def controller(mode: bool) -> None:
     This function has the serial port to communicate to and the threshold
     of cocontraction to switch modes hardcoded.
     """
-    port = connect('COM4')  # connect to the servo controller
+    port = connect(usb_port)  # connect to the servo controller
+    conn = emgEstablishServer()
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
@@ -75,15 +78,15 @@ def controller(mode: bool) -> None:
         if mode:  # True = walk, False = turn
             [leg_model, right_foot, previous_step, positions] =\
                 emgToWalk(body_model, leg_model, right_foot, previous_step,
-                          max_distance=30)
+                          conn, max_distance=30)
         else:
             [leg_model, right_foot, previous_turn_angle, positions] =\
                 emgToTurn(body_model, leg_model, right_foot,
-                          previous_turn_angle, max_turn_angle=15)
+                          conn, previous_turn_angle, max_turn_angle=15)
 
         sendPositions(port, positions, body_model)
 
-        if switchMode(0.75):
+        if switchMode(conn, 0.75):
             if mode:
                 [leg_model, right_foot, positions] =\
                     resetWalkStance(body_model, leg_model, right_foot,
@@ -97,7 +100,7 @@ def controller(mode: bool) -> None:
             sendPositions(port, positions, body_model)
 
 
-def sit() -> None:
+def sit(usb_port: string) -> None:
     """
     Tells the Hexapod to sit with its body on the ground.
 
@@ -110,7 +113,7 @@ def sit() -> None:
     port: Serial Port
         The COM port that the servo signals are sent over.
     """
-    port = connect('COM4')  # connect to the servo controller
+    port = connect(usb_port)  # connect to the servo controller
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
     sit_leg = startLegPos(body_model, start_radius=120, start_height=10)
@@ -119,7 +122,7 @@ def sit() -> None:
     sendData(port, message)  # send the serial message
 
 
-def stand() -> None:
+def stand(usb_port: string) -> None:
     """
     Tells the hexapod to stand in the neutral position.
 
@@ -137,7 +140,7 @@ def stand() -> None:
     port for the Lynxmotion SSC32U.
     """
     # controls the hexapod to walk or turn and send the commands
-    port = connect('COM4')  # connect to the servo controller
+    port = connect(usb_port)  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
@@ -152,7 +155,7 @@ def stand() -> None:
     sendData(port, message)  # send the serial message
 
 
-def walkCycle(distance: float, angle: float) -> None:
+def walkCycle(usb_port: string, distance: float, angle: float) -> None:
     """
     Tells the hexapod to walk a specified distance without the need for EMG.
 
@@ -172,7 +175,7 @@ def walkCycle(distance: float, angle: float) -> None:
     hexapod.move.walk
     """
     # controls the hexapod to walk or turn and send the commands
-    port = connect('COM4')  # connect to the servo controller
+    port = connect(usb_port)  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
@@ -185,7 +188,7 @@ def walkCycle(distance: float, angle: float) -> None:
     sendPositions(port, positions, body_model)
 
 
-def turnCycle(turn_angle: float) -> None:
+def turnCycle(usb_port: string, turn_angle: float) -> None:
     """
     Tells the hexapod to turn to an angle without EMG
 
@@ -201,7 +204,7 @@ def turnCycle(turn_angle: float) -> None:
     --------
     hexapod.move.turn
     """
-    port = connect('COM4')  # connect to the servo controller
+    port = connect(usb_port)  # connect to the servo controller
     # setup the starting robot positions
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
                          body_offset=85)
