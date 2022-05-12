@@ -33,6 +33,8 @@ pollEMG:
 from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np
 from hexapod.leg import getFeetPos, recalculateLegAngles, legModel
+from hexapod.piToPi import decodeEMG
+import socket
 from typing import Tuple
 
 
@@ -517,7 +519,7 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
 
 
 def emgToWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
-              previous_step: float,
+              previous_step: float, conn: socket,
               max_distance: float = 30) -> Tuple[np.ndarray, bool, float,
                                                  np.ndarray]:
     """
@@ -567,7 +569,7 @@ def emgToWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     is, the farther a change in EMG will move the hexapod.
     """
     # call a function to poll for forearm emg values from the raspberry pi zero
-    [fcr_emg, edc_emg] = pollEMG()
+    [fcr_emg, edc_emg] = pollEMG(conn)
     # finds the difference between EMG signals to move forward or backwards
     emg = fcr_emg - edc_emg
 
@@ -648,7 +650,7 @@ def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
 
 
 def emgToTurn(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
-              previous_turn_angle: float,
+              previous_turn_angle: float, conn: socket,
               max_turn_angle: float = 15) -> Tuple[np.ndarray, bool, float,
                                                    np.ndarray]:
     """
@@ -698,7 +700,7 @@ def emgToTurn(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     the farther a change in EMG will turn the hexapod.
     """
     # call a function to poll for forearm emg values from the raspberry pi zero
-    [fcr_emg, edc_emg] = pollEMG()
+    [fcr_emg, edc_emg] = pollEMG(conn)
     # finds the difference between EMG signals to move right or left
     emg = fcr_emg - edc_emg
 
@@ -779,7 +781,7 @@ def resetTurnStance(body_model: np.ndarray, leg_model: np.ndarray,
     return (leg_model, right_foot, turn_positions)
 
 
-def switchMode(threshold: float) -> bool:
+def switchMode(conn: socket, threshold: float) -> bool:
     """
     Switches walking modes if the user is cocontracting their muscles.
 
@@ -807,12 +809,12 @@ def switchMode(threshold: float) -> bool:
     This function is called after every EMG based step to see if the person is
     cocontracting hard enough to switch modes.
     """
-    [fcr_emg, edc_emg] = pollEMG()
+    [fcr_emg, edc_emg] = pollEMG(conn)
 
     return bool(fcr_emg > threshold and edc_emg > threshold)
 
 
-def pollEMG() -> Tuple[float, float]:
+def pollEMG(conn: socket) -> Tuple[float, float]:
     """
     Get EMG signals and normalize them
 
@@ -829,8 +831,7 @@ def pollEMG() -> Tuple[float, float]:
     This code just scales the EMG values to set it apart from the code on the
     Raspberry Pi Zero W that records the EMG.
     """
-    fcr_emg = 1
-    edc_emg = 0
+    fcr_emg, edc_emg = decodeEMG(conn)
 
     fcr_emg = min(fcr_emg, 1.0)
     fcr_emg = max(fcr_emg, 0.0)
