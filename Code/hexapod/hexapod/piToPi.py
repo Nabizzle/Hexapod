@@ -17,9 +17,11 @@ import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 from typing import Tuple
+import socket
 
 
-def receiveEMG(gain: int) -> Tuple[float, float]:
+def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 1,
+               gain_edc: float = 5) -> Tuple[float, float]:
     """
     Pull EMG from the Raspberry Pi Zero W
 
@@ -44,7 +46,44 @@ def receiveEMG(gain: int) -> Tuple[float, float]:
     fcr_channel = AnalogIn(mcp, MCP.P0)
     edc_channel = AnalogIn(mcp, MCP.P1)
     # get the 16 value on each EMG channel and normalize it
-    fcr_emg = fcr_channel.value / 65536.0 * gain
-    edc_emg = edc_channel.value / 65536.0 * gain
+    fcr_emg = fcr_channel.value / 65536.0 * gain_fcr
+    edc_emg = edc_channel.value / 65536.0 * gain_edc
 
     return (fcr_emg, edc_emg)
+
+
+def emgEstablishServer() -> socket:
+    HOST = "192.168.4.1"  # Standard loopback interface address (localhost)
+    PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, _ = s.accept()
+    return conn
+
+
+def decodeEMG(conn: socket, fcr_emg: float = 0, edc_emg: float = 0):
+    data = conn.recv(1024)
+    emg_string = data.decode('UTF-8')
+    conn.sendall(data)
+    emg = emg_string.split(",")
+    fcr_emg = float(emg[0])
+    edc_emg = float(emg[1])
+
+    return (fcr_emg, edc_emg)
+
+
+def emgClient():
+    HOST = "192.168.4.1"  # The server's hostname or IP address
+    PORT = 65432  # The port used by the server
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+        while True:
+            emg = receiveEMG(fcr_emg=0, edc_emg=0, gain_fcr=0.5, gain_edc=10)
+            emg_string=bytes(str(emg[0]) + "," + str(emg[1]), 'ascii')
+            s.sendall(emg_string)
+            data = s.recv(1024)
+            print(f"Received {data!r}")
