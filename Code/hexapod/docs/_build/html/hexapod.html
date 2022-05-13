@@ -117,7 +117,7 @@ it to utilize most of the functions.</p>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.controller">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.controller" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode:</span> <span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.controller" title="Permalink to this definition">¶</a></dt>
 <dd><p>Controls the hexapod to walk or turn based on EMG.</p>
 <p>Takes in EMG signals and tells the hexapod how to walk or turn based on
 those EMG signals. The signals are sent over a COM port to the Lynxmotion
@@ -127,6 +127,8 @@ when using the hexapod for its intended purpose.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>usb_port: string</strong></dt><dd><p>The name of the port to connect to</p>
+</dd>
 <dt><strong>mode: bool</strong></dt><dd><p>This parameter determines if the hexapod is walking or turning. <cite>mode</cite>
 equalling 1 is walking and 0 is turning.</p>
 </dd>
@@ -154,7 +156,7 @@ position as a servo command to the Lynxmotion SSC32U.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>port: Serial Port</strong></dt><dd><p>The COM port that the servo signals are sent over</p>
+<dt><strong>port: Serial Port</strong></dt><dd><p>The USB port that the servo signals are sent over</p>
 </dd>
 <dt><strong>positions: np.ndarray</strong></dt><dd><p>A numpy array of a set of foot positions to command the hexapod to.
 These foot positions are a 6x3 numpy array of x, y, z positions for
@@ -181,7 +183,7 @@ between commands.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.sit">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">sit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.sit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">sit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.sit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tells the Hexapod to sit with its body on the ground.</p>
 <p>Recreates the neutral hexapod positions, but with a lowered height so that
 the body of the hexapod touches the ground. This is the position that the
@@ -189,7 +191,7 @@ hexapod should be turned off in.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>port: Serial Port</strong></dt><dd><p>The COM port that the servo signals are sent over.</p>
+<dt><strong>usb_port: string</strong></dt><dd><p>The name of the port to connect to</p>
 </dd>
 </dl>
 </dd>
@@ -198,10 +200,18 @@ hexapod should be turned off in.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.stand">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">stand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.stand" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">stand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.stand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tells the hexapod to stand in the neutral position.</p>
 <p>Recreates the neutral hexapod positions that occur at the beginning
 of the controller function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>usb_port: string</strong></dt><dd><p>The name of the port to connect to</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
@@ -216,13 +226,15 @@ port for the Lynxmotion SSC32U.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.turnCycle">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">turnCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.turnCycle" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">turnCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turn_angle:</span> <span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.turnCycle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tells the hexapod to turn to an angle without EMG</p>
 <p>This function just uses the move.turn function and sends its positions to
 the Lynxmotion SSC32U.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>usb_port: string</strong></dt><dd><p>The name of the port to connect to</p>
+</dd>
 <dt><strong>turn_angle: float, default=60</strong></dt><dd><p>The angle to turn to. A positive angle if a left turn.</p>
 </dd>
 </dl>
@@ -238,13 +250,15 @@ the Lynxmotion SSC32U.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.controller.walkCycle">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">walkCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.walkCycle" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">walkCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle:</span> <span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.walkCycle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
 <p>This function just uses the move.walk function and sends its positions to
 the Lynxmotion SSC32U.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>usb_port: string</strong></dt><dd><p>The name of the port to connect to</p>
+</dd>
 <dt><strong>distance: float</strong></dt><dd><p>The length in millimeters that the hexapod will walk. This distance is
 broken up into steps based on the max step size in move.walk</p>
 </dd>
@@ -541,7 +555,7 @@ z axis.</p>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.move.emgToTurn">
-<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">emgToTurn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_turn_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.emgToTurn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">emgToTurn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model:</span> <span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model:</span> <span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot:</span> <span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_turn_angle:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_turn_angle:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">15</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.emgToTurn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
 <p>Takes two forearm EMG signals and turns an angle determined by how large
 the difference between the two EMG signals are. The angle to turn is
@@ -559,6 +573,8 @@ and tibia servos as well as the feet end positions.</p>
 The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
 </dd>
 <dt><strong>previous_turn_angle: float</strong></dt><dd><p>The angle the hexapod turned the last time this function was called.</p>
+</dd>
+<dt><strong>conn: socket</strong></dt><dd><p>The server socket EMG data is send to</p>
 </dd>
 <dt><strong>max_turn_angle: float, default=15</strong></dt><dd><p>The angle that the EMG difference scales to. The higher the
 difference, the closer to the <cite>max_turn_angle</cite> the hexapod will turn.</p>
@@ -592,7 +608,7 @@ the farther a change in EMG will turn the hexapod.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.move.emgToWalk">
-<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">emgToWalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.emgToWalk" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">emgToWalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model:</span> <span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model:</span> <span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot:</span> <span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_distance:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">30</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.emgToWalk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Walks a dynamic distance based a normalized EMG input.</p>
 <p>Takes two forearm EMG signals and walks forward a distance determined
 by how large the difference between the two EMG signals are. The distance
@@ -610,6 +626,8 @@ and tibia servos as well as the feet end positions.</p>
 The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
 </dd>
 <dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked the last time this function was called.</p>
+</dd>
+<dt><strong>conn: socket</strong></dt><dd><p>The server socket EMG data is send to</p>
 </dd>
 <dt><strong>max_distance: float, default=30</strong></dt><dd><p>The distance that the EMG difference scales to. The higher the
 difference, the closer to the <cite>max_distance</cite> the hexapod will walk.</p>
@@ -643,13 +661,19 @@ is, the farther a change in EMG will move the hexapod.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.move.pollEMG">
-<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">pollEMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.pollEMG" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">pollEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.pollEMG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get EMG signals and normalize them</p>
 <p>Queries the Raspberry pi Zero W for recorded forearm EMG values and then
 scales them from 0 to 1.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>conn: socket</strong></dt><dd><p>The server socket EMG data is send to</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
 <dt>[fcr_emg, edc_emg]: Tuple[float, float]</dt><dd><p>The two forearm EMG signals</p>
 </dd>
 </dl>
@@ -890,13 +914,15 @@ position and not a relative position change.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.move.switchMode">
-<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">switchMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#hexapod.move.switchMode" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">switchMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold:</span> <span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#hexapod.move.switchMode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
 <p>Checks if both EMG signals are above a threshold value to indicate if the
 hexapod should switch movement modes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>conn: socket</strong></dt><dd><p>The server socket EMG data is send to</p>
+</dd>
 <dt><strong>threshold: float</strong></dt><dd><p>The value above which both EMG signals need to be to cause a mode
 switch. This value should be between 0 and 1.</p>
 </dd>
@@ -1025,6 +1051,12 @@ degrees.</p>
 <dl class="simple">
 <dt>receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 </dd>
+<dt>emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
+</dd>
+<dt>decodeEMG:</dt><dd><p>Convert byte string EMG data to floats</p>
+</dd>
+<dt>emgClient:</dt><dd><p>Send EMG data to the EMG server</p>
+</dd>
 </dl>
 </section>
 <section id="notes">
@@ -1032,8 +1064,76 @@ degrees.</p>
 <p>This module will not function unless it is used on a Raspberry Pi or other
 board that can use the board library from Adafruit.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="hexapod.piToPi.decodeEMG">
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">decodeEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fcr_emg:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edc_emg:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.decodeEMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert byte string EMG data to floats</p>
+<p>Takes the received EMG data in the form of a byte string and converts the
+data to floats by splitting on the commas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>conn: socket</strong></dt><dd><p>The server socket EMG data is send to</p>
+</dd>
+<dt><strong>fcr_emg: float</strong></dt><dd><p>The wrist flexor EMG data</p>
+</dd>
+<dt><strong>edc_emg: float</strong></dt><dd><p>The wrist extensor EMG data</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>[fcr_emg, edc_emg]: Tuple[float, float]</dt><dd><p>The normalized forearm EMG values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.piToPi.emgEstablishServer" title="hexapod.piToPi.emgEstablishServer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.emgEstablishServer</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.piToPi.emgClient">
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">emgClient</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.piToPi.emgClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send EMG data to the EMG server</p>
+<p>Establishes a connection to the EMG server on the hexapodNetwork wifi and
+sends EMG data to it</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.piToPi.emgEstablishServer" title="hexapod.piToPi.emgEstablishServer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.emgEstablishServer</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="#hexapod.piToPi.receiveEMG" title="hexapod.piToPi.receiveEMG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.receiveEMG</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.piToPi.emgEstablishServer">
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">emgEstablishServer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></span><a class="headerlink" href="#hexapod.piToPi.emgEstablishServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the TCPIP server to recieve EMG data</p>
+<p>Establish the TCPIP server on the hexapodNetwork wifi to recieve EMG data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>conn: socket</dt><dd><p>A new socket opbject to send EMG over</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.piToPi.emgClient" title="hexapod.piToPi.emgClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.emgClient</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hexapod.piToPi.receiveEMG">
-<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">receiveEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.receiveEMG" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">receiveEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcr_emg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edc_emg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain_fcr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain_edc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.receiveEMG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 <p>Read in EMG values on the first two ADC channels of the Raspberry Pi
 zero through the MCP3008. This is done through a TCP IP socket.</p>
@@ -1051,6 +1151,12 @@ zero through the MCP3008. This is done through a TCP IP socket.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.piToPi.emgClient" title="hexapod.piToPi.emgClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.emgClient</span></code></a></dt><dd></dd>
+</dl>
+</div>
 </dd></dl>
 
 </section>
@@ -1396,6 +1502,12 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 <dt>move.pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
 </dd>
 <dt>piTopi.receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+</dd>
+<dt>piTopi.emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
+</dd>
+<dt>piTopi.decodeEMG:</dt><dd><p>Convert byte string EMG data to floats</p>
+</dd>
+<dt>piTopi.emgClient:</dt><dd><p>Send EMG data to the EMG server</p>
 </dd>
 <dt>rotation.xRot:</dt><dd><p>Return the rotation matrix for a rotation about the x axis.</p>
 </dd>
