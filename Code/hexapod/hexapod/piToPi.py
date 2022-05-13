@@ -20,7 +20,7 @@ from typing import Tuple
 import socket
 
 
-def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 1,
+def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 5,
                gain_edc: float = 5) -> Tuple[float, float]:
     """
     Pull EMG from the Raspberry Pi Zero W
