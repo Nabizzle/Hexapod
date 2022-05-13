@@ -33,6 +33,7 @@ jobs:
           pip install pytest pytest-cov
           pip install numpy==1.22.3
           pip install pyserial==3.5
+          pip install adafruit-circuitpython-mcp3xxx==1.4.7
           # Run pytest with --cov and --cov-report flags
           pytest --cov=./ --cov-report xml
           # Install deepsource CLI
