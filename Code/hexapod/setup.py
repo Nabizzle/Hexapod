@@ -11,6 +11,7 @@ setup(
     install_requires=['numpy==1.22.3', 'pyserial==3.5',
                       'adafruit-circuitpython-mcp3xxx==1.4.7'],
     setup_requires=['pytest-runner==6.0.0'],
-    tests_require=['pytest==7.1.0', 'numpy==1.22.3' 'pyserial==3.5'],
+    tests_require=['pytest==7.1.0', 'numpy==1.22.3' 'pyserial==3.5',
+                   'adafruit-circuitpython-mcp3xxx==1.4.7'],
     test_suite='tests',
 )
