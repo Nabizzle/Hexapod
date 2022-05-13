@@ -21,7 +21,7 @@ import busio
 import digitalio
 try:
     import board
-except(NotImplementedError):
+except NotImplementedError:
     print("Could not find a board")
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
@@ -107,7 +107,7 @@ def decodeEMG(conn: socket, fcr_emg: float = 0,
         The wrist flexor EMG data
     edc_emg: float
         The wrist extensor EMG data
-    
+
     Returns
     -------
     [fcr_emg, edc_emg]: Tuple[float, float]
@@ -146,7 +146,7 @@ def emgClient() -> None:
         s.connect((HOST, PORT))
         while True:
             emg = receiveEMG(fcr_emg=0, edc_emg=0, gain_fcr=0.5, gain_edc=10)
-            emg_string=bytes(str(emg[0]) + "," + str(emg[1]), 'ascii')
+            emg_string = bytes(str(emg[0]) + "," + str(emg[1]), 'ascii')
             s.sendall(emg_string)
             data = s.recv(1024)
             print(f"Received {data!r}")
