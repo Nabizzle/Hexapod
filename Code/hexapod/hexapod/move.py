@@ -542,6 +542,8 @@ def emgToWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
     previous_step: float
         The distance the hexapod walked the last time this function was called.
+    conn: socket
+        The server socket EMG data is send to
     max_distance: float, default=30
         The distance that the EMG difference scales to. The higher the
         difference, the closer to the `max_distance` the hexapod will walk.
@@ -673,6 +675,8 @@ def emgToTurn(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
     previous_turn_angle: float
         The angle the hexapod turned the last time this function was called.
+    conn: socket
+        The server socket EMG data is send to
     max_turn_angle: float, default=15
         The angle that the EMG difference scales to. The higher the
         difference, the closer to the `max_turn_angle` the hexapod will turn.
@@ -790,6 +794,8 @@ def switchMode(conn: socket, threshold: float) -> bool:
 
     Parameters
     ----------
+    conn: socket
+        The server socket EMG data is send to
     threshold: float
         The value above which both EMG signals need to be to cause a mode
         switch. This value should be between 0 and 1.
@@ -820,6 +826,11 @@ def pollEMG(conn: socket) -> Tuple[float, float]:
 
     Queries the Raspberry pi Zero W for recorded forearm EMG values and then
     scales them from 0 to 1.
+
+    Parameters
+    ----------
+    conn: socket
+        The server socket EMG data is send to
 
     Returns
     -------

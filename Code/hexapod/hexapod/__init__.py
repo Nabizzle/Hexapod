@@ -76,6 +76,12 @@ move.pollEMG:
     Get EMG signals and normalize them.
 piTopi.receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
+piTopi.emgEstablishserver:
+    Open the TCPIP server to recieve EMG data
+piTopi.decodeEMG:
+    Convert byte string EMG data to floats
+piTopi.emgClient:
+    Send EMG data to the EMG server
 rotation.xRot:
     Return the rotation matrix for a rotation about the x axis.
 rotation.yRot:

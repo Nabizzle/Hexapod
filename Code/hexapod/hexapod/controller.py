@@ -44,6 +44,8 @@ def controller(usb_port: string, mode: bool) -> None:
 
     Parameters
     ----------
+    usb_port: string
+        The name of the port to connect to
     mode: bool
         This parameter determines if the hexapod is walking or turning. `mode`
         equalling 1 is walking and 0 is turning.
@@ -110,8 +112,8 @@ def sit(usb_port: string) -> None:
 
     Parameters
     ----------
-    port: Serial Port
-        The COM port that the servo signals are sent over.
+    usb_port: string
+        The name of the port to connect to
     """
     port = connect(usb_port)  # connect to the servo controller
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
@@ -128,6 +130,11 @@ def stand(usb_port: string) -> None:
 
     Recreates the neutral hexapod positions that occur at the beginning
     of the controller function.
+
+    Parameters
+    ----------
+    usb_port: string
+        The name of the port to connect to
 
     See Also
     --------
@@ -164,6 +171,8 @@ def walkCycle(usb_port: string, distance: float, angle: float) -> None:
 
     Parameters
     ----------
+    usb_port: string
+        The name of the port to connect to
     distance: float
         The length in millimeters that the hexapod will walk. This distance is
         broken up into steps based on the max step size in move.walk
@@ -197,6 +206,8 @@ def turnCycle(usb_port: string, turn_angle: float) -> None:
 
     Parameters
     ----------
+    usb_port: string
+        The name of the port to connect to
     turn_angle: float, default=60
         The angle to turn to. A positive angle if a left turn.
 
@@ -228,7 +239,7 @@ def sendPositions(port: Any, positions: np.ndarray,
     Parameters
     ----------
     port: Serial Port
-        The COM port that the servo signals are sent over
+        The USB port that the servo signals are sent over
     positions: np.ndarray
         A numpy array of a set of foot positions to command the hexapod to.
         These foot positions are a 6x3 numpy array of x, y, z positions for

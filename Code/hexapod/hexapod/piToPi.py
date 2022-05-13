@@ -5,6 +5,12 @@ Functions
 ---------
 receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
+emgEstablishserver:
+    Open the TCPIP server to recieve EMG data
+decodeEMG:
+    Convert byte string EMG data to floats
+emgClient:
+    Send EMG data to the EMG server
 
 Notes
 -----
@@ -40,6 +46,10 @@ def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 5,
     -------
     [fcr_emg, edc_emg]: Tuple[float, float]
         The normalized forearm EMG values.
+
+    See Also
+    --------
+    hexapod.piToPi.emgClient
     """
     spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
     cs = digitalio.DigitalInOut(board.D5)
@@ -56,6 +66,20 @@ def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 5,
 
 
 def emgEstablishServer() -> socket:
+    """
+    Open the TCPIP server to recieve EMG data
+
+    Establish the TCPIP server on the hexapodNetwork wifi to recieve EMG data.
+
+    Returns
+    -------
+    conn: socket
+        A new socket opbject to send EMG over
+
+    See Also
+    --------
+    hexapod.piToPi.emgClient
+    """
     HOST = "192.168.4.1"  # Standard loopback interface address (localhost)
     PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
@@ -67,7 +91,32 @@ def emgEstablishServer() -> socket:
     return conn
 
 
-def decodeEMG(conn: socket, fcr_emg: float = 0, edc_emg: float = 0):
+def decodeEMG(conn: socket, fcr_emg: float = 0,
+              edc_emg: float = 0) -> Tuple[float, float]:
+    """
+    Convert byte string EMG data to floats
+
+    Takes the received EMG data in the form of a byte string and converts the
+    data to floats by splitting on the commas
+
+    Parameters
+    ----------
+    conn: socket
+        The server socket EMG data is send to
+    fcr_emg: float
+        The wrist flexor EMG data
+    edc_emg: float
+        The wrist extensor EMG data
+    
+    Returns
+    -------
+    [fcr_emg, edc_emg]: Tuple[float, float]
+        The normalized forearm EMG values.
+
+    See Also
+    --------
+    hexapod.piToPi.emgEstablishServer
+    """
     data = conn.recv(1024)
     emg_string = data.decode('UTF-8')
     conn.sendall(data)
@@ -78,7 +127,18 @@ def decodeEMG(conn: socket, fcr_emg: float = 0, edc_emg: float = 0):
     return (fcr_emg, edc_emg)
 
 
-def emgClient():
+def emgClient() -> None:
+    """
+    Send EMG data to the EMG server
+
+    Establishes a connection to the EMG server on the hexapodNetwork wifi and
+    sends EMG data to it
+
+    See Also
+    --------
+    hexapod.piToPi.emgEstablishServer
+    hexapod.piToPi.receiveEMG
+    """
     HOST = "192.168.4.1"  # The server's hostname or IP address
     PORT = 65432  # The port used by the server
 
