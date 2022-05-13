@@ -4336,19 +4336,3 @@ def test_resetTurnStance():
     [leg_model, right_foot, _] = move.resetTurnStance(body_model, input_leg_model, right_foot, previous_turn_angle)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
-
-
-def test_switchMode():
-    """
-    Tests that the switch Mode test is False
-
-    Tests that with the default outputs of the pollEMG() function, the
-    swithNModes test is false.
-    """
-    assert move.switchMode(0.75) is False
-
-
-def test_pollEMG():
-    """Tests that the returned EMG values are between 0 and 1"""
-    [fcr_emg, edc_emg] = move.pollEMG()
-    assert 0 <= fcr_emg <= 1 and 0 <= edc_emg <=1
