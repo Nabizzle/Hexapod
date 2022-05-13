@@ -13,7 +13,10 @@ board that can use the board library from Adafruit.
 """
 import busio
 import digitalio
-import board
+try:
+    import board
+except(NotImplementedError):
+    print("Could not find a board")
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 from typing import Tuple
