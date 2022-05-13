@@ -101,11 +101,23 @@ Takes the body and leg models, a boolean for which set of feet should move (same
 ### switchMode
 Takes in a threshold of EMG to switch the mode. If the user cocontracts above the given threshold, the function returns true to indicate the mode should switch. If the cocontraction is not above threshold, the function returns false.
 
+### pollEMG
+Querrys the Raspberry Pi Zero W for the wrist flexor and wrist extensor EMG values. The EMG values are constrained between 0 and 1 and the EMG values are output as a two value list with the flexor and extensor values respectivly.
+
 ## Rapsberry Pi to Raspberry Pi Communication
 Scripts used in the communications with and between Raspberry Pis.
 
-### pollEMG
-Querrys the Raspberry Pi Zero W for the wrist flexor and wrist extensor EMG values. The EMG values are constrained between 0 and 1 and the EMG values are output as a two value list with the flexor and extensor values respectivly.
+### receieveEMG
+Read in EMG values on the first two ADC channels of the Raspberry Pi zero through the MCP3008.
+
+### emgEstablishServer
+Open a TCPIP server on the hexapodNetwork Wifi IP address to receive EMG data from the raspberry pi. Also sends the data back to confirm the data was received.
+
+### decodeEMG
+Takes the received EMG data in the form of a byte string and converts the data to floats by splitting on the commas.
+
+### emgClient
+Establishes a connection to the EMG server on the hexapodNetwork wifi and sends EMG data to it.
 
 ## Lynxmotiohn SSC-32U Driver
 Functions to communicate with the Lynxmotion SSC-32U to drive the 18 servos of the hexapod
