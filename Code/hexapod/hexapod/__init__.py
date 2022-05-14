@@ -28,7 +28,7 @@ Functions
 ---------
 body.bodyPos:
     Creates a model of the body with input rotations and translations.
-controller.controller:
+controller.emgController:
     Controls the hexapod to walk or turn based on EMG.
 controller.sit:
     Tells the Hexapod to sit with its body on the ground.
