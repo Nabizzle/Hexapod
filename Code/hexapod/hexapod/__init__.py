@@ -74,6 +74,8 @@ move.switchMode:
     Switches walking modes if the user is cocontracting their muscles.
 move.pollEMG:
     Get EMG signals and normalize them.
+piToPi.createInputs:
+    Establish the analog inputs to record EMG
 piTopi.receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
 piTopi.emgEstablishserver:

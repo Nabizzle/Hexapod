@@ -3,6 +3,8 @@ Scripts used in the communications with and between Raspberry Pis.
 
 Functions
 ---------
+createInputs:
+    Establish the analog inputs to record EMG
 receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
 emgEstablishserver:
@@ -29,7 +31,34 @@ from typing import Tuple
 import socket
 
 
-def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 5,
+def createInputs() -> Tuple[AnalogIn, AnalogIn]:
+    """
+    Establish the analog inputs to record EMG
+
+    Create the analog inputs on the MCP3008 for recording EMG on the raspberry
+    pi zero
+
+    Returns
+    -------
+    [fcr_channel, edc_channel]: Tuple[AnalogIn, AnalogIn]
+        The analog channels for recording EMG.
+    See Also
+    --------
+    hexapod.piToPi.receiveEMG
+    """
+    spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
+    cs = digitalio.DigitalInOut(board.D5)
+    mcp = MCP.MCP3008(spi, cs)
+
+    # setup the EMG channels to record from
+    fcr_channel = AnalogIn(mcp, MCP.P0)
+    edc_channel = AnalogIn(mcp, MCP.P1)
+
+    return (fcr_channel, edc_channel)
+
+
+def receiveEMG(fcr_channel: AnalogIn, edc_channel: AnalogIn,
+               gain_fcr: float = 5,
                gain_edc: float = 5) -> Tuple[float, float]:
     """
     Pull EMG from the Raspberry Pi Zero W
@@ -39,8 +68,14 @@ def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 5,
 
     Parameters
     ----------
-    gain: int
-        A multiplier of the EMG input to amplify the signal.
+    fcr_channel: AnalogIn
+        The flexor EMG channel
+    edc_channel: AnalogIn
+        The extensor EMG channel
+    gain_fcr: int
+        A multiplier of the flexor EMG input to amplify the signal.
+    gain_edc: int
+        A multiplier of the extensor EMG input to amplify the signal.
 
     Returns
     -------
@@ -49,15 +84,9 @@ def receiveEMG(fcr_emg: float = 0, edc_emg: float = 0, gain_fcr: float = 5,
 
     See Also
     --------
+    hexapod.piToPi.createInputs
     hexapod.piToPi.emgClient
     """
-    spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
-    cs = digitalio.DigitalInOut(board.D5)
-    mcp = MCP.MCP3008(spi, cs)
-
-    # setup the EMG channels to record from
-    fcr_channel = AnalogIn(mcp, MCP.P0)
-    edc_channel = AnalogIn(mcp, MCP.P1)
     # get the 16 value on each EMG channel and normalize it
     fcr_emg = fcr_channel.value / 65536.0 * gain_fcr
     edc_emg = edc_channel.value / 65536.0 * gain_edc
@@ -91,8 +120,7 @@ def emgEstablishServer() -> socket:
     return conn
 
 
-def decodeEMG(conn: socket, fcr_emg: float = 0,
-              edc_emg: float = 0) -> Tuple[float, float]:
+def decodeEMG(conn: socket) -> Tuple[float, float]:
     """
     Convert byte string EMG data to floats
 
@@ -103,10 +131,6 @@ def decodeEMG(conn: socket, fcr_emg: float = 0,
     ----------
     conn: socket
         The server socket EMG data is send to
-    fcr_emg: float
-        The wrist flexor EMG data
-    edc_emg: float
-        The wrist extensor EMG data
 
     Returns
     -------
@@ -144,8 +168,9 @@ def emgClient() -> None:
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
+        fcr_channel, edc_channel = createInputs()
         while True:
-            emg = receiveEMG(fcr_emg=0, edc_emg=0, gain_fcr=0.5, gain_edc=10)
+            emg = receiveEMG(fcr_channel, edc_channel, gain_fcr=0.5, gain_edc=10)
             emg_string = bytes(str(emg[0]) + "," + str(emg[1]), 'ascii')
             s.sendall(emg_string)
             data = s.recv(1024)
