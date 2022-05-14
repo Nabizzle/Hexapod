@@ -7,7 +7,7 @@ it to utilize most of the functions.
 
 Functions
 ---------
-emgController:
+controller:
     Controls the hexapod to walk or turn based on EMG.
 sit:
     Tells the Hexapod to sit with its body on the ground.
@@ -32,7 +32,7 @@ from typing import Any
 from time import sleep
 
 
-def emgController(usb_port: string, mode: bool) -> None:
+def controller(usb_port: string, mode: bool) -> None:
     """
     Controls the hexapod to walk or turn based on EMG.
 

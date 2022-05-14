@@ -28,17 +28,17 @@ Functions
 ---------
 body.bodyPos:
     Creates a model of the body with input rotations and translations.
-emgController.emgController:
+controller.controller:
     Controls the hexapod to walk or turn based on EMG.
-emgController.sit:
+controller.sit:
     Tells the Hexapod to sit with its body on the ground.
-emgController.stand:
+controller.stand:
     Tells the hexapod to stand in the neutral position.
-emgController.walkCycle:
+controller.walkCycle:
     Tells the hexapod to walk a specified distance without the need for EMG.
-emgController.turnCycle:
+controller.turnCycle:
     Tells the hexapod to turn to an angle without EMG
-emgController.sendPositions:
+controller.sendPositions:
     Send each position in a set to the servo controller.
 leg.legPos:
     Finds the positions for the leg segments.
