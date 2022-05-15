@@ -102,7 +102,7 @@ it to utilize most of the functions.</p>
 <section id="id1">
 <h3>Functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt>controller:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+<dt>emgController:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
 </dd>
 <dt>sit:</dt><dd><p>Tells the Hexapod to sit with its body on the ground.</p>
 </dd>
@@ -116,8 +116,8 @@ it to utilize most of the functions.</p>
 </dd>
 </dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="hexapod.controller.controller">
-<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode:</span> <span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.controller" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="hexapod.controller.emgController">
+<span class="sig-prename descclassname"><span class="pre">hexapod.controller.</span></span><span class="sig-name descname"><span class="pre">emgController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usb_port:</span> <span class="pre">&lt;module</span> <span class="pre">'string'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\string.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode:</span> <span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#hexapod.controller.emgController" title="Permalink to this definition">¶</a></dt>
 <dd><p>Controls the hexapod to walk or turn based on EMG.</p>
 <p>Takes in EMG signals and tells the hexapod how to walk or turn based on
 those EMG signals. The signals are sent over a COM port to the Lynxmotion
@@ -215,7 +215,7 @@ of the controller function.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#hexapod.controller.controller" title="hexapod.controller.controller"><code class="xref py py-obj docutils literal notranslate"><span class="pre">controller</span></code></a></dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">controller</span></code></dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
 </dd>
 </dl>
 </div>
@@ -1049,6 +1049,8 @@ degrees.</p>
 <section id="id4">
 <h3>Functions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
+<dt>createInputs:</dt><dd><p>Establish the analog inputs to record EMG</p>
+</dd>
 <dt>receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 </dd>
 <dt>emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
@@ -1064,8 +1066,30 @@ degrees.</p>
 <p>This module will not function unless it is used on a Raspberry Pi or other
 board that can use the board library from Adafruit.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="hexapod.piToPi.createInputs">
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">createInputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">adafruit_mcp3xxx.analog_in.AnalogIn</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">adafruit_mcp3xxx.analog_in.AnalogIn</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.createInputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establish the analog inputs to record EMG</p>
+<p>Create the analog inputs on the MCP3008 for recording EMG on the raspberry
+pi zero</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>[fcr_channel, edc_channel]: Tuple[AnalogIn, AnalogIn]</dt><dd><p>The analog channels for recording EMG.</p>
+</dd>
+<dt>See Also</dt><dd></dd>
+</dl>
+<blockquote>
+<div></div></blockquote>
+<dl class="simple">
+<dt>hexapod.piToPi.receiveEMG</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hexapod.piToPi.decodeEMG">
-<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">decodeEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fcr_emg:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edc_emg:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.decodeEMG" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">decodeEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn:</span> <span class="pre">&lt;module</span> <span class="pre">'socket'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\nblch\\anaconda3\\envs\\hexapod\\lib\\socket.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.decodeEMG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert byte string EMG data to floats</p>
 <p>Takes the received EMG data in the form of a byte string and converts the
 data to floats by splitting on the commas</p>
@@ -1073,10 +1097,6 @@ data to floats by splitting on the commas</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>conn: socket</strong></dt><dd><p>The server socket EMG data is send to</p>
-</dd>
-<dt><strong>fcr_emg: float</strong></dt><dd><p>The wrist flexor EMG data</p>
-</dd>
-<dt><strong>edc_emg: float</strong></dt><dd><p>The wrist extensor EMG data</p>
 </dd>
 </dl>
 </dd>
@@ -1133,14 +1153,20 @@ sends EMG data to it</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.piToPi.receiveEMG">
-<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">receiveEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcr_emg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edc_emg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain_fcr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain_edc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.receiveEMG" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.piToPi.</span></span><span class="sig-name descname"><span class="pre">receiveEMG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcr_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">adafruit_mcp3xxx.analog_in.AnalogIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edc_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">adafruit_mcp3xxx.analog_in.AnalogIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain_fcr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain_edc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.piToPi.receiveEMG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 <p>Read in EMG values on the first two ADC channels of the Raspberry Pi
-zero through the MCP3008. This is done through a TCP IP socket.</p>
+zero through the MCP3008.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>gain: int</strong></dt><dd><p>A multiplier of the EMG input to amplify the signal.</p>
+<dt><strong>fcr_channel: AnalogIn</strong></dt><dd><p>The flexor EMG channel</p>
+</dd>
+<dt><strong>edc_channel: AnalogIn</strong></dt><dd><p>The extensor EMG channel</p>
+</dd>
+<dt><strong>gain_fcr: int</strong></dt><dd><p>A multiplier of the flexor EMG input to amplify the signal.</p>
+</dd>
+<dt><strong>gain_edc: int</strong></dt><dd><p>A multiplier of the extensor EMG input to amplify the signal.</p>
 </dd>
 </dl>
 </dd>
@@ -1154,6 +1180,7 @@ zero through the MCP3008. This is done through a TCP IP socket.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
+<dt><a class="reference internal" href="#hexapod.piToPi.createInputs" title="hexapod.piToPi.createInputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.createInputs</span></code></a></dt><dd></dd>
 <dt><a class="reference internal" href="#hexapod.piToPi.emgClient" title="hexapod.piToPi.emgClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.piToPi.emgClient</span></code></a></dt><dd></dd>
 </dl>
 </div>
@@ -1455,7 +1482,7 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 <dl class="simple">
 <dt>body.bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
 </dd>
-<dt>controller.controller:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+<dt>controller.emgController:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
 </dd>
 <dt>controller.sit:</dt><dd><p>Tells the Hexapod to sit with its body on the ground.</p>
 </dd>
@@ -1501,6 +1528,8 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 </dd>
 <dt>move.pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
 </dd>
+<dt>piToPi.createInputs:</dt><dd><p>Establish the analog inputs to record EMG</p>
+</dd>
 <dt>piTopi.receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
 </dd>
 <dt>piTopi.emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
@@ -1524,6 +1553,8 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 <dt>ssc32uDriver.disconnect:</dt><dd><p>Disconnects from the serial port.</p>
 </dd>
 <dt>ssc32uDriver.sendData:</dt><dd><p>Sends the byte string command for the servos to the Lynxmotiohn SSC-32U.</p>
+</dd>
+<dt>xbox:</dt><dd><p>A class object to contain all controller analog and state values</p>
 </dd>
 </dl>
 </section>
