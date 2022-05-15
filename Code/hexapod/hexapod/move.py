@@ -431,7 +431,7 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
     for i in range(steps):  # iterate over the number of steps to take
         # if the remaining turn distance to move is less than the max turn
         # angle, then turn the robot the remaining angle
-        if abs(remaining_turn_distance) <= max_turn_angle:
+        if abs(remaining_turn_distance) <= max_turn_angle * 2:
             # Get the current feet positions from the last stepped position
             if 'turn_positions' in locals():
                 feet_positions = turn_positions[-1, :, :]
@@ -454,8 +454,7 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
                 temp_turn_positions =\
                     stepTurn(feet_positions,
                              step_angle=np.sign(remaining_turn_distance)
-                             * (abs(remaining_turn_distance)
-                                + max_turn_angle),
+                             * abs(remaining_turn_distance),
                              right_foot=right_foot,
                              z_resolution=z_resolution)
 
@@ -468,6 +467,8 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
             # if this is the first step, create walk array with the first step
             else:
                 turn_positions = temp_turn_positions
+            remaining_turn_distance -=\
+                np.sign(remaining_turn_distance) * max_turn_angle
             right_foot = not right_foot  # switch which foot steps forward
             break
 
@@ -501,7 +502,7 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
                                              temp_turn_positions),
                                             axis=0)
             remaining_turn_distance -=\
-                np.sign(remaining_turn_distance) * max_turn_angle
+                np.sign(remaining_turn_distance) * max_turn_angle * 2
             right_foot = not right_foot
 
     feet_positions = turn_positions[-1, :, :]
