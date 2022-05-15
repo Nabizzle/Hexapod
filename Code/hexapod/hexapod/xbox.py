@@ -83,7 +83,7 @@ class xboxController():
         self.start = 0
 
         self._poll_thread =\
-            Thread(target=self._poll_controller, args=())
+            Thread(target=self.poll_controller, args=())
         self._poll_thread.daemon = True
         self._poll_thread.start()
 
@@ -172,7 +172,7 @@ class xboxController():
         return [rs_x, rs_y, rs_t, ls_x, ls_y, ls_t, a, b, y, x, down_up_d,
                 right_left_d, rt, rb, lt, lb, back, start]
 
-    def _poll_controller(self) -> None:
+    def poll_controller(self) -> None:
         """
         Sets all controller values in a thread
 
