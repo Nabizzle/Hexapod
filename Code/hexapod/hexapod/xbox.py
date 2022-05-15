@@ -1,7 +1,7 @@
 from inputs import get_gamepad
-from math import pow
 from threading import Thread
 from typing import List
+
 
 class xboxController():
     """
@@ -53,8 +53,9 @@ class xboxController():
     poll_thread: Thread
         The thread to poll each of the parts of the xbox one controller
     """
-    MAX_TRIG_VAL = pow(2, 8) # The maximum value of the triggers
-    MAX_JOY_VAL = pow(2, 15) # The maximum value of the joy sticks
+
+    MAX_TRIG_VAL = pow(2, 8)  # The maximum value of the triggers
+    MAX_JOY_VAL = pow(2, 15)  # The maximum value of the joy sticks
 
     def __init__(self) -> None:
         self.right_joystick_y = 0
@@ -85,7 +86,6 @@ class xboxController():
             Thread(target=self._poll_controller, args=())
         self._poll_thread.daemon = True
         self._poll_thread.start()
-
 
     def read(self) -> List:
         """
@@ -122,7 +122,8 @@ class xboxController():
         x: int, default 0
             The state of the x button
         down_up_d: int, default 0
-            The state of the up down direction of the D pad. Up is -1 and down is 1
+            The state of the up down direction of the D pad. Up is -1 and down
+            is 1
         right_left_d: int, default 0
             The state of the right left direction of the D pad. left is -1 and
             right is 1
@@ -144,6 +145,7 @@ class xboxController():
         Returns the analog and state values in the order of the atrribute
         declarations in the __init__ funciton.
         """
+
         rs_x = self.right_joystick_x
         rs_y = self.right_joystick_y
         rs_t = self.right_thumb
@@ -171,7 +173,6 @@ class xboxController():
         return [rs_x, rs_y, rs_t, ls_x, ls_y, ls_t, a, b, y, x, down_up_d,
                 right_left_d, rt, rb, lt, lb, back, start]
 
-
     def _poll_controller(self) -> None:
         """
         Sets all controller values in a thread
@@ -179,21 +180,30 @@ class xboxController():
         At the time of an event, the thread sets the appropriate
         xboxController atrribute
         """
+
         while True:
             events = get_gamepad()
             for event in events:
                 match event.code:
                     case 'ABS_RX':
-                        self.right_joystick_x = event.state / xboxController.MAX_JOY_VAL # normalize between -1 and 1
+                        # normalize between -1 and 1
+                        self.right_joystick_x =\
+                            event.state / xboxController.MAX_JOY_VAL
                     case 'ABS_RY':
-                        self.right_joystick_y = event.state / xboxController.MAX_JOY_VAL # normalize between -1 and 1
+                        # normalize between -1 and 1
+                        self.right_joystick_y =\
+                            event.state / xboxController.MAX_JOY_VAL
                     case 'BTN_THUMBR':
                         self.right_thumb = event.state
 
                     case 'ABS_X':
-                        self.left_joystick_x = event.state / xboxController.MAX_JOY_VAL # normalize between -1 and 1
+                        # normalize between -1 and 1
+                        self.left_joystick_x =\
+                            event.state / xboxController.MAX_JOY_VAL
                     case 'ABS_Y':
-                        self.left_joystick_y = event.state / xboxController.MAX_JOY_VAL # normalize between -1 and 1
+                        # normalize between -1 and 1
+                        self.left_joystick_y =\
+                            event.state / xboxController.MAX_JOY_VAL
                     case 'BTN_THUMBL':
                         self.left_thumb = event.state
 
@@ -211,12 +221,16 @@ class xboxController():
                     case 'ABS_HAT0X':
                         self.right_left_d_pad = event.state
                     case 'ABS_RZ':
-                        self.right_trigger = event.state / xboxController.MAX_TRIG_VAL # normalize between 0 and 1
+                        # normalize between 0 and 1
+                        self.right_trigger =\
+                            event.state / xboxController.MAX_TRIG_VAL
                     case 'BTN_TR':
                         self.right_bumper = event.state
 
                     case 'ABS_Z':
-                        self.left_trigger = event.state / xboxController.MAX_TRIG_VAL # normalize between 0 and 1
+                        # normalize between 0 and 1
+                        self.left_trigger =\
+                            event.state / xboxController.MAX_TRIG_VAL
                     case 'BTN_TL':
                         self.left_bumper = event.state
 
@@ -224,17 +238,10 @@ class xboxController():
                         self.back = event.state
                     case 'BTN_SELECT':
                         self.start = event.state
-                    
+
 
 if __name__ == '__main__':
-    """
-    Create a controller and print out all controller values
-
-    See Also
-    --------
-    hexapod.xbox.read:
-        Reads out all the controller values
-    """
+    # Create a controller and print out all controller values
     controller = xboxController()
     while True:
         print(controller.read())
