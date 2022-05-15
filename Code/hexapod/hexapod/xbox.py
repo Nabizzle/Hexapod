@@ -145,7 +145,6 @@ class xboxController():
         Returns the analog and state values in the order of the atrribute
         declarations in the __init__ funciton.
         """
-
         rs_x = self.right_joystick_x
         rs_y = self.right_joystick_y
         rs_t = self.right_thumb
@@ -180,7 +179,6 @@ class xboxController():
         At the time of an event, the thread sets the appropriate
         xboxController atrribute
         """
-
         while True:
             events = get_gamepad()
             for event in events:
