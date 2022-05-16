@@ -36,7 +36,6 @@ import socket
 from typing import Tuple
 
 
-
 def emgToTurn(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
               previous_turn_angle: float, conn: socket,
               max_turn_angle: float = 15) -> Tuple[np.ndarray, bool, float,

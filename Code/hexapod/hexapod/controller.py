@@ -92,7 +92,7 @@ def emgController(usb_port: string, mode: bool) -> None:
             if mode:
                 [leg_model, right_foot, positions] =\
                     resetWalkStance(body_model, leg_model, right_foot,
-                                    previous_step)
+                                    previous_step, previous_angle=90)
                 previous_step = 0
             else:
                 [leg_model, right_foot, positions] =\
