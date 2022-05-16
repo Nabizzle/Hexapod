@@ -781,3 +781,85 @@ def resetTurnStance(body_model: np.ndarray, leg_model: np.ndarray,
 
     return (leg_model, right_foot, turn_positions)
 
+def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
+             previous_step: float = 0, previous_angle: float = 0,
+             distance: float = 30,
+             angle: float = 90) -> Tuple[np.ndarray, bool, float, float,
+                                         np.ndarray]:
+    """
+    Walks in any direction based on the previous step.
+
+    Walks in much the same way as the regular walk function and the emgToWalk
+    function, but this funciton can walk in any direction between each step.
+    The new step direction is found using the previous step size and angle.
+
+    Parameters
+    ----------
+    body_model: np.ndarray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: np.ndarray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_step: float
+        The distance the hexapod walked the last time this function was called.
+    previous_step: float
+        The angle the hexapod walked the last time this function was called.
+    max_distance: float, default=30
+        The maximum step size of the hexapod.
+    angle: float, default=90
+        The angle that the hexapod will walk in.
+
+    Returns
+    -------
+    [leg_model, right_foot, previous_step, previous angle, walk_positions]:
+        Tuple[np.ndarray, bool, float, float, np.ndarray]
+
+        The updated input parameters for the next time the function is run.
+
+    See Also
+    --------
+    walk:
+        Creates a series of feet positions to use when walking in a direction.
+    resetWalkStance:
+        Completes the final step in walking to a neutral stance.
+    emgToWalk:
+        Walks a dynamic distance based a normalized EMG input.
+    hexapod.leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    This funciton uses the vector addition of the previous step size along its
+    angle with the step size along the new angle to find the new resultant
+    step size and angle. This is to reset the hexapod's stance while also
+    moving in the new direction.
+    """
+    # components of previous step
+    previous_x = previous_step * cos(radians(previous_angle))
+    previous_y = previous_step * sin(radians(previous_angle))
+    # components of desired step
+    current_x = distance * cos(radians(angle))
+    current_y = distance * sin(radians(angle))
+    # combined step
+    x = previous_x + current_x
+    y = previous_y + current_y
+    step_magnitude = hypot(x, y)
+    step_angle = atan2(y, x)
+    walk_positions = stepForward(step_angle=step_angle,
+                                 distance=step_magnitude,
+                                 right_foot=right_foot)
+    feet_positions = getFeetPos(leg_model)
+    # add all of the feet positions to the walk
+    for i in range(walk_positions.shape[0]):
+        walk_positions[i, :, :] = walk_positions[i, :, :] + feet_positions
+
+    previous_step = distance
+    previous_angle = angle
+    right_foot = not right_foot
+    leg_model = legModel(recalculateLegAngles(walk_positions[-1, :, :],
+                                              body_model), body_model)
+    return (leg_model, right_foot, previous_step, previous_angle,
+            walk_positions)
