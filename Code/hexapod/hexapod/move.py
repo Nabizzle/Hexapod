@@ -25,6 +25,8 @@ emgToTurn:
     Turns a dynamic angle based on a normalized EMG input.
 resetTurnStance:
     Completes the final step in turning to a neutral stance.
+omniWalk:
+    Walks in any direction based on the previous step.
 """
 from math import degrees, radians, sin, cos, atan2, hypot
 import numpy as np

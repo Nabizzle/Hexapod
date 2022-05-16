@@ -72,6 +72,8 @@ move.emgToTurn:
     Turns a dynamic angle based on a normalized EMG input.
 move.resetTurnStance:
     Completes the final step in turning to a neutral stance.
+move.omniWalk:
+    Walks in any direction based on the previous step.
 piToPi.createInputs:
     Establish the analog inputs to record EMG
 piTopi.receiveEMG:
