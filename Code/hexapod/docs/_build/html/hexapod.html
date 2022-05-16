@@ -47,9 +47,9 @@ their movement.</p>
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt>bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
-</dd>
 <dt>bodyAngle:</dt><dd><p>Finds the body angles based on analog stick inputs</p>
+</dd>
+<dt>bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
 </dd>
 </dl>
 <dl class="py function">
@@ -136,17 +136,17 @@ relevant information about the legs.</p>
 <section id="id1">
 <h3>Functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt>legPos:</dt><dd><p>Finds the positions for the leg segments.</p>
+<dt>getFeetPos:</dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
 </dd>
 <dt>legAngle:</dt><dd><p>Finds the angles for the coax, femur, and tibia leg segments.</p>
+</dd>
+<dt>legModel:</dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
+</dd>
+<dt>legPos:</dt><dd><p>Finds the positions for the leg segments.</p>
 </dd>
 <dt>recalculateLegAngles:</dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
 </dd>
 <dt>startLegPos:</dt><dd><p>Find the neutral position of the hexapod.</p>
-</dd>
-<dt>legModel:</dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
-</dd>
-<dt>getFeetPos:</dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
 </dd>
 </dl>
 <dl class="py function">
@@ -379,25 +379,25 @@ z axis.</p>
 <section id="id2">
 <h3>Functions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt>stepForward:</dt><dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
-</dd>
-<dt>stepTurnFoot:</dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
-</dd>
-<dt>stepTurn:</dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
-</dd>
-<dt>walk:</dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
-</dd>
-<dt>turn:</dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+<dt>emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
 </dd>
 <dt>emgToWalk:</dt><dd><p>Walks a dynamic distance based a normalized EMG input.</p>
 </dd>
-<dt>resetWalkStance:</dt><dd><p>Completes the final step in walking to a neutral stance.</p>
-</dd>
-<dt>emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
+<dt>omniWalk:</dt><dd><p>Walks in any direction based on the previous step.</p>
 </dd>
 <dt>resetTurnStance:</dt><dd><p>Completes the final step in turning to a neutral stance.</p>
 </dd>
-<dt>omniWalk:</dt><dd><p>Walks in any direction based on the previous step.</p>
+<dt>resetWalkStance:</dt><dd><p>Completes the final step in walking to a neutral stance.</p>
+</dd>
+<dt>stepForward:</dt><dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
+</dd>
+<dt>stepTurn:</dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
+</dd>
+<dt>stepTurnFoot:</dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
+</dd>
+<dt>turn:</dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+</dd>
+<dt>walk:</dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
 </dd>
 </dl>
 <dl class="py function">
@@ -526,7 +526,7 @@ The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
 </dd>
 <dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked the last time this function was called.</p>
 </dd>
-<dt><strong>previous_step: float</strong></dt><dd><p>The angle the hexapod walked the last time this function was called.</p>
+<dt><strong>previous_angle: float</strong></dt><dd><p>The angle the hexapod walked the last time this function was called.</p>
 </dd>
 <dt><strong>max_distance: float, default=30</strong></dt><dd><p>The maximum step size of the hexapod.</p>
 </dd>
@@ -612,7 +612,7 @@ contract at all.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.move.resetWalkStance">
-<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">resetWalkStance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.resetWalkStance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">resetWalkStance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.resetWalkStance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Completes the final step in walking to a neutral stance.</p>
 <p>Takes the final step of the walk cycle by repeating the previous step
 with the opposite legs as the last step.</p>
@@ -627,7 +627,9 @@ and tibia servos as well as the feet end positions.</p>
 <dt><strong>right_foot: bool</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
 The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
 </dd>
-<dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked the last time this function was called.</p>
+<dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked in its last step.</p>
+</dd>
+<dt><strong>previous_angle: float</strong></dt><dd><p>The angle the hexapod walked in its last step.</p>
 </dd>
 </dl>
 </dd>
@@ -894,17 +896,17 @@ degrees.</p>
 <dl class="simple">
 <dt>createInputs:</dt><dd><p>Establish the analog inputs to record EMG</p>
 </dd>
-<dt>receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
-</dd>
-<dt>emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
-</dd>
 <dt>decodeEMG:</dt><dd><p>Convert byte string EMG data to floats</p>
 </dd>
 <dt>emgClient:</dt><dd><p>Send EMG data to the EMG server</p>
 </dd>
-<dt>switchMode:</dt><dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
+<dt>emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
 </dd>
 <dt>pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
+</dd>
+<dt>receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+</dd>
+<dt>switchMode:</dt><dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
 </dd>
 </dl>
 </section>
@@ -1387,67 +1389,67 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 <section id="id7">
 <h3>Functions<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt>body.bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
-</dd>
 <dt>bodyAngle:</dt><dd><p>Finds the body angles based on analog stick inputs</p>
 </dd>
+<dt>body.bodyPos:</dt><dd><p>Creates a model of the body with input rotations and translations.</p>
+</dd>
 <dt>controller.emgController:</dt><dd><p>Controls the hexapod to walk or turn based on EMG.</p>
+</dd>
+<dt>controller.sendPositions:</dt><dd><p>Send each position in a set to the servo controller.</p>
 </dd>
 <dt>controller.sit:</dt><dd><p>Tells the Hexapod to sit with its body on the ground.</p>
 </dd>
 <dt>controller.stand:</dt><dd><p>Tells the hexapod to stand in the neutral position.</p>
 </dd>
-<dt>controller.walkCycle:</dt><dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
-</dd>
 <dt>controller.turnCycle:</dt><dd><p>Tells the hexapod to turn to an angle without EMG</p>
 </dd>
-<dt>controller.sendPositions:</dt><dd><p>Send each position in a set to the servo controller.</p>
+<dt>controller.walkCycle:</dt><dd><p>Tells the hexapod to walk a specified distance without the need for EMG.</p>
 </dd>
-<dt>leg.legPos:</dt><dd><p>Finds the positions for the leg segments.</p>
+<dt>leg.getFeetPos:</dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
 </dd>
 <dt>leg.legAngle:</dt><dd><p>Finds the angles for the coax, femur, and tibia leg segments.</p>
+</dd>
+<dt>leg.legModel:</dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
+</dd>
+<dt>leg.legPos:</dt><dd><p>Finds the positions for the leg segments.</p>
 </dd>
 <dt>leg.recalculateLegAngles:</dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
 </dd>
 <dt>leg.startLegPos:</dt><dd><p>Find the neutral position of the hexapod.</p>
 </dd>
-<dt>leg.legModel:</dt><dd><p>Generates the model of the legs based on the servo angles of the legs.</p>
-</dd>
-<dt>leg.getFeetPos:</dt><dd><p>Ouput the x, y, z position of the feet of the hexapod.</p>
-</dd>
-<dt>move.stepForward:</dt><dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
-</dd>
-<dt>move.stepTurnFoot:</dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
-</dd>
-<dt>move.stepTurn:</dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
-</dd>
-<dt>move.walk</dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
-</dd>
-<dt>move.turn</dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+<dt>move.emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
 </dd>
 <dt>move.emgToWalk:</dt><dd><p>Walks a dynamic distance based a normalized EMG input.</p>
 </dd>
-<dt>move.resetWalkStance:</dt><dd><p>Completes the final step in walking to a neutral stance.</p>
-</dd>
-<dt>move.emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
+<dt>move.omniWalk:</dt><dd><p>Walks in any direction based on the previous step.</p>
 </dd>
 <dt>move.resetTurnStance:</dt><dd><p>Completes the final step in turning to a neutral stance.</p>
 </dd>
-<dt>move.omniWalk:</dt><dd><p>Walks in any direction based on the previous step.</p>
+<dt>move.resetWalkStance:</dt><dd><p>Completes the final step in walking to a neutral stance.</p>
+</dd>
+<dt>move.stepForward:</dt><dd><p>Calculate the x, y, z position updates to move in a step in a direction.</p>
+</dd>
+<dt>move.stepTurn:</dt><dd><p>Calcluate the positions of each foot when turning about an angle.</p>
+</dd>
+<dt>move.stepTurnFoot:</dt><dd><p>Calculate the position of a foot when turning the hexapod about an angle.</p>
+</dd>
+<dt>move.turn</dt><dd><p>Creates the series of feet positions to turn the hexapod about the z axis.</p>
+</dd>
+<dt>move.walk</dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
 </dd>
 <dt>piToPi.createInputs:</dt><dd><p>Establish the analog inputs to record EMG</p>
-</dd>
-<dt>piTopi.receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
-</dd>
-<dt>piTopi.emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
 </dd>
 <dt>piTopi.decodeEMG:</dt><dd><p>Convert byte string EMG data to floats</p>
 </dd>
 <dt>piTopi.emgClient:</dt><dd><p>Send EMG data to the EMG server</p>
 </dd>
-<dt>piToPi.switchMode:</dt><dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
+<dt>piTopi.emgEstablishserver:</dt><dd><p>Open the TCPIP server to recieve EMG data</p>
 </dd>
 <dt>piToPi.pollEMG:</dt><dd><p>Get EMG signals and normalize them.</p>
+</dd>
+<dt>piTopi.receiveEMG:</dt><dd><p>Pull EMG from the Raspberry Pi Zero W</p>
+</dd>
+<dt>piToPi.switchMode:</dt><dd><p>Switches walking modes if the user is cocontracting their muscles.</p>
 </dd>
 <dt>rotation.xRot:</dt><dd><p>Return the rotation matrix for a rotation about the x axis.</p>
 </dd>
