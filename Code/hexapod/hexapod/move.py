@@ -592,9 +592,9 @@ def emgToWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
 
 
 def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
-                    right_foot: bool,
-                    previous_step: float) -> Tuple[np.ndarray, bool,
-                                                   np.ndarray]:
+                    right_foot: bool, previous_step: float,
+                    previous_angle: float) -> Tuple[np.ndarray, bool,
+                                                    np.ndarray]:
     """
     Completes the final step in walking to a neutral stance.
 
@@ -612,7 +612,9 @@ def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
     previous_step: float
-        The distance the hexapod walked the last time this function was called.
+        The distance the hexapod walked in its last step.
+    previous_angle: float
+        The angle the hexapod walked in its last step.
 
     Returns
     -------
@@ -637,7 +639,8 @@ def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
     The hexapod will also reset its stance during the walk if the user does not
     contract at all.
     """
-    walk_positions = stepForward(step_angle=90, distance=previous_step,
+    walk_positions = stepForward(step_angle=previous_angle,
+                                 distance=previous_step,
                                  right_foot=right_foot)
     feet_positions = getFeetPos(leg_model)
     # add all of the feet positions to the walk
@@ -807,7 +810,7 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
     previous_step: float
         The distance the hexapod walked the last time this function was called.
-    previous_step: float
+    previous_angle: float
         The angle the hexapod walked the last time this function was called.
     max_distance: float, default=30
         The maximum step size of the hexapod.
