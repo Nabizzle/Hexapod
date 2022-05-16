@@ -28,6 +28,8 @@ Functions
 ---------
 body.bodyPos:
     Creates a model of the body with input rotations and translations.
+bodyAngle:
+    Finds the body angles based on analog stick inputs
 controller.emgController:
     Controls the hexapod to walk or turn based on EMG.
 controller.sit:
