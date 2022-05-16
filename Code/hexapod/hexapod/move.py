@@ -333,7 +333,7 @@ def resetStance(body_model: np.ndarray, leg_model: np.ndarray,
     walk_positions = stepForward(step_angle=previous_walk_angle,
                                  distance=previous_walk_step,
                                  right_foot=right_foot)
-                
+
     move_positions = turn_positions + walk_positions
     leg_model = legModel(recalculateLegAngles(move_positions[-1, :, :],
                                               body_model), body_model)
@@ -469,8 +469,9 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
                          previous_turn_angle: float = 0,
                          walk_distance: float = 30,
                          walk_angle: float = 90,
-                         turn_angle = 15) -> Tuple[np.ndarray, bool, float,
-                                                   float, float, np.ndarray]:
+                         turn_angle: float = 15) -> Tuple[np.ndarray, bool,
+                                                          float, float, float,
+                                                          np.ndarray]:
     """
     Makes a step that allows both a turn and a walk in any direction.
 
