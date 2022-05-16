@@ -72,10 +72,6 @@ move.emgToTurn:
     Turns a dynamic angle based on a normalized EMG input.
 move.resetTurnStance:
     Completes the final step in turning to a neutral stance.
-move.switchMode:
-    Switches walking modes if the user is cocontracting their muscles.
-move.pollEMG:
-    Get EMG signals and normalize them.
 piToPi.createInputs:
     Establish the analog inputs to record EMG
 piTopi.receiveEMG:
@@ -86,6 +82,10 @@ piTopi.decodeEMG:
     Convert byte string EMG data to floats
 piTopi.emgClient:
     Send EMG data to the EMG server
+piToPi.switchMode:
+    Switches walking modes if the user is cocontracting their muscles.
+piToPi.pollEMG:
+    Get EMG signals and normalize them.
 rotation.xRot:
     Return the rotation matrix for a rotation about the x axis.
 rotation.yRot:

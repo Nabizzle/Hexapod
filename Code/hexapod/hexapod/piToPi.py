@@ -13,6 +13,10 @@ decodeEMG:
     Convert byte string EMG data to floats
 emgClient:
     Send EMG data to the EMG server
+switchMode:
+    Switches walking modes if the user is cocontracting their muscles.
+pollEMG:
+    Get EMG signals and normalize them.
 
 Notes
 -----
@@ -175,3 +179,71 @@ def emgClient() -> None:
             s.sendall(emg_string)
             data = s.recv(1024)
             print(f"Received {data!r}")
+
+
+def switchMode(conn: socket, threshold: float) -> bool:
+    """
+    Switches walking modes if the user is cocontracting their muscles.
+
+    Checks if both EMG signals are above a threshold value to indicate if the
+    hexapod should switch movement modes.
+
+    Parameters
+    ----------
+    conn: socket
+        The server socket EMG data is send to
+    threshold: float
+        The value above which both EMG signals need to be to cause a mode
+        switch. This value should be between 0 and 1.
+
+    Returns
+    -------
+    bool
+        True if both EMG signals are above the threshold input.
+
+    See Also
+    --------
+    pollEMG:
+        Get EMG signals and normalize them
+
+    Notes
+    -----
+    This function is called after every EMG based step to see if the person is
+    cocontracting hard enough to switch modes.
+    """
+    [fcr_emg, edc_emg] = pollEMG(conn)
+
+    return bool(fcr_emg > threshold and edc_emg > threshold)
+
+
+def pollEMG(conn: socket) -> Tuple[float, float]:
+    """
+    Get EMG signals and normalize them
+
+    Queries the Raspberry pi Zero W for recorded forearm EMG values and then
+    scales them from 0 to 1.
+
+    Parameters
+    ----------
+    conn: socket
+        The server socket EMG data is send to
+
+    Returns
+    -------
+    [fcr_emg, edc_emg]: Tuple[float, float]
+        The two forearm EMG signals
+
+    Notes
+    -----
+    This code just scales the EMG values to set it apart from the code on the
+    Raspberry Pi Zero W that records the EMG.
+    """
+    fcr_emg, edc_emg = decodeEMG(conn)
+
+    fcr_emg = min(fcr_emg, 1.0)
+    fcr_emg = max(fcr_emg, 0.0)
+
+    edc_emg = min(edc_emg, 1.0)
+    edc_emg = max(edc_emg, 0.0)
+
+    return (fcr_emg, edc_emg)
