@@ -10,11 +10,14 @@ Functions
 ---------
 bodyPos:
     Creates a model of the body with input rotations and translations.
+bodyAngle:
+    Finds the body angles based on analog stick inputs
 """
+from typing import Tuple
 import numpy as np
 from numpy.linalg import inv
 from hexapod.rotation import xRot, yRot, zRot
-from math import sin, pi
+from math import sin, tan, atan2, pi, radians, degrees
 
 
 def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
@@ -88,3 +91,33 @@ def bodyPos(pitch: float = 0, roll: float = 0, yaw: float = 0, Tx: float = 0,
     body_model = body_model + translation
 
     return body_model
+
+
+def bodyAngle(analog_x: float, analog_y: float,
+              max_angle: float = 15) -> Tuple[float, float]:
+    """
+    Finds the body angles based on analog stick inputs
+
+    Finds the body roll and pitch angles based on an single analog stick input
+    up to a maximum angle
+
+    Parameters
+    ----------
+    analog_x: float
+        The distance the analog stick is pushed in the x direction normalized
+        between -1 and 1
+    analog_y: float
+        The distance the analog stick is pushed in the y direction normalized
+        between -1 and 1
+    max_angle: float, default 15
+        The maxium angle the body will dip by
+
+    Returns
+    -------
+    pitch, roll: Tuple[float, float]
+        The found roll and pitch angles to update the body with.
+    """
+    max_depth = -tan(radians(max_angle))
+    pitch = degrees(atan2(max_depth * analog_y, 1))
+    roll = degrees(atan2(max_depth * analog_x, 1))
+    return (pitch, roll)
