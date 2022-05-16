@@ -397,6 +397,8 @@ z axis.</p>
 </dd>
 <dt>resetTurnStance:</dt><dd><p>Completes the final step in turning to a neutral stance.</p>
 </dd>
+<dt>omniWalk:</dt><dd><p>Walks in any direction based on the previous step.</p>
+</dd>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="hexapod.move.emgToTurn">
@@ -502,6 +504,62 @@ difference, the closer to the <cite>max_distance</cite> the hexapod will walk.</
 <p>When the difference in EMG is positive, the hexapod walks forwards. When it
 is negative, it walks backwards. The higher the <cite>max_distance</cite> parameter
 is, the farther a change in EMG will move the hexapod.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hexapod.move.omniWalk">
+<span class="sig-prename descclassname"><span class="pre">hexapod.move.</span></span><span class="sig-name descname"><span class="pre">omniWalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leg_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_foot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hexapod.move.omniWalk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walks in any direction based on the previous step.</p>
+<p>Walks in much the same way as the regular walk function and the emgToWalk
+function, but this funciton can walk in any direction between each step.
+The new step direction is found using the previous step size and angle.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>body_model: np.ndarray</strong></dt><dd><p>The 7x3 numpy array containing the locations of the coax servos.</p>
+</dd>
+<dt><strong>leg_model: np.ndarray</strong></dt><dd><p>the 4x3x6 numpy array that holds the locations of the coax, femur,
+and tibia servos as well as the feet end positions.</p>
+</dd>
+<dt><strong>right_foot: bool</strong></dt><dd><p>An indicator if the right or left set of legs are taking the step.
+The “right” set are legs 0, 2, and 4 and the “left” are 1, 3, and 5.</p>
+</dd>
+<dt><strong>previous_step: float</strong></dt><dd><p>The distance the hexapod walked the last time this function was called.</p>
+</dd>
+<dt><strong>previous_step: float</strong></dt><dd><p>The angle the hexapod walked the last time this function was called.</p>
+</dd>
+<dt><strong>max_distance: float, default=30</strong></dt><dd><p>The maximum step size of the hexapod.</p>
+</dd>
+<dt><strong>angle: float, default=90</strong></dt><dd><p>The angle that the hexapod will walk in.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt>[leg_model, right_foot, previous_step, previous angle, walk_positions]:</dt><dd><p>Tuple[np.ndarray, bool, float, float, np.ndarray]</p>
+<p>The updated input parameters for the next time the function is run.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#hexapod.move.walk" title="hexapod.move.walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walk</span></code></a></dt><dd><p>Creates a series of feet positions to use when walking in a direction.</p>
+</dd>
+<dt><a class="reference internal" href="#hexapod.move.resetWalkStance" title="hexapod.move.resetWalkStance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resetWalkStance</span></code></a></dt><dd><p>Completes the final step in walking to a neutral stance.</p>
+</dd>
+<dt><a class="reference internal" href="#hexapod.move.emgToWalk" title="hexapod.move.emgToWalk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emgToWalk</span></code></a></dt><dd><p>Walks a dynamic distance based a normalized EMG input.</p>
+</dd>
+<dt><a class="reference internal" href="#hexapod.leg.recalculateLegAngles" title="hexapod.leg.recalculateLegAngles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hexapod.leg.recalculateLegAngles</span></code></a></dt><dd><p>Finds the coax, femur, and tibia angles of each leg.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This funciton uses the vector addition of the previous step size along its
+angle with the step size along the new angle to find the new resultant
+step size and angle. This is to reset the hexapod’s stance while also
+moving in the new direction.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1374,6 +1432,8 @@ or can take in two EMG streams to direct the amount to walk and turn.</p>
 <dt>move.emgToTurn:</dt><dd><p>Turns a dynamic angle based on a normalized EMG input.</p>
 </dd>
 <dt>move.resetTurnStance:</dt><dd><p>Completes the final step in turning to a neutral stance.</p>
+</dd>
+<dt>move.omniWalk:</dt><dd><p>Walks in any direction based on the previous step.</p>
 </dd>
 <dt>piToPi.createInputs:</dt><dd><p>Establish the analog inputs to record EMG</p>
 </dd>
