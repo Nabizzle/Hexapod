@@ -108,6 +108,6 @@ ssc32uDriver.disconnect:
     Disconnects from the serial port.
 ssc32uDriver.sendData:
     Sends the byte string command for the servos to the Lynxmotiohn SSC-32U.
-xbox:
+xboxController:
     A class object to contain all controller analog and state values
 """
