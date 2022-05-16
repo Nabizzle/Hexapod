@@ -13,42 +13,42 @@ class xboxController():
 
     Attributes
     ----------
-    right_joystick_y: float, default 0
+    right_joystick_y: float, default=0
         The analog value in the y direction of the right analog stick
-    right_joystick_x: float, default 0
+    right_joystick_x: float, default=0
         The analog value in the x direction of the right analog stick
-    right_thumb: int, default 0
+    right_thumb: int, default=0
         The state value of the right analog stick pressed in
-    left_joystick_y: float, default 0
+    left_joystick_y: float, default=0
         The analog value in the y direction of the left analog stick
-    left_joystick_x: float, default 0
+    left_joystick_x: float, default=0
         The analog value in the x direction of the leftt analog stick
-    left_thumb: int, default 0
+    left_thumb: int, default=0
         The state value of the leftt analog stick pressed in
-    a: int, default 0
+    a: int, default=0
         The state of the a button
-    b: int, default 0
+    b: int, default=0
         The state of the b button
-    y: int, default 0
+    y: int, default=0
         The state of the y button
-    x: int, default 0
+    x: int, default=0
         The state of the x button
-    down_up_d_pad: int, default 0
+    down_up_d_pad: int, default=0
         The state of the up down direction of the D pad. Up is -1 and down is 1
-    right_left_d_pad: int, default 0
+    right_left_d_pad: int, default=0
         The state of the right left direction of the D pad. left is -1 and
         right is 1
-    right_trigger: float, default 0
+    right_trigger: float, default=0
         The analog value of the right trigger
-    right_bumper: int, default 0
+    right_bumper: int, default=0
         The state of the right bumper
-    left_trigger: float, default 0
+    left_trigger: float, default=0
         The analog value of the leftt trigger
-    left_bumper: int, default 0
+    left_bumper: int, default=0
         The state of the leftt bumper
-    back: int, default 0
+    back: int, default=0
         The state of the back button
-    start: int, default 0
+    start: int, default=0
         The state of the start button
     poll_thread: Thread
         The thread to poll each of the parts of the xbox one controller
@@ -101,43 +101,43 @@ class xboxController():
 
         Returns
         -------
-        rs_y: float, default 0
+        rs_y: float, default=0
         The analog value in the y direction of the right analog stick
-        rs_x: float, default 0
+        rs_x: float, default=0
             The analog value in the x direction of the right analog stick
-        rs_t: int, default 0
+        rs_t: int, default=0
             The state value of the right analog stick pressed in
-        ls_y: float, default 0
+        ls_y: float, default=0
             The analog value in the y direction of the left analog stick
-        ls_x: float, default 0
+        ls_x: float, default=0
             The analog value in the x direction of the leftt analog stick
-        ls_t: int, default 0
+        ls_t: int, default=0
             The state value of the leftt analog stick pressed in
-        a: int, default 0
+        a: int, default=0
             The state of the a button
-        b: int, default 0
+        b: int, default=0
             The state of the b button
-        y: int, default 0
+        y: int, default=0
             The state of the y button
-        x: int, default 0
+        x: int, default=0
             The state of the x button
-        down_up_d: int, default 0
+        down_up_d: int, default=0
             The state of the up down direction of the D pad. Up is -1 and down
             is 1
-        right_left_d: int, default 0
+        right_left_d: int, default=0
             The state of the right left direction of the D pad. left is -1 and
             right is 1
-        rt: float, default 0
+        rt: float, default=0
             The analog value of the right trigger
-        rb: int, default 0
+        rb: int, default=0
             The state of the right bumper
-        lt: float, default 0
+        lt: float, default=0
             The analog value of the leftt trigger
-        lb: int, default 0
+        lb: int, default=0
             The state of the leftt bumper
-        back: int, default 0
+        back: int, default=0
             The state of the back button
-        start: int, default 0
+        start: int, default=0
             The state of the start button
 
         Notes
