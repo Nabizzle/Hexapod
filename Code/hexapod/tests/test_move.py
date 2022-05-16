@@ -2380,7 +2380,7 @@ def test_resetWalkStance():
     right_foot = False
     previous_step = 15
 
-    [leg_model, right_foot, _] = move.resetWalkStance(body_model, input_leg_model, right_foot, previous_step)
+    [leg_model, right_foot, _] = move.resetWalkStance(body_model, input_leg_model, right_foot, previous_step, previous_angle=90)
 
     assert np.allclose(leg_model, output_leg_model) and right_foot is True
 
