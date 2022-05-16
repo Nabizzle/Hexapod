@@ -26,68 +26,68 @@ ssc32uDriver:
 
 Functions
 ---------
-body.bodyPos:
-    Creates a model of the body with input rotations and translations.
 bodyAngle:
     Finds the body angles based on analog stick inputs
+body.bodyPos:
+    Creates a model of the body with input rotations and translations.
 controller.emgController:
     Controls the hexapod to walk or turn based on EMG.
+controller.sendPositions:
+    Send each position in a set to the servo controller.
 controller.sit:
     Tells the Hexapod to sit with its body on the ground.
 controller.stand:
     Tells the hexapod to stand in the neutral position.
-controller.walkCycle:
-    Tells the hexapod to walk a specified distance without the need for EMG.
 controller.turnCycle:
     Tells the hexapod to turn to an angle without EMG
-controller.sendPositions:
-    Send each position in a set to the servo controller.
-leg.legPos:
-    Finds the positions for the leg segments.
+controller.walkCycle:
+    Tells the hexapod to walk a specified distance without the need for EMG.
+leg.getFeetPos:
+    Ouput the x, y, z position of the feet of the hexapod.
 leg.legAngle:
     Finds the angles for the coax, femur, and tibia leg segments.
+leg.legModel:
+    Generates the model of the legs based on the servo angles of the legs.
+leg.legPos:
+    Finds the positions for the leg segments.
 leg.recalculateLegAngles:
     Finds the coax, femur, and tibia angles of each leg.
 leg.startLegPos:
     Find the neutral position of the hexapod.
-leg.legModel:
-    Generates the model of the legs based on the servo angles of the legs.
-leg.getFeetPos:
-    Ouput the x, y, z position of the feet of the hexapod.
-move.stepForward:
-    Calculate the x, y, z position updates to move in a step in a direction.
-move.stepTurnFoot:
-    Calculate the position of a foot when turning the hexapod about an angle.
-move.stepTurn:
-    Calcluate the positions of each foot when turning about an angle.
-move.walk
-    Creates a series of feet positions to use when walking in a direction.
-move.turn
-    Creates the series of feet positions to turn the hexapod about the z axis.
-move.emgToWalk:
-    Walks a dynamic distance based a normalized EMG input.
-move.resetWalkStance:
-    Completes the final step in walking to a neutral stance.
 move.emgToTurn:
     Turns a dynamic angle based on a normalized EMG input.
-move.resetTurnStance:
-    Completes the final step in turning to a neutral stance.
+move.emgToWalk:
+    Walks a dynamic distance based a normalized EMG input.
 move.omniWalk:
     Walks in any direction based on the previous step.
+move.resetTurnStance:
+    Completes the final step in turning to a neutral stance.
+move.resetWalkStance:
+    Completes the final step in walking to a neutral stance.
+move.stepForward:
+    Calculate the x, y, z position updates to move in a step in a direction.
+move.stepTurn:
+    Calcluate the positions of each foot when turning about an angle.
+move.stepTurnFoot:
+    Calculate the position of a foot when turning the hexapod about an angle.
+move.turn
+    Creates the series of feet positions to turn the hexapod about the z axis.
+move.walk
+    Creates a series of feet positions to use when walking in a direction.
 piToPi.createInputs:
     Establish the analog inputs to record EMG
-piTopi.receiveEMG:
-    Pull EMG from the Raspberry Pi Zero W
-piTopi.emgEstablishserver:
-    Open the TCPIP server to recieve EMG data
 piTopi.decodeEMG:
     Convert byte string EMG data to floats
 piTopi.emgClient:
     Send EMG data to the EMG server
-piToPi.switchMode:
-    Switches walking modes if the user is cocontracting their muscles.
+piTopi.emgEstablishserver:
+    Open the TCPIP server to recieve EMG data
 piToPi.pollEMG:
     Get EMG signals and normalize them.
+piTopi.receiveEMG:
+    Pull EMG from the Raspberry Pi Zero W
+piToPi.switchMode:
+    Switches walking modes if the user is cocontracting their muscles.
 rotation.xRot:
     Return the rotation matrix for a rotation about the x axis.
 rotation.yRot:

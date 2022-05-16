@@ -5,18 +5,18 @@ Functions
 ---------
 createInputs:
     Establish the analog inputs to record EMG
-receiveEMG:
-    Pull EMG from the Raspberry Pi Zero W
-emgEstablishserver:
-    Open the TCPIP server to recieve EMG data
 decodeEMG:
     Convert byte string EMG data to floats
 emgClient:
     Send EMG data to the EMG server
-switchMode:
-    Switches walking modes if the user is cocontracting their muscles.
+emgEstablishserver:
+    Open the TCPIP server to recieve EMG data
 pollEMG:
     Get EMG signals and normalize them.
+receiveEMG:
+    Pull EMG from the Raspberry Pi Zero W
+switchMode:
+    Switches walking modes if the user is cocontracting their muscles.
 
 Notes
 -----
@@ -59,69 +59,6 @@ def createInputs() -> Tuple[AnalogIn, AnalogIn]:
     edc_channel = AnalogIn(mcp, MCP.P1)
 
     return (fcr_channel, edc_channel)
-
-
-def receiveEMG(fcr_channel: AnalogIn, edc_channel: AnalogIn,
-               gain_fcr: float = 5,
-               gain_edc: float = 5) -> Tuple[float, float]:
-    """
-    Pull EMG from the Raspberry Pi Zero W
-
-    Read in EMG values on the first two ADC channels of the Raspberry Pi
-    zero through the MCP3008.
-
-    Parameters
-    ----------
-    fcr_channel: AnalogIn
-        The flexor EMG channel
-    edc_channel: AnalogIn
-        The extensor EMG channel
-    gain_fcr: int
-        A multiplier of the flexor EMG input to amplify the signal.
-    gain_edc: int
-        A multiplier of the extensor EMG input to amplify the signal.
-
-    Returns
-    -------
-    [fcr_emg, edc_emg]: Tuple[float, float]
-        The normalized forearm EMG values.
-
-    See Also
-    --------
-    hexapod.piToPi.createInputs
-    hexapod.piToPi.emgClient
-    """
-    # get the 16 value on each EMG channel and normalize it
-    fcr_emg = fcr_channel.value / 65536.0 * gain_fcr
-    edc_emg = edc_channel.value / 65536.0 * gain_edc
-
-    return (fcr_emg, edc_emg)
-
-
-def emgEstablishServer() -> socket:
-    """
-    Open the TCPIP server to recieve EMG data
-
-    Establish the TCPIP server on the hexapodNetwork wifi to recieve EMG data.
-
-    Returns
-    -------
-    conn: socket
-        A new socket opbject to send EMG over
-
-    See Also
-    --------
-    hexapod.piToPi.emgClient
-    """
-    HOST = "192.168.4.1"  # Standard loopback interface address (localhost)
-    PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
-
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, _ = s.accept()
-    return conn
 
 
 def decodeEMG(conn: socket) -> Tuple[float, float]:
@@ -181,39 +118,30 @@ def emgClient() -> None:
             print(f"Received {data!r}")
 
 
-def switchMode(conn: socket, threshold: float) -> bool:
+def emgEstablishServer() -> socket:
     """
-    Switches walking modes if the user is cocontracting their muscles.
+    Open the TCPIP server to recieve EMG data
 
-    Checks if both EMG signals are above a threshold value to indicate if the
-    hexapod should switch movement modes.
-
-    Parameters
-    ----------
-    conn: socket
-        The server socket EMG data is send to
-    threshold: float
-        The value above which both EMG signals need to be to cause a mode
-        switch. This value should be between 0 and 1.
+    Establish the TCPIP server on the hexapodNetwork wifi to recieve EMG data.
 
     Returns
     -------
-    bool
-        True if both EMG signals are above the threshold input.
+    conn: socket
+        A new socket opbject to send EMG over
 
     See Also
     --------
-    pollEMG:
-        Get EMG signals and normalize them
-
-    Notes
-    -----
-    This function is called after every EMG based step to see if the person is
-    cocontracting hard enough to switch modes.
+    hexapod.piToPi.emgClient
     """
-    [fcr_emg, edc_emg] = pollEMG(conn)
+    HOST = "192.168.4.1"  # Standard loopback interface address (localhost)
+    PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
-    return bool(fcr_emg > threshold and edc_emg > threshold)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, _ = s.accept()
+    return conn
 
 
 def pollEMG(conn: socket) -> Tuple[float, float]:
@@ -247,3 +175,75 @@ def pollEMG(conn: socket) -> Tuple[float, float]:
     edc_emg = max(edc_emg, 0.0)
 
     return (fcr_emg, edc_emg)
+
+
+def receiveEMG(fcr_channel: AnalogIn, edc_channel: AnalogIn,
+               gain_fcr: float = 5,
+               gain_edc: float = 5) -> Tuple[float, float]:
+    """
+    Pull EMG from the Raspberry Pi Zero W
+
+    Read in EMG values on the first two ADC channels of the Raspberry Pi
+    zero through the MCP3008.
+
+    Parameters
+    ----------
+    fcr_channel: AnalogIn
+        The flexor EMG channel
+    edc_channel: AnalogIn
+        The extensor EMG channel
+    gain_fcr: int
+        A multiplier of the flexor EMG input to amplify the signal.
+    gain_edc: int
+        A multiplier of the extensor EMG input to amplify the signal.
+
+    Returns
+    -------
+    [fcr_emg, edc_emg]: Tuple[float, float]
+        The normalized forearm EMG values.
+
+    See Also
+    --------
+    hexapod.piToPi.createInputs
+    hexapod.piToPi.emgClient
+    """
+    # get the 16 value on each EMG channel and normalize it
+    fcr_emg = fcr_channel.value / 65536.0 * gain_fcr
+    edc_emg = edc_channel.value / 65536.0 * gain_edc
+
+    return (fcr_emg, edc_emg)
+
+
+def switchMode(conn: socket, threshold: float) -> bool:
+    """
+    Switches walking modes if the user is cocontracting their muscles.
+
+    Checks if both EMG signals are above a threshold value to indicate if the
+    hexapod should switch movement modes.
+
+    Parameters
+    ----------
+    conn: socket
+        The server socket EMG data is send to
+    threshold: float
+        The value above which both EMG signals need to be to cause a mode
+        switch. This value should be between 0 and 1.
+
+    Returns
+    -------
+    bool
+        True if both EMG signals are above the threshold input.
+
+    See Also
+    --------
+    pollEMG:
+        Get EMG signals and normalize them
+
+    Notes
+    -----
+    This function is called after every EMG based step to see if the person is
+    cocontracting hard enough to switch modes.
+    """
+    [fcr_emg, edc_emg] = pollEMG(conn)
+
+    return bool(fcr_emg > threshold and edc_emg > threshold)

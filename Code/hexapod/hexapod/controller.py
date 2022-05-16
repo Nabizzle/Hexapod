@@ -9,16 +9,16 @@ Functions
 ---------
 emgController:
     Controls the hexapod to walk or turn based on EMG.
+sendPositions:
+    Send each position in a set to the servo controller.
 sit:
     Tells the Hexapod to sit with its body on the ground.
 stand:
     Tells the hexapod to stand in the neutral position.
-walkCycle:
-    Tells the hexapod to walk a specified distance without the need for EMG
 turnCycle:
     Tells the hexapod to turn to an angle without EMG
-sendPositions:
-    Send each position in a set to the servo controller.
+walkCycle:
+    Tells the hexapod to walk a specified distance without the need for EMG
 """
 import string
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
@@ -102,6 +102,47 @@ def emgController(usb_port: string, mode: bool) -> None:
             sendPositions(port, positions, body_model)
 
 
+def sendPositions(port: Any, positions: np.ndarray,
+                  body_model: np.ndarray) -> bool:
+    """
+    Send each position in a set to the servo controller.
+
+    Takes a list of command positions and iterates through them to send each
+    position as a servo command to the Lynxmotion SSC32U.
+
+    Parameters
+    ----------
+    port: Serial Port
+        The USB port that the servo signals are sent over
+    positions: np.ndarray
+        A numpy array of a set of foot positions to command the hexapod to.
+        These foot positions are a 6x3 numpy array of x, y, z positions for
+        the six legs and the number of 6x3 arrays in the positions matrix is
+        determined by how far the hexapod walked or turned.
+    body_model: np.ndarray
+        The 7x3 numpy array containing the locations of the coax servos.
+
+    Returns
+    -------
+    bool:
+        The function returns true when finished.
+
+    Notes
+    -----
+    In this function, the ssc32uDriver.anglesToSerial function does not have
+    its speed or time inputs used as each change in position is so small, that
+    using these parameters is unneeded. Also note that there is a 5ms delay
+    between commands.
+    """
+    for position in positions:
+        # convert the feet positions to angles
+        angles = recalculateLegAngles(position, body_model)
+        # get the serial message from the angles
+        message = anglesToSerial(angles, 2000)
+        sendData(port, message)  # send the serial message
+    return True
+
+
 def sit(usb_port: string) -> None:
     """
     Tells the Hexapod to sit with its body on the ground.
@@ -162,6 +203,37 @@ def stand(usb_port: string) -> None:
     sendData(port, message)  # send the serial message
 
 
+def turnCycle(usb_port: string, turn_angle: float) -> None:
+    """
+    Tells the hexapod to turn to an angle without EMG
+
+    This function just uses the move.turn function and sends its positions to
+    the Lynxmotion SSC32U.
+
+    Parameters
+    ----------
+    usb_port: string
+        The name of the port to connect to
+    turn_angle: float, default=60
+        The angle to turn to. A positive angle if a left turn.
+
+    See Also
+    --------
+    hexapod.move.turn
+    """
+    port = connect(usb_port)  # connect to the servo controller
+    # setup the starting robot positions
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset=85)
+    start_leg = startLegPos(body_model, start_radius=180, start_height=60)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
+    sendData(port, message)  # send the serial message
+    leg_model = legModel(start_leg, body_model)
+    positions = turn(leg_model, turn_angle, 10)
+    sendPositions(port, positions, body_model)
+
+
 def walkCycle(usb_port: string, distance: float, angle: float) -> None:
     """
     Tells the hexapod to walk a specified distance without the need for EMG.
@@ -195,75 +267,3 @@ def walkCycle(usb_port: string, distance: float, angle: float) -> None:
     leg_model = legModel(start_leg, body_model)
     positions = walk(leg_model, distance, angle, 10)
     sendPositions(port, positions, body_model)
-
-
-def turnCycle(usb_port: string, turn_angle: float) -> None:
-    """
-    Tells the hexapod to turn to an angle without EMG
-
-    This function just uses the move.turn function and sends its positions to
-    the Lynxmotion SSC32U.
-
-    Parameters
-    ----------
-    usb_port: string
-        The name of the port to connect to
-    turn_angle: float, default=60
-        The angle to turn to. A positive angle if a left turn.
-
-    See Also
-    --------
-    hexapod.move.turn
-    """
-    port = connect(usb_port)  # connect to the servo controller
-    # setup the starting robot positions
-    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
-                         body_offset=85)
-    start_leg = startLegPos(body_model, start_radius=180, start_height=60)
-    # get the serial message from the angles
-    message = anglesToSerial(start_leg, 500, 2000)
-    sendData(port, message)  # send the serial message
-    leg_model = legModel(start_leg, body_model)
-    positions = turn(leg_model, turn_angle, 10)
-    sendPositions(port, positions, body_model)
-
-
-def sendPositions(port: Any, positions: np.ndarray,
-                  body_model: np.ndarray) -> bool:
-    """
-    Send each position in a set to the servo controller.
-
-    Takes a list of command positions and iterates through them to send each
-    position as a servo command to the Lynxmotion SSC32U.
-
-    Parameters
-    ----------
-    port: Serial Port
-        The USB port that the servo signals are sent over
-    positions: np.ndarray
-        A numpy array of a set of foot positions to command the hexapod to.
-        These foot positions are a 6x3 numpy array of x, y, z positions for
-        the six legs and the number of 6x3 arrays in the positions matrix is
-        determined by how far the hexapod walked or turned.
-    body_model: np.ndarray
-        The 7x3 numpy array containing the locations of the coax servos.
-
-    Returns
-    -------
-    bool:
-        The function returns true when finished.
-
-    Notes
-    -----
-    In this function, the ssc32uDriver.anglesToSerial function does not have
-    its speed or time inputs used as each change in position is so small, that
-    using these parameters is unneeded. Also note that there is a 5ms delay
-    between commands.
-    """
-    for position in positions:
-        # convert the feet positions to angles
-        angles = recalculateLegAngles(position, body_model)
-        # get the serial message from the angles
-        message = anglesToSerial(angles, 2000)
-        sendData(port, message)  # send the serial message
-    return True

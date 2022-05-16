@@ -1,3 +1,19 @@
+"""
+A class object to contain all controller analog and state values
+
+A class object for the xbox one controller that stores all controller button
+and analog statea and values. Also holds values to normalize the analog stick
+and trigger values between -1 and 1.
+
+Functions
+---------
+__init__:
+    Creates the start values of all buttons and analog inputs
+poll_controller:
+    Sets all controller values using a thread
+read:
+    Returns the values of all parts of the controller
+"""
 from inputs import get_gamepad
 from threading import Thread
 from typing import List
@@ -87,6 +103,71 @@ class xboxController():
         self._poll_thread.daemon = True
         self._poll_thread.start()
 
+    def poll_controller(self) -> None:
+        """
+        Sets all controller values using a thread
+
+        At the time of an event, the thread sets the appropriate
+        xboxController atrribute
+        """
+        while True:
+            events = get_gamepad()
+            for event in events:
+                match event.code:
+                    case 'ABS_RX':
+                        # normalize between -1 and 1
+                        self.right_joystick_x =\
+                            event.state / xboxController.MAX_JOY_VAL
+                    case 'ABS_RY':
+                        # normalize between -1 and 1
+                        self.right_joystick_y =\
+                            event.state / xboxController.MAX_JOY_VAL
+                    case 'BTN_THUMBR':
+                        self.right_thumb = event.state
+
+                    case 'ABS_X':
+                        # normalize between -1 and 1
+                        self.left_joystick_x =\
+                            event.state / xboxController.MAX_JOY_VAL
+                    case 'ABS_Y':
+                        # normalize between -1 and 1
+                        self.left_joystick_y =\
+                            event.state / xboxController.MAX_JOY_VAL
+                    case 'BTN_THUMBL':
+                        self.left_thumb = event.state
+
+                    case 'BTN_SOUTH':
+                        self.a = event.state
+                    case 'BTN_EAST':
+                        self.b = event.state
+                    case 'BTN_NORTH':
+                        self.y = event.state
+                    case 'BTN_WEST':
+                        self.x = event.state
+
+                    case 'ABS_HAT0Y':
+                        self.down_up_d_pad = event.state
+                    case 'ABS_HAT0X':
+                        self.right_left_d_pad = event.state
+                    case 'ABS_RZ':
+                        # normalize between 0 and 1
+                        self.right_trigger =\
+                            event.state / xboxController.MAX_TRIG_VAL
+                    case 'BTN_TR':
+                        self.right_bumper = event.state
+
+                    case 'ABS_Z':
+                        # normalize between 0 and 1
+                        self.left_trigger =\
+                            event.state / xboxController.MAX_TRIG_VAL
+                    case 'BTN_TL':
+                        self.left_bumper = event.state
+
+                    case 'BTN_START':
+                        self.back = event.state
+                    case 'BTN_SELECT':
+                        self.start = event.state
+
     def read(self) -> List:
         """
         Returns the values of all parts of the controller
@@ -171,71 +252,6 @@ class xboxController():
         start = self.start
         return [rs_x, rs_y, rs_t, ls_x, ls_y, ls_t, a, b, y, x, down_up_d,
                 right_left_d, rt, rb, lt, lb, back, start]
-
-    def poll_controller(self) -> None:
-        """
-        Sets all controller values in a thread
-
-        At the time of an event, the thread sets the appropriate
-        xboxController atrribute
-        """
-        while True:
-            events = get_gamepad()
-            for event in events:
-                match event.code:
-                    case 'ABS_RX':
-                        # normalize between -1 and 1
-                        self.right_joystick_x =\
-                            event.state / xboxController.MAX_JOY_VAL
-                    case 'ABS_RY':
-                        # normalize between -1 and 1
-                        self.right_joystick_y =\
-                            event.state / xboxController.MAX_JOY_VAL
-                    case 'BTN_THUMBR':
-                        self.right_thumb = event.state
-
-                    case 'ABS_X':
-                        # normalize between -1 and 1
-                        self.left_joystick_x =\
-                            event.state / xboxController.MAX_JOY_VAL
-                    case 'ABS_Y':
-                        # normalize between -1 and 1
-                        self.left_joystick_y =\
-                            event.state / xboxController.MAX_JOY_VAL
-                    case 'BTN_THUMBL':
-                        self.left_thumb = event.state
-
-                    case 'BTN_SOUTH':
-                        self.a = event.state
-                    case 'BTN_EAST':
-                        self.b = event.state
-                    case 'BTN_NORTH':
-                        self.y = event.state
-                    case 'BTN_WEST':
-                        self.x = event.state
-
-                    case 'ABS_HAT0Y':
-                        self.down_up_d_pad = event.state
-                    case 'ABS_HAT0X':
-                        self.right_left_d_pad = event.state
-                    case 'ABS_RZ':
-                        # normalize between 0 and 1
-                        self.right_trigger =\
-                            event.state / xboxController.MAX_TRIG_VAL
-                    case 'BTN_TR':
-                        self.right_bumper = event.state
-
-                    case 'ABS_Z':
-                        # normalize between 0 and 1
-                        self.left_trigger =\
-                            event.state / xboxController.MAX_TRIG_VAL
-                    case 'BTN_TL':
-                        self.left_bumper = event.state
-
-                    case 'BTN_START':
-                        self.back = event.state
-                    case 'BTN_SELECT':
-                        self.start = event.state
 
 
 if __name__ == '__main__':
