@@ -23,10 +23,10 @@ walkCycle:
 import string
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
 from hexapod.body import bodyPos
-from hexapod.move import (switchMode, emgToWalk, resetWalkStance, emgToTurn,
+from hexapod.move import (emgToWalk, resetWalkStance, emgToTurn,
                           resetTurnStance, walk, turn)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
-from hexapod.piToPi import emgEstablishServer
+from hexapod.piToPi import emgEstablishServer, switchMode
 import numpy as np
 from typing import Any
 from time import sleep
