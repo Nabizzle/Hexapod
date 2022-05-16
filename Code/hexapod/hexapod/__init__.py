@@ -60,10 +60,14 @@ move.emgToWalk:
     Walks a dynamic distance based a normalized EMG input.
 move.omniWalk:
     Walks in any direction based on the previous step.
+move.resetStance:
+    Completes the final step in simultaneous turning and walking.
 move.resetTurnStance:
     Completes the final step in turning to a neutral stance.
 move.resetWalkStance:
     Completes the final step in walking to a neutral stance.
+move.simultaneousWalkTurn:
+    Makes a step that allows both a turn and a walk in any direction.
 move.stepForward:
     Calculate the x, y, z position updates to move in a step in a direction.
 move.stepTurn:

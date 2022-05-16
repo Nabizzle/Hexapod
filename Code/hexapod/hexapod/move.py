@@ -13,10 +13,14 @@ emgToWalk:
     Walks a dynamic distance based a normalized EMG input.
 omniWalk:
     Walks in any direction based on the previous step.
+resetStance:
+    Completes the final step in simultaneous turning and walking.
 resetTurnStance:
     Completes the final step in turning to a neutral stance.
 resetWalkStance:
     Completes the final step in walking to a neutral stance.
+simultaneousWalkTurn:
+    Makes a step that allows both a turn and a walk in any direction.
 stepForward:
     Calculate the x, y, z position updates to move in a step in a direction.
 stepTurn:
@@ -70,7 +74,8 @@ def emgToTurn(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     -------
     [leg_model, right_foot, previous_turn_angle, turn_positions]:
         Tuple[np.ndarray, bool, float, np.ndarray]
-        The updated input parameters for the next time the function is run.
+        The updated input parameters for the next time the function is run as
+        well as the positions to move to.
 
     See Also
     --------
@@ -145,7 +150,8 @@ def emgToWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     [leg_model, right_foot, previous_step, walk_positions]:
         Tuple[np.ndarray, bool, float, np.ndarray]
 
-        The updated input parameters for the next time the function is run.
+        The updated input parameters for the next time the function is run as
+        well as the positions to move to.
 
     See Also
     --------
@@ -206,12 +212,12 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     right_foot: bool
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
-    previous_step: float
+    previous_step: float, default=0
         The distance the hexapod walked the last time this function was called.
-    previous_angle: float
+    previous_angle: float, default=0
         The angle the hexapod walked the last time this function was called.
-    max_distance: float, default=30
-        The maximum step size of the hexapod.
+    distance: float, default=30
+        The step size of the current step.
     angle: float, default=90
         The angle that the hexapod will walk in.
 
@@ -220,7 +226,8 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     [leg_model, right_foot, previous_step, previous angle, walk_positions]:
         Tuple[np.ndarray, bool, float, float, np.ndarray]
 
-        The updated input parameters for the next time the function is run.
+        The updated input parameters for the next time the function is run as
+        well as the positions to move to.
 
     See Also
     --------
@@ -268,6 +275,72 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
             walk_positions)
 
 
+def resetStance(body_model: np.ndarray, leg_model: np.ndarray,
+                right_foot: bool, previous_walk_step: float = 0,
+                previous_walk_angle: float = 0,
+                previous_turn_angle: float = 0) -> Tuple[np.ndarray, bool,
+                                                         np.ndarray]:
+    """
+    Completes the final step in simultaneous turning and walking.
+
+    Takes the final step of the simultaneous turn and walk cycle by repeating
+    the previous step with the opposite legs as the last step.
+
+    Parameters
+    ----------
+    body_model: np.ndarray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: np.ndarray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_walk_step: float, default=0
+        The distance the hexapod walked the last time this function was called.
+    previous_walk_angle: float, default=0
+        The angle the hexapod walked the last time this function was called.
+    previous_turn_angle: float
+        The angle the hexapod turned the last time this function was called.
+
+    Returns
+    -------
+    [leg_model, right_foot, move_positions]: Tuple[np.ndarray, bool,
+                                                   np.ndarray]
+        The updated `leg_model`, `right_foot`, and `turn_positions` parameters.
+        The first two allow the hexapod to switch to the walking phase with an
+        updated model and smoothly move the correct set of legs on the next
+        step, while the `turn_positions` numpy array is used to take the final
+        step when the positions are converted to servo angles.
+
+    See Also
+    --------
+    simultaneousWalkTurn:
+        Makes a step that allows both a turn and a walk in any direction
+    hexapod.leg.recalculateLegAngles:
+        Finds the coax, femur, and tibia angles of each leg.
+
+    Notes
+    -----
+    This function is only run when the simultaneous walking and turning
+    function is paused
+    """
+    feet_positions = getFeetPos(leg_model)
+    turn_positions = stepTurn(feet_positions,
+                              step_angle=previous_turn_angle,
+                              right_foot=right_foot)
+
+    walk_positions = stepForward(step_angle=previous_walk_angle,
+                                 distance=previous_walk_step,
+                                 right_foot=right_foot)
+                
+    move_positions = turn_positions + walk_positions
+    leg_model = legModel(recalculateLegAngles(move_positions[-1, :, :],
+                                              body_model), body_model)
+    right_foot = not right_foot
+    return (leg_model, right_foot, move_positions)
+
+
 def resetTurnStance(body_model: np.ndarray, leg_model: np.ndarray,
                     right_foot: bool,
                     previous_turn_angle: float) -> Tuple[np.ndarray, bool,
@@ -294,7 +367,7 @@ def resetTurnStance(body_model: np.ndarray, leg_model: np.ndarray,
     Returns
     -------
     [leg_model, right_foot, turn_positions]: Tuple[np.ndarray, bool,
-    np.ndarray]
+                                                   np.ndarray]
         The updated `leg_model`, `right_foot`, and `turn_positions` parameters.
         The first two allow the hexapod to switch to the walking phase with an
         updated model and smoothly move the correct set of legs on the next
@@ -356,7 +429,7 @@ def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
     Returns
     -------
     [leg_model, right_foot, walk_positions]: Tuple[np.ndarray, bool,
-    np.ndarray]
+                                                   np.ndarray]
         The updated `leg_model`, `right_foot`, and `walk_positions` parameters.
         The first two allow the hexapod to switch to the turning phase with an
         updated model and smoothly move the correct set of legs on the next
@@ -388,6 +461,104 @@ def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
                                               body_model), body_model)
     right_foot = not right_foot
     return (leg_model, right_foot, walk_positions)
+
+
+def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
+                         right_foot: bool, previous_walk_step: float = 0,
+                         previous_walk_angle: float = 0,
+                         previous_turn_angle: float = 0,
+                         walk_distance: float = 30,
+                         walk_angle: float = 90,
+                         turn_angle = 15) -> Tuple[np.ndarray, bool, float,
+                                                   float, float, np.ndarray]:
+    """
+    Makes a step that allows both a turn and a walk in any direction.
+
+    Allows the hexapod to walk and/or turn at the same time by finding the
+    feet postions to turn the hexapod and then applying the translation from
+    walking.
+
+    Parameters
+    ----------
+    body_model: np.ndarray
+        The 7x3 numpy array containing the locations of the coax servos.
+    leg_model: np.ndarray
+        the 4x3x6 numpy array that holds the locations of the coax, femur,
+        and tibia servos as well as the feet end positions.
+    right_foot: bool
+        An indicator if the right or left set of legs are taking the step.
+        The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
+    previous_walk_step: float, default=0
+        The distance the hexapod walked the last time this function was called.
+    previous_walk_angle: float, default=0
+        The angle the hexapod walked the last time this function was called.
+    previous_turn_angle: float
+        The angle the hexapod turned the last time this function was called.
+    walk_distance: float, default=30
+        The step size of the current step.
+    walk_angle: float, default=90
+        The angle that the hexapod will walk in.
+    turn_angle: float, default=15
+        The angle that the hexapod will turn to.
+
+    Returns
+    -------
+    [leg_model, right_foot, previous_walk_step, previous_walk_angle,
+     previous_turn_angle, move_positions]:
+        Tuple[np.ndarray, bool, float, float, float, np.ndarray]
+
+        The updated input parameters for the next time the function is run as
+        well as the positions to move to.
+
+    See Also
+    --------
+    emgToWalk:
+        Walks a dynamic distance based a normalized EMG input.
+    emgToTurn:
+        Turns a dynamic angle based on a normalized EMG input.
+    omniWalk:
+        Walks in any direction based on the previous step.
+
+    Notes
+    -----
+    The walking code is the same as the omniWalk code. Simultaneous walking
+    and turning is done by having the rotation of the hexapod found first
+    before the translation of the hexapod. This is the same concept as done
+    when applying a rotation and translation matrix to a point.
+    """
+    feet_positions = getFeetPos(leg_model)
+    turn_positions =\
+        stepTurn(feet_positions,
+                 step_angle=np.sign(turn_angle) * (abs(turn_angle)
+                                                   + previous_turn_angle),
+                 right_foot=right_foot)
+
+    # components of previous step
+    previous_x = previous_walk_step * cos(radians(previous_walk_angle))
+    previous_y = previous_walk_step * sin(radians(previous_walk_angle))
+    # components of desired step
+    current_x = walk_distance * cos(radians(walk_angle))
+    current_y = walk_distance * sin(radians(walk_angle))
+    # combined step
+    x = previous_x + current_x
+    y = previous_y + current_y
+    step_magnitude = hypot(x, y)
+    step_angle = atan2(y, x)
+    walk_positions = stepForward(step_angle=step_angle,
+                                 distance=step_magnitude,
+                                 right_foot=right_foot)
+
+    move_positions = turn_positions + walk_positions
+
+    previous_walk_step = walk_distance
+    previous_walk_angle = walk_angle
+    previous_turn_angle = turn_angle
+    right_foot = not right_foot
+    leg_model = legModel(recalculateLegAngles(move_positions[-1, :, :],
+                                              body_model), body_model)
+
+    return (leg_model, right_foot, previous_walk_step, previous_walk_angle,
+            previous_turn_angle, move_positions)
 
 
 def stepForward(step_angle: float = 90, distance: float = 30,
