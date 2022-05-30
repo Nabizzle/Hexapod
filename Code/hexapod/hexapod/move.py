@@ -257,7 +257,7 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     x = previous_x + current_x
     y = previous_y + current_y
     step_magnitude = hypot(x, y)
-    step_angle = atan2(y, x)
+    step_angle = degrees(atan2(y, x))
     walk_positions = stepForward(step_angle=step_angle,
                                  distance=step_magnitude,
                                  right_foot=right_foot)
@@ -463,7 +463,7 @@ def resetWalkStance(body_model: np.ndarray, leg_model: np.ndarray,
     return (leg_model, right_foot, walk_positions)
 
 
-def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
+def simultaneousWalkTurn(turn_feet_positions: np.ndarray,
                          right_foot: bool, previous_walk_step: float = 0,
                          previous_walk_angle: float = 0,
                          previous_turn_angle: float = 0,
@@ -481,11 +481,8 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
 
     Parameters
     ----------
-    body_model: np.ndarray
-        The 7x3 numpy array containing the locations of the coax servos.
-    leg_model: np.ndarray
-        the 4x3x6 numpy array that holds the locations of the coax, femur,
-        and tibia servos as well as the feet end positions.
+    turn_feet_positions: np.ndarray
+        The 6x3 numpy array containing the locations of the feet after a turn.
     right_foot: bool
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
@@ -504,7 +501,7 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
 
     Returns
     -------
-    [leg_model, right_foot, previous_walk_step, previous_walk_angle,
+    [turn_feet_positions, right_foot, previous_walk_step, previous_walk_angle,
      previous_turn_angle, move_positions]:
         Tuple[np.ndarray, bool, float, float, float, np.ndarray]
 
@@ -527,12 +524,13 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
     before the translation of the hexapod. This is the same concept as done
     when applying a rotation and translation matrix to a point.
     """
-    feet_positions = getFeetPos(leg_model)
     turn_positions =\
-        stepTurn(feet_positions,
+        stepTurn(turn_feet_positions,
                  step_angle=np.sign(turn_angle) * (abs(turn_angle)
                                                    + previous_turn_angle),
                  right_foot=right_foot)
+
+    turn_feet_positions = turn_positions[-1, :, :]
 
     # components of previous step
     previous_x = previous_walk_step * cos(radians(previous_walk_angle))
@@ -544,7 +542,7 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
     x = previous_x + current_x
     y = previous_y + current_y
     step_magnitude = hypot(x, y)
-    step_angle = atan2(y, x)
+    step_angle = degrees(atan2(y, x))
     walk_positions = stepForward(step_angle=step_angle,
                                  distance=step_magnitude,
                                  right_foot=right_foot)
@@ -555,11 +553,9 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
     previous_walk_angle = walk_angle
     previous_turn_angle = turn_angle
     right_foot = not right_foot
-    leg_model = legModel(recalculateLegAngles(move_positions[-1, :, :],
-                                              body_model), body_model)
 
-    return (leg_model, right_foot, previous_walk_step, previous_walk_angle,
-            previous_turn_angle, move_positions)
+    return (turn_feet_positions, right_foot, previous_walk_step,   
+            previous_walk_angle, previous_turn_angle, move_positions)
 
 
 def stepForward(step_angle: float = 90, distance: float = 30,
