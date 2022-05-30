@@ -22,11 +22,13 @@ walkCycle:
 """
 import string
 from hexapod.leg import recalculateLegAngles, startLegPos, legModel
-from hexapod.body import bodyPos
+from hexapod.body import bodyPos, bodyAngle
 from hexapod.move import (emgToWalk, resetWalkStance, emgToTurn,
-                          resetTurnStance, walk, turn)
+                          resetTurnStance, walk, turn, simultaneousWalkTurn)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
 from hexapod.piToPi import emgEstablishServer, switchMode
+from hexapod.xboxController import xboxController
+from math import hypot, atan2
 import numpy as np
 from typing import Any
 from time import sleep
@@ -52,14 +54,16 @@ def emgController(usb_port: string, mode: bool) -> None:
 
     See Also
     --------
-    hexapod.move.switchMode:
+    hexapod.piToPi.switchMode:
         Sends a boolean based on EMG to indicate when to change movement
         modes.
+    gamePadController:
+        Controls the hexapod to walk or turn based on a game pad.
 
     Notes
     -----
     This function has the serial port to communicate to and the threshold
-    of cocontraction to switch modes hardcoded.
+    of co-contraction to switch modes hardcoded.
     """
     port = connect(usb_port)  # connect to the servo controller
     conn = emgEstablishServer()
@@ -100,6 +104,131 @@ def emgController(usb_port: string, mode: bool) -> None:
                                     previous_turn_angle)
             mode = not mode
             sendPositions(port, positions, body_model)
+
+def gamePadController(usb_port: string, mode: int) -> None:
+    """
+    Controls the hexapod to walk or turn based on a game pad.
+
+    Takes in input from a game pad, currently an Xbox controller, and
+    move the hexapod based on this input. Allows for the switching between
+    states of movement to walk, turn, and move the body.
+
+    Parameters
+    ----------
+    usb_port: string
+        The name of the port to connect to
+    mode: int
+        This parameter determines if the current state of movement.
+
+    See Also
+    --------
+    emgController:
+        Controls the hexapod to walk or turn based on EMG.
+
+    Notes
+    -----
+    This function has the serial port to communicate to and the threshold
+    of co-contraction to switch modes hardcoded.
+    """
+    port = connect(usb_port)  # connect to the servo controller
+    # setup the starting robot positions
+    body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
+                         body_offset=85)
+    start_leg = startLegPos(body_model, start_radius=180, start_height=60)
+    # get the serial message from the angles
+    message = anglesToSerial(start_leg, 500, 2000)
+    sendData(port, message)  # send the serial message
+    leg_model = legModel(start_leg, body_model)
+    # iterate until the controller says to stop
+    xbox_controller = xboxController()
+    previous_walk_step = 0
+    previous_walk_angle = 90
+    previous_turn_angle = 0
+    right_foot = True
+
+    previous_mode = 1
+
+    max_walk_distance = 30
+    max_turn_angle = 15
+    max_body_shift = 15
+    max_body_turn = 15
+    while(mode != 5):
+        [rs_x, rs_y, rs_t, ls_x, ls_y, ls_t, a, b, y, x, down_up_d,
+        right_left_d, rt, rb, lt, lb, back, start] = xbox_controller.read()
+
+        if(b == 1):
+            mode = 5
+        elif(start == 1):
+            if(mode != 4):
+                previous_mode = mode
+                mode = 4
+            else:
+                mode = previous_mode
+        elif(rt > 0.5):
+            mode = 2
+        elif(lt > 0.5):
+            mode = 3
+        else:
+            mode = 1
+
+        match mode:
+            case 1:  # walk/turn
+                if(a == 1):
+                    [pitch, roll] = body_model =\
+                    bodyAngle(analog_x=right_left_d, analog_y=-down_up_d,
+                              max_angle=max_body_turn)
+                    bodyPos(pitch=pitch, roll=roll, yaw=0, Tx=0, Ty=0, Tz=0,
+                            body_offset=85)
+                else:
+                    Tx = max_body_shift * right_left_d
+                    Ty = max_body_shift * -down_up_d
+                    bodyPos(pitch=0, roll=0, yaw=0, Tx=Tx,
+                            Ty=Ty, Tz=0, body_offset=85)
+
+                walk_distance = hypot(ls_x, ls_y) * max_walk_distance
+                walk_angle = atan2(ls_y, ls_x)
+                turn_angle = hypot(rs_x, rs_y) * max_turn_angle * np.sign(rs_x)
+
+                [leg_model, right_foot, previous_walk_step,
+                previous_walk_angle, previous_turn_angle, move_positions] =\
+                simultaneousWalkTurn(body_model, leg_model, right_foot,
+                previous_walk_step, previous_walk_angle, previous_turn_angle,
+                walk_distance, walk_angle, turn_angle)
+            case 2:
+                [pitch, roll] = body_model =\
+                bodyAngle(analog_x=ls_x, analog_y=ls_y, 
+                          max_angle=max_body_turn)
+                Tx = max_body_shift * rs_x
+                Ty = max_body_shift * rs_y
+                bodyPos(pitch=pitch, roll=roll, yaw=0, Tx=Tx, 
+                        Ty=Ty, Tz=0, body_offset=85)
+                start_leg = startLegPos(body_model, start_radius=180, 
+                                        start_height=60)
+                # get the serial message from the angles
+                message = anglesToSerial(start_leg, 500, 2000)
+                sendData(port, message)  # send the serial message
+            case 3:
+                yaw = hypot(rs_x, rs_y) * max_body_turn * np.sign(rs_x)
+                Tz = hypot(ls_x, ls_y) * max_body_shift * np.sign(ls_y)
+                bodyPos(pitch=0, roll=0, yaw=yaw, Tx=0, 
+                        Ty=0, Tz=Tz, body_offset=85)
+                start_leg = startLegPos(body_model, start_radius=180, 
+                                        start_height=60)
+                # get the serial message from the angles
+                message = anglesToSerial(start_leg, 500, 2000)
+                sendData(port, message)  # send the serial message
+            case 4:  # Pause control
+                continue
+            case 5:
+                print("Ending Control")
+                break
+            case _:  # default case
+                print ("This option was not initiated.")
+                print("Switching base to walk/turn mode.")
+                mode = 1
+
+        sendPositions(port, move_positions, body_model)
+
 
 
 def sendPositions(port: Any, positions: np.ndarray,
@@ -179,7 +308,7 @@ def stand(usb_port: string) -> None:
 
     See Also
     --------
-    controller:
+    emgController:
         Controls the hexapod to walk or turn based on EMG.
 
     Notes
