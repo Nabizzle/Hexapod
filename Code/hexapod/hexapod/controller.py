@@ -154,7 +154,7 @@ def gamePadController(usb_port: string, mode: int) -> None:
     max_body_shift = 15
     max_body_turn = 15
     while mode != 5:
-        [rs_x, rs_y, _unused_rs_t, ls_x, ls_y, _unused_ls_t, a, b, _unused_y, 
+        [rs_x, rs_y, _unused_rs_t, ls_x, ls_y, _unused_ls_t, a, b, _unused_y,
          _unused_x, down_up_d, right_left_d, rt, _unused_rb, lt, _unused_lb,
          _unused_back, start] = xbox_controller.read()
 
