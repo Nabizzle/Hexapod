@@ -105,6 +105,7 @@ def emgController(usb_port: string, mode: bool) -> None:
             mode = not mode
             sendPositions(port, positions, body_model)
 
+
 def gamePadController(usb_port: string, mode: int) -> None:
     """
     Controls the hexapod to walk or turn based on a game pad.
@@ -152,31 +153,32 @@ def gamePadController(usb_port: string, mode: int) -> None:
     max_turn_angle = 15
     max_body_shift = 15
     max_body_turn = 15
-    while(mode != 5):
-        [rs_x, rs_y, rs_t, ls_x, ls_y, ls_t, a, b, y, x, down_up_d,
-        right_left_d, rt, rb, lt, lb, back, start] = xbox_controller.read()
+    while mode != 5:
+        [rs_x, rs_y, _unused_rs_t, ls_x, ls_y, _unused_ls_t, a, b, _unused_y, 
+         _unused_x, down_up_d, right_left_d, rt, _unused_rb, lt, _unused_lb,
+         _unused_back, start] = xbox_controller.read()
 
-        if(b == 1):
+        if b == 1:
             mode = 5
-        elif(start == 1):
-            if(mode != 4):
+        elif start == 1:
+            if mode != 4 :
                 previous_mode = mode
                 mode = 4
             else:
                 mode = previous_mode
-        elif(rt > 0.5):
+        elif rt > 0.5 :
             mode = 2
-        elif(lt > 0.5):
+        elif lt > 0.5 :
             mode = 3
         else:
             mode = 1
 
         match mode:
             case 1:  # walk/turn
-                if(a == 1):
+                if a == 1 :
                     [pitch, roll] = body_model =\
-                    bodyAngle(analog_x=right_left_d, analog_y=-down_up_d,
-                              max_angle=max_body_turn)
+                        bodyAngle(analog_x=right_left_d, analog_y=-down_up_d,
+                                  max_angle=max_body_turn)
                     bodyPos(pitch=pitch, roll=roll, yaw=0, Tx=0, Ty=0, Tz=0,
                             body_offset=85)
                 else:
@@ -190,19 +192,21 @@ def gamePadController(usb_port: string, mode: int) -> None:
                 turn_angle = hypot(rs_x, rs_y) * max_turn_angle * np.sign(rs_x)
 
                 [leg_model, right_foot, previous_walk_step,
-                previous_walk_angle, previous_turn_angle, move_positions] =\
-                simultaneousWalkTurn(body_model, leg_model, right_foot,
-                previous_walk_step, previous_walk_angle, previous_turn_angle,
-                walk_distance, walk_angle, turn_angle)
+                 previous_walk_angle, previous_turn_angle, move_positions] =\
+                    simultaneousWalkTurn(body_model, leg_model, right_foot,
+                                         previous_walk_step,
+                                         previous_walk_angle,
+                                         previous_turn_angle, walk_distance,
+                                         walk_angle, turn_angle)
             case 2:
                 [pitch, roll] = body_model =\
-                bodyAngle(analog_x=ls_x, analog_y=ls_y, 
-                          max_angle=max_body_turn)
+                    bodyAngle(analog_x=ls_x, analog_y=ls_y,
+                              max_angle=max_body_turn)
                 Tx = max_body_shift * rs_x
                 Ty = max_body_shift * rs_y
-                bodyPos(pitch=pitch, roll=roll, yaw=0, Tx=Tx, 
+                bodyPos(pitch=pitch, roll=roll, yaw=0, Tx=Tx,
                         Ty=Ty, Tz=0, body_offset=85)
-                start_leg = startLegPos(body_model, start_radius=180, 
+                start_leg = startLegPos(body_model, start_radius=180,
                                         start_height=60)
                 # get the serial message from the angles
                 message = anglesToSerial(start_leg, 500, 2000)
@@ -210,9 +214,9 @@ def gamePadController(usb_port: string, mode: int) -> None:
             case 3:
                 yaw = hypot(rs_x, rs_y) * max_body_turn * np.sign(rs_x)
                 Tz = hypot(ls_x, ls_y) * max_body_shift * np.sign(ls_y)
-                bodyPos(pitch=0, roll=0, yaw=yaw, Tx=0, 
+                bodyPos(pitch=0, roll=0, yaw=yaw, Tx=0,
                         Ty=0, Tz=Tz, body_offset=85)
-                start_leg = startLegPos(body_model, start_radius=180, 
+                start_leg = startLegPos(body_model, start_radius=180,
                                         start_height=60)
                 # get the serial message from the angles
                 message = anglesToSerial(start_leg, 500, 2000)
@@ -223,12 +227,11 @@ def gamePadController(usb_port: string, mode: int) -> None:
                 print("Ending Control")
                 break
             case _:  # default case
-                print ("This option was not initiated.")
+                print("This option was not initiated.")
                 print("Switching base to walk/turn mode.")
                 mode = 1
 
         sendPositions(port, move_positions, body_model)
-
 
 
 def sendPositions(port: Any, positions: np.ndarray,
