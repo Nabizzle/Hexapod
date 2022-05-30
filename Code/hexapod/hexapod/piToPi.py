@@ -9,14 +9,14 @@ decodeEMG:
     Convert byte string EMG data to floats
 emgClient:
     Send EMG data to the EMG server
-emgEstablishserver:
-    Open the TCPIP server to recieve EMG data
+emgEstablishServer:
+    Open the TCPIP server to receive EMG data
 pollEMG:
     Get EMG signals and normalize them.
 receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
 switchMode:
-    Switches walking modes if the user is cocontracting their muscles.
+    Switches walking modes if the user is co-contracting their muscles.
 
 Notes
 -----
@@ -120,14 +120,14 @@ def emgClient() -> None:
 
 def emgEstablishServer() -> socket:
     """
-    Open the TCPIP server to recieve EMG data
+    Open the TCPIP server to receive EMG data
 
-    Establish the TCPIP server on the hexapodNetwork wifi to recieve EMG data.
+    Establish the TCPIP server on the hexapodNetwork wifi to receive EMG data.
 
     Returns
     -------
     conn: socket
-        A new socket opbject to send EMG over
+        A new socket object to send EMG over
 
     See Also
     --------
@@ -216,7 +216,7 @@ def receiveEMG(fcr_channel: AnalogIn, edc_channel: AnalogIn,
 
 def switchMode(conn: socket, threshold: float) -> bool:
     """
-    Switches walking modes if the user is cocontracting their muscles.
+    Switches walking modes if the user is co-contracting their muscles.
 
     Checks if both EMG signals are above a threshold value to indicate if the
     hexapod should switch movement modes.
@@ -242,7 +242,7 @@ def switchMode(conn: socket, threshold: float) -> bool:
     Notes
     -----
     This function is called after every EMG based step to see if the person is
-    cocontracting hard enough to switch modes.
+    co-contracting hard enough to switch modes.
     """
     [fcr_emg, edc_emg] = pollEMG(conn)
 

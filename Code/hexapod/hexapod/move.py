@@ -2,7 +2,7 @@
 Functions to calculate linear and angular movement for the hexapod.
 
 These are a collection of functions to find how the hexapod will take steps to
-move linearlly in any direction aor to turn itself in the x-y plane about the
+move linearly in any direction aor to turn itself in the x-y plane about the
 z axis.
 
 Functions
@@ -24,7 +24,7 @@ simultaneousWalkTurn:
 stepForward:
     Calculate the x, y, z position updates to move in a step in a direction.
 stepTurn:
-    Calcluate the positions of each foot when turning about an angle.
+    Calculate the positions of each foot when turning about an angle.
 stepTurnFoot:
     Calculate the position of a foot when turning the hexapod about an angle.
 turn:
@@ -199,7 +199,7 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
     Walks in any direction based on the previous step.
 
     Walks in much the same way as the regular walk function and the emgToWalk
-    function, but this funciton can walk in any direction between each step.
+    function, but this function can walk in any direction between each step.
     The new step direction is found using the previous step size and angle.
 
     Parameters
@@ -242,7 +242,7 @@ def omniWalk(body_model: np.ndarray, leg_model: np.ndarray, right_foot: bool,
 
     Notes
     -----
-    This funciton uses the vector addition of the previous step size along its
+    This function uses the vector addition of the previous step size along its
     angle with the step size along the new angle to find the new resultant
     step size and angle. This is to reset the hexapod's stance while also
     moving in the new direction.
@@ -476,7 +476,7 @@ def simultaneousWalkTurn(body_model: np.ndarray, leg_model: np.ndarray,
     Makes a step that allows both a turn and a walk in any direction.
 
     Allows the hexapod to walk and/or turn at the same time by finding the
-    feet postions to turn the hexapod and then applying the translation from
+    feet positions to turn the hexapod and then applying the translation from
     walking.
 
     Parameters
@@ -569,8 +569,8 @@ def stepForward(step_angle: float = 90, distance: float = 30,
     Calculate the x, y, z position updates to move in a step in a direction.
 
     Finds the relative positions to move the hexapod's six legs to when taking
-    a step. The resolution of each submovement is determined by the
-    resolution of the upwards submovements and the steps taken are parabolic.
+    a step. The resolution of each sub-movement is determined by the
+    resolution of the upwards sub-movements and the steps taken are parabolic.
 
     Parameters
     ----------
@@ -584,7 +584,7 @@ def stepForward(step_angle: float = 90, distance: float = 30,
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
     z_resolution: float, default=10
-        the size in mm of the upwards submovements.
+        the size in mm of the upwards sub-movements.
 
     Returns
     -------
@@ -594,8 +594,8 @@ def stepForward(step_angle: float = 90, distance: float = 30,
 
     Notes
     -----
-    The number of submovements is determined by the resolution in the z
-    direction. If you want fewer submovements, raise the `z_resolution`
+    The number of sub-movements is determined by the resolution in the z
+    direction. If you want fewer sub-movements, raise the `z_resolution`
     number that is hardcoded in the function.
     """
     z = np.array([-(i ** 2) / 4 + ((step_height) ** 2) / 4
@@ -623,17 +623,17 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
              step_height: float = 15, right_foot: bool = True,
              z_resolution: float = 10) -> np.ndarray:
     """
-    Calcluate the positions of each foot when turning about an angle.
+    Calculate the positions of each foot when turning about an angle.
 
     Finds the absolute positions of each leg of the hexapod using the
-    stepTurnFoot function to find the relative additions to the curent
+    stepTurnFoot function to find the relative additions to the current
     feet positions.
 
     Parameters
     ----------
     feet_pos: np.ndarray
         The 6x3 numpy array of the x, y, z, positions of each foot of the
-        hexapod. This array can be found the leg.getFeetPos funciton.
+        hexapod. This array can be found the leg.getFeetPos function.
     step_angle: float, default=15
         The angle to move make the step to. A positive angle is a left step.
     step_height: float, default=15
@@ -642,7 +642,7 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
         An indicator if the right or left set of legs are taking the step.
         The "right" set are legs 0, 2, and 4 and the "left" are 1, 3, and 5.
     z_resolution: float, default=10
-        the size in mm of the upwards submovements.
+        the size in mm of the upwards sub-movements.
 
     Returns
     -------
@@ -656,7 +656,7 @@ def stepTurn(feet_pos: np.ndarray, step_angle: float = 15,
         Calculate the position of a foot when turning the hexapod about an
         angle.
     hexapod.leg.getFeetPos:
-        Ouput the x, y, z position of the feet of the hexapod.
+        Output the x, y, z position of the feet of the hexapod.
 
     Notes
     -----
@@ -687,7 +687,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
     """
     Calculate the position of a foot when turning the hexapod about an angle.
 
-    Finds the relative position changes as submovements for one foot in turning
+    Finds the relative position changes as sub-movements for one foot in turning
     the hexapod. This function is used in conjunction with the stepTurn
     function to turn the hexapod.
 
@@ -708,7 +708,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
         taking the step. The "right" set are legs 0, 2, and 4 and the "left"
         are 1, 3, and 5.
     z_resolution: float, default=10
-        the size in mm of the upwards submovements.
+        the size in mm of the upwards sub-movements.
 
     Returns
     -------
@@ -719,7 +719,7 @@ def stepTurnFoot(foot_x: float, foot_y: float, foot_z: float,
     See Also
     --------
     stepTurn:
-        Calcluate the positions of each foot when turning about an angle.
+        Calculate the positions of each foot when turning about an angle.
 
     Notes
     -----
@@ -772,13 +772,13 @@ def turn(leg_model: np.ndarray, turn_angle: float = 60,
     turn_angle: float, default=60
         The angle to turn to. A positive angle if a left turn.
     z_resolution: float, default=10
-        the size in mm of the upwards submovements.
+        the size in mm of the upwards sub-movements.
 
     Returns
     -------
     turn_positions: np.ndarray
         An nx6x3 array of the absolute foot positions to take during all of the
-        submovements during the turn. These positions are used to calculate
+        sub-movements during the turn. These positions are used to calculate
         the servo angles to take in the turn.
 
     Raises
@@ -913,13 +913,13 @@ def walk(leg_model: np.ndarray, distance: float = 30,
     angle: float, default=90
         The direction the step is taken in in degrees. 90 degrees is forward.
     z_resolution: float, default=10
-        the size in mm of the upwards submovements.
+        the size in mm of the upwards sub-movements.
 
     Returns
     -------
     walk_positions: np.ndarray
         An nx6x3 array of the absolute foot positions to take during all of the
-        submovements during the walk. These positions are used to calculate
+        sub-movements during the walk. These positions are used to calculate
         the servo angles to take in the walk.
 
     Raises
@@ -947,7 +947,7 @@ def walk(leg_model: np.ndarray, distance: float = 30,
         steps += 1
 
     right_foot = True  # If the right foot is moving forward
-    # Sets the remaining distance to move forward as the full distane to move
+    # Sets the remaining distance to move forward as the full distance to move
     remaining_distance = distance
     for i in range(steps):  # iterate over the number of steps to take
         # if the remaining distance to move is less than the max step size,

@@ -2,7 +2,7 @@
 A class object to contain all controller analog and state values
 
 A class object for the xbox one controller that stores all controller button
-and analog statea and values. Also holds values to normalize the analog stick
+and analog states and values. Also holds values to normalize the analog stick
 and trigger values between -1 and 1.
 
 Functions
@@ -24,7 +24,7 @@ class xboxController():
     A class object to contain all controller analog and state values
 
     A class object for the xbox one controller that stores all controller
-    button and analog statea and values. Also holds values to normalize the
+    button and analog states and values. Also holds values to normalize the
     analog stick and trigger values between -1 and 1.
 
     Attributes
@@ -38,9 +38,9 @@ class xboxController():
     left_joystick_y: float, default=0
         The analog value in the y direction of the left analog stick
     left_joystick_x: float, default=0
-        The analog value in the x direction of the leftt analog stick
+        The analog value in the x direction of the left analog stick
     left_thumb: int, default=0
-        The state value of the leftt analog stick pressed in
+        The state value of the left analog stick pressed in
     a: int, default=0
         The state of the a button
     b: int, default=0
@@ -59,9 +59,9 @@ class xboxController():
     right_bumper: int, default=0
         The state of the right bumper
     left_trigger: float, default=0
-        The analog value of the leftt trigger
+        The analog value of the left trigger
     left_bumper: int, default=0
-        The state of the leftt bumper
+        The state of the left bumper
     back: int, default=0
         The state of the back button
     start: int, default=0
@@ -108,7 +108,7 @@ class xboxController():
         Sets all controller values using a thread
 
         At the time of an event, the thread sets the appropriate
-        xboxController atrribute
+        xboxController attribute
         """
         while True:
             events = get_gamepad()
@@ -191,9 +191,9 @@ class xboxController():
         ls_y: float, default=0
             The analog value in the y direction of the left analog stick
         ls_x: float, default=0
-            The analog value in the x direction of the leftt analog stick
+            The analog value in the x direction of the left analog stick
         ls_t: int, default=0
-            The state value of the leftt analog stick pressed in
+            The state value of the left analog stick pressed in
         a: int, default=0
             The state of the a button
         b: int, default=0
@@ -213,9 +213,9 @@ class xboxController():
         rb: int, default=0
             The state of the right bumper
         lt: float, default=0
-            The analog value of the leftt trigger
+            The analog value of the left trigger
         lb: int, default=0
-            The state of the leftt bumper
+            The state of the left bumper
         back: int, default=0
             The state of the back button
         start: int, default=0
@@ -223,8 +223,8 @@ class xboxController():
 
         Notes
         -----
-        Returns the analog and state values in the order of the atrribute
-        declarations in the __init__ funciton.
+        Returns the analog and state values in the order of the attribute
+        declarations in the __init__ function.
         """
         rs_x = self.right_joystick_x
         rs_y = self.right_joystick_y

@@ -37,7 +37,7 @@ def bodyAngle(analog_x: float, analog_y: float,
         The distance the analog stick is pushed in the y direction normalized
         between -1 and 1
     max_angle: float, default 15
-        The maxium angle the body will dip by
+        The maximum angle the body will dip by
 
     Returns
     -------
