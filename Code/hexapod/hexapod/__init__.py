@@ -1,5 +1,5 @@
 """
-A library of funtions to control an 18 DoF hexapod
+A library of functions to control an 18 DoF hexapod
 
 This library contains code to create a computational model of the body and
 legs of the hexapod so that those models can control a real hexapod's 18
@@ -20,7 +20,7 @@ move:
 piTopi:
     Scripts used in the communications with and between Raspberry Pis.
 rotation:
-    Functions to return rotation matricies.
+    Functions to return rotation matrices.
 ssc32uDriver:
     Driver functions to communicate with the Lynxmotion SSC-32U.
 
@@ -43,7 +43,7 @@ controller.turnCycle:
 controller.walkCycle:
     Tells the hexapod to walk a specified distance without the need for EMG.
 leg.getFeetPos:
-    Ouput the x, y, z position of the feet of the hexapod.
+    Output the x, y, z position of the feet of the hexapod.
 leg.legAngle:
     Finds the angles for the coax, femur, and tibia leg segments.
 leg.legModel:
@@ -71,7 +71,7 @@ move.simultaneousWalkTurn:
 move.stepForward:
     Calculate the x, y, z position updates to move in a step in a direction.
 move.stepTurn:
-    Calcluate the positions of each foot when turning about an angle.
+    Calculate the positions of each foot when turning about an angle.
 move.stepTurnFoot:
     Calculate the position of a foot when turning the hexapod about an angle.
 move.turn
@@ -84,14 +84,14 @@ piTopi.decodeEMG:
     Convert byte string EMG data to floats
 piTopi.emgClient:
     Send EMG data to the EMG server
-piTopi.emgEstablishserver:
-    Open the TCPIP server to recieve EMG data
+piTopi.emgEstablishServer:
+    Open the TCPIP server to receive EMG data
 piToPi.pollEMG:
     Get EMG signals and normalize them.
 piTopi.receiveEMG:
     Pull EMG from the Raspberry Pi Zero W
 piToPi.switchMode:
-    Switches walking modes if the user is cocontracting their muscles.
+    Switches walking modes if the user is co-contracting their muscles.
 rotation.xRot:
     Return the rotation matrix for a rotation about the x axis.
 rotation.yRot:
@@ -107,7 +107,7 @@ ssc32uDriver.connect:
 ssc32uDriver.disconnect:
     Disconnects from the serial port.
 ssc32uDriver.sendData:
-    Sends the byte string command for the servos to the Lynxmotiohn SSC-32U.
+    Sends the byte string command for the servos to the Lynxmotion SSC-32U.
 xboxController:
     A class object to contain all controller analog and state values
 """

@@ -19,12 +19,12 @@ def test_legPos():
 
 
 def test_legAngle():
-    """Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the defult leg dimensions declared by the function definition"""
+    """Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the default leg dimensions declared by the function definition"""
     assert np.allclose(leg.legAngle(40, 10, -20),
                        np.array([14.03624, 57.8379894, -74.735641]))
 
 def test_legAngleZeros():
-    """Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the defult leg dimensions declared by the function definition"""
+    """Tests that the coax, femur, and tibia angles are correct given the end foot position. This test uses the default leg dimensions declared by the function definition"""
     assert np.allclose(leg.legAngle(26.34 + 76.2, 0, -88.32),
                        np.array([0, 0, 0]))
 

@@ -1,5 +1,5 @@
 """
-Functions to return rotation matricies.
+Functions to return rotation matrices.
 
 These are the functions to find the rotation of any point around an axis by an
 angle in degrees.

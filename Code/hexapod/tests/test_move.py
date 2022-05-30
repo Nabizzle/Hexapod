@@ -4,7 +4,7 @@ import pytest
 
 
 def test_stepForward():
-    """Tests that the ouput feet offsets from making one step forward are correct"""
+    """Tests that the output feet offsets from making one step forward are correct"""
     assert np.allclose(move.stepForward(step_angle=90, distance=30,
     step_height=15, right_foot=True, z_resolution=1),
                        np.array([[[0.00000e+00, 0.00000e+00, 0.00000e+00],

@@ -16,7 +16,7 @@ connect:
 disconnect:
     Disconnects from the serial port.
 sendData:
-    Sends the commands for the servos to the Lynxmotiohn SSC-32U.
+    Sends the commands for the servos to the Lynxmotion SSC-32U.
 
 Notes
 -----
@@ -33,7 +33,7 @@ def angleToPW(angle: float) -> float:
     Convert an angle to the pulse width to command that angle.
 
     Takes an input `angle` in degrees and converts it to the pulse width to
-    command that angle in microsecods.
+    command that angle in microseconds.
 
     Parameters
     ----------
@@ -61,7 +61,7 @@ def anglesToSerial(angles: np.ndarray, speed: Optional[int] = None,
     Takes the hexapods servo angles and converts them to a serial command.
 
     Converts an array of 18 servo angles to the formatted serial command for
-    the Lynxmotiohn SSC-32U. The servo angles need to be in the format made in
+    the Lynxmotion SSC-32U. The servo angles need to be in the format made in
     the leg module.
 
     Parameters
@@ -129,7 +129,7 @@ def connect(com: str) -> Any:
     """
     Connect to the input COM port.
 
-    Open a serial port with the Lynxmotiohn SSC-32U on the desired COM port.
+    Open a serial port with the Lynxmotion SSC-32U on the desired COM port.
 
     Parameters
     ----------
@@ -178,16 +178,16 @@ def disconnect(ser: Any) -> bool:
 
 def sendData(ser: Any, serial_string: bytes) -> bool:
     """
-    Sends the commands for the servos to the Lynxmotiohn SSC-32U.
+    Sends the commands for the servos to the Lynxmotion SSC-32U.
 
-    Takes the input byte string and writes it accross the input serial port.
+    Takes the input byte string and writes it across the input serial port.
 
     Parameters
     ----------
     ser: Serial Port
         The pyserial serial port made in the connect function
     serial_string: bytes
-        The message to move the servos with the Lynxmotiohn SSC-32U.
+        The message to move the servos with the Lynxmotion SSC-32U.
 
     Returns
     -------

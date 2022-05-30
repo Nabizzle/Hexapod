@@ -11,7 +11,7 @@ def test_angleToPW():
 
 
 def test_anglesToSerial():
-    """Tests that the message to the servo controller is made and formatted correctly and as a btye string"""
+    """Tests that the message to the servo controller is made and formatted correctly and as a byte string"""
     angles = np.array([[60, 60, 60],
                        [0, 60, 60],
                        [-60, 60, 60],

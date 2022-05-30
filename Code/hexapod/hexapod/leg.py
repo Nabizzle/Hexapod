@@ -9,7 +9,7 @@ relevant information about the legs.
 Functions
 ---------
 getFeetPos:
-    Ouput the x, y, z position of the feet of the hexapod.
+    Output the x, y, z position of the feet of the hexapod.
 legAngle:
     Finds the angles for the coax, femur, and tibia leg segments.
 legModel:
@@ -30,7 +30,7 @@ from typing import List
 
 def getFeetPos(leg_model: np.ndarray) -> np.ndarray:
     """
-    Ouput the x, y, z position of the feet of the hexapod.
+    Output the x, y, z position of the feet of the hexapod.
 
     Return the current positions of the ends of the legs or where the feet
     of the hexapod currently are.
@@ -69,14 +69,14 @@ def legAngle(x: float, y: float, z: float, coax: float = 26.34,
         The y location of the foot.
     z: float
         The z location of the foot.
-    coax: float, defualt=26.34
+    coax: float, default=26.34
         The length of the coax segment in millimeters or the segment from the
-        body attachment point to the begining of the femur.
+        body attachment point to the beginning of the femur.
     femur: float, default=76.2
         The length of the femur segment in millimeters or the segment from the
-        begnining of the femur to the start of the tibia.
+        beginning of the femur to the start of the tibia.
     tibia: float, default=88.32
-        The length of the tibia segment in millimeters or the semgne from the
+        The length of the tibia segment in millimeters or the segment from the
         start of the tibia to the foot of the leg.
 
     Returns
@@ -176,14 +176,14 @@ def legPos(coax_angle: float, femur_angle: float, tibia_angle: float,
     leg_num: int
         The number of the leg. leg 0 is the front right leg and each
         successive leg is clockwise looking down at the hexapod.
-    coax: float, defualt=26.34
+    coax: float, default=26.34
         The length of the coax segment in millimeters or the segment from the
-        body attachment point to the begining of the femur.
+        body attachment point to the beginning of the femur.
     femur: float, default=76.2
         The length of the femur segment in millimeters or the segment from the
-        begnining of the femur to the start of the tibia.
+        beginning of the femur to the start of the tibia.
     tibia: float, default=88.32
-        The length of the tibia segment in millimeters or the semgne from the
+        The length of the tibia segment in millimeters or the segment from the
         start of the tibia to the foot of the leg.
 
     Returns
