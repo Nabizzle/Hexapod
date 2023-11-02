@@ -26,8 +26,8 @@ from hexapod.body import bodyPos, bodyAngle
 from hexapod.move import (emgToWalk, resetWalkStance, emgToTurn,
                           resetTurnStance, walk, turn, simultaneousWalkTurn)
 from hexapod.ssc32uDriver import anglesToSerial, connect, sendData
-from hexapod.piToPi import emgEstablishServer, switchMode
-from hexapod.xboxController import xboxController
+from hexapod.piToPi import (emgEstablishServer, gamePadEstablishServer,
+                            switchMode, pollGamePad)
 from math import hypot, atan2, degrees
 import numpy as np
 from typing import Any
@@ -132,6 +132,7 @@ def gamePadController(usb_port: string, mode: int) -> None:
     of co-contraction to switch modes hardcoded.
     """
     port = connect(usb_port)  # connect to the servo controller
+    conn = gamePadEstablishServer()
     # setup the starting robot positions
     stand(usb_port)
     body_model = bodyPos(pitch=0, roll=0, yaw=0, Tx=0, Ty=0, Tz=0,
@@ -139,8 +140,6 @@ def gamePadController(usb_port: string, mode: int) -> None:
     start_leg = startLegPos(body_model, start_radius=180, start_height=60)
     # get the serial message from the angles
     leg_model = legModel(start_leg, body_model)
-    # iterate until the controller says to stop
-    xbox_controller = xboxController()
     previous_walk_step = 0
     previous_walk_angle = 90
     previous_turn_angle = 0
@@ -155,9 +154,8 @@ def gamePadController(usb_port: string, mode: int) -> None:
     max_body_turn = 15
     start_down = True
     while mode != 5:
-        [rs_x, rs_y, _unused_rs_t, ls_x, ls_y, _unused_ls_t, a, b,
-        _unused_y, _unused_x, down_up_d, right_left_d, rt, rb, lt, _unused_lb,
-         _unused_back, start] = xbox_controller.read()
+        [rs_x, rs_y, rs_t, ls_x, ls_y, ls_t, a, b, y, x, down_up_d,
+         right_left_d, rt, rb, lt, lb, back, start] = pollGamePad(conn)
 
         if b == 1:
             mode = 5
@@ -173,20 +171,20 @@ def gamePadController(usb_port: string, mode: int) -> None:
                 print("Back to mode ", previous_mode)
                 stand(usb_port)
                 mode = previous_mode
-        elif rt > 0.5 and mode != 4 :
+        elif rt > 0.5 and mode != 4:
             mode = 2
-        elif lt > 0.5 and mode != 4 :
+        elif lt > 0.5 and mode != 4:
             mode = 3
         elif not start_down:
             print("reset start button")
             start_down = True
-        elif a==1 and mode != 4:
+        elif a == 1 and mode != 4:
             mode = 1
 
         match mode:
             case 1:  # walk/turn
                 pitch = roll = Tx = Ty = 0
-                if rb == 1 :
+                if rb == 1:
                     [pitch, roll] = body_model =\
                         bodyAngle(analog_x=right_left_d, analog_y=-down_up_d,
                                   max_angle=max_body_turn)
@@ -213,7 +211,8 @@ def gamePadController(usb_port: string, mode: int) -> None:
 
                 walk_distance = left_stick_mag * max_walk_distance
                 walk_angle = degrees(atan2(ls_y, ls_x))
-                turn_angle = right_stick_mag * max_turn_angle * np.sign(rs_x)
+                turn_angle =\
+                    right_stick_mag * max_turn_angle / 2 * np.sign(rs_x)
 
                 [turn_feet_positions, right_foot, previous_walk_step,
                  previous_walk_angle, previous_turn_angle, move_positions] =\
